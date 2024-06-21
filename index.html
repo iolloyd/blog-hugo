@@ -22,7 +22,7 @@
         const ipfsHash = 'QmPtruaivzhWTifF91WVY8VcstXR5jshA2ie2QyuJxag7w';
 
         async function loadBio() {
-            const bioUrl = `https://ipfs.io/ipfs/${ipfsHash}`;
+            const bioUrl = `https://cloudflare-ipfs.com/ipfs/${ipfsHash}`;
             const response = await fetch(bioUrl);
             const bioHtml = await response.text();
             document.getElementById('bio-container').innerHTML = bioHtml;
