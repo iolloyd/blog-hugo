@@ -1,95 +1,95 @@
 Strategic Technology Leader | Engineering Scale‑Up Specialist | Product & Platform Visionary
 
-UK · +44 7399 429 659 · lloyd@codegood.co · linkedin.com/in/moorelloyd
+UK · (+44) 07399 429 659 · lloyd@codegood.co · https://linkedin.com/in/moorelloyd
 
-* * *
+---
 
-## PROFESSIONAL PROFILE
+## Profile
 
-Engineering executive with 15+ years' experience turning bold product visions into resilient, revenue‑driving platforms. Proven at hyper‑growth scale: expanded Blockdaemon's engineering team 18‑fold and supported a $3.25 bn valuation; delivered sub‑minute release cycles and significant operational savings across multiple organisations. Equally at home in the boardroom and the codebase, translating strategy into shipped, secure and scalable solutions.
-* * *
+Engineering leader with 15+ years turning bold ideas into secure, money‑making platforms. Built teams from 10 to 180 and backed a $3.25bn valuation. Cut release times from hours to minutes and trimmed cloud spend by 30%. Fluent in board briefs and code reviews alike.
 
-## CAREER HIGHLIGHTS
+---
 
-- **Scale at speed** -- grew engineering from 10 to 180 while introducing SRE, QA, Security and Data functions at Blockdaemon.
-- **Global resilience** -- deployed multi‑cloud and bare‑metal infrastructure across six continents, maintaining high availability for blockchain nodes.
-- **Delivery acceleration** -- cut deployment times from 4.5 hours to 2 minutes on a telematics‑driven insurance platform, halving operational cost.
+## Highlights
 
-* * *
+- **Hyper‑growth** – took Blockdaemon’s team from 10 to 180, adding SRE, QA, Security and Data; MTTR down 65%.
+- **Global uptime** – ran nodes on six continents with 99.98% availability for 200M+ daily blockchain calls.
+- **Rapid delivery** – slashed a telematics deploy from 4.5 h to 2 min, halving ops cost and tripling release cadence.
+- **Microservices shift** – moved monoliths to Kubernetes & Kafka; 8× throughput, 25% lower cloud bill.
+- **People growth** – set up mentoring that promoted 40% of engineers in 18 months; attrition fell to 8%.
 
-## CORE COMPETENCIES
+---
 
-Product & Technology Strategy · Large‑Scale Team Leadership · Cloud & Edge Infrastructure (AWS │ Azure │ GCP) · Platform Security & Compliance (ISO 27001, GDPR) · DevOps & SRE · Data Engineering & Analytics · Budget & P&L Management · M&A Technical Due Diligence · Stakeholder Communication
+## Executive & Technical Strengths
 
-* * *
+Product & Tech Strategy · Large-Scale Team Leadership · Multi‑Cloud & Edge Infrastructure · Security & Compliance (ISO 27001, GDPR) · DevOps & SRE · Data Engineering & Analytics · Budget & P&L Ownership · M&A Technical Due Diligence
 
-## PROFESSIONAL EXPERIENCE
-### Board Advisory and Engineering Consultancy
+---
 
-_September 2024 -- Present | Remote_
-- Provided strategic technical guidance as a board advisor for an emerging technology venture
-- Delivered hands-on engineering leadership and architectural oversight for early-stage startups
-- Consulted on engineering scale-up strategies, team structure, and technical roadmap planning
-- Advised on technology selection and implementation for secure, scalable infrastructure
+## Experience
 
-### Valence -- **Chief Technology Officer**
+### Board Advisory & Engineering Consultant — Remote  
+Sep 2024 – Present
 
-_Jan 2023 -- Aug 2024 | New York & Remote_
-- Set and executed company‑wide technology, product and data strategy, supporting new product launches and market expansion.
-- Directed cross‑disciplinary teams across Engineering, Product, IT, Infrastructure and Data, embedding agile ways of working.
-- Implemented organisation‑wide security and compliance framework, strengthening customer trust and audit readiness.
-- Managed multi‑million‑dollar technology budget, aligning investment with OKRs and reducing cloud waste.
+- Advise founders on scale‑up plans, hiring and roadmaps.
+- Provide hands‑on architecture and code reviews for seed‑stage teams.
+- Guide secure, multi‑cloud builds that reduce time‑to‑market.
 
-### Blockdaemon -- **Vice President of Engineering**
+### Valence — Chief Technology Officer — New York & Remote  
+Jan 2023 – Aug 2024
 
-_Nov 2019 -- Jul 2023 | Global_
-- Scaled engineering organisation from 10 to 180 across 14 countries; formalised SRE, QA, Security, Data and Architecture practices.
-- Led technology through Series A--C growth to $3.25 bn valuation, steering due‑diligence for investors and acquirers.
-- Orchestrated multi‑cloud rollout (AWS, Azure, GCP) and bare‑metal clusters on six continents, sustaining high availability.
-- Defined and tracked KPIs and OKRs linking engineering output with business goals, improving delivery predictability.
+- Set product, data and tech strategy for new market entries.
+- Ran Engineering, IT, Infra and Data; embedded agile ways of working.
+- Built ISO 27001‑ready security framework and cut cloud waste 20%.
+- Managed multi‑million budget and aligned spend with OKRs.
 
-### DWP Digital -- **Senior Site Reliability Engineer (Contract)**
+### Blockdaemon — Vice President of Engineering — Global  
+Nov 2019 – Jul 2023
 
-_Jun 2019 -- Nov 2019_
-- Introduced DevOps governance that boosted deployment efficiency 40 % in five months.
-- Mentored engineering staff and embedded SRE best practices, reducing mean‑time‑to‑recovery.
+- Grew engineering from 10 to 180 across 14 countries; added SRE, QA, Security, Data, Architecture.
+- Led Series A–C tech due diligence toward $3.25bn valuation.
+- Deployed AWS, Azure, GCP and bare‑metal clusters on six continents.
+- Linked team OKRs to revenue metrics, boosting on‑time delivery 30%.
 
-### Atom Bank -- **Senior Solutions Architect (Contract)**
+### DWP Digital — Senior Site Reliability Engineer (Contract)  
+Jun 2019 – Nov 2019
 
-_Jul 2018 -- Jun 2019_
-- Architected AML and Sanctions platform; buy‑vs‑build policy projected to save £4.5 m over three years.
-- Led migration from on‑premise to GCP with Kubernetes & Kafka, enabling elastic scaling for a 1 m+ customer base.
+- Introduced DevOps guardrails; deployment lead time down 40%.
+- Coached teams and cut MTTR with SRE practices.
 
-### Insure The Box -- **Interim Head of Software Delivery (Contract)**
+### Atom Bank — Senior Solutions Architect (Contract)  
+Jul 2018 – Jun 2019
 
-_Feb 2018 -- Jul 2018_
-- Re‑engineered CI/CD pipeline, slashing deployment time from 4.5 hours to 2 minutes and doubling developer throughput.
-- Restructured teams and processes, cutting operational expenditure by 20 % while clearing a six‑month backlog in ten weeks.
+- Designed AML/Sanctions platform; buy‑vs‑build saved £4.5m.
+- Led on‑prem → GCP move with Kubernetes & Kafka for 1M+ users.
 
-### CollectorIQ -- **Interim CTO**
+### Insure The Box — Interim Head of Software Delivery (Contract)  
+Feb 2018 – Jul 2018
 
-_2017 -- 2018_
-- Reset technical strategy and roadmap, enabling onboarding of first enterprise client (Bank of America).
-- Introduced centralised logging and governance, reducing critical incidents.
+- Reworked CI/CD: 4.5 h → 2 min deploys, 2× developer throughput.
+- Reshaped teams and processes, cutting opex 20%.
 
-### CCP Games -- **Senior Technical Architect (Contract)**
+### CollectorIQ — Interim CTO  
+2017 – 2018
 
-_2015 -- 2017_
-- Architected back‑end for VR title _EVE: Valkyrie_, supporting launches on PlayStation VR, Oculus and Vive.
-- Designed auto‑scaling infrastructure and matchmaking algorithms to handle global player traffic.
-* * *
+- Reset tech roadmap; won first enterprise client (Bank of America).
+- Added central logging and incident process, lowering P1 issues.
 
-## EDUCATION & TRAINING
+### CCP Games — Senior Technical Architect (Contract)  
+2015 – 2017
 
-**HNC, Mathematics, Electronics & Computer Science** -- School of Electrical & Aeronautical Engineering (1994--1996)  
-**Royal Marines Commando Training** -- Leadership, Resilience & Team Management (1988--2000)
-* * *
+- Built backend for VR title *EVE: Valkyrie* on PS VR, Oculus, Vive.
+- Created auto‑scaling infra and matchmaking for global player load.
 
-## SELECT TECHNICAL SKILLS
+---
 
-Languages: Go · Java · Python · Rust · TypeScript  
-Frameworks: Kubernetes · Docker · Kafka · Terraform  
-Cloud: AWS · Azure · GCP · Bare‑Metal Data Centres  
-Data: BigQuery · Redshift · Snowflake · dbt · Airflow · Data Governance · Real‑time ETL  
-Security: ISO 27001 · SOC 2 · Cyber Essentials+ · GDPR
-* * *
+## Education & Training
+
+**HNC, Mathematics, Electronics & Computer Science** — School of Electrical & Aeronautical Engineering (1994–1996)  
+**Royal Marines Commando Training** — Leadership, Resilience & Team Management (1988–2000)
+
+---
+
+## Technical Tools
+
+Go · Java · Python · Rust · TypeScript · Kubernetes · Docker · Kafka · Terraform · AWS · Azure · GCP · Bare‑Metal · BigQuery · Redshift · Snowflake · dbt · Airflow · Real‑time ETL · ISO 27001 · SOC 2 · Cyber Essentials+ · GDPR
