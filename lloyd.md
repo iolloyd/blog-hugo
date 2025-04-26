@@ -1,5 +1,6 @@
 layout: page
 title: "About Lloyd Moore"
+permalink: /about
 
 Strategic Technology Leader | Engineering Scale‑Up Specialist | Product & Platform Visionary
 
