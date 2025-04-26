@@ -7,16 +7,16 @@ UK · linkedin.com/in/moorelloyd
 
 ## Profile
 
-**Engineering leader who turns bold ideas into revenue‑generating platforms.** Grew teams from 10 to 180, underpinning a $3.25 bn valuation. Cut release times from hours to minutes and saved 30 % on cloud spend. Equally confident briefing boards or reviewing pull requests.
+**Engineering leader who turns bold ideas into revenue‑generating platforms.** Grew teams from 10 to 180, underpinning a $3.25 bn valuation. Cut release times from hours to minutes and saved 70 % on cloud spend. Equally confident briefing boards or reviewing pull requests.
 
 ---
 
 ## Highlights
 
-- **Hyper‑growth** – grew Blockdaemon’s team from 10 to 180, adding SRE, QA, Security and Data; MTTR down 65 %.
-- **Global uptime** – ran nodes on six continents with 99.98 % availability for 200 M+ daily blockchain calls.
-- **Delivery & architecture** – migrated to Kubernetes & Kafka and cut deploys from 4.5 h to 2 min; 8× throughput and 25 % lower cloud bill.
-- **People growth** – launched mentoring that promoted 40 % of engineers in 18 months; attrition fell to 8 %.
+- **Hyper‑growth** – grew Blockdaemon’s team from 10 to 180, adding SRE, QA, Security and Data; MTTR down 75 %.
+- **Global uptime** – ran nodes on six continents with 99.9 % availability for 200 M+ daily blockchain calls.
+- **Delivery & architecture** – migrated to Kubernetes & Kafka and cut deploys from 4.5 h to 2 min; 8× throughput and 65 % lower cloud bill.
+- **People growth** – launched mentoring that promoted 40 % of engineers in 18 months; attrition fell to 4 %.
 
 ---
 
