@@ -1,8 +1,6 @@
 layout: page
 title: "About Lloyd Moore"
 
-# LLOYD MOORE
-
 Strategic Technology Leader | Engineering Scale‑Up Specialist | Product & Platform Visionary
 
 UK · +44 7399 429 659 · "lloyd@codegood.co" · linkedin.com/in/moorelloyd
