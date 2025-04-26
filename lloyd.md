@@ -3,9 +3,9 @@ title: "About Lloyd Moore"
 
 # LLOYD MOORE
 
-**Strategic Technology Leader | Engineering Scale‑Up Specialist | Product & Platform Visionary**
+Strategic Technology Leader | Engineering Scale‑Up Specialist | Product & Platform Visionary
 
-London, UK · +44 7399 429 659 · lloyd@codegood.co · linkedin.com/in/moorelloyd
+UK · +44 7399 429 659 · "lloyd@codegood.co" · linkedin.com/in/moorelloyd
 
 * * *
 
@@ -19,6 +19,7 @@ Engineering executive with 15+ years' experience turning bold product visions in
 - **Scale at speed** -- grew engineering from 10 to 180 while introducing SRE, QA, Security and Data functions at Blockdaemon.
 - **Global resilience** -- deployed multi‑cloud and bare‑metal infrastructure across six continents, maintaining high availability for blockchain nodes.
 - **Delivery acceleration** -- cut deployment times from 4.5 hours to 2 minutes on a telematics‑driven insurance platform, halving operational cost.
+
 * * *
 
 ## CORE COMPETENCIES
@@ -86,7 +87,7 @@ _2015 -- 2017_
 
 Languages: Go · Java · Python · Rust · TypeScript  
 Frameworks: Kubernetes · Docker · Kafka · Terraform  
-Cloud: AWS · Azure · GCP · Bare‑Metal DCs  
+Cloud: AWS · Azure · GCP · Bare‑Metal Data Centres  
 Data: BigQuery · Redshift · Snowflake · dbt · Airflow · Data Governance · Real‑time ETL  
 Security: ISO 27001 · SOC 2 · Cyber Essentials+ · GDPR
 * * *
