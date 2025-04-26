@@ -30,7 +30,7 @@ Product & Tech Strategy · Large‑Scale Team Leadership · Multi‑Cloud & Edge
 
 ### Board Advisory & Engineering Consultant — Remote  
 Sep 2024 – Present
-- Advise founders on scale‑up plans, architecture and hiring, accelerating product launches by up to three months.
+- Advise founders on scale‑up plans, architecture and hiring, accelerating product launches by up to twelve months.
 - Provide hands‑on code and design reviews to de‑risk funding pitches.
 
 ### Valence — Chief Technology Officer — New York & Remote  
