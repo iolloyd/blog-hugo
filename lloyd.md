@@ -51,7 +51,23 @@ Nov 2019 – Jul 2023
 - Deployed AWS, Azure, GCP and bare-metal clusters on six continents with 99.98 % uptime.
 - Linked team OKRs to revenue metrics, boosting on-time delivery 30 %.
 
+### Selected Contract Engagements
 
+│-**Senior Site Reliability Engineer, DWP Digital** — Jun–Nov 2019
+│-Boosted deployment efficiency 40 % in five months by introducing DevOps guardrails.
+│-
+│-**Senior Solutions Architect, Atom Bank** — Jul 2018–Jun 2019
+│-Designed AML/Sanctions platform; buy‑vs‑build strategy saved £4.5 m.
+│-
+│-**Interim Head of Software Delivery, Insure The Box** — Feb–Jul 2018
+│-Rebuilt CI/CD from 4.5 h to 2 min deploys, doubling developer throughput.
+│-
+│-**Interim CTO, CollectorIQ** — 2017–2018
+│-Reset tech roadmap, winning first enterprise client (Bank of America).
+│-
+│-**Senior Technical Architect, CCP Games** — 2015–2017
+│-Built backend for VR title *EVE: Valkyrie*, handling global player load with automatic team selection dependant on skill and latency
+│
 ---
 
 ## Education & Training
