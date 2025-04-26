@@ -24,6 +24,13 @@ Product & Technology Strategy · Large‑Scale Team Leadership · Cloud & Edge I
 * * *
 
 ## PROFESSIONAL EXPERIENCE
+### Board Advisory and Engineering Consultancy
+
+_September 2024 -- Present | Remote_
+- Provided strategic technical guidance as a board advisor for an emerging technology venture
+- Delivered hands-on engineering leadership and architectural oversight for early-stage startups
+- Consulted on engineering scale-up strategies, team structure, and technical roadmap planning
+- Advised on technology selection and implementation for secure, scalable infrastructure
 
 ### Valence -- **Chief Technology Officer**
 
