@@ -1,6 +1,3 @@
-# Lloyd Moore
-{: .name-heading}
-
 <span>+44 7399 429 659</span> • 
 <span><a href="mailto:lloyd@lloydmoore.com">lloyd@lloydmoore.com</a></span> • 
 <span><a href="https://linkedin.com/in/moorelloyd">linkedin.com/in/moorelloyd</a></span>
