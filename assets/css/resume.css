@@ -9,8 +9,19 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
   font-size: 0.9em;
+}
+
+.executive-summary {
+  font-size: 1.1em;
+  line-height: 1.5;
+  margin-bottom: 2em;
+  color: #333;
+  max-width: 800px;
+  border-left: 3px solid #555;
+  padding-left: 1em;
+  font-style: italic;
 }
 
 .section-heading {
@@ -62,6 +73,23 @@
   margin-bottom: 0;
 }
 
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5em;
+}
+
+.skills-category h4 {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.skills-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
 .pdf-button {
   display: inline-block;
   padding: 10px 15px;
@@ -84,6 +112,10 @@
   .resume-date {
     flex: 0 0 120px;
   }
+  
+  .executive-summary {
+    font-size: 1em;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -102,5 +134,9 @@
   .contact-info {
     flex-direction: column;
     gap: 0.2em;
+  }
+  
+  .skills-container {
+    grid-template-columns: 1fr;
   }
 }

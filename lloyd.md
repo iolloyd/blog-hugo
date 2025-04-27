@@ -6,7 +6,10 @@
 <span><a href="https://linkedin.com/in/moorelloyd">linkedin.com/in/moorelloyd</a></span>
 {: .contact-info}
 
-## Strategic Technology Leader | Platform Scale‑Up Specialist
+Technology executive with 20+ years of experience scaling high-performance engineering teams and mission-critical platforms. Proven track record of transforming technical organizations through talent development, architectural innovation, and strategic alignment with business objectives. Combines deep technical expertise with executive-level vision to deliver measurable business outcomes.
+{: .executive-summary}
+
+## Strategic Technology Leader
 {: .section-heading}
 
 **Engineering leader who turns bold ideas into revenue‑generating platforms.** Grew teams from 10 to over 180, underpinning a $3.25 bn valuation. Cut release times from hours to minutes and saved 70% on cloud spend. Equally confident briefing boards or submitting and reviewing pull requests.
@@ -37,6 +40,7 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
 
 - Advise founders on scale‑up plans, architecture and hiring, accelerating product launches by up to twelve months.
 - Provide hands‑on code and design reviews to de‑risk funding pitches.
+- Delivered strategic roadmap that secured $2.5M in seed funding for early-stage fintech startup.
 
 </div>
 </div>
@@ -170,12 +174,53 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
 </div>
 </div>
 
-## Technical Tools
+## Technical Skills
 {: .section-heading}
 
-<div class="resume-entry" markdown="1">
-<div class="resume-date"></div>
-<div class="resume-content">
-Go • Java • Python • Rust • TypeScript • Kubernetes • Docker • Kafka • Terraform • AWS • Azure • GCP • Bare‑Metal • BigQuery • Redshift • Snowflake • dbt • Airflow • ISO 27001 • SOC 2 • Cyber Essentials+ • GDPR • Google Cloud
-</div>
+<div class="skills-container">
+  <div class="skills-category">
+    <h4>Languages</h4>
+    <ul class="skills-list">
+      <li>Go</li>
+      <li>Java</li>
+      <li>Python</li>
+      <li>Rust</li>
+      <li>TypeScript</li>
+    </ul>
+  </div>
+  
+  <div class="skills-category">
+    <h4>Infrastructure & Cloud</h4>
+    <ul class="skills-list">
+      <li>AWS</li>
+      <li>Azure</li>
+      <li>GCP</li>
+      <li>Bare-Metal</li>
+      <li>Kubernetes</li>
+      <li>Docker</li>
+      <li>Terraform</li>
+    </ul>
+  </div>
+  
+  <div class="skills-category">
+    <h4>Data Engineering</h4>
+    <ul class="skills-list">
+      <li>BigQuery</li>
+      <li>Redshift</li>
+      <li>Snowflake</li>
+      <li>dbt</li>
+      <li>Airflow</li>
+      <li>Kafka</li>
+    </ul>
+  </div>
+  
+  <div class="skills-category">
+    <h4>Security & Compliance</h4>
+    <ul class="skills-list">
+      <li>ISO 27001</li>
+      <li>SOC 2</li>
+      <li>Cyber Essentials+</li>
+      <li>GDPR</li>
+    </ul>
+  </div>
 </div>
