@@ -137,7 +137,7 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
 </div>
 
 <div class="resume-entry" markdown="1">
-<div class="resume-date">2011 - 2012/div>
+<div class="resume-date">2011 - 2012</div>
 <div class="resume-content">
 <div class="resume-position">Head of Engineering</div>
 <div class="resume-company">High-Traffic Video-Streaming Platform</div>
@@ -205,6 +205,7 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
       <li>Rust</li>
       <li>Ruby</li>
       <li>TypeScript</li>
+      <li>Haskell</li>
     </ul>
   </div>
   
@@ -233,6 +234,9 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
       <li>dbt</li>
       <li>Airflow</li>
       <li>Kafka</li>
+      <li>Postgresql</li>
+      <li>MySql</li>
+      <li>Sqlite</li>
     </ul>
   </div>
   
@@ -243,6 +247,7 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
       <li>SOC 2</li>
       <li>Cyber Essentials+</li>
       <li>GDPR</li>
+      <li>TOGAF</li>
     </ul>
   </div>
 </div>
