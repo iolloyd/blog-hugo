@@ -128,11 +128,28 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
 </div>
 
 <div class="resume-entry" markdown="1">
-<div class="resume-date">2014 - 2015</div>
+<div class="resume-date">2012 - 2015</div>
+<div class="resume-content">
+<div class="resume-position">Lead Architect</div>
+<div class="resume-company">Lookbooks</div>
+<div class="resume-description">Complete redesign of projects API and backend services resulting in improvement of uptime from 2 to 3 9s.</div>
+</div>
+</div>
+
+<div class="resume-entry" markdown="1">
+<div class="resume-date">2011 - 2012/div>
 <div class="resume-content">
 <div class="resume-position">Head of Engineering</div>
 <div class="resume-company">High-Traffic Video-Streaming Platform</div>
 <div class="resume-description">Managed 8 engineers, handled 1 Bn+ monthly requests, achieved 99.99% uptime.</div>
+</div>
+</div>
+
+<div class="resume-entry" markdown="1">
+<div class="resume-date">2007 - 2011</div>
+<div class="resume-content">
+<div class="resume-position">Lead Engineer</div>
+<div class="resume-company">Ad Salsa</div>
 </div>
 </div>
 
@@ -183,8 +200,10 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
     <ul class="skills-list">
       <li>Go</li>
       <li>Java</li>
+      <li>Ocaml</li>
       <li>Python</li>
       <li>Rust</li>
+      <li>Ruby</li>
       <li>TypeScript</li>
     </ul>
   </div>
@@ -194,6 +213,9 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
     <ul class="skills-list">
       <li>AWS</li>
       <li>Azure</li>
+      <li>Consul</li>
+      <li>Nomad</li>
+      <li>Nix</li>
       <li>GCP</li>
       <li>Bare-Metal</li>
       <li>Kubernetes</li>
