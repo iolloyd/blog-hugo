@@ -186,14 +186,33 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
 </div>
 </div>
 
-## Education & Training
+## Military Leadership
+{: .section-heading}
+
+<div class="resume-entry" markdown="1">
+<div class="resume-date"></div>
+<div class="resume-content">
+<div class="resume-position">Royal Marines Commando</div>
+<div class="resume-company">British Royal Navy</div>
+<div class="resume-description" markdown="1">
+
+Twelve years of service developing exceptional leadership abilities in high-pressure environments. Military experience directly informs my approach to technology leadership through:
+
+- **Crisis management** – Leading teams through complex, time-sensitive operations with limited resources and rapidly changing conditions.
+- **Team cohesion** – Building high-performing units across diverse backgrounds and skill levels; establishing clear communication protocols.
+- **Strategic planning** – Balancing immediate tactical needs with long-term objectives; developing contingency plans for mission-critical systems.
+- **Resilience training** – Instilling a culture that thrives under pressure and maintains operational excellence during critical incidents and scaling challenges.
+
+</div>
+</div>
+</div>
+
+## Education
 {: .section-heading}
 
 <div class="resume-entry" markdown="1">
 <div class="resume-date"></div>
 <div class="resume-content">
 **HNC, Mathematics, Electronics & Computer Science** — School of Electrical & Aeronautical Engineering
-
-**Royal Marines Commando (12 years)** — Leadership, Resilience & Team Management
 </div>
 </div>
