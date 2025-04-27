@@ -6,7 +6,7 @@
 <span><a href="https://linkedin.com/in/moorelloyd">linkedin.com/in/moorelloyd</a></span>
 {: .contact-info}
 
-Technology executive with 20+ years of experience scaling high-performance engineering teams and mission-critical platforms. Proven track record of transforming technical organizations through talent development, architectural innovation, and strategic alignment with business objectives. Combines deep technical expertise with executive-level vision to deliver measurable business outcomes.
+Technology executive with 20+ years of experience scaling high-performance engineering teams and mission-critical platforms. Combines Royal Marines leadership training with deep technical expertise to transform organizations through talent development, architectural innovation, and strategic alignment with business objectives. Delivers measurable business outcomes through disciplined execution and resilient team building.
 {: .executive-summary}
 
 ## Strategic Technology Leader
