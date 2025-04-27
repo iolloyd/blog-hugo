@@ -213,6 +213,6 @@ Twelve years of service developing exceptional leadership abilities in high-pres
 <div class="resume-entry" markdown="1">
 <div class="resume-date"></div>
 <div class="resume-content">
-**HNC, Mathematics, Electronics & Computer Science** — School of Electrical & Aeronautical Engineering
+<strong>HNC, Mathematics, Electronics & Computer Science</strong> — School of Electrical & Aeronautical Engineering
 </div>
 </div>
