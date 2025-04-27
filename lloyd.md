@@ -1,8 +1,8 @@
 Strategic Technology Leader | Platform Scale‑Up Specialist
 
-+44 7399 429 659
-lloyd@lloydmoore.com
-[linkedin](https://linkedin.com/in/moorelloyd)
+- +44 7399 429 659
+- lloyd@lloydmoore.com
+- [linkedin](https://linkedin.com/in/moorelloyd)
 
 ---
 
@@ -56,30 +56,29 @@ Nov 2019 – Jul 2023
 
 ### Prior Engagements
 
-- **Senior Site Reliability Engineer, DWP Digital** — Jun–Nov 2019
+- _Jun - Nov 2019_ **Senior Site Reliability Engineer, DWP Digital**
 Boosted deployment efficiency 40 % in five months by introducing DevOps guardrails.
 
-- **Senior Solutions Architect, Atom Bank** — Jul 2018–Jun 2019
+- _Jul 2018 - Jun 2019_ **Senior Solutions Architect, Atom Bank**
 Designed AML/Sanctions platform; buy‑vs‑build strategy saved £4.5 m.
 
-- **Interim Head of Software Delivery, Insure The Box** — Jan–Jul 2018
+- _Jan - Jul 2018_ **Interim Head of Software Delivery, Insure The Box** 
 Rebuilt CI/CD from 4.5 h to 2 min deploys, doubling developer throughput.
 
-- **Interim CTO, CollectorIQ** — 2017–2018
+- _2017 - 2018_ **Interim CTO, CollectorIQ** 
 Reset tech roadmap, winning first enterprise client (Bank of America).
 
-- **Senior Technical Architect, CCP Games** — 2015–2017
+- _2015 - 2017_ **Senior Architect, CCP Games** 
 Built backend for VR title *EVE: Valkyrie*, handling global player load with automatic team selection dependant on skill and latency
 
-- **Head of Engineering**, High-Traffic Video-Streaming Platform (adult-content sector), 2014–2015
+- _2014 - 2015_ **Head of Engineering**, High-Traffic Video-Streaming Platform (adult-content sector)
 Managed 8 engineers, handled 1 Bn+ monthly requests, achieved 99.99 % uptime.
 
-
-- **Team lead** Local Billing Solutions, 2006 - 2007 
-- **Senior Engineer** Local Billing Solutions, 2004 - 2006
+- _2006 - 2007_ **Team lead** Local Billing Solutions
+- _2004 - 2006_ **Senior Engineer** Local Billing Solutions
 Developing, improving and extending a key payment gateway service across 150 countries.
 
-- **Co-founder** Encantado Web, 2001 - 2004
+- _2001 - 2004_ **Co-founder** Encantado Web
 Lead web developer and system administrator
 
 ---
