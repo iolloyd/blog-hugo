@@ -1,12 +1,7 @@
----
-layout: default
-title: Lloyd Moore - CTO / VP Engineering
----
-
 # Lloyd Moore
 {: .name-heading}
 
-**CTO / VP Engineering | Technology & Product Strategy**
+CTO / VP Engineering | Technology & Product Strategy
 {: .title-heading}
 
 <span>+44 7399 429 659</span> • 
