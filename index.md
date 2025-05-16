@@ -9,8 +9,6 @@ title: "Home"
   <p><a href="{{ '/blog/' | relative_url }}">Blog</a></p>
 </div>
 
-## The Who 
-
 I'm passionate about systems, data, music and maths.
 
 ## Contact
