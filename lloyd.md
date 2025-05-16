@@ -95,7 +95,7 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
 </div>
 
 <div class="resume-entry" markdown="1">
-<div class="resume-date">2011 – 2018</div>
+<div class="resume-date">2000 – 2018</div>
 <div class="resume-content">
 <div class="resume-position">Prior Experience</div>
 <div class="resume-company"></div>
