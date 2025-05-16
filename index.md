@@ -3,11 +3,8 @@ layout: home
 title: "Home"
 ---
 
-
-<div style="text-align: center;">
-  <p><a href="{{ '/cv' | relative_url }}">CV</a></p>
-  <p><a href="{{ '/blog/' | relative_url }}">Blog</a></p>
-</div>
+<p><a href="{{ '/cv' | relative_url }}">CV</a></p>
+<p><a href="{{ '/blog/' | relative_url }}">Blog</a></p>
 
 I'm passionate about systems, data, music and maths.
 
