@@ -116,7 +116,7 @@ description: "Lloyd Moore - Engineering executive specializing in scaling teams,
     <h2>Trusted By Industry Leaders</h2>
     <div class="companies-grid">
     <div class="company-logo">
-      <img src="/assets/images/blockdaemon-logo.png" alt="Blockdaemon" />
+      <img src="/assets/images/blockdaemon-logo.svg" alt="Blockdaemon" />
     </div>
     <!-- Add more company logos as needed -->
     </div>
