@@ -146,7 +146,7 @@ description: "Lloyd Moore - Engineering executive specializing in scaling teams,
     I'd love to explore how we can work together.</p>
     <div class="contact-options">
       <a href="mailto:lloyd@lloydmoore.com" class="btn btn-primary">Email Me</a>
-      <a href="https://www.linkedin.com/in/lloydmoore" class="btn btn-secondary">Connect on LinkedIn</a>
+      <a href="https://www.linkedin.com/in/moorelloyd" class="btn btn-secondary">Connect on LinkedIn</a>
     </div>
   </div>
 </section>
