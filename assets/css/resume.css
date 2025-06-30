@@ -1,34 +1,84 @@
 /* Resume styling with dates on left and content on right */
+.cv-header {
+  text-align: center;
+  padding: 3rem 0 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  margin: -3rem -20px 3rem;
+  position: relative;
+}
+
 .name-heading {
-  font-size: 2.5em;
+  font-size: 3em;
   margin-bottom: 0.2em;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.title-heading {
+  font-size: 1.5em;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 1em;
 }
 
 .contact-info {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5em;
+  gap: 1em;
   margin-bottom: 1.5em;
-  font-size: 0.9em;
+  font-size: 0.95em;
+  justify-content: center;
+  align-items: center;
 }
 
-.executive-summary {
-  font-size: 1.1em;
-  line-height: 1.5;
-  margin-bottom: 2em;
-  color: #333;
+.contact-info span {
+  display: flex;
+  align-items: center;
+}
+
+.contact-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.value-proposition {
+  font-size: 1.15em;
+  line-height: 1.6;
+  margin: 2em auto;
+  color: var(--text-secondary);
   max-width: 800px;
-  border-left: 3px solid #555;
-  padding-left: 1em;
-  font-style: italic;
+  text-align: center;
+  font-weight: 400;
+}
+
+.download-cv {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.download-cv .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.download-cv .btn::before {
+  content: "⬇";
+  font-size: 1.2em;
 }
 
 .section-heading {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 0.3em;
-  margin-top: 1.8em;
-  margin-bottom: 1em;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5em;
+  margin-top: 2.5em;
+  margin-bottom: 1.5em;
+  color: var(--text-primary);
+  font-size: 1.75em;
 }
 
 .profile-summary {
@@ -37,15 +87,25 @@
 
 .resume-entry {
   display: flex;
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
+  padding: 1.5rem;
+  background: var(--bg-light);
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.resume-entry:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateX(5px);
 }
 
 .resume-date {
-  flex: 0 0 150px;
-  padding-right: 1.5em;
+  flex: 0 0 170px;
+  padding-right: 2em;
   text-align: right;
-  color: #555;
-  font-weight: 500;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9em;
 }
 
 .resume-content {
@@ -53,24 +113,53 @@
 }
 
 .resume-position {
-  font-weight: bold;
-  margin-bottom: 0.2em;
+  font-weight: 700;
+  font-size: 1.25em;
+  margin-bottom: 0.3em;
+  color: var(--text-primary);
 }
 
 .resume-company {
-  font-style: italic;
-  margin-bottom: 0.5em;
+  font-style: normal;
+  font-weight: 500;
+  margin-bottom: 0.75em;
+  color: var(--text-secondary);
 }
 
 .resume-description ul {
-  padding-left: 1.2em;
+  padding-left: 0;
   margin-top: 0.5em;
   margin-bottom: 0;
+  list-style: none;
+}
+
+.resume-description li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+}
+
+.resume-description li:before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
 .resume-description p {
   margin-top: 0.3em;
   margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.core-strengths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin-top: 1em;
+  line-height: 1.6;
 }
 
 .skills-container {
@@ -118,25 +207,54 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
+  .cv-header {
+    padding: 2rem 0 1.5rem;
+  }
+  
+  .name-heading {
+    font-size: 2.5em;
+  }
+  
+  .title-heading {
+    font-size: 1.25em;
+  }
+  
   .resume-entry {
     flex-direction: column;
+    padding: 1.25rem;
   }
   
   .resume-date {
     flex: none;
     text-align: left;
     padding-right: 0;
-    margin-bottom: 0.3em;
-    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 0.75em;
   }
   
   .contact-info {
     flex-direction: column;
-    gap: 0.2em;
+    gap: 0.5em;
   }
   
   .skills-container {
     grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .name-heading {
+    font-size: 2em;
+  }
+  
+  .section-heading {
+    font-size: 1.5em;
+  }
+  
+  .resume-position {
+    font-size: 1.1em;
   }
 }

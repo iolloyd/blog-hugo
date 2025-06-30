@@ -2,6 +2,7 @@
 layout: page
 title: Blog
 permalink: /blog/
+description: "Technical leadership insights, engineering best practices, and thoughts on scaling teams and platforms from Lloyd Moore."
 ---
 
 ## Blog Posts

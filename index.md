@@ -1,15 +1,5 @@
 ---
 layout: home
 title: "Home"
+description: "Lloyd Moore - Engineering executive specializing in scaling teams, platforms and revenue. CTO & VP Engineering with expertise in cloud architecture and digital transformation."
 ---
-
-<p><a href="{{ '/cv' | relative_url }}">CV</a></p>
-<p><a href="{{ '/blog/' | relative_url }}">Blog</a></p>
-
-I'm passionate about systems, data, music and maths.
-
-## Contact
-
-- Email: [lloyd@lloydmoore.com](mailto:lloyd@lloydmoore.com)
-- LinkedIn: [linkedin.com/in/moorelloyd](https://www.linkedin.com/in/moorelloyd)
-- GitHub: [github.com/iolloyd](https://github.com/iolloyd)

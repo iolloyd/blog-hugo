@@ -1,6 +1,16 @@
-title: "About"
+title: "Lloyd Moore - CTO & VP Engineering"
+description: "Engineering executive who scales teams, platforms and revenue. Expert in cloud architecture, team leadership, and digital transformation."
+url: "https://iolloyd.github.io"
+author: Lloyd Moore
+
+# Google Analytics - uncomment and add your tracking ID
+# google_analytics: G-XXXXXXXXXX
+
 plugins:
   - jekyll-relative-links
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  
 relative_links:
   enabled: true
   collections: true

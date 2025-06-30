@@ -1,16 +1,22 @@
+<div class="cv-header" markdown="1">
+
 # Lloyd Moore
 {: .name-heading}
 
 CTO / VP Engineering | Technology & Product Strategy
 {: .title-heading}
 
+<div class="contact-info">
 <span>+44 7399 429 659</span> • 
 <span><a href="mailto:lloyd@lloydmoore.com">lloyd@lloydmoore.com</a></span> • 
 <span><a href="https://linkedin.com/in/moorelloyd">linkedin.com/in/moorelloyd</a></span>
-{: .contact-info}
+</div>
 
-## Value Proposition
-{: .section-heading}
+</div>
+
+<div class="download-cv">
+<a href="#" class="btn btn-primary" onclick="window.print(); return false;">Download CV as PDF</a>
+</div>
 
 Engineering executive who scales teams, platforms and revenue. Grew engineering headcount 10 → 187, underpinned a $3.25 bn valuation, and cut cloud spend 70% while driving 99.98% uptime.
 {: .value-proposition}
@@ -135,9 +141,8 @@ Crisis leadership, team cohesion and strategic planning under pressure inform my
 <div class="resume-content">
 <div class="resume-description" markdown="1">
 
-**HNC, Mathematics, Electronics & Computer Science** — School of Electrical & Aeronautical Engineering
+HNC, Mathematics, Electronics & Computer Science** — School of Electrical & Aeronautical Engineering
 
-**ISO 27001 Lead Implementer | AWS Certified Solutions Architect (Associate)**
 
 </div>
 </div>
