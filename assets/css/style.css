@@ -165,6 +165,26 @@ p {
   transition: 0.3s;
 }
 
+/* Navigation Logo */
+.nav-logo-divider {
+  width: 1px;
+  height: 30px;
+  background-color: var(--border-color);
+  margin: 0 var(--space-lg);
+}
+
+.nav-logo {
+  height: 30px;
+  width: auto;
+  margin-right: auto;
+  filter: brightness(0.9);
+  transition: filter 0.2s;
+}
+
+.nav-logo:hover {
+  filter: brightness(1);
+}
+
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
@@ -1290,6 +1310,12 @@ p {
   
   .nav-toggle {
     display: flex;
+  }
+  
+  /* Hide logo on mobile to save space */
+  .nav-logo-divider,
+  .nav-logo {
+    display: none;
   }
   
   .hero-name {
