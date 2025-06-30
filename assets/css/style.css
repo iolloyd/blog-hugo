@@ -45,6 +45,10 @@
   --container-content: 800px;
   --container-narrow: 600px;
   
+  /* Container padding */
+  --container-padding: var(--space-xl);
+  --container-padding-mobile: var(--space-lg);
+  
   /* Responsive font sizes */
   --text-xs: 0.75rem;   /* 12px */
   --text-sm: 0.875rem;  /* 14px */
@@ -96,7 +100,21 @@ p {
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding: 0 var(--container-padding);
+}
+
+/* Content container for consistent content width */
+.content-container {
+  max-width: var(--container-content);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Narrow container for forms, CTAs, etc */
+.narrow-container {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
 }
 
 /* Navigation */
@@ -195,9 +213,9 @@ p {
 }
 
 .hero-container {
-  max-width: 900px;
+  max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--container-padding);
   text-align: center;
 }
 
@@ -250,7 +268,7 @@ p {
   font-size: 1.25rem;
   line-height: 1.8;
   color: var(--text-secondary);
-  max-width: 700px;
+  max-width: var(--container-narrow);
   margin: 0 auto 2.5rem;
 }
 
@@ -278,7 +296,7 @@ p {
 }
 
 .hero-content {
-  max-width: 600px;
+  max-width: var(--container-narrow);
 }
 
 .hero-title {
@@ -536,8 +554,9 @@ p {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--grid-gap);
-  max-width: 1000px;
+  max-width: var(--container-max);
   margin: 0 auto;
+  padding: 0 var(--container-padding);
 }
 
 .metric-card {
@@ -700,7 +719,7 @@ p {
 .contact-section p {
   font-size: 1.25rem;
   margin-bottom: 2.5rem;
-  max-width: 600px;
+  max-width: var(--container-narrow);
   margin-left: auto;
   margin-right: auto;
   opacity: 0.9;
@@ -947,15 +966,74 @@ p {
 }
 
 .page-content {
-  max-width: 800px;
+  max-width: var(--container-content);
   margin: 0 auto;
-  padding: 3rem 20px;
+  padding: var(--section-padding-mobile) var(--container-padding);
 }
 
 /* Blog Page Styles */
 .blog-header {
   text-align: center;
   margin-bottom: 4rem;
+}
+
+/* Blog Post Styles */
+.post-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.post-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.post-body {
+  line-height: 1.8;
+  margin-bottom: 3rem;
+}
+
+.post-body h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.post-body p {
+  margin-bottom: 1.25rem;
+}
+
+.post-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 2rem;
+}
+
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.prev-post, .next-post {
+  max-width: 45%;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.prev-post:hover, .next-post:hover {
+  text-decoration: underline;
+}
+
+.next-post {
+  margin-left: auto;
+  text-align: right;
 }
 
 .blog-header h1 {
@@ -1233,12 +1311,16 @@ p {
 
 .about-cta {
   margin-top: 5rem;
-  padding: 4rem 0;
+  padding: var(--section-padding) 0;
   text-align: center;
   background: linear-gradient(135deg, var(--secondary-color) 0%, #0f172a 100%);
   color: white;
-  margin-left: -20px;
-  margin-right: -20px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   margin-bottom: -3rem;
 }
 
@@ -1246,15 +1328,17 @@ p {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   color: white;
+  padding: 0 var(--container-padding);
 }
 
 .about-cta p {
   font-size: 1.25rem;
   margin-bottom: 2.5rem;
-  max-width: 600px;
+  max-width: var(--container-narrow);
   margin-left: auto;
   margin-right: auto;
   opacity: 0.9;
+  padding: 0 var(--container-padding);
 }
 
 .about-cta-buttons {
@@ -1262,6 +1346,7 @@ p {
   gap: 1.5rem;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 0 var(--container-padding);
 }
 
 .about-cta .btn-primary {
@@ -1290,6 +1375,7 @@ p {
     --section-padding: var(--section-padding-mobile);
     --card-padding: var(--card-padding-mobile);
     --grid-gap: var(--grid-gap-mobile);
+    --container-padding: var(--container-padding-mobile);
   }
   
   .nav-menu {
@@ -1518,6 +1604,7 @@ p {
   
   .metrics-grid {
     grid-template-columns: 1fr;
+    padding: 0 var(--container-padding-mobile);
   }
   
   .contact-options {
