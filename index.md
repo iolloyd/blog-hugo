@@ -5,8 +5,9 @@ description: "Lloyd Moore - Engineering executive specializing in scaling teams,
 ---
 
 <section class="hero-section">
-  <div class="hero-content">
-    <h1 class="hero-title">From Royal Marines to Silicon Valley</h1>
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">From Royal Marines to Silicon Valley</h1>
     <h2 class="hero-subtitle">Engineering Leadership at Scale</h2>
     
     <div class="value-props-container">
@@ -31,16 +32,33 @@ description: "Lloyd Moore - Engineering executive specializing in scaling teams,
   </div>
   
   <div class="hero-image">
-    <!-- Professional headshot placeholder -->
-    <div class="headshot-placeholder">
-      <img src="/assets/images/lloyd-moore-headshot.jpg" alt="Lloyd Moore - CTO & VP Engineering" />
+    <!-- Professional cartoon avatar -->
+    <div class="cartoon-avatar">
+      <div class="avatar-head">
+        <div class="avatar-hair"></div>
+        <div class="avatar-face">
+          <div class="avatar-eyes">
+            <div class="avatar-eye left"></div>
+            <div class="avatar-eye right"></div>
+          </div>
+          <div class="avatar-nose"></div>
+          <div class="avatar-mouth"></div>
+        </div>
+      </div>
+      <div class="avatar-body">
+        <div class="avatar-shirt">
+          <div class="avatar-tie"></div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </section>
 
 <section class="impact-metrics">
-  <h2>Proven Impact at Scale</h2>
-  <div class="metrics-grid">
+  <div class="container">
+    <h2>Proven Impact at Scale</h2>
+    <div class="metrics-grid">
     <div class="metric-card">
       <div class="metric-number">187</div>
       <div class="metric-label">Engineers Managed</div>
@@ -61,12 +79,14 @@ description: "Lloyd Moore - Engineering executive specializing in scaling teams,
       <div class="metric-label">Team Attrition</div>
       <div class="metric-detail">Industry-leading retention</div>
     </div>
+    </div>
   </div>
 </section>
 
 <section class="expertise-areas">
-  <h2>Areas of Expertise</h2>
-  <div class="expertise-grid">
+  <div class="container">
+    <h2>Areas of Expertise</h2>
+    <div class="expertise-grid">
     <div class="expertise-card">
       <h3>Hyper-Growth Leadership</h3>
       <p>Proven track record scaling engineering organizations from startup to enterprise, 
@@ -87,22 +107,26 @@ description: "Lloyd Moore - Engineering executive specializing in scaling teams,
       <p>Military leadership principles applied to tech: 40% internal promotion rate, 
       world-class engineering culture.</p>
     </div>
+    </div>
   </div>
 </section>
 
 <section class="companies-section">
-  <h2>Trusted By Industry Leaders</h2>
-  <div class="companies-grid">
+  <div class="container">
+    <h2>Trusted By Industry Leaders</h2>
+    <div class="companies-grid">
     <div class="company-logo">
       <img src="/assets/images/blockdaemon-logo.png" alt="Blockdaemon" />
     </div>
     <!-- Add more company logos as needed -->
+    </div>
   </div>
 </section>
 
 <section class="recent-thoughts">
-  <h2>Recent Thoughts on Engineering Leadership</h2>
-  <div class="blog-preview">
+  <div class="container">
+    <h2>Recent Thoughts on Engineering Leadership</h2>
+    <div class="blog-preview">
     {% for post in site.posts limit:3 %}
     <article class="blog-card">
       <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
@@ -111,18 +135,21 @@ description: "Lloyd Moore - Engineering executive specializing in scaling teams,
       <a href="{{ post.url }}" class="read-more">Read more →</a>
     </article>
     {% endfor %}
-  </div>
-  <div class="blog-cta">
-    <a href="/blog" class="btn btn-outline">View All Articles</a>
+    </div>
+    <div class="blog-cta">
+      <a href="/blog" class="btn btn-outline">View All Articles</a>
+    </div>
   </div>
 </section>
 
 <section id="contact" class="contact-section">
-  <h2>Let's Build Something Great Together</h2>
-  <p>Whether you're scaling a team, optimizing infrastructure, or navigating hyper-growth, 
-  I'd love to explore how we can work together.</p>
-  <div class="contact-options">
-    <a href="mailto:lloyd@lloydmoore.com" class="btn btn-primary">Email Me</a>
-    <a href="https://www.linkedin.com/in/lloydmoore" class="btn btn-secondary">Connect on LinkedIn</a>
+  <div class="container">
+    <h2>Let's Build Something Great Together</h2>
+    <p>Whether you're scaling a team, optimizing infrastructure, or navigating hyper-growth, 
+    I'd love to explore how we can work together.</p>
+    <div class="contact-options">
+      <a href="mailto:lloyd@lloydmoore.com" class="btn btn-primary">Email Me</a>
+      <a href="https://www.linkedin.com/in/lloydmoore" class="btn btn-secondary">Connect on LinkedIn</a>
+    </div>
   </div>
 </section>

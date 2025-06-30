@@ -1,4 +1,5 @@
 :root {
+  /* Colors */
   --primary-color: #2563eb;
   --secondary-color: #1e293b;
   --accent-color: #3b82f6;
@@ -8,8 +9,53 @@
   --bg-white: #ffffff;
   --border-color: #e2e8f0;
   --success-color: #10b981;
+  
+  /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Spacing Scale */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-xxl: 3rem;    /* 48px */
+  --space-3xl: 4rem;    /* 64px */
+  --space-4xl: 5rem;    /* 80px */
+  --space-5xl: 6rem;    /* 96px */
+  
+  /* Component-specific spacing */
+  --section-padding: var(--space-4xl);
+  --section-padding-mobile: var(--space-xxl);
+  --card-padding: var(--space-xl);
+  --card-padding-mobile: var(--space-lg);
+  --grid-gap: var(--space-xl);
+  --grid-gap-mobile: var(--space-lg);
+  
+  /* Typography spacing */
+  --heading-margin-bottom: var(--space-lg);
+  --paragraph-margin-bottom: var(--space-md);
+  --line-height-base: 1.6;
+  --line-height-heading: 1.2;
+  --line-height-relaxed: 1.8;
+  
+  /* Container widths */
+  --container-max: 1200px;
+  --container-content: 800px;
+  --container-narrow: 600px;
+  
+  /* Responsive font sizes */
+  --text-xs: 0.75rem;   /* 12px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.25rem;   /* 20px */
+  --text-2xl: 1.5rem;   /* 24px */
+  --text-3xl: 2rem;     /* 32px */
+  --text-4xl: 2.5rem;   /* 40px */
+  --text-5xl: 3rem;     /* 48px */
+  --text-6xl: 3.5rem;   /* 56px */
 }
 
 * {
@@ -20,8 +66,8 @@
 
 body {
   font-family: var(--font-primary);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--text-base);
+  line-height: var(--line-height-base);
   color: var(--text-primary);
   background-color: var(--bg-white);
 }
@@ -29,7 +75,8 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: var(--line-height-heading);
+  margin-bottom: var(--heading-margin-bottom);
 }
 
 a {
@@ -41,10 +88,15 @@ a:hover {
   text-decoration: underline;
 }
 
+p {
+  margin-bottom: var(--paragraph-margin-bottom);
+  line-height: var(--line-height-relaxed);
+}
+
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--space-xl);
 }
 
 /* Navigation */
@@ -57,13 +109,13 @@ a:hover {
 }
 
 .navbar {
-  padding: 1rem 0;
+  padding: var(--space-md) 0;
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--space-xl);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -192,7 +244,7 @@ a:hover {
 /* New Hero Section for Homepage */
 .hero-section {
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-  padding: 6rem 0;
+  padding: var(--space-5xl) 0;
   min-height: 80vh;
   display: flex;
   align-items: center;
@@ -210,10 +262,10 @@ a:hover {
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: var(--text-6xl);
   font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1rem;
+  line-height: var(--line-height-heading);
+  margin-bottom: var(--space-md);
   background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -221,10 +273,10 @@ a:hover {
 }
 
 .hero-subtitle {
-  font-size: 2rem;
+  font-size: var(--text-3xl);
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 /* Value Proposition Slider */
@@ -272,48 +324,205 @@ a:hover {
   align-items: center;
 }
 
-.headshot-placeholder {
+/* Cartoon Avatar */
+.cartoon-avatar {
   width: 400px;
   height: 400px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  position: relative;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
   border-radius: 50%;
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+  transition: transform 0.3s ease;
 }
 
-.headshot-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.cartoon-avatar:hover {
+  transform: scale(1.05);
+}
+
+.avatar-head {
+  position: absolute;
+  top: 15%;
+  width: 180px;
+  height: 220px;
+}
+
+.avatar-hair {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 100px;
+  background: #2c3e50;
+  border-radius: 50% 50% 0 0;
+}
+
+.avatar-hair::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: -10px;
+  width: 30px;
+  height: 60px;
+  background: #2c3e50;
   border-radius: 50%;
+}
+
+.avatar-hair::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: -10px;
+  width: 30px;
+  height: 60px;
+  background: #2c3e50;
+  border-radius: 50%;
+}
+
+.avatar-face {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 180px;
+  background: #fdbcb4;
+  border-radius: 50% 50% 55% 55%;
+}
+
+.avatar-eyes {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.avatar-eye {
+  width: 25px;
+  height: 35px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-eye::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #1e293b;
+  border-radius: 50%;
+}
+
+.avatar-eye::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+}
+
+.avatar-nose {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 25px;
+  background: #e8a298;
+  border-radius: 50%;
+}
+
+.avatar-mouth {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 25px;
+  border-bottom: 4px solid #d68478;
+  border-radius: 0 0 50px 50px;
+}
+
+.avatar-body {
+  position: absolute;
+  bottom: -20px;
+  width: 240px;
+  height: 200px;
+}
+
+.avatar-shirt {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 180px;
+  background: var(--primary-color);
+  border-radius: 30px 30px 0 0;
+  overflow: hidden;
+}
+
+.avatar-shirt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 40px;
+  background: #fdbcb4;
+  border-radius: 0 0 40px 40px;
+}
+
+.avatar-tie {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 120px;
+  background: var(--secondary-color);
+  clip-path: polygon(35% 0%, 65% 0%, 70% 100%, 50% 90%, 30% 100%);
 }
 
 /* Impact Metrics Section */
 .impact-metrics {
-  padding: 5rem 0;
+  padding: var(--section-padding) 0;
   background: var(--bg-white);
 }
 
 .impact-metrics h2 {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-xxl);
   color: var(--text-primary);
 }
 
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  gap: var(--grid-gap);
   max-width: 1000px;
   margin: 0 auto;
 }
 
 .metric-card {
   text-align: center;
-  padding: 2.5rem 2rem;
+  padding: var(--card-padding);
   background: var(--bg-light);
   border-radius: 1rem;
   transition: all 0.3s ease;
@@ -327,35 +536,36 @@ a:hover {
 }
 
 .metric-number {
-  font-size: 3.5rem;
+  font-size: var(--text-6xl);
   font-weight: 800;
   color: var(--primary-color);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-sm);
   font-family: var(--font-heading);
 }
 
 .metric-label {
-  font-size: 1.25rem;
+  font-size: var(--text-xl);
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-sm);
 }
 
 .metric-detail {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
+  line-height: var(--line-height-base);
 }
 
 /* Companies Section */
 .companies-section {
-  padding: 4rem 0;
+  padding: var(--section-padding) 0;
   background: var(--bg-light);
   text-align: center;
 }
 
 .companies-section h2 {
-  font-size: 2rem;
-  margin-bottom: 3rem;
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-xxl);
   color: var(--text-primary);
 }
 
@@ -383,14 +593,14 @@ a:hover {
 
 /* Recent Thoughts Section */
 .recent-thoughts {
-  padding: 5rem 0;
+  padding: var(--section-padding) 0;
   background: var(--bg-white);
 }
 
 .recent-thoughts h2 {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-xxl);
   color: var(--text-primary);
 }
 
@@ -1055,6 +1265,13 @@ a:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  /* Update CSS variables for mobile */
+  :root {
+    --section-padding: var(--section-padding-mobile);
+    --card-padding: var(--card-padding-mobile);
+    --grid-gap: var(--grid-gap-mobile);
+  }
+  
   .nav-menu {
     display: none;
     position: absolute;
@@ -1063,7 +1280,7 @@ a:hover {
     right: 0;
     background: var(--bg-white);
     flex-direction: column;
-    padding: 1rem;
+    padding: var(--space-md);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   
@@ -1106,28 +1323,55 @@ a:hover {
   }
   
   .hero-title {
-    font-size: 2.5rem;
+    font-size: var(--text-4xl);
   }
   
   .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: var(--text-2xl);
   }
   
   .value-prop {
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
   }
   
   .hero-image {
-    margin-top: 3rem;
+    margin-top: var(--space-xxl);
   }
   
-  .headshot-placeholder {
+  .cartoon-avatar {
     width: 300px;
     height: 300px;
   }
   
+  /* Scale avatar elements for tablet */
+  .avatar-head {
+    width: 135px;
+    height: 165px;
+  }
+  
+  .avatar-hair {
+    width: 135px;
+    height: 75px;
+  }
+  
+  .avatar-face {
+    width: 120px;
+    height: 135px;
+    top: 45px;
+  }
+  
+  .avatar-body {
+    width: 180px;
+    height: 150px;
+  }
+  
+  .avatar-shirt {
+    width: 180px;
+    height: 135px;
+  }
+  
   .metric-number {
-    font-size: 2.5rem;
+    font-size: var(--text-4xl);
   }
   
   .blog-preview {
@@ -1136,8 +1380,15 @@ a:hover {
 }
 
 @media (max-width: 480px) {
+  /* Further reduce spacing for small mobile */
+  :root {
+    --section-padding: var(--space-xxl);
+    --card-padding: var(--space-lg);
+    --grid-gap: var(--space-md);
+  }
+  
   .hero {
-    padding: 4rem 0;
+    padding: var(--space-3xl) 0;
     min-height: auto;
   }
   
@@ -1158,16 +1409,16 @@ a:hover {
   
   /* Additional mobile styles */
   .hero-section {
-    padding: 3rem 0;
+    padding: var(--space-xxl) 0;
     min-height: auto;
   }
   
   .hero-title {
-    font-size: 2rem;
+    font-size: var(--text-3xl);
   }
   
   .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
   }
   
   .value-props-container {
@@ -1175,12 +1426,68 @@ a:hover {
   }
   
   .value-prop {
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
   }
   
-  .headshot-placeholder {
+  .cartoon-avatar {
     width: 250px;
     height: 250px;
+  }
+  
+  /* Scale avatar elements for small mobile */
+  .avatar-head {
+    width: 113px;
+    height: 138px;
+    top: 20%;
+  }
+  
+  .avatar-hair {
+    width: 113px;
+    height: 63px;
+  }
+  
+  .avatar-face {
+    width: 100px;
+    height: 113px;
+    top: 38px;
+  }
+  
+  .avatar-eyes {
+    top: 40px;
+    gap: 25px;
+  }
+  
+  .avatar-eye {
+    width: 18px;
+    height: 25px;
+  }
+  
+  .avatar-nose {
+    top: 65px;
+    width: 15px;
+    height: 18px;
+  }
+  
+  .avatar-mouth {
+    bottom: 25px;
+    width: 35px;
+    height: 18px;
+  }
+  
+  .avatar-body {
+    width: 150px;
+    height: 125px;
+  }
+  
+  .avatar-shirt {
+    width: 150px;
+    height: 113px;
+  }
+  
+  .avatar-tie {
+    width: 30px;
+    height: 90px;
+    top: 30px;
   }
   
   .metrics-grid {
