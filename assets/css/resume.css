@@ -258,3 +258,102 @@
     font-size: 1.1em;
   }
 }
+
+/* CV CTA Section */
+.cv-cta-section {
+  margin-top: 4rem;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #0f172a 100%);
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-bottom: -3rem;
+}
+
+.cv-cta-container {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cv-cta-section h2 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-heading);
+}
+
+.cv-cta-section p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cv-cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cv-cta-buttons .btn {
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+}
+
+/* Override button styles for CV CTA section */
+.cv-cta-section .btn-primary {
+  background: white;
+  color: var(--secondary-color);
+}
+
+.cv-cta-section .btn-primary:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cv-cta-section .btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.cv-cta-section .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.cv-cta-section .btn-outline {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.cv-cta-section .btn-outline:hover {
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+@media screen and (max-width: 768px) {
+  .cv-cta-section h2 {
+    font-size: 2rem;
+  }
+  
+  .cv-cta-section p {
+    font-size: 1.1rem;
+  }
+  
+  .cv-cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cv-cta-buttons .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
