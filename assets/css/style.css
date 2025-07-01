@@ -78,6 +78,14 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.06);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.08);
+  
+  /* Additional variables for compatibility */
+  --text-primary: var(--apple-black);
+  --text-secondary: var(--apple-gray-dark);
+  --primary-color: var(--apple-blue);
+  --secondary-color: var(--apple-gray-dark);
+  --bg-light: var(--apple-gray-lighter);
+  --font-heading: var(--font-system);
 }
 
 /* Reset with Apple sensibilities */
@@ -560,4 +568,214 @@ a:hover {
   .apple-feature-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Page content styling */
+.page-content {
+  max-width: var(--container-md);
+  margin: 0 auto;
+  padding: calc(52px + var(--space-3xl)) var(--space-lg) var(--space-3xl);
+}
+
+.page-content h1 {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+/* Additional button styles for compatibility */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs) var(--space-lg);
+  font-size: var(--text-base);
+  font-weight: 400;
+  border-radius: 980px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: var(--font-system);
+}
+
+.btn-primary {
+  background: var(--apple-blue);
+  color: var(--apple-white);
+}
+
+.btn-primary:hover {
+  background: var(--apple-blue-hover);
+  color: var(--apple-white);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--apple-blue);
+  box-shadow: inset 0 0 0 1px var(--apple-blue);
+}
+
+.btn-secondary:hover {
+  background: var(--apple-blue);
+  color: var(--apple-white);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--apple-gray-dark);
+  box-shadow: inset 0 0 0 1px var(--apple-gray-light);
+}
+
+.btn-outline:hover {
+  color: var(--apple-black);
+  box-shadow: inset 0 0 0 1px var(--apple-gray);
+}
+
+/* Blog header styling */
+.apple-blog-header {
+  padding-top: calc(52px + var(--space-5xl));
+  padding-bottom: var(--space-3xl);
+  text-align: center;
+  background: var(--apple-white);
+}
+
+.apple-page-title {
+  font-size: var(--text-6xl);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-lg);
+  background: linear-gradient(180deg, #000000 0%, #434343 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.apple-page-lead {
+  font-size: var(--text-xl);
+  color: var(--apple-gray-dark);
+  line-height: var(--leading-relaxed);
+  max-width: var(--container-md);
+  margin: 0 auto;
+}
+
+/* About page styles */
+.about-hero {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.about-hero h1 {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-md);
+}
+
+.about-tagline {
+  font-size: var(--text-xl);
+  color: var(--apple-gray-dark);
+  font-weight: 500;
+}
+
+.about-content {
+  max-width: var(--container-md);
+  margin: 0 auto;
+}
+
+.about-section {
+  margin-bottom: var(--space-3xl);
+}
+
+.about-section h2 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-lg);
+  color: var(--apple-black);
+}
+
+.about-section p {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--apple-gray-dark);
+  margin-bottom: var(--space-md);
+}
+
+.philosophy-grid,
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.philosophy-item,
+.value-card {
+  padding: var(--space-lg);
+  background: var(--apple-gray-lighter);
+  border-radius: 12px;
+}
+
+.philosophy-item h3,
+.value-card h3 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-sm);
+  color: var(--apple-black);
+}
+
+.philosophy-item p,
+.value-card p {
+  font-size: var(--text-base);
+  color: var(--apple-gray-dark);
+  line-height: var(--leading-relaxed);
+}
+
+.track-record-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-lg) 0;
+}
+
+.track-record-list li {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--apple-gray-light);
+  font-size: var(--text-lg);
+  color: var(--apple-gray-dark);
+}
+
+.track-record-list li:last-child {
+  border-bottom: none;
+}
+
+.track-record-list strong {
+  color: var(--apple-black);
+  font-weight: 600;
+}
+
+.about-values {
+  margin: var(--space-5xl) 0;
+}
+
+.about-cta {
+  text-align: center;
+  padding: var(--space-3xl) 0;
+  margin-top: var(--space-5xl);
+}
+
+.about-cta h2 {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-md);
+}
+
+.about-cta p {
+  font-size: var(--text-xl);
+  color: var(--apple-gray-dark);
+  margin-bottom: var(--space-xl);
+}
+
+.about-cta-buttons {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
 }
