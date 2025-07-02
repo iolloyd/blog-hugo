@@ -14,7 +14,7 @@ description: "Professional CV of Lloyd Moore - CTO/VP Engineering with experienc
     <p>Whether you're scaling a team, optimizing infrastructure, or navigating hyper-growth, let's explore how we can work together.</p>
     <div class="cv-cta-buttons">
       <a href="mailto:lloyd@lloydmoore.com" class="btn btn-primary">Get in Touch</a>
-      <a href="https://www.linkedin.com/in/lloydmoore" class="btn btn-secondary">Connect on LinkedIn</a>
+      <a href="https://www.linkedin.com/in/moorelloyd" class="btn btn-secondary">Connect on LinkedIn</a>
       <a href="/" class="btn btn-outline">Back to Homepage</a>
     </div>
   </div>
