@@ -13,7 +13,7 @@ description: "Lloyd Moore's journey from Royal Marines Commando to Silicon Valle
 <div class="about-content">
   <section class="about-section">
     <h2>The Unconventional Path</h2>
-    <p>My journey to technology leadership began not in a computer science classroom, but in the Royal Marines Commandos. At 17, I enlisted and spent the next decade learning what true leadership means – often in the most challenging conditions imaginable.</p>
+    <p>My journey to technology leadership began not in a computer science classroom, but in the Royal Marines Commandos. At 18, I enlisted and spent the next decade learning what true leadership means – often in the most challenging conditions imaginable.</p>
     
     <p>The Marines taught me that leadership isn't about rank or title; it's about earning trust, making decisions under pressure, and putting your team's success above your own. These principles have guided every step of my technology career, from my first role as a developer to leading engineering organizations of nearly 200 people.</p>
   </section>
