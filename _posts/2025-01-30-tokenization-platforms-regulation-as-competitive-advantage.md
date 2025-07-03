@@ -1,5 +1,5 @@
 ---
-layout: apple-post
+layout: post
 title: "How Smart Tokenization Platforms Turn Regulation Into a Competitive Moat"
 date: 2025-01-30 10:00:00
 categories: [fintech, blockchain, regulation, architecture]

@@ -1,7 +1,7 @@
 ---
-layout: apple-post
+layout: post
 title: "Makefiles: Your Secret Weapon for Self-Documenting Development Environments"
-date: 2025-07-03
+date: 2025-01-03
 categories: [devops, productivity, tooling]
 description: "Discover how to transform GNU Make from a build tool into a powerful, self-documenting task runner that makes onboarding developers a breeze."
 ---

@@ -1,5 +1,5 @@
 ---
-layout: apple-post
+layout: post
 title: "When 'Boring' Technology is the Best Choice"
 date: 2025-01-30
 categories: [architecture, leadership, devops]
