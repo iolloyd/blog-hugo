@@ -19,6 +19,7 @@
   font-weight: 500;
   color: var(--primary-color);
   margin-bottom: 1em;
+  text-align: center;
 }
 
 .contact-info {
