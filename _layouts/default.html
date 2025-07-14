@@ -80,6 +80,10 @@
     /* Mobile nav toggle critical styles */
     .mobile-nav-toggle {
       display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--apple-black);
     }
     
     @media (max-width: 768px) {
@@ -89,14 +93,16 @@
         justify-content: center;
         width: 44px;
         height: 44px;
+        padding: 10px;
       }
       
       .apple-nav-menu {
-        display: none;
+        display: none !important;
       }
       
       .apple-nav-container {
         height: 56px;
+        padding: 0 1rem;
       }
     }
   </style>
@@ -105,6 +111,9 @@
   <link rel="preload" href="/assets/css/style.css" as="style">
   <link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>
+  
+  <!-- Mobile-specific CSS -->
+  <link rel="stylesheet" href="/assets/css/mobile.css">
   
   <!-- Additional CSS for animations -->
   <style>
