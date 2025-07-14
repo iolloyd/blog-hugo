@@ -191,20 +191,157 @@
 }
 
 @media print {
-  .pdf-button {
-    display: none;
+  /* Page setup */
+  @page {
+    size: A4;
+    margin: 0.75in;
   }
   
+  /* Reset body styles for print */
   body {
-    font-size: 11pt;
+    font-size: 10pt;
+    line-height: 1.4;
+    color: #000 !important;
+    background: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  /* Hide non-essential elements */
+  .pdf-button,
+  .download-cv,
+  .cv-cta-section,
+  .cv-cta-container,
+  nav,
+  header nav,
+  footer,
+  .site-header,
+  .site-footer {
+    display: none !important;
+  }
+  
+  /* Clean header for print */
+  .cv-header {
+    background: none !important;
+    margin: 0 !important;
+    padding: 0 0 1.5rem !important;
+    page-break-after: avoid;
+  }
+  
+  /* Typography adjustments */
+  .name-heading {
+    font-size: 2.2em !important;
+    margin-bottom: 0.2em !important;
+    color: #000 !important;
+  }
+  
+  .title-heading {
+    font-size: 1.2em !important;
+    margin-bottom: 0.8em !important;
+    color: #333 !important;
+  }
+  
+  .contact-info {
+    font-size: 0.9em !important;
+    margin-bottom: 1em !important;
+  }
+  
+  .contact-info a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+  
+  .value-proposition {
+    font-size: 1em !important;
+    margin: 1.5em 0 !important;
+    color: #333 !important;
+  }
+  
+  .section-heading {
+    font-size: 1.4em !important;
+    margin-top: 1.5em !important;
+    margin-bottom: 1em !important;
+    border-bottom: 1px solid #000 !important;
+    page-break-after: avoid;
+  }
+  
+  /* Resume entries */
+  .resume-entry {
+    background: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    padding: 0.8rem 0 !important;
+    margin-bottom: 1.2em !important;
+    page-break-inside: avoid;
+  }
+  
+  .resume-entry:hover {
+    transform: none !important;
+    box-shadow: none !important;
   }
   
   .resume-date {
-    flex: 0 0 120px;
+    flex: 0 0 110px !important;
+    font-size: 0.85em !important;
+    color: #333 !important;
+    padding-right: 1.5em !important;
   }
   
-  .executive-summary {
-    font-size: 1em;
+  .resume-position {
+    font-size: 1.1em !important;
+    margin-bottom: 0.2em !important;
+  }
+  
+  .resume-company {
+    font-size: 0.95em !important;
+    margin-bottom: 0.5em !important;
+    color: #555 !important;
+  }
+  
+  .resume-description {
+    font-size: 0.9em !important;
+  }
+  
+  .resume-description li {
+    margin-bottom: 0.3em !important;
+    page-break-inside: avoid;
+  }
+  
+  .resume-description li:before {
+    content: "•" !important;
+    color: #000 !important;
+  }
+  
+  /* Core strengths */
+  .core-strengths {
+    font-size: 0.9em !important;
+    color: #333 !important;
+  }
+  
+  /* Ensure links are visible */
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+  
+  /* Page breaks */
+  h2, h3 {
+    page-break-after: avoid;
+  }
+  
+  /* Remove all transitions and animations */
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  /* Ensure proper margins */
+  .container,
+  main,
+  article {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
 
