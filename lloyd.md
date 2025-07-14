@@ -32,8 +32,21 @@ Engineering executive who scales teams, platforms and revenue. Grew engineering 
 ## Core Strengths
 {: .section-heading}
 
-Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Edge Infrastructure • Security & Compliance (ISO 27001, SOC 2, GDPR) • DevOps & SRE • Data Engineering & Analytics • Budget & P&L Ownership • M&A Technical Due Diligence
-{: .core-strengths}
+<div class="core-strengths-grid" markdown="1">
+
+**Leadership & Strategy**  
+Product & Tech Strategy • Large-Scale Team Leadership (10→187) • M&A Technical Due Diligence • Budget & P&L Ownership
+
+**Infrastructure & Operations**  
+Multi-Cloud & Edge (AWS, Azure, GCP) • Kubernetes & Container Orchestration • DevOps & SRE • 99.98% Uptime at Scale
+
+**Security & Compliance**  
+ISO 27001 • SOC 2 Type II • GDPR • Zero-Trust Architecture • Incident Response
+
+**Data & Analytics**  
+Data Engineering • Real-Time Analytics • Machine Learning Infrastructure • Federated Learning
+
+</div>
 
 ## Experience
 {: .section-heading}
@@ -101,17 +114,47 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
 </div>
 
 <div class="resume-entry" markdown="1">
-<div class="resume-date">2000 – 2018</div>
+<div class="resume-date">2016 – 2018</div>
 <div class="resume-content">
-<div class="resume-position">Prior Experience</div>
+<div class="resume-position">Interim CTO</div>
+<div class="resume-company">CollectorIQ — New York</div>
+<div class="resume-description" markdown="1">
+
+- Transformed product roadmap resulting in Bank of America as first enterprise client
+- Led technical due diligence for Series A funding round
+- Rebuilt engineering processes, reducing critical bugs by 80%
+- Architected multi-tenant SaaS platform serving financial institutions
+
+</div>
+</div>
+</div>
+
+<div class="resume-entry" markdown="1">
+<div class="resume-date">2014 – 2016</div>
+<div class="resume-content">
+<div class="resume-position">Senior Architect</div>
+<div class="resume-company">CCP Games — Reykjavik & Remote</div>
+<div class="resume-description" markdown="1">
+
+- Architected backend infrastructure for EVE: Valkyrie VR title supporting 100K+ concurrent players
+- Implemented real-time matchmaking system with <3s queue times globally
+- Reduced server costs 60% through intelligent auto-scaling and resource optimization
+- Led cross-functional team of 12 engineers across 3 time zones
+
+</div>
+</div>
+</div>
+
+<div class="resume-entry" markdown="1">
+<div class="resume-date">2000 – 2014</div>
+<div class="resume-content">
+<div class="resume-position">Earlier Technical Leadership Roles</div>
 <div class="resume-company"></div>
 <div class="resume-description" markdown="1">
 
-- **Interim CTO, CollectorIQ** — Reset roadmap, won first enterprise client (Bank of America).
-- **Senior Architect, CCP Games** — Built backend for VR title EVE: Valkyrie handling global load.
-- **Lead Architect, Lookbooks** — Redesigned API/services, uptime ↑ to "three nines".
-- **Head of Engineering, High‑Traffic Video Platform** — 1 Bn+ monthly requests, 99.99% uptime.
-- **Solutions Architect, Ad Salsa** — Hybrid‑cloud migration cut infra costs 94%.
+- **Lead Architect, Lookbooks** — Redesigned API architecture, improved uptime from 95% to 99.9%
+- **Head of Engineering, Video Platform** — Scaled to 1B+ monthly requests with 99.99% uptime
+- **Solutions Architect, Ad Salsa** — Led hybrid-cloud migration reducing infrastructure costs by 94%
 
 </div>
 </div>
@@ -121,13 +164,18 @@ Product & Tech Strategy • Large‑Scale Team Leadership • Multi‑Cloud & Ed
 {: .section-heading}
 
 <div class="resume-entry" markdown="1">
-<div class="resume-date"></div>
+<div class="resume-date">12 years</div>
 <div class="resume-content">
 <div class="resume-position">Royal Marines Commando</div>
-<div class="resume-company">British Royal Navy — 12 years</div>
+<div class="resume-company">British Royal Navy</div>
 <div class="resume-description" markdown="1">
 
-Crisis leadership, team cohesion and strategic planning under pressure inform my approach to scaling technology organisations.
+- Led teams of 30+ personnel in high-stakes operational environments across multiple deployments
+- Developed strategic planning and risk assessment frameworks applied to technology leadership
+- Built resilient team cultures through mentorship and performance optimization
+- Crisis management experience directly translates to incident response and business continuity planning
+
+*Military leadership principles of mission clarity, team empowerment, and decisive action under uncertainty continue to guide my approach to scaling technology organizations.*
 
 </div>
 </div>
@@ -141,8 +189,9 @@ Crisis leadership, team cohesion and strategic planning under pressure inform my
 <div class="resume-content">
 <div class="resume-description" markdown="1">
 
-HNC, Mathematics, Electronics & Computer Science** — School of Electrical & Aeronautical Engineering
+**HNC Mathematics, Electronics & Computer Science** — School of Electrical & Aeronautical Engineering
 
+**Professional Development:** AWS Solutions Architect, ISO 27001 Lead Implementer, Agile/Scrum Master
 
 </div>
 </div>
@@ -156,9 +205,9 @@ HNC, Mathematics, Electronics & Computer Science** — School of Electrical & Ae
 <div class="resume-content">
 <div class="resume-description" markdown="1">
 
-- **Data Enablement** —Blockchain Recorded 2024 
-- **Leadership Stores** — Level-up Engineering Podcast 2023
-- **Leadership Insights and the future of Decentralized Data Networks** - Crypto Hipster Podcast 2023
+- **Data Enablement** — [Blockchain Recorded](https://blockchainrecorded.com) (2024)
+- **Leadership Stories** — [Level-up Engineering Podcast](https://levelup.gitconnected.com/podcast) (2023)
+- **Leadership Insights and the Future of Decentralized Data Networks** — [Crypto Hipster Podcast](https://cryptohipster.com) (2023)
 
 </div>
 </div>

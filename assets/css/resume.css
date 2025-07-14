@@ -163,6 +163,27 @@
   line-height: 1.6;
 }
 
+.core-strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.core-strengths-grid strong {
+  display: block;
+  color: var(--primary-color);
+  font-size: 1.1em;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.core-strengths-grid p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
 .skills-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -315,6 +336,22 @@
   /* Core strengths */
   .core-strengths {
     font-size: 0.9em !important;
+    color: #333 !important;
+  }
+  
+  .core-strengths-grid {
+    gap: 1rem !important;
+    margin-top: 1rem !important;
+  }
+  
+  .core-strengths-grid strong {
+    font-size: 1em !important;
+    color: #000 !important;
+    margin-bottom: 0.3rem !important;
+  }
+  
+  .core-strengths-grid p {
+    font-size: 0.85em !important;
     color: #333 !important;
   }
   
