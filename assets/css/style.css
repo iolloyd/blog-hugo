@@ -779,3 +779,6 @@ a:hover {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/* Mobile enhancements */
+@import 'mobile.css';

@@ -1,0 +1,377 @@
+/* Mobile-First Design Improvements
+   Following Apple HIG and modern mobile best practices
+   Minimum touch target: 44x44px (Apple HIG)
+   Optimized for thumb navigation
+*/
+
+/* Mobile Typography Scale - Optimized for readability */
+@media (max-width: 768px) {
+  :root {
+    /* Adjusted type scale for mobile */
+    --text-xs: 0.875rem;    /* 14px - increased from 12px */
+    --text-sm: 1rem;        /* 16px - increased from 14px */
+    --text-base: 1.125rem;  /* 18px - increased from 17px */
+    --text-lg: 1.375rem;    /* 22px - increased from 20px */
+    --text-xl: 1.625rem;    /* 26px - decreased from 24px */
+    --text-2xl: 2rem;       /* 32px - decreased from 30px */
+    --text-3xl: 2.5rem;     /* 40px - decreased from 36px */
+    --text-4xl: 3rem;       /* 48px - same */
+    --text-5xl: 3.5rem;     /* 56px - decreased from 60px */
+    --text-6xl: 4rem;       /* 64px - decreased from 72px */
+    
+    /* Increased line heights for mobile readability */
+    --leading-normal: 1.6;
+    --leading-relaxed: 1.75;
+    --leading-loose: 1.875;
+  }
+  
+  /* Base typography adjustments */
+  body {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    -webkit-text-size-adjust: 100%; /* Prevent iOS text size adjust */
+  }
+  
+  /* Improved paragraph spacing */
+  p {
+    margin-bottom: var(--space-lg);
+  }
+}
+
+/* Fix iOS viewport height issues */
+@supports (-webkit-touch-callout: none) {
+  .apple-hero,
+  .apple-nav-menu,
+  .mobile-nav-menu {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Mobile Navigation Styles */
+.mobile-nav-toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1002;
+  color: var(--apple-black);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform var(--transition-base);
+}
+
+.hamburger-line {
+  transition: all var(--transition-base);
+  transform-origin: center;
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-base);
+  z-index: 999;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Mobile Nav Menu */
+.mobile-nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 85%;
+  max-width: 375px;
+  height: 100%;
+  height: 100vh;
+  height: -webkit-fill-available;
+  background: var(--apple-white);
+  transition: right var(--transition-base);
+  z-index: 1001;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--apple-gray-light);
+}
+
+.mobile-nav-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--apple-black);
+}
+
+.mobile-nav-close {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-links {
+  padding: var(--space-md) 0;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--text-lg);
+  color: var(--apple-black);
+  text-decoration: none;
+  transition: background-color var(--transition-fast);
+  position: relative;
+  min-height: 44px; /* Ensure 44px touch target */
+}
+
+.mobile-nav-link:active {
+  background-color: var(--apple-gray-lighter);
+}
+
+/* Menu open state */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+body.menu-open .mobile-nav-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.menu-open .mobile-nav-menu {
+  right: 0;
+}
+
+/* Hamburger animation */
+body.menu-open .hamburger-line-top {
+  transform: rotate(45deg) translateY(6px);
+}
+
+body.menu-open .hamburger-line-middle {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+body.menu-open .hamburger-line-bottom {
+  transform: rotate(-45deg) translateY(-6px);
+}
+
+/* Touch-friendly spacing for all interactive elements */
+@media (max-width: 768px) {
+  /* Show mobile nav, hide desktop nav links */
+  .mobile-nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .apple-nav-menu {
+    display: none;
+  }
+  
+  /* Increase tap targets for all links and buttons */
+  .apple-btn,
+  .btn {
+    min-height: 44px;
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--text-base);
+  }
+  
+  /* Full-width buttons on mobile */
+  .apple-hero-cta,
+  .apple-connect-options,
+  .about-cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .apple-hero-cta .apple-btn,
+  .apple-connect-options .apple-btn,
+  .about-cta-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Improved spacing */
+  .apple-nav-container {
+    padding: 0 var(--space-md);
+    height: 56px; /* Slightly taller on mobile */
+  }
+  
+  /* Better content spacing */
+  .apple-hero {
+    padding-top: calc(56px + var(--space-3xl));
+    padding-bottom: var(--space-3xl);
+  }
+  
+  .apple-container {
+    padding: 0 var(--space-md);
+  }
+  
+  /* Improved article readability */
+  .apple-article {
+    padding: var(--space-3xl) var(--space-md);
+  }
+  
+  .apple-article-content {
+    font-size: var(--text-base);
+    line-height: var(--leading-loose);
+  }
+  
+  /* Stack grids on mobile */
+  .apple-feature-grid,
+  .apple-philosophy-grid,
+  .apple-blog-preview,
+  .philosophy-grid,
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  /* Optimize cards for mobile */
+  .apple-feature-card,
+  .apple-blog-preview-item,
+  .philosophy-item,
+  .value-card {
+    padding: var(--space-md);
+  }
+  
+  /* Better image handling */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Improved form inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+    padding: var(--space-sm);
+  }
+  
+  /* Better code blocks */
+  pre {
+    font-size: 14px;
+    padding: var(--space-md);
+    border-radius: 8px;
+  }
+  
+  /* Blog list improvements */
+  .apple-blog-item {
+    padding: var(--space-lg) 0;
+  }
+  
+  .apple-blog-item-title {
+    font-size: var(--text-2xl);
+  }
+  
+  .apple-blog-item-excerpt {
+    font-size: var(--text-base);
+  }
+}
+
+/* Small mobile devices (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  :root {
+    /* Further reduced for very small screens */
+    --text-4xl: 2.5rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.5rem;
+  }
+  
+  .mobile-nav-menu {
+    width: 90%;
+  }
+  
+  /* Tighter spacing on small screens */
+  .apple-container {
+    padding: 0 var(--space-sm);
+  }
+  
+  .apple-article {
+    padding: var(--space-2xl) var(--space-sm);
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .apple-hero {
+    padding-top: calc(56px + var(--space-xl));
+    padding-bottom: var(--space-xl);
+  }
+  
+  .apple-hero-title {
+    font-size: var(--text-5xl);
+  }
+}
+
+/* High-resolution displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Thinner borders for retina displays */
+  .mobile-nav-header {
+    border-bottom-width: 0.5px;
+  }
+  
+  .apple-blog-item {
+    border-bottom-width: 0.5px;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .mobile-nav-menu {
+    background: #1c1c1e;
+    color: #f2f2f7;
+  }
+  
+  .mobile-nav-link {
+    color: #f2f2f7;
+  }
+  
+  .mobile-nav-link:active {
+    background-color: #2c2c2e;
+  }
+  
+  .mobile-nav-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}

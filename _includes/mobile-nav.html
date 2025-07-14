@@ -1,0 +1,28 @@
+<!-- Mobile Navigation Component -->
+<button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-menu">
+  <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path class="hamburger-line hamburger-line-top" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path class="hamburger-line hamburger-line-middle" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path class="hamburger-line hamburger-line-bottom" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<div class="mobile-nav-overlay" aria-hidden="true">
+  <nav id="mobile-nav-menu" class="mobile-nav-menu" role="navigation">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">Menu</span>
+      <button class="mobile-nav-close" aria-label="Close navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="/" class="mobile-nav-link">Home</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+      <a href="/blog" class="mobile-nav-link">Blog</a>
+      <a href="/cv" class="mobile-nav-link">Experience</a>
+      <a href="#connect" class="mobile-nav-link">Contact</a>
+    </div>
+  </nav>
+</div>

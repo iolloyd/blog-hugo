@@ -14,3 +14,14 @@ plugins:
 relative_links:
   enabled: true
   collections: true
+
+# Include PWA files in Jekyll build
+include:
+  - manifest.json
+  - sw.js
+  - offline.html
+  - assets/js/service-worker.js
+
+# Exclude service worker from Jekyll processing
+exclude:
+  - service-worker.js

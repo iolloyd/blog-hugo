@@ -83,56 +83,111 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Button hover effects
-  document.querySelectorAll('.apple-btn').forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-      this.style.transform = 'scale(1.05)';
-    });
-    
-    btn.addEventListener('mouseleave', function() {
-      this.style.transform = 'scale(1)';
-    });
-  });
-  
-  // Mobile menu toggle
-  const createMobileMenu = () => {
-    const navContainer = document.querySelector('.apple-nav-container');
-    if (!navContainer) return;
-    
-    // Create menu toggle button
-    const menuToggle = document.createElement('button');
-    menuToggle.className = 'apple-menu-toggle';
-    menuToggle.innerHTML = `
-      <span></span>
-      <span></span>
-      <span></span>
-    `;
-    
-    // Create mobile menu backdrop
-    const backdrop = document.createElement('div');
-    backdrop.className = 'apple-menu-backdrop';
-    
-    // Insert elements
-    navContainer.appendChild(menuToggle);
-    document.body.appendChild(backdrop);
-    
-    // Toggle menu
-    menuToggle.addEventListener('click', () => {
-      document.body.classList.toggle('menu-open');
-    });
-    
-    backdrop.addEventListener('click', () => {
-      document.body.classList.remove('menu-open');
+  // Enhanced button interactions with touch support
+  const enhanceButtons = () => {
+    document.querySelectorAll('.apple-btn, .btn, button').forEach(btn => {
+      // Skip if already enhanced
+      if (btn.dataset.enhanced) return;
+      btn.dataset.enhanced = 'true';
+      
+      // Mouse hover effects
+      btn.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.05)';
+      });
+      
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+      });
+      
+      // Touch interactions with haptic feedback
+      btn.addEventListener('touchstart', function(e) {
+        // Prevent double-tap zoom
+        e.preventDefault();
+        
+        // Visual feedback
+        this.style.transform = 'scale(0.95)';
+        this.classList.add('touch-active');
+        
+        // Haptic feedback (if supported)
+        if (window.navigator && window.navigator.vibrate) {
+          window.navigator.vibrate(10); // Light haptic tap
+        }
+      }, { passive: false });
+      
+      btn.addEventListener('touchend', function() {
+        this.style.transform = 'scale(1)';
+        this.classList.remove('touch-active');
+      });
+      
+      // Handle touch cancel
+      btn.addEventListener('touchcancel', function() {
+        this.style.transform = 'scale(1)';
+        this.classList.remove('touch-active');
+      });
     });
   };
+  
+  // Enhanced link interactions
+  const enhanceLinks = () => {
+    document.querySelectorAll('a').forEach(link => {
+      // Skip if already enhanced or is navigation
+      if (link.dataset.enhanced || link.closest('.apple-nav')) return;
+      link.dataset.enhanced = 'true';
+      
+      link.addEventListener('touchstart', function() {
+        this.classList.add('touch-active');
+      }, { passive: true });
+      
+      link.addEventListener('touchend', function() {
+        this.classList.remove('touch-active');
+      });
+    });
+  };
+  
+  // Touch-friendly card interactions
+  const enhanceCards = () => {
+    const cards = document.querySelectorAll('.apple-feature-card, .apple-blog-preview-item, .apple-blog-item');
+    
+    cards.forEach(card => {
+      if (card.dataset.enhanced) return;
+      card.dataset.enhanced = 'true';
+      
+      // Make entire card tappable if it contains a link
+      const link = card.querySelector('a');
+      if (link) {
+        card.style.cursor = 'pointer';
+        
+        card.addEventListener('click', function(e) {
+          if (e.target.tagName !== 'A') {
+            link.click();
+          }
+        });
+        
+        // Touch feedback
+        card.addEventListener('touchstart', function() {
+          this.style.transform = 'scale(0.98)';
+          this.classList.add('touch-active');
+        }, { passive: true });
+        
+        card.addEventListener('touchend', function() {
+          this.style.transform = '';
+          this.classList.remove('touch-active');
+        });
+      }
+    });
+  };
+  
+  enhanceButtons();
+  enhanceLinks();
+  enhanceCards();
+  
+  // Mobile menu functionality moved to mobile-nav.js for better organization
   
   // Initialize
   addAnimationClasses();
   animateOnScroll();
   
-  if (window.innerWidth <= 768) {
-    createMobileMenu();
-  }
+  // Mobile navigation is now handled in mobile-nav.js
   
   // Listen for scroll events
   let ticking = false;
@@ -147,9 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', requestTick);
   window.addEventListener('resize', () => {
     animateOnScroll();
-    if (window.innerWidth <= 768 && !document.querySelector('.apple-menu-toggle')) {
-      createMobileMenu();
-    }
+    // Mobile navigation is now handled in mobile-nav.js
   });
 });
 
@@ -183,78 +236,36 @@ style.textContent = `
     transform: translateX(0);
   }
   
-  /* Mobile menu styles */
-  .apple-menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    z-index: 1001;
+  /* Mobile menu styles are now in mobile.css */
+  
+  /* Touch interaction styles */
+  .touch-active {
+    opacity: 0.7 !important;
+    transition: all 0.1s ease !important;
   }
   
-  .apple-menu-toggle span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--apple-black);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  .apple-btn.touch-active,
+  .btn.touch-active {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
   }
   
-  .apple-menu-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 999;
+  .apple-feature-card.touch-active,
+  .apple-blog-preview-item.touch-active,
+  .apple-blog-item.touch-active {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
   }
   
-  @media (max-width: 768px) {
-    .apple-menu-toggle {
-      display: flex;
-    }
-    
-    .apple-nav-menu {
-      position: fixed;
-      top: 0;
-      right: -280px;
-      width: 280px;
-      height: 100vh;
-      background: var(--apple-white);
-      flex-direction: column;
-      padding: 80px 40px;
-      gap: var(--space-lg);
-      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 1000;
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-    }
-    
-    .menu-open .apple-nav-menu {
-      right: 0;
-    }
-    
-    .menu-open .apple-menu-backdrop {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .menu-open .apple-menu-toggle span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    
-    .menu-open .apple-menu-toggle span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .menu-open .apple-menu-toggle span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
+  /* Prevent text selection on touch */
+  @media (pointer: coarse) {
+    .apple-btn,
+    .btn,
+    button,
+    .apple-feature-card,
+    .apple-blog-preview-item,
+    .apple-blog-item {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
     }
   }
   
@@ -264,8 +275,16 @@ style.textContent = `
     will-change: transform;
   }
   
-  .apple-btn {
+  .apple-btn,
+  .btn,
+  button {
     will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Smooth transitions for touch */
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 `;
 document.head.appendChild(style);
