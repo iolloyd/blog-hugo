@@ -282,9 +282,19 @@
         <a href="/cv" class="apple-nav-link">Experience</a>
         <a href="#connect" class="apple-nav-link">Contact</a>
       </div>
-      {% include mobile-nav.html %}
+      <!-- Mobile nav toggle button -->
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-menu">
+        <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path class="hamburger-line hamburger-line-top" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-middle" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-bottom" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
   </nav>
+  
+  <!-- Mobile Navigation -->
+  {% include mobile-nav.html %}
   
   <main>
     {{ content }}

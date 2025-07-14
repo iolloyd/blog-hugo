@@ -30,6 +30,14 @@
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
     -webkit-text-size-adjust: 100%; /* Prevent iOS text size adjust */
+    
+    /* Enhanced font rendering for mobile */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed; /* Better performance on mobile */
+    
+    /* Fix for thin text on iOS - subtle stroke */
+    -webkit-text-stroke: 0.35px;
   }
   
   /* Improved paragraph spacing */
@@ -345,6 +353,13 @@ body.menu-open .hamburger-line-bottom {
   
   .apple-blog-item {
     border-bottom-width: 0.5px;
+  }
+  
+  /* Adjusted text stroke for high DPI screens */
+  @media (max-width: 768px) {
+    body {
+      -webkit-text-stroke: 0.2px; /* Thinner stroke for retina */
+    }
   }
 }
 
