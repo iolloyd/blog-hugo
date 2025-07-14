@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" class="crt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} :: {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  
+  <!-- Terminal theme meta tags -->
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Mr. Robot CSS -->
+  <link rel="stylesheet" href="/assets/css/mr-robot.css">
+  <link rel="stylesheet" href="/assets/css/terminal-effects.css">
+  
+  <!-- Monospace font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  {% if site.google_analytics %}
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}');
+  </script>
+  {% endif %}
+</head>
+<body>
+  <!-- Terminal scan lines and effects -->
+  <div class="noise"></div>
+  
+  <!-- Terminal navigation -->
+  <nav class="terminal-nav">
+    <div class="terminal-nav-container">
+      <a href="/" class="terminal-nav-brand">{{ site.author | default: "SYSTEM" }}</a>
+      <div class="terminal-nav-menu">
+        <a href="/about" class="terminal-nav-link">about</a>
+        <a href="/blog" class="terminal-nav-link">blog</a>
+        <a href="/cv" class="terminal-nav-link">resume</a>
+        <a href="#connect" class="terminal-nav-link">contact</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- ASCII art header (optional) -->
+  {% include terminal-header.html %}
+  
+  <main>
+    {{ content }}
+  </main>
+  
+  <!-- Terminal footer -->
+  <footer class="terminal-footer">
+    <div class="terminal-footer-container">
+      <div class="terminal-window">
+        <div class="terminal-window-header">
+          <span class="terminal-window-title">SYSTEM://CONNECT</span>
+          <div class="terminal-window-controls">
+            <span class="terminal-window-control"></span>
+            <span class="terminal-window-control"></span>
+            <span class="terminal-window-control"></span>
+          </div>
+        </div>
+        <div class="terminal-window-content">
+          <div class="terminal-footer-links">
+            <a href="mailto:lloyd@lloydmoore.com" class="terminal-footer-link">[email]</a>
+            <a href="https://linkedin.com/in/moorelloyd" class="terminal-footer-link">[linkedin]</a>
+            <a href="https://github.com/iolloyd" class="terminal-footer-link">[github]</a>
+          </div>
+          <p class="terminal-footer-copyright">
+            // Copyright {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.
+          </p>
+          <p class="terminal-footer-copyright">
+            // System uptime: <span id="uptime">calculating...</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Terminal JavaScript -->
+  <script src="/assets/js/terminal.js"></script>
+  <script src="/assets/js/mr-robot.js"></script>
+  
+  <script>
+    // Quick uptime calculator
+    (function() {
+      const start = new Date();
+      setInterval(function() {
+        const now = new Date();
+        const diff = Math.floor((now - start) / 1000);
+        const hours = Math.floor(diff / 3600);
+        const minutes = Math.floor((diff % 3600) / 60);
+        const seconds = diff % 60;
+        document.getElementById('uptime').textContent = 
+          `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    })();
+  </script>
+</body>
+</html>

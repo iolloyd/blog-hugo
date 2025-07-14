@@ -1,0 +1,55 @@
+<!-- Terminal ASCII Header -->
+<div class="terminal-header" style="display: none;">
+  <pre class="ascii-art">
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  ███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗    ██████╗ ██████╗║
+║  ██╔════╝╚██╗ ██╔╝██╔════╝╚══██╔══╝██╔════╝████╗ ████║    ╚════██╗╚════██╗║
+║  ███████╗ ╚████╔╝ ███████╗   ██║   █████╗  ██╔████╔██║     █████╔╝ █████╔╝║
+║  ╚════██║  ╚██╔╝  ╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║     ╚═══██╗██╔═══╝ ║
+║  ███████║   ██║   ███████║   ██║   ███████╗██║ ╚═╝ ██║    ██████╔╝███████╗║
+║  ╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═════╝ ╚══════╝║
+╚═══════════════════════════════════════════════════════════════════════════╝
+  </pre>
+</div>
+
+<style>
+.terminal-header {
+  text-align: center;
+  padding: var(--space-md) 0;
+  margin-top: 48px;
+  position: relative;
+  z-index: 10;
+}
+
+.ascii-art {
+  color: var(--mr-text-dim);
+  font-size: 0.7rem;
+  line-height: 1;
+  overflow-x: auto;
+  display: inline-block;
+  text-align: left;
+  margin: 0;
+  padding: var(--space-sm);
+  font-family: var(--mr-terminal-font);
+}
+
+/* Show on larger screens only */
+@media (min-width: 768px) {
+  .terminal-header {
+    display: block !important;
+  }
+}
+
+/* Animate on page load */
+.ascii-art {
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+</style>
