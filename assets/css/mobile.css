@@ -23,6 +23,15 @@
     --leading-normal: 1.6;
     --leading-relaxed: 1.75;
     --leading-loose: 1.875;
+    
+    /* Content-specific scales for mobile */
+    --article-font-size-mobile: 1.125rem; /* 18px for articles */
+    --ui-font-size-mobile: 1rem;         /* 16px for UI */
+    --nav-font-size-mobile: 1.0625rem;   /* 17px for navigation */
+    
+    /* Vertical rhythm for mobile */
+    --baseline-mobile: 0.5rem;
+    --paragraph-spacing-mobile: 1.5em;
   }
   
   /* Base typography adjustments */
