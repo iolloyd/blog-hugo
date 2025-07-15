@@ -90,6 +90,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (btn.dataset.enhanced) return;
       btn.dataset.enhanced = 'true';
       
+      // Add CSS touch-action to prevent double-tap zoom
+      btn.style.touchAction = 'manipulation';
+      
       // Mouse hover effects
       btn.addEventListener('mouseenter', function() {
         this.style.transform = 'scale(1.05)';
@@ -101,8 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Touch interactions with haptic feedback
       btn.addEventListener('touchstart', function(e) {
-        // Prevent double-tap zoom
-        e.preventDefault();
+        // No preventDefault - let links work naturally
         
         // Visual feedback
         this.style.transform = 'scale(0.95)';
@@ -112,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.navigator && window.navigator.vibrate) {
           window.navigator.vibrate(10); // Light haptic tap
         }
-      }, { passive: false });
+      }, { passive: true });
       
       btn.addEventListener('touchend', function() {
         this.style.transform = 'scale(1)';

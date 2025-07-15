@@ -632,6 +632,13 @@ a:hover {
   box-shadow: inset 0 0 0 1px var(--apple-gray);
 }
 
+/* Touch-action for all button elements to prevent double-tap zoom */
+.apple-btn,
+.btn,
+button {
+  touch-action: manipulation;
+}
+
 /* Blog header styling */
 .apple-blog-header {
   padding-top: calc(52px + var(--space-5xl));
