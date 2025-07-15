@@ -18,10 +18,21 @@ class MobileNav {
   }
   
   init() {
-    if (!this.toggle || !this.menu) return;
+    if (!this.toggle || !this.menu) {
+      console.error('Mobile nav elements not found:', {
+        toggle: this.toggle,
+        menu: this.menu
+      });
+      return;
+    }
+    
+    console.log('Setting up mobile nav event listeners');
     
     // Toggle button click
-    this.toggle.addEventListener('click', () => this.toggleMenu());
+    this.toggle.addEventListener('click', () => {
+      console.log('Toggle button clicked');
+      this.toggleMenu();
+    });
     
     // Close button click
     if (this.closeBtn) {
@@ -69,6 +80,7 @@ class MobileNav {
   }
   
   toggleMenu() {
+    console.log('toggleMenu called, isOpen:', this.isOpen);
     if (this.isOpen) {
       this.closeMenu();
     } else {
@@ -224,10 +236,28 @@ class MobileNav {
   }
 }
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  new MobileNav();
-});
+// Initialize mobile navigation
+// Handle both immediate and deferred script loading
+function initializeMobileNav() {
+  console.log('Initializing mobile navigation...');
+  const mobileNav = new MobileNav();
+  
+  // Add debug info
+  console.log('Mobile nav elements found:', {
+    toggle: !!mobileNav.toggle,
+    overlay: !!mobileNav.overlay,
+    menu: !!mobileNav.menu,
+    closeBtn: !!mobileNav.closeBtn
+  });
+}
+
+// Check if DOM is already loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeMobileNav);
+} else {
+  // DOM is already loaded, initialize immediately
+  initializeMobileNav();
+}
 
 // Add screen reader only styles
 const srStyles = document.createElement('style');
