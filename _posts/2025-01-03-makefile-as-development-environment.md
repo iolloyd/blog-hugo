@@ -10,7 +10,7 @@ description: "Discover how to transform GNU Make from a build tool into a powerf
 > "What's the command to deploy to staging?"  
 > "How do I reset the local database?"
 
-If you've heard these questions more than once, you need a better way to document your development workflow. Enter the humble Makefile—not for compiling C code, but as your team's command center.
+If you've heard these questions more than once, you need a better way to document your development workflow. Enter the humble Makefile—not for compiling C code, but as your team's command centre.
 
 ## The Problem with README-Driven Development
 

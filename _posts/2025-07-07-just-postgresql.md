@@ -121,7 +121,7 @@ FOR VALUES FROM ('2024-03-01') TO ('2024-04-01');
 Sometimes you do need Kafka:
 
 Throughput: Millions of events per second
-Multiple datacenters: Built-in geo-replication
+Multiple datacentres: Built-in geo-replication
 Stream processing: Complex windowing and joins
 Long retention: Keeping months of high-volume data
 Existing ecosystem: Your team already runs Kafka
