@@ -47,8 +47,12 @@ description: "Thoughts on engineering leadership, scaling teams, and building ex
     text-align: center;
   }
   
+  .apple-blog-header .apple-container {
+    padding: 0 var(--fluid-space-lg);
+  }
+  
   .apple-page-title {
-    font-size: var(--text-6xl);
+    font-size: var(--fluid-text-5xl);
     font-weight: 700;
     letter-spacing: -0.02em;
     margin-bottom: var(--space-lg);
@@ -97,8 +101,16 @@ description: "Thoughts on engineering leadership, scaling teams, and building ex
   
   /* Responsive */
   @media (max-width: 768px) {
+    .apple-blog-header .apple-container {
+      padding: 0 var(--fluid-space-sm);
+    }
+    
     .apple-page-title {
-      font-size: var(--text-5xl);
+      font-size: var(--fluid-text-4xl);
+      line-height: 1.1;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
     }
     
     .apple-subscribe-options {
@@ -108,6 +120,14 @@ description: "Thoughts on engineering leadership, scaling teams, and building ex
     
     .apple-subscribe-options .apple-btn {
       width: 100%;
+    }
+  }
+  
+  /* Extra small screens */
+  @media (max-width: 375px) {
+    .apple-page-title {
+      font-size: var(--fluid-text-3xl);
+      letter-spacing: -0.01em;
     }
   }
 </style>

@@ -2,7 +2,49 @@
    Following Apple HIG and modern mobile best practices
    Minimum touch target: 44x44px (Apple HIG)
    Optimized for thumb navigation
+   Enhanced with modern CSS features:
+   - Container queries for responsive components
+   - CSS logical properties
+   - Safe area insets for modern devices
+   - Advanced Grid patterns
 */
+
+/* Container Queries Support */
+@container (width >= 320px) {
+  .mobile-responsive-card {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@container (width >= 480px) {
+  .mobile-responsive-card {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Safe Area Insets for Modern Devices */
+:root {
+  /* Safe area variables */
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  
+  /* Combined safe areas with base padding */
+  --mobile-padding-top: max(var(--safe-area-inset-top), var(--space-md));
+  --mobile-padding-right: max(var(--safe-area-inset-right), var(--space-md));
+  --mobile-padding-bottom: max(var(--safe-area-inset-bottom), var(--space-md));
+  --mobile-padding-left: max(var(--safe-area-inset-left), var(--space-md));
+}
+
+/* CSS Logical Properties for Better Internationalization */
+.mobile-content {
+  padding-inline: var(--mobile-padding-right) var(--mobile-padding-left);
+  padding-block: var(--mobile-padding-top) var(--mobile-padding-bottom);
+  margin-inline: auto;
+  max-inline-size: 100%;
+}
 
 /* Mobile Typography Scale - Optimized for readability */
 @media (max-width: 768px) {
@@ -64,7 +106,7 @@
   }
 }
 
-/* Mobile Navigation Styles */
+/* Enhanced Mobile Navigation Styles */
 .mobile-nav-toggle {
   display: none;
   position: relative;
@@ -77,6 +119,24 @@
   z-index: 1002;
   color: var(--apple-black);
   -webkit-tap-highlight-color: transparent;
+  
+  /* Enhanced touch interactions */
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  
+  /* Better visual feedback */
+  border-radius: 8px;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.mobile-nav-toggle:hover {
+  background-color: var(--apple-gray-lighter);
+}
+
+.mobile-nav-toggle:active {
+  transform: scale(0.95);
+  background-color: var(--apple-gray-light);
 }
 
 .hamburger-icon {
@@ -106,7 +166,7 @@
   backdrop-filter: blur(10px);
 }
 
-/* Mobile Nav Menu */
+/* Enhanced Mobile Nav Menu */
 .mobile-nav-menu {
   position: fixed;
   top: 0;
@@ -115,13 +175,23 @@
   max-width: 375px;
   height: 100%;
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for modern browsers */
   height: -webkit-fill-available;
   background: var(--apple-white);
-  transition: right var(--transition-base);
+  transition: transform var(--transition-base), visibility var(--transition-base);
   z-index: 1001;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
+  overscroll-behavior: contain; /* Prevent scroll chaining */
+  -webkit-overflow-scrolling: touch;
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+  
+  /* Safe area support */
+  padding-top: var(--safe-area-inset-top);
+  padding-bottom: var(--safe-area-inset-bottom);
+  
+  /* Better accessibility */
+  contain: layout style;
+  will-change: transform;
 }
 
 .mobile-nav-header {
@@ -170,11 +240,13 @@
   background-color: var(--apple-gray-lighter);
 }
 
-/* Menu open state */
+/* Menu open state - Enhanced */
 body.menu-open {
   overflow: hidden;
   position: fixed;
   width: 100%;
+  /* Prevent viewport shifts on iOS */
+  touch-action: none;
 }
 
 body.menu-open .mobile-nav-overlay {
@@ -183,7 +255,8 @@ body.menu-open .mobile-nav-overlay {
 }
 
 body.menu-open .mobile-nav-menu {
-  right: 0;
+  transform: translateX(-100%);
+  visibility: visible;
 }
 
 /* Hamburger animation */
@@ -198,6 +271,38 @@ body.menu-open .hamburger-line-middle {
 
 body.menu-open .hamburger-line-bottom {
   transform: rotate(-45deg) translateY(-6px);
+}
+
+/* Modern CSS Grid Layouts for Mobile */
+.mobile-grid-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  container-type: inline-size;
+}
+
+.mobile-card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(45%, 140px), 1fr));
+  justify-items: center;
+}
+
+@supports (container-type: inline-size) {
+  .mobile-responsive-component {
+    container-type: inline-size;
+  }
+}
+
+/* Enhanced Touch Targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Touch-friendly spacing for all interactive elements */
@@ -242,14 +347,30 @@ body.menu-open .hamburger-line-bottom {
     height: 56px; /* Slightly taller on mobile */
   }
   
-  /* Better content spacing */
+  /* Better content spacing with safe areas */
   .apple-hero {
-    padding-top: calc(56px + var(--space-3xl));
-    padding-bottom: var(--space-3xl);
+    padding-top: calc(56px + var(--space-3xl) + var(--safe-area-inset-top));
+    padding-bottom: calc(var(--space-3xl) + var(--safe-area-inset-bottom));
+    padding-left: var(--mobile-padding-left);
+    padding-right: var(--mobile-padding-right);
   }
   
   .apple-container {
-    padding: 0 var(--space-md);
+    padding-left: var(--mobile-padding-left);
+    padding-right: var(--mobile-padding-right);
+  }
+  
+  /* Modern aspect ratio boxes */
+  .aspect-ratio-16-9 {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .aspect-ratio-4-3 {
+    aspect-ratio: 4 / 3;
+  }
+  
+  .aspect-ratio-1-1 {
+    aspect-ratio: 1 / 1;
   }
   
   /* Improved article readability */
@@ -280,10 +401,29 @@ body.menu-open .hamburger-line-bottom {
     padding: var(--space-md);
   }
   
-  /* Better image handling */
+  /* Enhanced image handling */
   img {
     max-width: 100%;
     height: auto;
+    /* Better image rendering */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  /* Responsive images with container queries */
+  @container (max-width: 480px) {
+    .responsive-image {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  @container (min-width: 481px) {
+    .responsive-image {
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
   }
   
   /* Improved form inputs */
@@ -331,25 +471,40 @@ body.menu-open .hamburger-line-bottom {
     width: 90%;
   }
   
-  /* Tighter spacing on small screens */
+  /* Tighter spacing on small screens with safe areas */
   .apple-container {
-    padding: 0 var(--space-sm);
+    padding-left: max(var(--safe-area-inset-left), var(--space-sm));
+    padding-right: max(var(--safe-area-inset-right), var(--space-sm));
   }
   
   .apple-article {
-    padding: var(--space-2xl) var(--space-sm);
+    padding: var(--space-2xl) max(var(--safe-area-inset-left), var(--space-sm)) var(--space-2xl) max(var(--safe-area-inset-right), var(--space-sm));
+  }
+  
+  /* Compact grid for tiny screens */
+  .mobile-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 120px), 1fr));
+    gap: 0.75rem;
   }
 }
 
-/* Landscape orientation adjustments */
+/* Landscape orientation adjustments with safe areas */
 @media (max-width: 768px) and (orientation: landscape) {
   .apple-hero {
-    padding-top: calc(56px + var(--space-xl));
-    padding-bottom: var(--space-xl);
+    padding-top: calc(56px + var(--space-xl) + var(--safe-area-inset-top));
+    padding-bottom: calc(var(--space-xl) + var(--safe-area-inset-bottom));
+    padding-left: var(--mobile-padding-left);
+    padding-right: var(--mobile-padding-right);
   }
   
   .apple-hero-title {
     font-size: var(--text-5xl);
+  }
+  
+  /* Optimize navigation for landscape */
+  .mobile-nav-menu {
+    width: 75%; /* Narrower in landscape */
+    max-width: 320px;
   }
 }
 
@@ -380,22 +535,74 @@ body.menu-open .hamburger-line-bottom {
   }
 }
 
-/* Dark mode support */
+/* Enhanced dark mode support */
 @media (prefers-color-scheme: dark) {
   .mobile-nav-menu {
     background: #1c1c1e;
     color: #f2f2f7;
+    border-left: 1px solid #2c2c2e;
   }
   
   .mobile-nav-link {
     color: #f2f2f7;
   }
   
-  .mobile-nav-link:active {
+  .mobile-nav-link:hover {
     background-color: #2c2c2e;
   }
   
+  .mobile-nav-link:active {
+    background-color: #3a3a3c;
+  }
+  
   .mobile-nav-overlay {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .mobile-nav-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .mobile-nav-toggle:active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Modern mobile optimizations */
+@supports (backdrop-filter: blur(10px)) {
+  .mobile-nav-overlay {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+/* Focus visible for better keyboard navigation */
+@supports selector(:focus-visible) {
+  .mobile-nav-toggle:focus:not(:focus-visible) {
+    outline: none;
+  }
+  
+  .mobile-nav-toggle:focus-visible {
+    outline: 2px solid var(--apple-blue);
+    outline-offset: 2px;
+  }
+}
+
+/* Interaction media queries for better touch vs mouse detection */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch devices - remove hover effects */
+  .mobile-nav-toggle:hover {
+    background-color: transparent;
+  }
+  
+  .mobile-nav-link:hover {
+    background-color: transparent;
+  }
+}
+
+/* Modern scroll behavior */
+@supports (scroll-behavior: smooth) {
+  .mobile-nav-menu {
+    scroll-behavior: smooth;
   }
 }
