@@ -1,5 +1,6 @@
-// Mobile Navigation Enhancement
-// Implements accessible, touch-friendly navigation with gesture support
+// Enhanced Mobile Navigation
+// Modern touch interactions, accessibility, and gesture support
+// Includes: haptic feedback, pointer events, modern animation APIs
 
 class MobileNav {
   constructor() {
@@ -13,6 +14,13 @@ class MobileNav {
     this.touchStartY = 0;
     this.touchEndX = 0;
     this.touchEndY = 0;
+    this.dragProgress = 0;
+    this.isDragging = false;
+    
+    // Animation and feedback
+    this.supportsHapticFeedback = 'vibrate' in navigator;
+    this.supportsWebAnimations = 'animate' in HTMLElement.prototype;
+    this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     this.init();
   }
@@ -94,12 +102,20 @@ class MobileNav {
     this.toggle.setAttribute('aria-expanded', 'true');
     this.overlay.setAttribute('aria-hidden', 'false');
     
+    // Haptic feedback on supported devices
+    this.triggerHapticFeedback('light');
+    
+    // Modern animation with Web Animations API
+    if (this.supportsWebAnimations && !this.reducedMotion) {
+      this.animateMenuOpen();
+    }
+    
     // Focus management
     setTimeout(() => {
       if (this.closeBtn) {
         this.closeBtn.focus();
       }
-    }, 300);
+    }, this.reducedMotion ? 0 : 300);
     
     // Announce to screen readers
     this.announceToScreenReader('Navigation menu opened');
@@ -111,6 +127,14 @@ class MobileNav {
     this.toggle.setAttribute('aria-expanded', 'false');
     this.overlay.setAttribute('aria-hidden', 'true');
     
+    // Haptic feedback on supported devices
+    this.triggerHapticFeedback('light');
+    
+    // Modern animation with Web Animations API
+    if (this.supportsWebAnimations && !this.reducedMotion) {
+      this.animateMenuClose();
+    }
+    
     // Return focus to toggle button
     this.toggle.focus();
     
@@ -119,49 +143,157 @@ class MobileNav {
   }
   
   initTouchGestures() {
-    // Swipe right to close menu
+    // Enhanced touch gestures with pointer events and better feedback
+    this.initPointerEvents();
+    this.initTouchEvents();
+  }
+  
+  initPointerEvents() {
+    // Modern pointer events for better cross-platform support
+    if ('PointerEvent' in window) {
+      this.menu.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'touch') {
+          this.handlePointerStart(e);
+        }
+      });
+      
+      this.menu.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch' && this.isDragging) {
+          this.handlePointerMove(e);
+        }
+      });
+      
+      this.menu.addEventListener('pointerup', (e) => {
+        if (e.pointerType === 'touch') {
+          this.handlePointerEnd(e);
+        }
+      });
+      
+      this.menu.addEventListener('pointercancel', (e) => {
+        if (e.pointerType === 'touch') {
+          this.resetDragState();
+        }
+      });
+    }
+  }
+  
+  initTouchEvents() {
+    // Fallback to touch events for older browsers
     this.menu.addEventListener('touchstart', (e) => {
-      this.touchStartX = e.touches[0].clientX;
-      this.touchStartY = e.touches[0].clientY;
+      this.handleTouchStart(e);
     }, { passive: true });
     
     this.menu.addEventListener('touchmove', (e) => {
-      if (!this.touchStartX || !this.touchStartY) return;
-      
-      this.touchEndX = e.touches[0].clientX;
-      this.touchEndY = e.touches[0].clientY;
-      
-      // Calculate swipe distance
-      const diffX = this.touchEndX - this.touchStartX;
-      const diffY = Math.abs(this.touchEndY - this.touchStartY);
-      
-      // If horizontal swipe is greater than vertical, and swipe right
-      if (diffX > 50 && diffY < 50) {
-        // Visual feedback during swipe
-        const progress = Math.min(diffX / 200, 1);
-        this.menu.style.transform = `translateX(${diffX}px)`;
-        this.overlay.style.opacity = 1 - (progress * 0.5);
-      }
+      this.handleTouchMove(e);
+    }, { passive: false }); // Not passive to prevent default when needed
+    
+    this.menu.addEventListener('touchend', (e) => {
+      this.handleTouchEnd(e);
     }, { passive: true });
     
-    this.menu.addEventListener('touchend', () => {
-      const diffX = this.touchEndX - this.touchStartX;
+    this.menu.addEventListener('touchcancel', (e) => {
+      this.resetDragState();
+    }, { passive: true });
+  }
+  
+  handlePointerStart(e) {
+    this.startDrag(e.clientX, e.clientY);
+  }
+  
+  handlePointerMove(e) {
+    this.updateDrag(e.clientX, e.clientY);
+  }
+  
+  handlePointerEnd(e) {
+    this.endDrag();
+  }
+  
+  handleTouchStart(e) {
+    const touch = e.touches[0];
+    this.startDrag(touch.clientX, touch.clientY);
+  }
+  
+  handleTouchMove(e) {
+    if (!this.isDragging) return;
+    
+    const touch = e.touches[0];
+    this.updateDrag(touch.clientX, touch.clientY);
+    
+    // Prevent default scroll if we're dragging horizontally
+    if (this.dragProgress > 0.1) {
+      e.preventDefault();
+    }
+  }
+  
+  handleTouchEnd(e) {
+    this.endDrag();
+  }
+  
+  startDrag(x, y) {
+    this.touchStartX = x;
+    this.touchStartY = y;
+    this.isDragging = false;
+    this.dragProgress = 0;
+  }
+  
+  updateDrag(x, y) {
+    const diffX = x - this.touchStartX;
+    const diffY = Math.abs(y - this.touchStartY);
+    
+    // Only start dragging if horizontal movement is greater than vertical
+    if (!this.isDragging && Math.abs(diffX) > 10 && diffX > diffY) {
+      this.isDragging = true;
+    }
+    
+    if (this.isDragging && diffX > 0) {
+      this.dragProgress = Math.min(diffX / 200, 1);
       
-      // If swipe right is more than 100px, close menu
-      if (diffX > 100) {
-        this.closeMenu();
+      // Smooth visual feedback
+      if (this.supportsWebAnimations && !this.reducedMotion) {
+        this.menu.style.transform = `translateX(${diffX * 0.8}px)`;
       } else {
-        // Reset position
+        this.menu.style.transform = `translateX(${diffX}px)`;
+      }
+      
+      this.overlay.style.opacity = Math.max(0.1, 1 - (this.dragProgress * 0.7));
+      
+      // Haptic feedback at certain thresholds
+      if (this.dragProgress > 0.3 && !this.hapticTriggered) {
+        this.triggerHapticFeedback('light');
+        this.hapticTriggered = true;
+      }
+    }
+  }
+  
+  endDrag() {
+    if (!this.isDragging) {
+      this.resetDragState();
+      return;
+    }
+    
+    // Close menu if drag progress is sufficient
+    if (this.dragProgress > 0.4) {
+      this.triggerHapticFeedback('medium');
+      this.closeMenu();
+    } else {
+      // Animate back to original position
+      if (this.supportsWebAnimations && !this.reducedMotion) {
+        this.animateMenuReset();
+      } else {
         this.menu.style.transform = '';
         this.overlay.style.opacity = '';
       }
-      
-      // Reset touch coordinates
-      this.touchStartX = 0;
-      this.touchStartY = 0;
-      this.touchEndX = 0;
-      this.touchEndY = 0;
-    }, { passive: true });
+    }
+    
+    this.resetDragState();
+  }
+  
+  resetDragState() {
+    this.isDragging = false;
+    this.dragProgress = 0;
+    this.touchStartX = 0;
+    this.touchStartY = 0;
+    this.hapticTriggered = false;
   }
   
   preventBodyScroll() {
@@ -231,8 +363,89 @@ class MobileNav {
     document.body.appendChild(announcement);
     
     setTimeout(() => {
-      document.body.removeChild(announcement);
+      if (document.body.contains(announcement)) {
+        document.body.removeChild(announcement);
+      }
     }, 1000);
+  }
+  
+  // Modern animation methods
+  animateMenuOpen() {
+    if (!this.menu || this.reducedMotion) return;
+    
+    const keyframes = [
+      { transform: 'translateX(100%)', opacity: 0 },
+      { transform: 'translateX(0)', opacity: 1 }
+    ];
+    
+    const options = {
+      duration: 300,
+      easing: 'cubic-bezier(0.2, 0, 0.2, 1)',
+      fill: 'forwards'
+    };
+    
+    this.menu.animate(keyframes, options);
+    
+    // Animate overlay
+    this.overlay.animate(
+      [{ opacity: 0 }, { opacity: 1 }],
+      { duration: 200, easing: 'ease-out', fill: 'forwards' }
+    );
+  }
+  
+  animateMenuClose() {
+    if (!this.menu || this.reducedMotion) return;
+    
+    const keyframes = [
+      { transform: 'translateX(0)', opacity: 1 },
+      { transform: 'translateX(100%)', opacity: 0 }
+    ];
+    
+    const options = {
+      duration: 250,
+      easing: 'cubic-bezier(0.4, 0, 1, 1)',
+      fill: 'forwards'
+    };
+    
+    this.menu.animate(keyframes, options);
+    
+    // Animate overlay
+    this.overlay.animate(
+      [{ opacity: 1 }, { opacity: 0 }],
+      { duration: 200, easing: 'ease-in', fill: 'forwards' }
+    );
+  }
+  
+  animateMenuReset() {
+    if (!this.menu || this.reducedMotion) return;
+    
+    const currentTransform = this.menu.style.transform;
+    
+    this.menu.animate([
+      { transform: currentTransform },
+      { transform: 'translateX(0)' }
+    ], {
+      duration: 200,
+      easing: 'cubic-bezier(0.2, 0, 0.2, 1)'
+    }).addEventListener('finish', () => {
+      this.menu.style.transform = '';
+      this.overlay.style.opacity = '';
+    });
+  }
+  
+  // Haptic feedback for supported devices
+  triggerHapticFeedback(intensity = 'light') {
+    if (!this.supportsHapticFeedback) return;
+    
+    const patterns = {
+      light: [10],
+      medium: [20],
+      heavy: [50]
+    };
+    
+    if (navigator.vibrate && patterns[intensity]) {
+      navigator.vibrate(patterns[intensity]);
+    }
   }
 }
 
