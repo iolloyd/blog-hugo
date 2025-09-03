@@ -787,5 +787,213 @@ button {
   flex-wrap: wrap;
 }
 
+/* Simple Block Styling - Text-focused, minimal design */
+.simple-block {
+  /* Strip all decorative elements - no shadows, borders, or backgrounds */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  
+  /* Focus purely on typography and content */
+  max-width: 65ch; /* Optimal reading width */
+  margin: 0 auto var(--space-3xl);
+  padding: 0;
+  
+  /* Classic web typography */
+  font-family: var(--font-system);
+  font-size: var(--text-base);
+  line-height: var(--leading-loose);
+  color: var(--apple-black);
+  
+  /* Mobile-optimized spacing */
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+.simple-block-header {
+  margin-bottom: var(--space-xl);
+  text-align: left; /* Left-align for old-school feel */
+}
+
+.simple-block-title {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  color: var(--apple-black);
+  margin-bottom: var(--space-sm);
+  letter-spacing: var(--tracking-normal); /* No tight tracking */
+}
+
+.simple-block-subtitle {
+  font-size: var(--text-lg);
+  font-weight: 400;
+  color: var(--apple-gray-dark);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-md);
+}
+
+.simple-block-content {
+  /* Pure content focus */
+  font-size: var(--text-base);
+  line-height: var(--leading-loose);
+  color: var(--apple-gray-dark);
+}
+
+.simple-block-content p {
+  margin-bottom: var(--space-lg);
+}
+
+.simple-block-content h2 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+}
+
+.simple-block-content h3 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+}
+
+.simple-block-content ul,
+.simple-block-content ol {
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-xl);
+}
+
+.simple-block-content li {
+  margin-bottom: var(--space-xs);
+  line-height: var(--leading-relaxed);
+}
+
+/* Simple block separator - subtle line for visual breaks */
+.simple-block-separator {
+  width: 100%;
+  height: 1px;
+  background: var(--apple-gray-light);
+  border: none;
+  margin: var(--space-4xl) auto;
+  max-width: 65ch;
+}
+
+/* Simple block group - for multiple blocks */
+.simple-block-group .simple-block + .simple-block {
+  margin-top: var(--space-2xl);
+  border-top: 1px solid var(--apple-gray-light);
+  padding-top: var(--space-2xl);
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 768px) {
+  .simple-block {
+    max-width: 100%;
+    margin-bottom: var(--space-2xl);
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+    
+    /* Enhanced mobile typography */
+    font-size: var(--text-base);
+    line-height: 1.75;
+  }
+  
+  .simple-block-title {
+    font-size: var(--text-2xl);
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+  }
+  
+  .simple-block-subtitle {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .simple-block-content {
+    font-size: var(--text-base);
+    line-height: 1.75;
+  }
+  
+  .simple-block-content h2 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .simple-block-content h3 {
+    font-size: var(--text-base);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .simple-block-separator {
+    margin: var(--space-2xl) auto;
+  }
+  
+  .simple-block-group .simple-block + .simple-block {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
+  }
+}
+
+/* Small mobile optimization */
+@media (max-width: 480px) {
+  .simple-block {
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+  }
+  
+  .simple-block-title {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Text selection and interaction improvements */
+.simple-block-content ::selection {
+  background: rgba(0, 113, 227, 0.2);
+  color: inherit;
+}
+
+.simple-block-content ::-moz-selection {
+  background: rgba(0, 113, 227, 0.2);
+  color: inherit;
+}
+
+/* Focus on accessibility */
+.simple-block a {
+  color: var(--apple-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast);
+}
+
+.simple-block a:hover {
+  color: var(--apple-blue-hover);
+  text-decoration-thickness: 2px;
+}
+
+.simple-block a:focus {
+  outline: 2px solid var(--apple-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Simple block variations */
+.simple-block-centered {
+  text-align: center;
+}
+
+.simple-block-narrow {
+  max-width: 50ch;
+}
+
+.simple-block-wide {
+  max-width: 75ch;
+}
+
 /* Mobile enhancements */
 @import 'mobile.css';

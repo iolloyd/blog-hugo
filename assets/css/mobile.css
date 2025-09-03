@@ -606,3 +606,46 @@ body.menu-open .hamburger-line-bottom {
     scroll-behavior: smooth;
   }
 }
+
+/* Simple Block Mobile Enhancements */
+@media (max-width: 768px) {
+  /* Ensure simple blocks work well with safe areas */
+  .simple-block {
+    margin-left: var(--mobile-padding-left);
+    margin-right: var(--mobile-padding-right);
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  /* Enhanced touch targets for links in simple blocks */
+  .simple-block a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 113, 227, 0.1);
+  }
+  
+  /* Better spacing for grouped blocks on mobile */
+  .simple-block-group {
+    margin-left: var(--mobile-padding-left);
+    margin-right: var(--mobile-padding-right);
+  }
+  
+  .simple-block-group .simple-block {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Enhanced text selection for mobile */
+@media (pointer: coarse) {
+  .simple-block-content {
+    /* Slightly larger tap targets for touch */
+    line-height: 1.8;
+  }
+  
+  .simple-block-content a {
+    padding: var(--space-xxs) 0;
+  }
+}
