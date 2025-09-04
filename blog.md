@@ -34,7 +34,6 @@ description: "Thoughts on engineering leadership, scaling teams, and building ex
       <p>Get notified when I publish new insights on engineering leadership and team scaling.</p>
       <div class="apple-subscribe-options">
         <a href="https://linkedin.com/in/moorelloyd" class="apple-btn apple-btn-primary">Follow on LinkedIn</a>
-        <a href="mailto:lloyd@lloydmoore.com" class="apple-btn apple-btn-secondary">Email me</a>
       </div>
     </div>
   </div>

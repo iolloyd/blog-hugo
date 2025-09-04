@@ -7,9 +7,9 @@ CTO / VP Engineering | Technology & Product Strategy
 {: .title-heading}
 
 <div class="contact-info">
-<span>+44 7399 429 659</span> • 
-<span><a href="mailto:lloyd@lloydmoore.com">lloyd@lloydmoore.com</a></span> • 
-<span><a href="https://linkedin.com/in/moorelloyd">linkedin.com/in/moorelloyd</a></span>
+<span class="contact-item"><svg class="contact-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>+44 7399 429 659</span>
+<span class="contact-item"><svg class="contact-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg><a href="mailto:lloyd@lloydmoore.com">lloyd@lloydmoore.com</a></span>
+<span class="contact-item"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><a href="https://linkedin.com/in/moorelloyd">LinkedIn Profile</a></span>
 </div>
 
 </div>
@@ -18,38 +18,90 @@ CTO / VP Engineering | Technology & Product Strategy
 <a href="#" class="btn btn-primary" onclick="window.print(); return false;">Download CV as PDF</a>
 </div>
 
-Engineering executive who scales teams, platforms and revenue. Grew engineering headcount 10 → 187, underpinned a $3.25 bn valuation, and cut cloud spend 70% while driving 99.98% uptime.
-{: .value-proposition}
-
-## Career Highlights
-{: .section-heading}
-
-- **Hyper‑growth** – Built Blockdaemon's engineering org from 10 to 187 across 14 countries; MTTR down 75%.
-- **Platform scale** – Operated blockchain nodes on six continents handling 200 M+ daily calls at 99.9% availability.
-- **Velocity & efficiency** – Migrated to Kubernetes & Kafka; deploy time 4.5 h → 2 min, throughput ×8, cloud bill –65%.
-- **People & culture** – Mentoring scheme promoted 40% of engineers in 18 months; attrition 4%.
-
-## Core Strengths
-{: .section-heading}
-
-<div class="core-strengths-grid" markdown="1">
-
-**Leadership & Strategy**  
-Product & Tech Strategy • Large-Scale Team Leadership (10→187) • M&A Technical Due Diligence • Budget & P&L Ownership
-
-**Infrastructure & Operations**  
-Multi-Cloud & Edge (AWS, Azure, GCP) • Kubernetes & Container Orchestration • DevOps & SRE • 99.98% Uptime at Scale
-
-**Security & Compliance**  
-ISO 27001 • SOC 2 Type II • GDPR • Zero-Trust Architecture • Incident Response
-
-**Data & Analytics**  
-Data Engineering • Real-Time Analytics • Machine Learning Infrastructure • Federated Learning
-
+<div class="value-proposition-enhanced">
+<p class="value-proposition-text">Engineering executive who scales teams, platforms and revenue. Grew engineering headcount <strong class="highlight-metric">10 → 187</strong>, underpinned a <strong class="highlight-metric">$3.25 bn valuation</strong>, and cut cloud spend <strong class="highlight-metric">70%</strong> while driving <strong class="highlight-metric">99.98% uptime</strong>.</p>
 </div>
 
-## Experience
-{: .section-heading}
+<div class="section-card">
+<h2 class="section-heading">Career Highlights</h2>
+
+<div class="highlights-grid">
+<div class="highlight-item">
+<div class="highlight-icon">🚀</div>
+<div class="highlight-content">
+<strong>Hyper‑growth</strong><br>
+Built Blockdaemon's engineering org from <span class="metric">10 to 187</span> across 14 countries; MTTR down <span class="metric">75%</span>.
+</div>
+</div>
+
+<div class="highlight-item">
+<div class="highlight-icon">🌍</div>
+<div class="highlight-content">
+<strong>Platform scale</strong><br>
+Operated blockchain nodes on six continents handling <span class="metric">200M+ daily calls</span> at <span class="metric">99.9% availability</span>.
+</div>
+</div>
+
+<div class="highlight-item">
+<div class="highlight-icon">⚡</div>
+<div class="highlight-content">
+<strong>Velocity & efficiency</strong><br>
+Migrated to Kubernetes & Kafka; deploy time <span class="metric">4.5h → 2min</span>, throughput <span class="metric">×8</span>, cloud bill <span class="metric">–65%</span>.
+</div>
+</div>
+
+<div class="highlight-item">
+<div class="highlight-icon">👥</div>
+<div class="highlight-content">
+<strong>People & culture</strong><br>
+Mentoring scheme promoted <span class="metric">40% of engineers</span> in 18 months; attrition <span class="metric">4%</span>.
+</div>
+</div>
+</div>
+</div>
+
+<div class="section-card">
+<h2 class="section-heading">Core Strengths</h2>
+
+<div class="core-strengths-grid">
+
+<div class="strength-category">
+<div class="strength-icon">🎯</div>
+<div class="strength-content">
+<h3>Leadership & Strategy</h3>
+Product & Tech Strategy • Large-Scale Team Leadership (10→187) • M&A Technical Due Diligence • Budget & P&L Ownership
+</div>
+</div>
+
+<div class="strength-category">
+<div class="strength-icon">⚙️</div>
+<div class="strength-content">
+<h3>Infrastructure & Operations</h3>
+Multi-Cloud & Edge (AWS, Azure, GCP) • Kubernetes & Container Orchestration • DevOps & SRE • 99.98% Uptime at Scale
+</div>
+</div>
+
+<div class="strength-category">
+<div class="strength-icon">🔒</div>
+<div class="strength-content">
+<h3>Security & Compliance</h3>
+ISO 27001 • SOC 2 Type II • GDPR • Zero-Trust Architecture • Incident Response
+</div>
+</div>
+
+<div class="strength-category">
+<div class="strength-icon">📊</div>
+<div class="strength-content">
+<h3>Data & Analytics</h3>
+Data Engineering • Real-Time Analytics • Machine Learning Infrastructure • Federated Learning
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="section-card">
+<h2 class="section-heading">Experience</h2>
 
 <div class="resume-entry" markdown="1">
 <div class="resume-date">Sep 2024 – Present</div>
@@ -159,9 +211,10 @@ Data Engineering • Real-Time Analytics • Machine Learning Infrastructure •
 </div>
 </div>
 </div>
+</div>
 
-## Military Leadership
-{: .section-heading}
+<div class="section-card">
+<h2 class="section-heading">Military Leadership</h2>
 
 <div class="resume-entry" markdown="1">
 <div class="resume-date">12 years</div>
@@ -180,9 +233,10 @@ Data Engineering • Real-Time Analytics • Machine Learning Infrastructure •
 </div>
 </div>
 </div>
+</div>
 
-## Education & Certifications
-{: .section-heading}
+<div class="section-card">
+<h2 class="section-heading">Education & Certifications</h2>
 
 <div class="resume-entry" markdown="1">
 <div class="resume-date"></div>
@@ -196,9 +250,10 @@ Data Engineering • Real-Time Analytics • Machine Learning Infrastructure •
 </div>
 </div>
 </div>
+</div>
 
-## Speaking & Podcasts
-{: .section-heading}
+<div class="section-card">
+<h2 class="section-heading">Speaking & Podcasts</h2>
 
 <div class="resume-entry" markdown="1">
 <div class="resume-date"></div>
@@ -209,6 +264,26 @@ Data Engineering • Real-Time Analytics • Machine Learning Infrastructure •
 - **Leadership Stories** — [Level-up Engineering Podcast](https://levelup.gitconnected.com/podcast) (2023)
 - **Leadership Insights and the Future of Decentralized Data Networks** — [Crypto Hipster Podcast](https://cryptohipster.com) (2023)
 
+</div>
+</div>
+</div>
+</div>
+
+<!-- Featured Blog Posts Section -->
+<div class="section-card">
+<h2 class="section-heading">Featured Insights</h2>
+
+<div class="blog-posts-grid">
+<div class="blog-post-preview">
+<h3><a href="/2025/08/28/tlaplus-not-just-concurrency.html">TLA+ - Not Just Concurrency</a></h3>
+<p>How formal methods can transform system design thinking beyond just concurrent programming challenges.</p>
+<span class="blog-date">August 2024</span>
+</div>
+
+<div class="blog-post-preview">
+<h3><a href="/2025/01/30/when-boring-tech-is-best.html">When Boring Tech is Best</a></h3>
+<p>Why proven, stable technologies often deliver better business outcomes than cutting-edge solutions.</p>
+<span class="blog-date">January 2024</span>
 </div>
 </div>
 </div>
