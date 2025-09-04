@@ -8,8 +8,6 @@ excerpt: "A real-world case study of using formal methods to find a subtle race 
 author: Lloyd Moore
 ---
 
-# How TLA+ Formal Verification Caught a Production Bug Before It Shipped
-
 *A real-world case study of using formal methods to find a subtle race condition in a CV matching system*
 
 ---
