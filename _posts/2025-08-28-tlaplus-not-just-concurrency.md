@@ -8,13 +8,11 @@ excerpt: "A real-world case study of using formal methods to find a subtle race 
 author: Lloyd Moore
 ---
 
-# How TLA+ Formal Verification Caught a Production Bug Before It Shipped
-
 *A real-world case study of using formal methods to find a subtle race condition in a CV matching system*
 
 ---
 
-I decided to experiment with TLA+ formal verification on a production recruitment and job matching system. What started as an academic exercise turned into a genuine "saved our bacon" moment when the verification caught a subtle but critical race condition that would have caused data inconsistencies in production.
+I experimented with TLA+ formal verification on a production recruitment and job matching system. What started as an academic exercise turned into a genuine "saved our bacon" moment when the verification caught a subtle but critical race condition that would have caused data inconsistencies in production.
 
 Here's the story of how mathematical proof caught what code reviews, unit tests, and integration tests all missed.
 
