@@ -14,7 +14,7 @@ author: Lloyd Moore
 
 ---
 
-I decided to experiment with TLA+ formal verification on a production recruitment and job matching system. What started as an academic exercise turned into a genuine "saved our bacon" moment when the verification caught a subtle but critical race condition that would have caused data inconsistencies in production.
+I experimented with TLA+ formal verification on a production recruitment and job matching system. What started as an academic exercise turned into a genuine "saved our bacon" moment when the verification caught a subtle but critical race condition that would have caused data inconsistencies in production.
 
 Here's the story of how mathematical proof caught what code reviews, unit tests, and integration tests all missed.
 
