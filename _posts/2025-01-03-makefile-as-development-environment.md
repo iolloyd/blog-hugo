@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: tactical-briefing
 title: "Makefiles: Your Secret Weapon for Self-Documenting Development Environments"
 date: 2025-01-03
 categories: [devops, productivity, tooling]

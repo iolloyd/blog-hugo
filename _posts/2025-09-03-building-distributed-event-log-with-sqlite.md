@@ -4,6 +4,11 @@ title: "Building a Distributed Event Log with SQLite: When Simple Beats Complex"
 date: 2025-09-03
 categories: [architecture, databases, distributed-systems]
 description: "How to build a robust, eventually-consistent event queue and replication system using SQLite as the foundation—proving that sometimes the simplest solution is the most elegant."
+metrics:
+  - "100k+ events/second throughput"
+  - "Zero external dependencies required"
+  - "Multi-master replication with conflict resolution"
+  - "99.9% availability with simple file replication"
 ---
 
 > "The best code is no code. The second-best code is code so simple that deletion becomes obvious."
