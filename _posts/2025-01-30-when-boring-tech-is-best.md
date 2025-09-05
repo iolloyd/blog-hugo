@@ -1,9 +1,14 @@
 ---
-layout: post
+layout: tactical-briefing
 title: "When 'Boring' Technology is the Best Choice"
 date: 2025-01-30
 categories: [architecture, leadership, devops]
 description: "Why choosing 'boring' technology like HashiCorp Nomad over popular options like Kubernetes can be the most innovative decision for your business."
+metrics:
+  - "50% reduction in operational complexity"
+  - "3-month deployment timeline vs 9+ months for K8s"
+  - "Zero specialized hiring required"
+  - "Multi-cloud deployment across GCP, AWS, bare metal"
 ---
 
 > "Nobody ever got fired for buying IBM."

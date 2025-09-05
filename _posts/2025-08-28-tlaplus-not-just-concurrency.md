@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: tactical-briefing
 title: "How TLA+ Formal Verification Caught a Production Bug Before It Shipped"
 date: 2025-08-28
 categories: [formal-methods, verification, architecture]

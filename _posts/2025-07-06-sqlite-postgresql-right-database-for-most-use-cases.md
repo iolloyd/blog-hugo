@@ -1,9 +1,14 @@
 ---
-layout: post
+layout: tactical-briefing
 title: "SQLite and PostgreSQL: The Right Database for 99% of Use Cases"
 date: 2025-07-06
 categories: [architecture, databases, engineering]
 description: "Why SQLite and PostgreSQL cover almost all database needs, and when you actually need something else."
+metrics:
+  - "99% of applications covered by SQLite + PostgreSQL"
+  - "10+ TB SQLite databases in production"
+  - "1M+ writes/second PostgreSQL capability"
+  - "80% cost reduction vs specialized databases"
 ---
 
 > "The best tool for the job is the one you already know how to use properly." - Ancient Engineering Wisdom
