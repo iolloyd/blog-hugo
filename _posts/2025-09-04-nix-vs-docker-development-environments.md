@@ -1,9 +1,14 @@
 ---
-layout: post
+layout: tactical-briefing
 title: "Why Nix Beats Docker for Local Development (And Makes It Better in Production)"
 date: 2025-09-04
 categories: [devops, tooling, productivity]
 description: "How Nix eliminates Docker's development friction while creating superior production containers - a practical guide."
+metrics:
+  - "10.4x faster environment activation (4s vs 42s)"
+  - "91% less disk usage per project (450MB vs 5.1GB)"
+  - "75% less memory overhead (2GB vs 8GB)"
+  - "Zero dependency conflicts across team environments"
 ---
 
 > "It works on my machine" is supposed to be a problem that containers solved. Yet here we are, still debugging environment differences between developers who all claim to be running 'the same' Docker setup.

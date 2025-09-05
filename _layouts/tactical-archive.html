@@ -1,0 +1,250 @@
+---
+layout: tactical-default
+---
+
+<div class="intel-archive">
+  <!-- Intelligence Archive Header -->
+  <header class="intel-archive-header">
+    <div class="intel-classification">CLASSIFIED: INTELLIGENCE ARCHIVE</div>
+    <h1 class="intel-archive-title">Technical Intelligence Database</h1>
+    <p class="intel-archive-description">
+      Operational insights from scaling engineering organizations, optimizing high-performance systems, 
+      and executing mission-critical technology initiatives. Declassified for strategic advantage.
+    </p>
+  </header>
+
+  <!-- Intelligence Reports Grid -->
+  <section class="intel-archive-grid">
+    {% for post in site.posts %}
+    <article class="intel-archive-item">
+      <div class="intel-item-header">
+        <span class="intel-item-classification">TECHNICAL</span>
+        <time class="intel-item-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+      </div>
+      <h2 class="intel-item-title">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </h2>
+      <p class="intel-item-summary">{{ post.description }}</p>
+      <div class="intel-item-action">
+        <a href="{{ post.url }}" class="intel-access-link">ACCESS REPORT</a>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+
+  <!-- Mission Contact -->
+  <section class="intel-contact">
+    <h2 class="intel-contact-title">Request Additional Intelligence</h2>
+    <p class="intel-contact-description">
+      Require specific operational guidance or strategic consultation on scaling engineering organizations?
+    </p>
+    <div class="intel-contact-actions">
+      <a href="mailto:lloyd@lloydmoore.com" class="btn-tactical">Establish Comms</a>
+      <a href="https://linkedin.com/in/moorelloyd" class="btn-tactical btn-tactical-secondary">Network Access</a>
+    </div>
+  </section>
+</div>
+
+<style>
+/* Intelligence Archive Styles */
+.intel-archive {
+  grid-column: 2;
+  padding: calc(56px + var(--space-2xl)) 0 var(--space-4xl);
+}
+
+.intel-archive-header {
+  text-align: center;
+  margin-bottom: var(--space-4xl);
+  padding: var(--space-2xl);
+  border: 2px solid var(--tactical-grid);
+  background: var(--tactical-surface);
+}
+
+.intel-classification {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.intel-archive-title {
+  font-size: var(--text-command);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-lg);
+  line-height: 0.9;
+}
+
+.intel-archive-description {
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  line-height: 1.6;
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+/* Intelligence Archive Grid */
+.intel-archive-grid {
+  display: grid;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-4xl);
+}
+
+.intel-archive-item {
+  padding: var(--space-lg);
+  border: 1px solid var(--tactical-grid);
+  background: var(--tactical-surface);
+  transition: all var(--transition-tactical);
+}
+
+.intel-archive-item:hover {
+  border-color: var(--tactical-primary);
+  box-shadow: var(--shadow-tactical);
+}
+
+.intel-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.intel-item-classification {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  padding: 2px var(--space-xs);
+  border: 1px solid var(--tactical-grid);
+}
+
+.intel-item-date {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  color: var(--tactical-text-muted);
+}
+
+.intel-item-title {
+  font-size: var(--text-tactical);
+  font-weight: 700;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+}
+
+.intel-item-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-tactical);
+}
+
+.intel-item-title a:hover {
+  color: var(--tactical-primary);
+}
+
+.intel-item-summary {
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-lg);
+}
+
+.intel-item-action {
+  text-align: right;
+}
+
+.intel-access-link {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-primary);
+  text-decoration: none;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-tactical);
+}
+
+.intel-access-link:hover {
+  border-bottom-color: var(--tactical-primary);
+}
+
+/* Contact Section */
+.intel-contact {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: var(--tactical-surface);
+  border: 2px solid var(--tactical-grid);
+}
+
+.intel-contact-title {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-tactical);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-md);
+}
+
+.intel-contact-description {
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+  max-width: 50ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intel-contact-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .intel-archive-header {
+    padding: var(--space-md);
+  }
+  
+  .intel-archive-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .intel-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+  
+  .intel-contact-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-tactical {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .intel-archive {
+    padding: calc(56px + var(--space-lg)) var(--space-sm) var(--space-3xl);
+  }
+  
+  .intel-archive-item {
+    padding: var(--space-md);
+  }
+}
+</style>
