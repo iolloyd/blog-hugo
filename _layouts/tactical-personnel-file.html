@@ -1,0 +1,233 @@
+---
+layout: tactical-default
+---
+
+<div class="personnel-file">
+  <!-- Personnel File Header -->
+  <header class="personnel-header">
+    <div class="personnel-classification">CLASSIFIED: PERSONNEL FILE</div>
+    <h1 class="personnel-name">{{ page.title | default: "Lloyd Moore" }}</h1>
+    <div class="personnel-rank">From Royal Marines Commando to Silicon Valley Engineering Executive</div>
+  </header>
+
+  <!-- Personnel File Content -->
+  <div class="personnel-file-content">
+    {{ content }}
+  </div>
+
+  <!-- Mission Contact -->
+  <section class="personnel-contact">
+    <h2 class="contact-title">Request Operational Consultation</h2>
+    <p class="contact-description">
+      Scaling engineering organizations, optimizing high-performance systems, or navigating hyper-growth environments? 
+      Military-precision leadership available for strategic missions.
+    </p>
+    <div class="contact-actions">
+      <a href="mailto:lloyd@lloydmoore.com" class="btn-tactical">Establish Comms</a>
+      <a href="https://www.linkedin.com/in/moorelloyd" class="btn-tactical btn-tactical-secondary">Network Access</a>
+      <a href="/cv" class="btn-tactical btn-tactical-secondary">Service Record</a>
+    </div>
+  </section>
+</div>
+
+<style>
+/* Personnel File Styles */
+.personnel-file {
+  padding: calc(56px + var(--space-2xl)) var(--space-lg) var(--space-4xl);
+  max-width: var(--container-briefing);
+  margin: 0 auto;
+}
+
+.personnel-header {
+  text-align: center;
+  margin-bottom: var(--space-4xl);
+  padding: var(--space-xl);
+  border: 2px solid var(--tactical-grid);
+  background: var(--tactical-surface);
+}
+
+.personnel-classification {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.personnel-name {
+  font-size: var(--text-command);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-md);
+  line-height: 0.9;
+}
+
+.personnel-rank {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  line-height: 1.4;
+}
+
+/* Personnel File Content */
+.personnel-file-content {
+  max-width: var(--container-intel);
+  margin: 0 auto var(--space-4xl);
+  line-height: 1.7;
+}
+
+.personnel-file-content h2 {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-tactical);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text);
+  margin: var(--space-2xl) 0 var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--tactical-grid);
+}
+
+.personnel-file-content h3 {
+  font-size: var(--text-intel);
+  font-weight: 600;
+  color: var(--tactical-text);
+  margin: var(--space-xl) 0 var(--space-md);
+}
+
+.personnel-file-content p {
+  margin-bottom: var(--space-lg);
+  color: var(--tactical-text-secondary);
+}
+
+.personnel-file-content ul {
+  margin: var(--space-lg) 0;
+  padding-left: var(--space-xl);
+}
+
+.personnel-file-content li {
+  margin-bottom: var(--space-sm);
+  color: var(--tactical-text-secondary);
+  line-height: 1.6;
+}
+
+.personnel-file-content strong {
+  color: var(--tactical-text);
+}
+
+.personnel-file-content blockquote {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg);
+  background: var(--tactical-surface);
+  border-left: 4px solid var(--tactical-primary);
+  font-style: italic;
+  color: var(--tactical-text-secondary);
+}
+
+/* Mission Values Grid */
+.values-tactical-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+.value-tactical-card {
+  padding: var(--space-lg);
+  background: var(--tactical-surface);
+  border: 2px solid var(--tactical-grid);
+  transition: border-color var(--transition-tactical);
+}
+
+.value-tactical-card:hover {
+  border-color: var(--tactical-primary);
+}
+
+.value-tactical-card h3 {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-intel);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-sm);
+}
+
+.value-tactical-card p {
+  color: var(--tactical-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Personnel Contact */
+.personnel-contact {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: var(--tactical-surface);
+  border: 2px solid var(--tactical-grid);
+}
+
+.contact-title {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-tactical);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-md);
+}
+
+.contact-description {
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-xl);
+}
+
+.contact-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .personnel-file {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  .personnel-header {
+    padding: var(--space-md);
+  }
+  
+  .values-tactical-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-tactical {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .personnel-file {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+}
+</style>
