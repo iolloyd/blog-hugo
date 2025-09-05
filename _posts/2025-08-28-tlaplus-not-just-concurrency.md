@@ -4,8 +4,12 @@ title: "How TLA+ Formal Verification Caught a Production Bug Before It Shipped"
 date: 2025-08-28
 categories: [formal-methods, verification, architecture]
 tags: [tlaplus, formal-verification, concurrency, testing, software-engineering]
-excerpt: "A real-world case study of using formal methods to find a subtle race condition in a CV matching system that traditional testing missed."
-author: Lloyd Moore
+description: "A real-world case study of using formal methods to find a subtle race condition in a CV matching system that traditional testing missed."
+metrics:
+  - "1 critical race condition identified pre-production"
+  - "3-day TLA+ modeling vs weeks of debugging"
+  - "100% state space coverage achieved"
+  - "Zero deployment rollbacks prevented"
 ---
 
 *How we caught a production bug before it shipped using formal verification*

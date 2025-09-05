@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: tactical-briefing
 title: "Building a Distributed Event Log with SQLite: When Simple Beats Complex"
 date: 2025-09-03
 categories: [architecture, databases, distributed-systems]
