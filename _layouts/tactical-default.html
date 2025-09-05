@@ -16,38 +16,36 @@
     {% seo %}
 </head>
 <body>
-    <div class="tactical-grid">
-        <!-- Navigation -->
-        <nav class="nav-tactical">
-            <div class="nav-tactical-container">
-                <a href="/" class="nav-tactical-brand">LLOYD.MOORE</a>
-                <div class="nav-tactical-menu">
-                    <a href="/" class="nav-tactical-link">HOME</a>
-                    <a href="/blog" class="nav-tactical-link">INTEL</a>
-                    <a href="/about" class="nav-tactical-link">PERSONNEL</a>
-                    <a href="/cv" class="nav-tactical-link">SERVICE.REC</a>
-                </div>
+    <!-- Navigation -->
+    <nav class="nav-tactical">
+        <div class="nav-tactical-container">
+            <a href="/" class="nav-tactical-brand">LLOYD.MOORE</a>
+            <div class="nav-tactical-menu">
+                <a href="/" class="nav-tactical-link">HOME</a>
+                <a href="/blog" class="nav-tactical-link">INTEL</a>
+                <a href="/about" class="nav-tactical-link">PERSONNEL</a>
+                <a href="/cv" class="nav-tactical-link">SERVICE.REC</a>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- Main Content -->
-        <main>
-            {{ content }}
-        </main>
+    <!-- Main Content -->
+    <main class="tactical-main">
+        {{ content }}
+    </main>
 
-        <!-- Footer -->
-        <footer class="tactical-footer">
-            <div class="tactical-footer-container">
-                <div class="tactical-footer-links">
-                    <a href="mailto:lloyd@lloydmoore.com" class="tactical-footer-link">COMM.LINK</a>
-                    <a href="https://www.linkedin.com/in/moorelloyd" class="tactical-footer-link">NET.PROF</a>
-                </div>
-                <div class="tactical-footer-copyright">
-                    CLASSIFIED MATERIAL - {{ 'now' | date: "%Y" }} - LLOYD MOORE
-                </div>
+    <!-- Footer -->
+    <footer class="tactical-footer">
+        <div class="tactical-footer-container">
+            <div class="tactical-footer-links">
+                <a href="mailto:lloyd@lloydmoore.com" class="tactical-footer-link">COMM.LINK</a>
+                <a href="https://www.linkedin.com/in/moorelloyd" class="tactical-footer-link">NET.PROF</a>
             </div>
-        </footer>
-    </div>
+            <div class="tactical-footer-copyright">
+                CLASSIFIED MATERIAL - {{ 'now' | date: "%Y" }} - LLOYD MOORE
+            </div>
+        </div>
+    </footer>
 
     <!-- Analytics and Scripts -->
     {% if jekyll.environment == "production" %}

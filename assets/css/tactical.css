@@ -23,13 +23,13 @@
   --font-tactical-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
   --font-tactical-display: 'Inter', system-ui, sans-serif;
   
-  /* Tactical Typography Scale */
-  --text-briefing: clamp(3rem, 8vw, 8rem);    /* Hero titles */
-  --text-classification: clamp(0.75rem, 2vw, 0.875rem); /* Labels */
-  --text-intel: clamp(1rem, 3vw, 1.125rem);   /* Body text */
-  --text-tactical: clamp(1.25rem, 4vw, 1.5rem); /* Section headers */
-  --text-command: clamp(2rem, 5vw, 3rem);     /* Major headers */
-  --text-status: clamp(0.875rem, 2.5vw, 1rem); /* Status indicators */
+  /* Tactical Typography Scale - Fixed */
+  --text-briefing: clamp(2.5rem, 6vw, 4rem);    /* Hero titles */
+  --text-classification: 0.875rem; /* Labels */
+  --text-intel: 1.125rem;   /* Body text */
+  --text-tactical: 1.5rem; /* Section headers */
+  --text-command: clamp(1.75rem, 4vw, 2.5rem);     /* Major headers */
+  --text-status: 1rem; /* Status indicators */
   
   /* Spacing - Grid-based precision */
   --space-grid: 8px;
@@ -77,21 +77,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tactical Grid System */
+/* Tactical Grid System - Fixed */
 .tactical-grid {
-  display: grid;
-  grid-template-columns: 
-    minmax(var(--space-md), 1fr) 
-    minmax(0, var(--container-briefing)) 
-    minmax(var(--space-md), 1fr);
-  grid-template-rows: auto 1fr auto;
   min-height: 100vh;
-  gap: 0;
+}
+
+/* Container for all content */
+.tactical-container {
+  max-width: var(--container-briefing);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Main content area */
+.tactical-main {
+  min-height: calc(100vh - 120px); /* Account for nav and footer */
+  padding-top: 56px; /* Nav height */
 }
 
 /* Navigation - Command Interface */
 .nav-tactical {
-  grid-column: 1 / -1;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -104,8 +109,8 @@ body {
 }
 
 .nav-tactical-container {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 56px;
   padding: 0 var(--space-lg);
@@ -148,13 +153,18 @@ body {
 
 /* Intelligence Briefing Header */
 .briefing-header {
-  grid-column: 2;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
+  justify-content: space-between;
   align-items: baseline;
   border-bottom: 2px solid var(--tactical-grid);
   padding: calc(56px + var(--space-lg)) 0 var(--space-lg);
   margin-bottom: var(--space-xl);
+  max-width: var(--container-briefing);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-xl);
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
 }
 
 .classification {
@@ -179,7 +189,6 @@ body {
 
 /* Briefing Title - Command Authority */
 .briefing-title {
-  grid-column: 2;
   font-size: var(--text-briefing);
   font-weight: 800;
   line-height: 0.9;
@@ -187,12 +196,18 @@ body {
   color: var(--tactical-text);
   margin-bottom: var(--space-xl);
   text-transform: uppercase;
+  max-width: var(--container-briefing);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
 }
 
 /* Mission Dashboard - Homepage */
 .mission-dashboard {
-  grid-column: 2;
-  padding: calc(56px + var(--space-2xl)) 0 var(--space-4xl);
+  padding: calc(56px + var(--space-2xl)) var(--space-lg) var(--space-4xl);
+  max-width: var(--container-briefing);
+  margin: 0 auto;
 }
 
 .mission-briefing-header {
@@ -361,10 +376,9 @@ body {
 
 /* Article Layout - Intelligence Briefing */
 .briefing-document {
-  grid-column: 2;
   max-width: var(--container-intel);
   margin: 0 auto;
-  padding-bottom: var(--space-4xl);
+  padding: 0 var(--space-lg) var(--space-4xl);
 }
 
 .tactical-analysis {
@@ -517,8 +531,9 @@ body {
 
 /* Personnel File - About Page */
 .personnel-file {
-  grid-column: 2;
-  padding: calc(56px + var(--space-2xl)) 0 var(--space-4xl);
+  padding: calc(56px + var(--space-2xl)) var(--space-lg) var(--space-4xl);
+  max-width: var(--container-briefing);
+  margin: 0 auto;
 }
 
 .personnel-header {
@@ -557,7 +572,6 @@ body {
 
 /* Footer - Command Terminal */
 .tactical-footer {
-  grid-column: 1 / -1;
   background: var(--tactical-surface);
   border-top: 2px solid var(--tactical-grid);
   padding: var(--space-xl) 0;
@@ -600,14 +614,9 @@ body {
 
 /* Mobile Tactical Optimization */
 @media (max-width: 768px) {
-  .tactical-grid {
-    grid-template-columns: 
-      var(--space-md)
-      minmax(0, 1fr)
-      var(--space-md);
-  }
-  
-  .nav-tactical-container {
+  .tactical-container,
+  .nav-tactical-container,
+  .tactical-footer-container {
     padding: 0 var(--space-md);
   }
   
@@ -616,21 +625,27 @@ body {
   }
   
   .briefing-header {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: var(--space-sm);
     text-align: center;
-  }
-  
-  .briefing-date {
-    justify-self: center;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
   }
   
   .briefing-title {
-    font-size: clamp(2rem, 8vw, 4rem);
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
   }
   
-  .mission-title {
-    font-size: clamp(2rem, 8vw, 4rem);
+  .mission-dashboard,
+  .personnel-file {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  .briefing-document {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
   }
   
   .metrics-display {
@@ -650,15 +665,10 @@ body {
 }
 
 @media (max-width: 480px) {
-  .nav-tactical-container {
+  .tactical-container,
+  .nav-tactical-container,
+  .tactical-footer-container {
     padding: 0 var(--space-sm);
-  }
-  
-  .tactical-grid {
-    grid-template-columns: 
-      var(--space-sm)
-      minmax(0, 1fr)
-      var(--space-sm);
   }
   
   .mission-briefing-header,
@@ -666,9 +676,13 @@ body {
     padding: var(--space-md);
   }
   
+  .briefing-header,
   .briefing-title,
-  .mission-title {
-    font-size: clamp(1.5rem, 8vw, 3rem);
+  .mission-dashboard,
+  .personnel-file,
+  .briefing-document {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
   }
   
   .metric-card,

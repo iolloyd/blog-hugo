@@ -48,8 +48,9 @@ layout: tactical-default
 <style>
 /* Intelligence Archive Styles */
 .intel-archive {
-  grid-column: 2;
-  padding: calc(56px + var(--space-2xl)) 0 var(--space-4xl);
+  padding: calc(56px + var(--space-2xl)) var(--space-lg) var(--space-4xl);
+  max-width: var(--container-briefing);
+  margin: 0 auto;
 }
 
 .intel-archive-header {
@@ -235,6 +236,13 @@ layout: tactical-default
   
   .btn-tactical {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .intel-archive {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
   }
 }
 
