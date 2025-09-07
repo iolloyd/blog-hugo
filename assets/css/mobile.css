@@ -36,6 +36,11 @@
   --mobile-padding-right: max(var(--safe-area-inset-right), var(--space-md));
   --mobile-padding-bottom: max(var(--safe-area-inset-bottom), var(--space-md));
   --mobile-padding-left: max(var(--safe-area-inset-left), var(--space-md));
+  
+  /* Document layout mobile optimizations */
+  --mobile-reading-width: 100%;
+  --mobile-line-height: 1.8;
+  --mobile-font-size: clamp(1.125rem, 3vw, 1.25rem);
 }
 
 /* CSS Logical Properties for Better Internationalization */
