@@ -185,9 +185,8 @@ Engineering leadership directly contributed to **$3.25B organizational valuation
 - Transitioned from military to civilian technical leadership roles
 
 **ROYAL MARINES | COMMANDO** *1988-2000*
-- **12 Years Active Service:** Multiple operational deployments globally including Afghanistan
+- **12 Years Active Service:** Multiple operational deployments globally.
 - **Training & Development:** Commando Training Centre instructor and leadership development
-- **Operational Leadership:** Multiple command positions training junior officers and NCOs
 
 ## TECHNICAL SPECIALIZATIONS
 
