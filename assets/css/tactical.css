@@ -287,7 +287,7 @@ body {
   color: var(--tactical-text-secondary);
   line-height: 1.4;
   max-width: 60ch;
-  margin: 0 auto;
+  margin: 0;
 }
 
 /* Key Metrics Display */
@@ -421,7 +421,7 @@ body {
 /* Article Layout - Intelligence Briefing */
 .briefing-document {
   max-width: var(--container-intel);
-  margin: 0 auto;
+  margin: 0;
   padding: 0 var(--space-lg) var(--space-4xl);
 }
 
@@ -577,7 +577,7 @@ body {
 .personnel-file {
   padding: calc(56px + var(--space-2xl)) var(--space-lg) var(--space-4xl);
   max-width: var(--container-briefing);
-  margin: 0 auto;
+  margin: 0;
 }
 
 .personnel-header {
@@ -624,7 +624,7 @@ body {
 
 .tactical-footer-container {
   max-width: var(--container-briefing);
-  margin: 0 auto;
+  margin: 0;
   padding: 0 var(--space-lg);
   text-align: center;
 }

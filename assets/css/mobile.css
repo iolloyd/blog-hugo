@@ -47,7 +47,7 @@
 .mobile-content {
   padding-inline: var(--mobile-padding-right) var(--mobile-padding-left);
   padding-block: var(--mobile-padding-top) var(--mobile-padding-bottom);
-  margin-inline: auto;
+  margin-inline: 0;
   max-inline-size: 100%;
 }
 
