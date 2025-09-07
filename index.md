@@ -94,7 +94,6 @@ description: "Engineering executive transforming organizations through military-
   </p>
   
   <div style="text-align: center; margin-top: 2rem;">
-    <a href="mailto:lloyd@lloydmoore.com" class="btn-tactical" style="margin-right: 1rem;">Establish Comms</a>
     <a href="https://www.linkedin.com/in/moorelloyd" class="btn-tactical btn-tactical-secondary">Network Profile</a>
   </div>
 </section>
