@@ -18,6 +18,19 @@ Engineering leadership directly contributed to **$3.25B organizational valuation
 
 ## SERVICE RECORD
 
+### **CODEGOOD LIMITED | TECHNOLOGY CONSULTANT & PROJECT DELIVERY SPECIALIST**
+*2023-Present | LONDON, UNITED KINGDOM*
+
+**Mission:** Help enterprises deliver complex technology projects faster, safer, and more effectively.
+
+**Key Operations:**
+- **Strategic Consulting:** IT consulting, cybersecurity, and SaaS development expertise
+- **Project Management:** Complex technology project delivery for enterprise clients
+- **Team Transformation:** Specialize in transforming engineering organizations
+- **Technical Leadership:** Guide challenging technical discussions and strategic implementations
+
+**Technologies:** Multi-platform consulting across various technology stacks
+
 ### **BLOCKDAEMON | CTO/VP ENGINEERING** 
 *2019-2023 | SAN FRANCISCO/LONDON*
 
@@ -44,6 +57,19 @@ Engineering leadership directly contributed to **$3.25B organizational valuation
 - **Performance Optimization:** Sub-millisecond order execution, 99.95% uptime
 
 **Technologies:** C++, Go, PostgreSQL, Redis, Docker, AWS
+
+### **KEY PROJECT DELIVERIES**
+
+**TOYFOUNDRY.COM | PROJECT LEAD** *May 2013*
+- **Mission:** Deliver complete e-commerce solution for Halfbrick gaming company
+- **Execution:** Managed development team using Symfony2 framework
+- **Result:** Successfully delivered scalable e-commerce platform
+
+**ADSALSA STATISTICS ENGINE | ARCHITECT & LEAD DEVELOPER**
+- **Mission:** Build high-performance statistics processing system  
+- **Architecture:** Single server solution with 16 GB RAM capacity
+- **Innovation:** Implemented Redis-based replication for enhanced performance and reliability
+- **Result:** Delivered robust statistics engine with horizontal scaling capabilities
 
 ### **EARLIER COMMAND POSITIONS**
 
@@ -87,6 +113,10 @@ Engineering leadership directly contributed to **$3.25B organizational valuation
 - Board-level technical advisory
 
 ## EDUCATION & CERTIFICATIONS
+
+**FORMAL EDUCATION**
+- **S.E.A.E (School of Electrical and Aeronautical Engineering)** *1994-1996*
+  - Engineering foundation studies in electrical and aeronautical disciplines
 
 **LEADERSHIP & STRATEGY**
 - All Arms Commando Course (Royal Marines)
