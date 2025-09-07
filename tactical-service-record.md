@@ -221,16 +221,16 @@ Engineering leadership directly contributed to **$3.25B organizational valuation
   - Engineering foundation studies in electrical and aeronautical disciplines
 
 **LEADERSHIP & STRATEGY**
-- All Arms Commando Course (Royal Marines)
+- Royal Marines Commando Course 
 - Advanced Leadership and Management (Military)
 - Multiple operational leadership deployments
 
 **TECHNICAL QUALIFICATIONS**  
-- AWS Solutions Architect
-- Kubernetes Certified Administrator
+- AWS and GCP Solutions Architect
+- Kubernetes Administrator
 - Various programming and infrastructure certifications
 
-**CONTINUOUS LEARNING**
+**CONTINUOUS EARNING**
 - Active in technology leadership communities
 - Regular speaker at engineering and leadership conferences
 - Advisor to multiple high-growth technology companies
