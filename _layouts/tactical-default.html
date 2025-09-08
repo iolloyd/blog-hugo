@@ -20,14 +20,42 @@
     <nav class="nav-tactical">
         <div class="nav-tactical-container">
             <a href="/" class="nav-tactical-brand">LLOYD.MOORE</a>
+            
+            <!-- Desktop Navigation -->
             <div class="nav-tactical-menu">
                 <a href="/" class="nav-tactical-link">HOME</a>
                 <a href="/blog" class="nav-tactical-link">INTEL</a>
                 <a href="/about" class="nav-tactical-link">PERSONNEL</a>
                 <a href="/cv" class="nav-tactical-link">SERVICE.REC</a>
             </div>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="tactical-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="tactical-hamburger-line"></span>
+                <span class="tactical-hamburger-line"></span>
+                <span class="tactical-hamburger-line"></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="tactical-mobile-overlay" aria-hidden="true">
+        <div class="tactical-mobile-menu">
+            <div class="tactical-mobile-header">
+                <div class="tactical-mobile-brand">LLOYD.MOORE</div>
+                <button class="tactical-mobile-close" aria-label="Close navigation menu">
+                    <span class="tactical-close-line"></span>
+                    <span class="tactical-close-line"></span>
+                </button>
+            </div>
+            <nav class="tactical-mobile-nav">
+                <a href="/" class="tactical-mobile-link">HOME</a>
+                <a href="/blog" class="tactical-mobile-link">INTEL</a>
+                <a href="/about" class="tactical-mobile-link">PERSONNEL</a>
+                <a href="/cv" class="tactical-mobile-link">SERVICE.REC</a>
+            </nav>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="tactical-main">
@@ -51,5 +79,8 @@
     {% if jekyll.environment == "production" %}
     <!-- Add your analytics code here -->
     {% endif %}
+    
+    <!-- Tactical Mobile Navigation Script -->
+    <script src="{{ '/assets/js/tactical-mobile-nav.js' | relative_url }}"></script>
 </body>
 </html>

@@ -655,6 +655,166 @@ body {
   color: var(--tactical-text-muted);
 }
 
+/* Tactical Mobile Navigation */
+.tactical-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: var(--space-xs);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.tactical-hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: var(--tactical-text);
+  transition: all var(--transition-tactical);
+  transform-origin: center;
+}
+
+.tactical-mobile-toggle[aria-expanded="true"] .tactical-hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.tactical-mobile-toggle[aria-expanded="true"] .tactical-hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.tactical-mobile-toggle[aria-expanded="true"] .tactical-hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Navigation Overlay */
+.tactical-mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-command), visibility var(--transition-command);
+}
+
+.tactical-mobile-overlay[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tactical-mobile-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(100vw, 400px);
+  height: 100vh;
+  background-color: var(--tactical-surface);
+  border-left: 2px solid var(--tactical-primary);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--transition-command);
+}
+
+.tactical-mobile-overlay[aria-hidden="false"] .tactical-mobile-menu {
+  transform: translateX(0);
+}
+
+.tactical-mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  border-bottom: 2px solid var(--tactical-grid);
+  background: var(--tactical-background);
+}
+
+.tactical-mobile-brand {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-status);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text);
+}
+
+.tactical-mobile-close {
+  display: flex;
+  background: none;
+  border: 1px solid var(--tactical-grid);
+  padding: var(--space-xs);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  transition: border-color var(--transition-tactical);
+}
+
+.tactical-mobile-close:hover,
+.tactical-mobile-close:focus {
+  border-color: var(--tactical-primary);
+}
+
+.tactical-close-line {
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: var(--tactical-text);
+}
+
+.tactical-close-line:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.tactical-close-line:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+.tactical-mobile-nav {
+  padding: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tactical-mobile-link {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-intel);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text-secondary);
+  text-decoration: none;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--tactical-grid);
+  transition: all var(--transition-tactical);
+  display: flex;
+  align-items: center;
+  min-height: 44px; /* Accessibility touch target */
+}
+
+.tactical-mobile-link:hover,
+.tactical-mobile-link:focus {
+  color: var(--tactical-primary);
+  background-color: var(--tactical-background);
+  border-left: 4px solid var(--tactical-primary);
+}
+
+.tactical-mobile-link:last-child {
+  border-bottom: none;
+}
+
 /* Mobile Tactical Optimization */
 @media (max-width: 768px) {
   .tactical-container,
@@ -663,8 +823,14 @@ body {
     padding: 0 var(--space-md);
   }
   
+  /* Hide desktop navigation on mobile */
   .nav-tactical-menu {
-    gap: var(--space-md);
+    display: none;
+  }
+  
+  /* Show mobile toggle on mobile */
+  .tactical-mobile-toggle {
+    display: flex;
   }
   
   .briefing-header {
