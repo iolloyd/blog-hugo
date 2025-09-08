@@ -158,7 +158,7 @@ body {
   align-items: center;
   height: 56px;
   padding: 0 var(--document-margin);
-  max-width: 100%;
+  max-width: var(--container-briefing);
   margin: 0;
 }
 
@@ -174,7 +174,6 @@ body {
 .nav-tactical-menu {
   display: flex;
   gap: var(--space-xl);
-  justify-self: end;
 }
 
 .nav-tactical-link {
