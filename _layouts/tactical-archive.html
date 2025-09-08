@@ -49,11 +49,11 @@ layout: tactical-default
 .intel-archive {
   padding: calc(56px + var(--space-2xl)) var(--space-lg) var(--space-4xl);
   max-width: var(--container-briefing);
-  margin: 0 auto;
+  margin: 0;
 }
 
 .intel-archive-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: var(--space-4xl);
   padding: var(--space-2xl);
   border: 2px solid var(--tactical-grid);
@@ -85,7 +85,7 @@ layout: tactical-default
   color: var(--tactical-text-secondary);
   line-height: 1.6;
   max-width: 60ch;
-  margin: 0 auto;
+  margin: 0;
 }
 
 /* Intelligence Archive Grid */
@@ -179,7 +179,7 @@ layout: tactical-default
 
 /* Contact Section */
 .intel-contact {
-  text-align: center;
+  text-align: left;
   padding: var(--space-2xl);
   background: var(--tactical-surface);
   border: 2px solid var(--tactical-grid);
@@ -201,14 +201,14 @@ layout: tactical-default
   line-height: 1.6;
   margin-bottom: var(--space-xl);
   max-width: 50ch;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .intel-contact-actions {
   display: flex;
   gap: var(--space-md);
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
