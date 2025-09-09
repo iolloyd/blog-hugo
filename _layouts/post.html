@@ -1,142 +1,30 @@
 ---
-layout: apple-default
+layout: minimal-default
 ---
 
-<article class="apple-article">
-  <header class="apple-article-header">
-    <time class="apple-article-date">{{ page.date | date: "%B %d, %Y" }}</time>
-    <h1 class="apple-article-title">{{ page.title }}</h1>
-    {% if page.description %}
-    <p class="apple-article-lead">{{ page.description }}</p>
+<article class="minimal-post">
+    <header class="minimal-post-header">
+        <h1 class="minimal-post-title-main">{{ page.title }}</h1>
+        <div class="minimal-post-meta">
+            <time>{{ page.date | date: "%B %d, %Y" }}</time>
+            {% if page.description %}
+            <br>{{ page.description }}
+            {% endif %}
+        </div>
+    </header>
+    
+    <div class="minimal-post-content">
+        {{ content }}
+    </div>
+    
+    {% if page.previous or page.next %}
+    <div class="minimal-post-nav">
+        {% if page.previous %}
+        <p><a href="{{ page.previous.url }}">Previous: {{ page.previous.title }}</a></p>
+        {% endif %}
+        {% if page.next %}
+        <p><a href="{{ page.next.url }}">Next: {{ page.next.title }}</a></p>
+        {% endif %}
+    </div>
     {% endif %}
-  </header>
-  
-  <div class="apple-article-content article-content">
-    {{ content }}
-  </div>
-  
-  <footer class="apple-article-footer">
-    <div class="apple-article-meta">
-      {% if page.categories %}
-      <div class="apple-article-categories">
-        {% for category in page.categories %}
-        <span class="apple-category">{{ category }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
-    </div>
-    
-    <div class="apple-article-nav">
-      {% if page.previous %}
-      <a href="{{ page.previous.url }}" class="apple-article-nav-prev">
-        <span class="apple-article-nav-label">Previous</span>
-        <span class="apple-article-nav-title">{{ page.previous.title }}</span>
-      </a>
-      {% endif %}
-      
-      {% if page.next %}
-      <a href="{{ page.next.url }}" class="apple-article-nav-next">
-        <span class="apple-article-nav-label">Next</span>
-        <span class="apple-article-nav-title">{{ page.next.title }}</span>
-      </a>
-      {% endif %}
-    </div>
-    
-    <div class="apple-article-cta">
-      <p>Want to discuss this topic further?</p>
-      <a href="mailto:lloyd@lloydmoore.com" class="apple-btn apple-btn-primary">Get in touch</a>
-    </div>
-  </footer>
 </article>
-
-<style>
-  /* Article footer styles */
-  .apple-article-footer {
-    margin-top: var(--space-5xl);
-    padding-top: var(--space-3xl);
-    border-top: 1px solid var(--apple-gray-light);
-  }
-  
-  .apple-article-meta {
-    margin-bottom: var(--space-xl);
-  }
-  
-  .apple-article-categories {
-    display: flex;
-    gap: var(--space-xs);
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .apple-category {
-    font-size: var(--text-sm);
-    color: var(--apple-gray);
-    background: var(--apple-gray-lighter);
-    padding: var(--space-xxs) var(--space-sm);
-    border-radius: 100px;
-  }
-  
-  /* Article navigation */
-  .apple-article-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-    margin: var(--space-3xl) 0;
-  }
-  
-  .apple-article-nav-prev,
-  .apple-article-nav-next {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xxs);
-    padding: var(--space-lg);
-    background: var(--apple-gray-lighter);
-    border-radius: 12px;
-    text-decoration: none;
-    transition: transform var(--transition-base);
-  }
-  
-  .apple-article-nav-prev:hover,
-  .apple-article-nav-next:hover {
-    transform: translateY(-2px);
-  }
-  
-  .apple-article-nav-next {
-    text-align: right;
-    align-items: flex-end;
-  }
-  
-  .apple-article-nav-label {
-    font-size: var(--text-sm);
-    color: var(--apple-gray);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  .apple-article-nav-title {
-    font-size: var(--text-lg);
-    color: var(--apple-black);
-    font-weight: 600;
-  }
-  
-  .apple-article-cta {
-    text-align: center;
-    padding: var(--space-3xl);
-    background: var(--apple-gray-lighter);
-    border-radius: 18px;
-    margin-top: var(--space-3xl);
-  }
-  
-  .apple-article-cta p {
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-lg);
-    color: var(--apple-gray-dark);
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .apple-article-nav {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

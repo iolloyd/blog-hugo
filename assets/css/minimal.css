@@ -1,0 +1,236 @@
+/* Paul Graham Inspired Minimal Design
+ * Focus on readability, typography, and generous white space
+ * No decorative elements, just pure content
+ */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000;
+    background-color: #fff;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: normal;
+    margin: 1.5em 0 0.5em 0;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin: 1em 0;
+}
+
+/* Links - classic web colors */
+a {
+    color: #0000FF;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #800080;
+}
+
+a:hover {
+    color: #FF0000;
+}
+
+/* Navigation - minimal text links */
+.minimal-nav {
+    margin-bottom: 3em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ccc;
+}
+
+.minimal-nav-links {
+    list-style: none;
+}
+
+.minimal-nav-links li {
+    display: inline;
+    margin-right: 1.5em;
+}
+
+.minimal-nav-links a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #0000FF;
+}
+
+.minimal-nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Content spacing */
+.minimal-content {
+    margin-bottom: 3em;
+}
+
+/* Blog post listing */
+.minimal-post-list {
+    list-style: none;
+}
+
+.minimal-post-list li {
+    margin-bottom: 1.5em;
+}
+
+.minimal-post-date {
+    color: #666;
+    font-size: 14px;
+    margin-right: 1em;
+}
+
+.minimal-post-title {
+    color: #0000FF;
+    text-decoration: none;
+}
+
+.minimal-post-title:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.minimal-footer {
+    margin-top: 4em;
+    padding-top: 2em;
+    border-top: 1px solid #ccc;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Post content */
+.minimal-post-header {
+    margin-bottom: 2em;
+}
+
+.minimal-post-title-main {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0 0 0.5em 0;
+}
+
+.minimal-post-meta {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 2em;
+}
+
+/* Code blocks - minimal styling */
+pre {
+    background-color: #f5f5f5;
+    padding: 1em;
+    overflow-x: auto;
+    margin: 1em 0;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+code {
+    font-family: monospace;
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    font-size: 14px;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+/* Blockquotes */
+blockquote {
+    margin: 1em 0;
+    padding-left: 2em;
+    border-left: 3px solid #ccc;
+    color: #666;
+    font-style: italic;
+}
+
+/* Lists */
+ul, ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin: 0.5em 0;
+}
+
+/* Tables - minimal styling */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 0.5em;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Post navigation */
+.minimal-post-nav {
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 1px solid #ccc;
+}
+
+/* Mobile responsiveness - maintain readability */
+@media (max-width: 640px) {
+    body {
+        padding: 15px;
+        font-size: 15px;
+    }
+    
+    h1 {
+        font-size: 22px;
+    }
+    
+    h2 {
+        font-size: 19px;
+    }
+    
+    .minimal-nav-links li {
+        display: block;
+        margin: 0.5em 0;
+    }
+}
