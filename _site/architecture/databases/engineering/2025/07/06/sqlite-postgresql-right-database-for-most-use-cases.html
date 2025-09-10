@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite and PostgreSQL: The Right Database for 99% of Use Cases | Lloyd Moore - CTO & VP Engineering</title>
+    <meta name="description" content="Why SQLite and PostgreSQL cover almost all database needs, and when you actually need something else.">
+    
+    <!-- Tactical CSS Framework -->
+    <link rel="stylesheet" href="/assets/css/tactical.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO and Social -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>SQLite and PostgreSQL: The Right Database for 99% of Use Cases | Lloyd Moore - CTO &amp; VP Engineering</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="SQLite and PostgreSQL: The Right Database for 99% of Use Cases" />
+<meta name="author" content="Lloyd Moore" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Why SQLite and PostgreSQL cover almost all database needs, and when you actually need something else." />
+<meta property="og:description" content="Why SQLite and PostgreSQL cover almost all database needs, and when you actually need something else." />
+<link rel="canonical" href="http://localhost:4000/architecture/databases/engineering/2025/07/06/sqlite-postgresql-right-database-for-most-use-cases.html" />
+<meta property="og:url" content="http://localhost:4000/architecture/databases/engineering/2025/07/06/sqlite-postgresql-right-database-for-most-use-cases.html" />
+<meta property="og:site_name" content="Lloyd Moore - CTO &amp; VP Engineering" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-07-06T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SQLite and PostgreSQL: The Right Database for 99% of Use Cases" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lloyd Moore"},"dateModified":"2025-07-06T00:00:00+01:00","datePublished":"2025-07-06T00:00:00+01:00","description":"Why SQLite and PostgreSQL cover almost all database needs, and when you actually need something else.","headline":"SQLite and PostgreSQL: The Right Database for 99% of Use Cases","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/architecture/databases/engineering/2025/07/06/sqlite-postgresql-right-database-for-most-use-cases.html"},"url":"http://localhost:4000/architecture/databases/engineering/2025/07/06/sqlite-postgresql-right-database-for-most-use-cases.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-tactical">
+        <div class="nav-tactical-container">
+            <a href="/" class="nav-tactical-brand">LLOYD.MOORE</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-tactical-menu">
+                <a href="/" class="nav-tactical-link">HOME</a>
+                <a href="/blog" class="nav-tactical-link">INTEL</a>
+                <a href="/about" class="nav-tactical-link">PERSONNEL</a>
+                <a href="/cv" class="nav-tactical-link">SERVICE.REC</a>
+            </div>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="tactical-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="tactical-hamburger-line"></span>
+                <span class="tactical-hamburger-line"></span>
+                <span class="tactical-hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="tactical-mobile-overlay" aria-hidden="true">
+        <div class="tactical-mobile-menu">
+            <div class="tactical-mobile-header">
+                <div class="tactical-mobile-brand">LLOYD.MOORE</div>
+                <button class="tactical-mobile-close" aria-label="Close navigation menu">
+                    <span class="tactical-close-line"></span>
+                    <span class="tactical-close-line"></span>
+                </button>
+            </div>
+            <nav class="tactical-mobile-nav">
+                <a href="/" class="tactical-mobile-link">HOME</a>
+                <a href="/blog" class="tactical-mobile-link">INTEL</a>
+                <a href="/about" class="tactical-mobile-link">PERSONNEL</a>
+                <a href="/cv" class="tactical-mobile-link">SERVICE.REC</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="tactical-main">
+        <article class="briefing-document document-content">
+  <!-- Intelligence Briefing Header -->
+  <header class="briefing-header">
+    <span class="classification">CLASSIFICATION: TECHNICAL</span>
+    <span class="briefing-date">DATE: 2025-07-06</span>
+  </header>
+  
+  <!-- Briefing Title -->
+  <h1 class="briefing-title">SQLite and PostgreSQL: The Right Database for 99% of Use Cases</h1>
+  
+  
+  <!-- Key Metrics Section -->
+  <section class="key-metrics">
+    <h2>Key Metrics</h2>
+    <ul class="metrics-list">
+      
+      <li class="metric-item">99% of applications covered by SQLite + PostgreSQL</li>
+      
+      <li class="metric-item">10+ TB SQLite databases in production</li>
+      
+      <li class="metric-item">1M+ writes/second PostgreSQL capability</li>
+      
+      <li class="metric-item">80% cost reduction vs specialized databases</li>
+      
+    </ul>
+  </section>
+  
+  
+  <!-- Tactical Analysis -->
+  <section class="tactical-analysis">
+    <h2>Tactical Analysis</h2>
+    <blockquote>
+  <p>“The best tool for the job is the one you already know how to use properly.” - Ancient Engineering Wisdom</p>
+</blockquote>
+
+<p>You face endless database choices today. NoSQL, NewSQL, graph databases, time-series databases – they all promise to solve your problems. But here’s the truth: <strong>you only need SQLite or PostgreSQL for 99% of applications</strong>.</p>
+
+<h2 id="the-power-duo-sqlite-and-postgresql">The Power Duo: SQLite and PostgreSQL</h2>
+
+<h3 id="sqlite-the-embedded-powerhouse">SQLite: The Embedded Powerhouse</h3>
+
+<p>Don’t dismiss SQLite as a “toy database.” It’s the world’s most deployed database engine. Billions of devices run SQLite right now. Here’s when you should choose it:</p>
+
+<p><strong>Perfect for:</strong></p>
+<ul>
+  <li>Mobile applications</li>
+  <li>Desktop software</li>
+  <li>Embedded systems</li>
+  <li>Development and testing</li>
+  <li>Small to medium web applications (yes, really!)</li>
+  <li>Static site generators with dynamic features</li>
+  <li>Edge computing scenarios</li>
+</ul>
+
+<p><strong>Key strengths:</strong></p>
+<ul>
+  <li>Zero configuration required</li>
+  <li>No server needed</li>
+  <li>Stores everything in one file</li>
+  <li>ACID compliant transactions</li>
+  <li>Lightning fast for read-heavy workloads</li>
+  <li>Handles databases up to 281TB</li>
+</ul>
+
+<p><strong>Real-world example:</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- SQLite handles complex queries just fine</span>
+<span class="k">WITH</span> <span class="n">monthly_revenue</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span> 
+    <span class="nb">DATE</span><span class="p">(</span><span class="n">created_at</span><span class="p">,</span> <span class="s1">'start of month'</span><span class="p">)</span> <span class="k">as</span> <span class="k">month</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">revenue</span>
+  <span class="k">FROM</span> <span class="n">transactions</span>
+  <span class="k">WHERE</span> <span class="n">status</span> <span class="o">=</span> <span class="s1">'completed'</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="nb">DATE</span><span class="p">(</span><span class="n">created_at</span><span class="p">,</span> <span class="s1">'start of month'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> 
+  <span class="k">month</span><span class="p">,</span>
+  <span class="n">revenue</span><span class="p">,</span>
+  <span class="k">SUM</span><span class="p">(</span><span class="n">revenue</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="k">month</span><span class="p">)</span> <span class="k">as</span> <span class="n">cumulative_revenue</span>
+<span class="k">FROM</span> <span class="n">monthly_revenue</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="postgresql-the-enterprise-workhorse">PostgreSQL: The Enterprise Workhorse</h3>
+
+<p>PostgreSQL steps in when you need a full-featured database server. This isn’t just a database. It’s a complete data platform.</p>
+
+<p><strong>Perfect for:</strong></p>
+<ul>
+  <li>Web applications at any scale</li>
+  <li>Multi-tenant SaaS applications</li>
+  <li>Financial systems</li>
+  <li>Analytics workloads</li>
+  <li>Geospatial applications</li>
+  <li>Full-text search requirements</li>
+  <li>JSON document storage (yes, it does that too!)</li>
+</ul>
+
+<p><strong>Key strengths:</strong></p>
+<ul>
+  <li>Advanced indexing options (B-tree, Hash, GIN, GiST, BRIN)</li>
+  <li>Smart query planning</li>
+  <li>Custom functions and data types</li>
+  <li>Row-level security controls</li>
+  <li>Partitioning for massive datasets</li>
+  <li>Built-in replication</li>
+  <li>JSONB for flexible document storage</li>
+</ul>
+
+<p><strong>Real-world example:</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- PostgreSQL's advanced features in action</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">products</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="nb">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+  <span class="n">name</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">attributes</span> <span class="n">JSONB</span><span class="p">,</span>
+  <span class="k">location</span> <span class="n">GEOGRAPHY</span><span class="p">(</span><span class="n">POINT</span><span class="p">),</span>
+  <span class="n">search_vector</span> <span class="n">TSVECTOR</span>
+<span class="p">);</span>
+
+<span class="c1">-- Partial index for performance</span>
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">idx_active_products</span> <span class="k">ON</span> <span class="n">products</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> 
+<span class="k">WHERE</span> <span class="n">attributes</span><span class="o">-&gt;&gt;</span><span class="s1">'status'</span> <span class="o">=</span> <span class="s1">'active'</span><span class="p">;</span>
+
+<span class="c1">-- Full-text search</span>
+<span class="k">UPDATE</span> <span class="n">products</span> 
+<span class="k">SET</span> <span class="n">search_vector</span> <span class="o">=</span> <span class="n">to_tsvector</span><span class="p">(</span><span class="s1">'english'</span><span class="p">,</span> <span class="n">name</span> <span class="o">||</span> <span class="s1">' '</span> <span class="o">||</span> <span class="n">attributes</span><span class="p">);</span>
+
+<span class="c1">-- Geospatial query with JSON filtering</span>
+<span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span> <span class="n">attributes</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">ST_DWithin</span><span class="p">(</span><span class="k">location</span><span class="p">,</span> <span class="n">ST_MakePoint</span><span class="p">(</span><span class="o">-</span><span class="mi">73</span><span class="p">.</span><span class="mi">935242</span><span class="p">,</span> <span class="mi">40</span><span class="p">.</span><span class="mi">730610</span><span class="p">)::</span><span class="n">geography</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="k">AND</span> <span class="n">attributes</span> <span class="o">@&gt;</span> <span class="s1">'{"category": "electronics"}'</span>
+  <span class="k">AND</span> <span class="n">search_vector</span> <span class="o">@@</span> <span class="n">plainto_tsquery</span><span class="p">(</span><span class="s1">'wireless headphones'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="the-99-rule-when-these-two-are-enough">The 99% Rule: When These Two Are Enough</h2>
+
+<p>Your application likely fits into one of these common categories. SQLite and PostgreSQL excel in all of them:</p>
+
+<h3 id="1-content-management-systems">1. <strong>Content Management Systems</strong></h3>
+<p>Choose SQLite for single-user blogs or small team sites. Use PostgreSQL for multi-tenant CMS platforms.</p>
+
+<h3 id="2-e-commerce-platforms">2. <strong>E-commerce Platforms</strong></h3>
+<p>SQLite works perfectly for mobile app product catalogs. PostgreSQL handles full e-commerce sites with complex transactions.</p>
+
+<h3 id="3-saas-applications">3. <strong>SaaS Applications</strong></h3>
+<p>PostgreSQL’s row-level security makes multi-tenancy simple. JSONB columns adapt to varying customer needs without schema changes.</p>
+
+<h3 id="4-analytics-dashboards">4. <strong>Analytics Dashboards</strong></h3>
+<p>Embed SQLite for in-app analytics. Use PostgreSQL with TimescaleDB for time-series data analysis.</p>
+
+<h3 id="5-mobile-and-desktop-apps">5. <strong>Mobile and Desktop Apps</strong></h3>
+<p>SQLite stores data locally on devices. PostgreSQL powers your backend API.</p>
+
+<h2 id="the-1-when-you-actually-need-something-else">The 1%: When You Actually Need Something Else</h2>
+
+<p>You might need specialized databases in these rare cases. But even then, try PostgreSQL first:</p>
+
+<h3 id="1-true-graph-traversal-at-scale">1. <strong>True Graph Traversal at Scale</strong></h3>
+<p><strong>When to switch:</strong> You’re running a social network with billions of users. You need real-time friend-of-friend queries across 6+ degrees of separation.
+<strong>Alternative:</strong> Neo4j, Amazon Neptune
+<strong>But first try:</strong> PostgreSQL with recursive CTEs or the Apache AGE extension</p>
+
+<h3 id="2-extreme-write-throughput">2. <strong>Extreme Write Throughput</strong></h3>
+<p><strong>When to switch:</strong> Your IoT platform ingests over 1 million writes per second continuously.
+<strong>Alternative:</strong> Cassandra, ScyllaDB
+<strong>But first try:</strong> PostgreSQL with partitioning and write-optimized settings</p>
+
+<h3 id="3-global-multi-master-requirements">3. <strong>Global Multi-Master Requirements</strong></h3>
+<p><strong>When to switch:</strong> You need active-active writes across continents with automatic conflict resolution.
+<strong>Alternative:</strong> CockroachDB, YugabyteDB
+<strong>But first try:</strong> PostgreSQL with logical replication and custom conflict handling</p>
+
+<h3 id="4-specialized-time-series-workloads">4. <strong>Specialized Time-Series Workloads</strong></h3>
+<p><strong>When to switch:</strong> Your monitoring system needs complex retention policies and automated downsampling.
+<strong>Alternative:</strong> InfluxDB, Prometheus
+<strong>But first try:</strong> PostgreSQL with TimescaleDB extension</p>
+
+<h3 id="5-document-store-with-complex-aggregations">5. <strong>Document Store with Complex Aggregations</strong></h3>
+<p><strong>When to switch:</strong> Your entire data model consists of deeply nested documents requiring MapReduce operations.
+<strong>Alternative:</strong> MongoDB
+<strong>But first try:</strong> PostgreSQL with JSONB and generated columns</p>
+
+<h2 id="decision-framework">Decision Framework</h2>
+
+<p>Stop before you add another database. Ask yourself these four questions:</p>
+
+<ol>
+  <li><strong>Have you actually hit a limitation?</strong> Don’t solve problems you don’t have yet.</li>
+  <li><strong>Can PostgreSQL extensions solve this?</strong> Check PostGIS, TimescaleDB, and pg_partman first.</li>
+  <li><strong>Is the complexity worth it?</strong> Every new database adds monitoring, backups, and expertise requirements.</li>
+  <li><strong>Have you tuned your current database?</strong> Most performance issues stem from poor configuration, not wrong technology.</li>
+</ol>
+
+<h2 id="best-practices-for-the-99">Best Practices for the 99%</h2>
+
+<h3 id="start-with-sqlite-when">Start with SQLite When:</h3>
+<p>You’re building prototypes or MVPs. You’re creating desktop or mobile apps. You need embedded data storage. You’re working on single-user applications.</p>
+
+<h3 id="migrate-to-postgresql-when">Migrate to PostgreSQL When:</h3>
+<p>Multiple users need concurrent access. You need advanced features like full-text search or GIS. You’re scaling beyond one machine. You require strict data integrity across complex transactions.</p>
+
+<h3 id="configuration-tips">Configuration Tips:</h3>
+
+<p><strong>SQLite optimization:</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PRAGMA</span> <span class="n">journal_mode</span> <span class="o">=</span> <span class="n">WAL</span><span class="p">;</span>  <span class="c1">-- Better concurrency</span>
+<span class="n">PRAGMA</span> <span class="n">synchronous</span> <span class="o">=</span> <span class="n">NORMAL</span><span class="p">;</span>  <span class="c1">-- Faster writes, still safe</span>
+<span class="n">PRAGMA</span> <span class="n">cache_size</span> <span class="o">=</span> <span class="o">-</span><span class="mi">64000</span><span class="p">;</span>  <span class="c1">-- 64MB cache</span>
+<span class="n">PRAGMA</span> <span class="n">temp_store</span> <span class="o">=</span> <span class="n">MEMORY</span><span class="p">;</span>  <span class="c1">-- Temp tables in RAM</span>
+</code></pre></div></div>
+
+<p><strong>PostgreSQL optimization:</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- In postgresql.conf</span>
+<span class="n">shared_buffers</span> <span class="o">=</span> <span class="mi">25</span><span class="o">%</span> <span class="k">of</span> <span class="n">RAM</span>
+<span class="n">effective_cache_size</span> <span class="o">=</span> <span class="mi">75</span><span class="o">%</span> <span class="k">of</span> <span class="n">RAM</span>
+<span class="n">maintenance_work_mem</span> <span class="o">=</span> <span class="mi">256</span><span class="n">MB</span>
+<span class="n">checkpoint_completion_target</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">9</span>
+<span class="n">wal_buffers</span> <span class="o">=</span> <span class="mi">16</span><span class="n">MB</span>
+</code></pre></div></div>
+
+<h2 id="the-hidden-costs-of-database-proliferation">The Hidden Costs of Database Proliferation</h2>
+
+<p>Every database you add creates new problems:</p>
+<ul>
+  <li>You need another system to monitor and backup</li>
+  <li>Your team needs additional expertise</li>
+  <li>Deployments become more complex</li>
+  <li>You increase your attack surface</li>
+  <li>Operational costs rise</li>
+  <li>Debugging gets harder</li>
+</ul>
+
+<p><strong>Stick with boring technology that works.</strong></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The database world offers countless options. You don’t need to use them all. SQLite and PostgreSQL evolved over decades to handle almost every use case you’ll encounter. They’re battle-tested, well-documented, and backed by massive communities.</p>
+
+<p>Before you add that shiny new database, ask one question: “Can PostgreSQL do this?” The answer is almost always yes. For smaller projects, SQLite will surprise you with its power.</p>
+
+<p>Remember: <strong>boring technology choices free you to build interesting products.</strong></p>
+
+<hr />
+
+<p><em>What’s your experience with database selection? Have you found cases where SQLite or PostgreSQL wasn’t enough?</em></p>
+
+<p><em>Originally shared on <a href="https://linkedin.com/in/moorelloyd">LinkedIn</a></em></p>
+
+  </section>
+  
+  <!-- Mission Navigation -->
+  <footer class="briefing-footer">
+    
+    <div class="briefing-nav">
+      
+      <a href="/fintech/blockchain/regulation/architecture/2025/01/30/tokenization-platforms-regulation-as-competitive-advantage.html" class="briefing-nav-link briefing-nav-prev">
+        <span class="briefing-nav-label">Previous Intel</span>
+        <span class="briefing-nav-title">How Smart Tokenization Platforms Turn Regulation Into a Competitive Moat</span>
+      </a>
+      
+      
+      
+      <a href="/architecture/databases/data-engineering/2025/07/14/duckdb-the-surprising-swiss-army-knife-of-data.html" class="briefing-nav-link briefing-nav-next">
+        <span class="briefing-nav-label">Next Intel</span>
+        <span class="briefing-nav-title">DuckDB: The Surprising Swiss Army Knife of Data Processing</span>
+      </a>
+      
+    </div>
+    
+    
+    <!-- Mission Contact -->
+    <div class="briefing-contact">
+      <p class="briefing-contact-text">Request additional intelligence or operational consultation?</p>
+    </div>
+  </footer>
+</article>
+
+<style>
+/* Additional briefing styles */
+.briefing-footer {
+  margin-top: var(--space-4xl);
+  padding-top: var(--space-2xl);
+  border-top: 2px solid var(--tactical-grid);
+}
+
+.briefing-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xl);
+}
+
+.briefing-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  background: var(--tactical-surface);
+  border: 1px solid var(--tactical-grid);
+  text-decoration: none;
+  transition: all var(--transition-tactical);
+}
+
+.briefing-nav-link:hover {
+  border-color: var(--tactical-primary);
+  box-shadow: var(--shadow-tactical);
+}
+
+.briefing-nav-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.briefing-nav-label {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+}
+
+.briefing-nav-title {
+  font-size: var(--text-intel);
+  color: var(--tactical-text);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.briefing-contact {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: var(--tactical-surface);
+  border: 2px solid var(--tactical-grid);
+}
+
+.briefing-contact-text {
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .briefing-nav {
+    grid-template-columns: 1fr;
+  }
+  
+  .briefing-nav-next {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+</style>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tactical-footer">
+        <div class="tactical-footer-container">
+            <div class="tactical-footer-links">
+                <a href="mailto:lloyd@lloydmoore.com" class="tactical-footer-link">COMM.LINK</a>
+                <a href="https://www.linkedin.com/in/moorelloyd" class="tactical-footer-link">NET.PROF</a>
+            </div>
+            <div class="tactical-footer-copyright">
+                CLASSIFIED MATERIAL - 2025 - LLOYD MOORE
+            </div>
+        </div>
+    </footer>
+
+    <!-- Analytics and Scripts -->
+    
+    
+    <!-- Tactical Mobile Navigation Script -->
+    <script src="/assets/js/tactical-mobile-nav.js"></script>
+</body>
+</html>

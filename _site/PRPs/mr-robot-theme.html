@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lloyd Moore</title>
+  <meta name="description" content="Engineering executive who scales teams, platforms and revenue. Expert in cloud architecture, team leadership, and digital transformation.">
+  
+  <!-- Resource hints for performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  
+  <!-- Preload custom font if available -->
+  <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Apple-inspired web app meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0071e3">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Critical CSS inline for faster first paint -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    :root {
+      --apple-black: #1d1d1f;
+      --apple-gray-dark: #424245;
+      --apple-gray: #86868b;
+      --apple-gray-light: #d2d2d7;
+      --apple-gray-lighter: #f5f5f7;
+      --apple-white: #ffffff;
+      --apple-blue: #0071e3;
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-system);
+      font-size: 1.0625rem;
+      line-height: 1.625;
+      color: var(--apple-black);
+      background-color: var(--apple-white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Navigation critical styles */
+    .apple-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(251, 251, 253, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .apple-nav-container {
+      max-width: 980px;
+      margin: 0;
+      padding: 0 var(--space-lg);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    /* Mobile nav toggle critical styles */
+    .mobile-nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--apple-black);
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+      }
+      
+      .apple-nav-menu {
+        display: none !important;
+      }
+      
+      .apple-nav-container {
+        height: 56px;
+        padding: 0 1rem;
+      }
+    }
+  </style>
+  
+  <!-- Apple-style CSS (deferred) -->
+  <link rel="preload" href="/assets/css/style.css" as="style">
+  <link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>
+  
+  <!-- Mobile-specific CSS -->
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  
+  <!-- Enhanced Typography System -->
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  
+  <!-- Additional CSS for animations -->
+  <style>
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Page load animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    /* Stagger animation delays */
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    
+    /* Apple-style container */
+    .apple-container {
+      max-width: var(--container-lg);
+      margin: 0;
+      padding: 0 var(--space-lg);
+    }
+    
+    /* Section spacing */
+    .apple-metrics,
+    .apple-philosophy,
+    .apple-recent-posts,
+    .apple-connect {
+      padding: var(--space-5xl) 0;
+    }
+    
+    /* Section titles */
+    .apple-section-title {
+      font-size: var(--text-5xl);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-md);
+      letter-spacing: var(--tracking-tight);
+    }
+    
+    .apple-section-lead {
+      font-size: var(--text-xl);
+      color: var(--apple-gray-dark);
+      text-align: center;
+      max-width: var(--container-md);
+      margin: 0 0 var(--space-3xl);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Philosophy grid */
+    .apple-philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-xl);
+    }
+    
+    .apple-philosophy-item h3 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-philosophy-item p {
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Blog preview */
+    .apple-blog-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+    }
+    
+    .apple-blog-preview-item {
+      padding: var(--space-lg);
+      background: var(--apple-gray-lighter);
+      border-radius: 18px;
+      transition: transform var(--transition-base);
+    }
+    
+    .apple-blog-preview-item:hover {
+      transform: translateY(-4px);
+    }
+    
+    .apple-blog-preview-date {
+      font-size: var(--text-sm);
+      color: var(--apple-gray);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .apple-blog-preview-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-blog-preview-title a {
+      color: var(--apple-black);
+      transition: color var(--transition-fast);
+    }
+    
+    .apple-blog-preview-title a:hover {
+      color: var(--apple-blue);
+    }
+    
+    .apple-blog-preview-excerpt {
+      color: var(--apple-gray-dark);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-md);
+    }
+    
+    /* Connect section */
+    .apple-connect {
+      background: var(--apple-gray-lighter);
+      text-align: center;
+    }
+    
+    .apple-connect-options {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Section CTA */
+    .apple-section-cta {
+      text-align: center;
+      margin-top: var(--space-xl);
+    }
+    
+    /* Hero CTA */
+    .apple-hero-cta {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+  </style>
+  
+  
+</head>
+<body>
+  <!-- Apple-style navigation -->
+  <nav class="apple-nav">
+    <div class="apple-nav-container">
+      <a href="/" class="apple-nav-brand">Lloyd Moore</a>
+      <div class="apple-nav-menu">
+        <a href="/about" class="apple-nav-link">About</a>
+        <a href="/blog" class="apple-nav-link">Blog</a>
+        <a href="/cv" class="apple-nav-link">Experience</a>
+      </div>
+      <!-- Typography accessibility controls -->
+      <!-- Typography Accessibility Controls -->
+<div class="typography-controls" aria-label="Typography settings">
+  <button 
+    class="typography-toggle-btn"
+    type="button"
+    aria-label="Typography settings"
+    aria-expanded="false"
+    aria-controls="typography-menu"
+  >
+    <svg class="typography-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+    </svg>
+  </button>
+  
+  <div id="typography-menu" class="typography-menu" aria-hidden="true">
+    <div class="typography-menu-header">
+      <h3 class="typography-menu-title">Reading Preferences</h3>
+      <button 
+        class="typography-close-btn"
+        type="button"
+        aria-label="Close typography settings"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="typography-menu-content">
+      <!-- Font Size Controls -->
+      <div class="typography-control-group">
+        <label class="typography-label">Text Size</label>
+        <div class="typography-size-controls">
+          <button 
+            class="size-btn" 
+            data-size="small"
+            aria-label="Small text size"
+            title="Small (90%)"
+          >
+            <span class="size-preview size-small">A</span>
+          </button>
+          <button 
+            class="size-btn active" 
+            data-size="normal"
+            aria-label="Normal text size"
+            title="Normal (100%)"
+          >
+            <span class="size-preview size-normal">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="large"
+            aria-label="Large text size"
+            title="Large (110%)"
+          >
+            <span class="size-preview size-large">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="xlarge"
+            aria-label="Extra large text size"
+            title="Extra Large (125%)"
+          >
+            <span class="size-preview size-xlarge">A</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Dyslexia Mode Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="dyslexia-toggle">
+          Dyslexia-Friendly Font
+          <span class="typography-hint">Improves letter distinction</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="dyslexia-toggle"
+            aria-describedby="dyslexia-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="dyslexia-desc" class="sr-only">
+          Activates a font designed to improve readability for people with dyslexia
+        </p>
+      </div>
+      
+      <!-- System Fonts Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="system-fonts-toggle">
+          Use System Fonts
+          <span class="typography-hint">Faster loading, native feel</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="system-fonts-toggle"
+            aria-describedby="system-fonts-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="system-fonts-desc" class="sr-only">
+          Uses your device's default fonts for faster loading
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Typography Controls Styles */
+.typography-controls {
+  position: relative;
+  display: inline-block;
+}
+
+.typography-toggle-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray-dark);
+  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.typography-toggle-btn:hover {
+  color: var(--apple-black);
+}
+
+.typography-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: var(--apple-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-base);
+  z-index: 100;
+}
+
+.typography-menu[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.typography-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--apple-gray-light);
+}
+
+.typography-menu-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0;
+}
+
+.typography-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.typography-close-btn:hover {
+  background: var(--apple-gray-lighter);
+}
+
+.typography-menu-content {
+  padding: var(--space-md);
+}
+
+.typography-control-group {
+  margin-bottom: var(--space-lg);
+}
+
+.typography-control-group:last-child {
+  margin-bottom: 0;
+}
+
+.typography-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: var(--space-sm);
+}
+
+.typography-hint {
+  font-size: var(--text-xs);
+  font-weight: normal;
+  color: var(--apple-gray);
+}
+
+/* Size Controls */
+.typography-size-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs);
+}
+
+.size-btn {
+  padding: var(--space-sm);
+  background: var(--apple-gray-lighter);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+}
+
+.size-btn:hover {
+  background: var(--apple-gray-light);
+}
+
+.size-btn.active {
+  background: var(--apple-blue);
+  color: white;
+  border-color: var(--apple-blue);
+}
+
+.size-preview {
+  display: block;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.size-small { font-size: 14px; }
+.size-normal { font-size: 18px; }
+.size-large { font-size: 22px; }
+.size-xlarge { font-size: 26px; }
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--apple-gray-light);
+  transition: all var(--transition-fast);
+  border-radius: 28px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: all var(--transition-fast);
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--apple-green);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .typography-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    transform: translateY(100%);
+  }
+  
+  .typography-menu[aria-hidden="false"] {
+    transform: translateY(0);
+  }
+  
+  .typography-control-group {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--apple-gray-lighter);
+  }
+  
+  .typography-control-group:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .typography-menu {
+    background: #1c1c1e;
+    color: #f2f2f7;
+  }
+  
+  .typography-menu-header {
+    border-bottom-color: #38383a;
+  }
+  
+  .typography-label {
+    color: #f2f2f7;
+  }
+  
+  .size-btn {
+    background: #2c2c2e;
+    color: #f2f2f7;
+  }
+  
+  .size-btn:hover {
+    background: #38383a;
+  }
+  
+  .typography-close-btn:hover {
+    background: #2c2c2e;
+  }
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  const toggle = document.querySelector('.typography-toggle-btn');
+  const menu = document.querySelector('.typography-menu');
+  const closeBtn = document.querySelector('.typography-close-btn');
+  const sizeButtons = document.querySelectorAll('.size-btn');
+  const dyslexiaToggle = document.getElementById('dyslexia-toggle');
+  const systemFontsToggle = document.getElementById('system-fonts-toggle');
+  
+  // Toggle menu
+  function toggleMenu() {
+    const isOpen = menu.getAttribute('aria-hidden') === 'false';
+    toggle.setAttribute('aria-expanded', !isOpen);
+    menu.setAttribute('aria-hidden', isOpen);
+  }
+  
+  toggle.addEventListener('click', toggleMenu);
+  closeBtn.addEventListener('click', toggleMenu);
+  
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.typography-controls')) {
+      toggle.setAttribute('aria-expanded', false);
+      menu.setAttribute('aria-hidden', true);
+    }
+  });
+  
+  // Font size controls
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const size = this.dataset.size;
+      
+      // Remove all size classes
+      document.body.classList.remove('font-size-small', 'font-size-normal', 'font-size-large', 'font-size-xlarge');
+      
+      // Add new size class
+      if (size !== 'normal') {
+        document.body.classList.add(`font-size-${size}`);
+      }
+      
+      // Update active button
+      sizeButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Save preference
+      localStorage.setItem('preferredFontSize', size);
+    });
+  });
+  
+  // Dyslexia mode
+  dyslexiaToggle.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dyslexia-mode');
+      localStorage.setItem('dyslexiaMode', 'true');
+    } else {
+      document.body.classList.remove('dyslexia-mode');
+      localStorage.removeItem('dyslexiaMode');
+    }
+  });
+  
+  // System fonts toggle
+  systemFontsToggle.addEventListener('change', function() {
+    if (typeof window.toggleSystemFonts === 'function') {
+      window.toggleSystemFonts(this.checked);
+    }
+    localStorage.setItem('prefersSystemFonts', this.checked);
+  });
+  
+  // Restore preferences on load
+  const savedSize = localStorage.getItem('preferredFontSize');
+  if (savedSize && savedSize !== 'normal') {
+    document.body.classList.add(`font-size-${savedSize}`);
+    document.querySelector(`[data-size="${savedSize}"]`).classList.add('active');
+    document.querySelector('[data-size="normal"]').classList.remove('active');
+  }
+  
+  if (localStorage.getItem('dyslexiaMode') === 'true') {
+    dyslexiaToggle.checked = true;
+    document.body.classList.add('dyslexia-mode');
+  }
+  
+  if (localStorage.getItem('prefersSystemFonts') === 'true') {
+    systemFontsToggle.checked = true;
+  }
+})();
+</script>
+      <!-- Mobile nav toggle button -->
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-menu">
+        <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path class="hamburger-line hamburger-line-top" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-middle" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-bottom" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation -->
+  <!-- Mobile Navigation Component -->
+<div class="mobile-nav-overlay" aria-hidden="true">
+  <nav id="mobile-nav-menu" class="mobile-nav-menu" role="navigation">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">Menu</span>
+      <button class="mobile-nav-close" aria-label="Close navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="/" class="mobile-nav-link">Home</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+      <a href="/blog" class="mobile-nav-link">Blog</a>
+      <a href="/cv" class="mobile-nav-link">Experience</a>
+    </div>
+  </nav>
+</div>
+  
+  <main>
+    <div class="page-content">
+  <h1></h1>
+  <p>name: “Mr. Robot Theme Implementation for Jekyll Blog”
+description: |</p>
+
+<h2 id="purpose">Purpose</h2>
+<p>Transform the existing Jekyll blog from an Apple-inspired aesthetic to a dark, cyberpunk Mr. Robot-inspired theme with terminal aesthetics, CRT effects, and hacker culture visual elements.</p>
+
+<h2 id="core-principles">Core Principles</h2>
+<ol>
+  <li><strong>Context is King</strong>: Include ALL necessary documentation, examples, and caveats</li>
+  <li><strong>Validation Loops</strong>: Provide executable tests/lints the AI can run and fix</li>
+  <li><strong>Information Dense</strong>: Use keywords and patterns from the codebase</li>
+  <li><strong>Progressive Success</strong>: Start simple, validate, then enhance</li>
+  <li><strong>Global rules</strong>: Be sure to follow all rules in CLAUDE.md</li>
+</ol>
+
+<hr />
+
+<h2 id="goal">Goal</h2>
+<p>Create a complete Mr. Robot-inspired theme for the Jekyll blog that captures the show’s dark, terminal-based aesthetic with authentic hacker culture elements, CRT monitor effects, and cyberpunk visual design.</p>
+
+<h2 id="why">Why</h2>
+<ul>
+  <li>Transform the blog from clean Apple aesthetic to dark cyberpunk/hacker aesthetic</li>
+  <li>Create immersive atmosphere that appeals to technical audience</li>
+  <li>Differentiate the site with unique terminal-inspired visual identity</li>
+  <li>Align with personal brand as engineering executive with deep technical roots</li>
+</ul>
+
+<h2 id="what">What</h2>
+<p>Dark theme with terminal-inspired UI featuring:</p>
+<ul>
+  <li>Dark backgrounds (#0a0a0a to #1a1a1a)</li>
+  <li>Green phosphor text (#33ff33, #66ff66) with glow effects</li>
+  <li>CRT monitor effects (scan lines, flicker, glow)</li>
+  <li>Terminal/monospace typography</li>
+  <li>ASCII art elements</li>
+  <li>Glitch animations</li>
+  <li>Command-line inspired navigation</li>
+  <li>Matrix-style digital rain effects (optional)</li>
+</ul>
+
+<h3 id="success-criteria">Success Criteria</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Dark theme implemented across all pages</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Terminal-style typography and color scheme active</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />CRT effects visible but not distracting</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Navigation redesigned with command-line aesthetic</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Blog posts formatted like terminal output</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Site remains readable and accessible</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Performance not significantly impacted</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Mobile responsive design maintained</li>
+</ul>
+
+<h2 id="all-needed-context">All Needed Context</h2>
+
+<h3 id="documentation--references">Documentation &amp; References</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># MUST READ - Include these in your context window</span>
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://css-tricks.com/old-timey-terminal-styling/</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">CRT monitor effects implementation in CSS</span>
+  
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://codepen.io/somethingformed/pen/raWJXV</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Terminal text effects and animations</span>
+  
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://github.com/Swordfish90/cool-retro-term</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Reference for authentic terminal aesthetics</span>
+  
+<span class="pi">-</span> <span class="na">file</span><span class="pi">:</span> <span class="s">/Users/iolloyd/code/blog/assets/css/style.css</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Current CSS to be replaced/modified</span>
+  
+<span class="pi">-</span> <span class="na">file</span><span class="pi">:</span> <span class="s">/Users/iolloyd/code/blog/_layouts/default.html</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Main layout template to modify</span>
+  
+<span class="pi">-</span> <span class="na">file</span><span class="pi">:</span> <span class="s">/Users/iolloyd/code/blog/_config.yml</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Jekyll configuration for site metadata</span>
+
+<span class="pi">-</span> <span class="na">docfile</span><span class="pi">:</span> <span class="s">/Users/iolloyd/code/blog/APPLE-DESIGN-GUIDE.md</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Current design system to understand what's being replaced</span>
+</code></pre></div></div>
+
+<h3 id="current-codebase-tree">Current Codebase tree</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/iolloyd/code/blog
+├── _config.yml
+├── _includes
+│   └── analytics.html
+├── _layouts
+│   ├── apple-default.html
+│   ├── apple-home.html
+│   ├── default.html
+│   ├── home.html
+│   ├── page.html
+│   └── post.html
+├── _posts
+│   ├── 2025-01-03-makefile-as-development-environment.md
+│   ├── 2025-01-30-tokenization-platforms-regulation-as-competitive-advantage.md
+│   ├── 2025-01-30-when-boring-tech-is-best.md
+│   ├── 2025-07-06-sqlite-postgresql-right-database-for-most-use-cases.md
+│   ├── 2025-07-07-just-postgresql.md
+│   └── 2025-07-14-duckdb-the-surprising-swiss-army-knife-of-data.md
+├── assets
+│   ├── css
+│   │   ├── resume.css
+│   │   └── style.css
+│   └── js
+│       └── animations.js
+</code></pre></div></div>
+
+<h3 id="desired-codebase-tree-with-files-to-be-added">Desired Codebase tree with files to be added</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/iolloyd/code/blog
+├── assets
+│   ├── css
+│   │   ├── mr-robot.css          <span class="c"># Main Mr. Robot theme styles</span>
+│   │   ├── terminal-effects.css  <span class="c"># CRT and terminal effects</span>
+│   │   └── resume.css           <span class="c"># Keep existing (update colors)</span>
+│   └── js
+│       ├── mr-robot.js          <span class="c"># Theme-specific interactions</span>
+│       └── terminal.js          <span class="c"># Terminal effects and animations</span>
+├── _layouts
+│   ├── mr-robot-default.html    <span class="c"># New base layout</span>
+│   ├── mr-robot-home.html       <span class="c"># New homepage layout</span>
+│   ├── mr-robot-post.html       <span class="c"># New blog post layout</span>
+│   └── <span class="o">[</span>keep existing <span class="k">for </span>fallback]
+├── _includes
+│   ├── terminal-header.html     <span class="c"># Terminal-style header</span>
+│   └── ascii-art.html          <span class="c"># ASCII art components</span>
+</code></pre></div></div>
+
+<h3 id="known-gotchas--design-considerations">Known Gotchas &amp; Design Considerations</h3>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* CRITICAL: Mr. Robot aesthetic specifics */</span>
+<span class="c">/* 1. Colors must be muted/dark - no pure white (#ffffff) */</span>
+<span class="c">/* 2. Green phosphor should glow using text-shadow */</span>
+<span class="c">/* 3. CRT effects should be subtle on mobile for performance */</span>
+<span class="c">/* 4. Monospace fonts required throughout */</span>
+<span class="c">/* 5. Animation performance matters - use CSS transforms */</span>
+<span class="c">/* 6. Accessibility: maintain contrast ratios despite dark theme */</span>
+</code></pre></div></div>
+
+<h2 id="implementation-blueprint">Implementation Blueprint</h2>
+
+<h3 id="data-models-and-structure">Data models and structure</h3>
+
+<p>Create the core visual language components:</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* Color palette - Mr. Robot cyberpunk theme */</span>
+<span class="nd">:root</span> <span class="p">{</span>
+  <span class="py">--mr-bg-primary</span><span class="p">:</span> <span class="m">#0a0a0a</span><span class="p">;</span>      <span class="c">/* Near black background */</span>
+  <span class="py">--mr-bg-secondary</span><span class="p">:</span> <span class="m">#1a1a1a</span><span class="p">;</span>    <span class="c">/* Slightly lighter black */</span>
+  <span class="py">--mr-text-primary</span><span class="p">:</span> <span class="m">#33ff33</span><span class="p">;</span>    <span class="c">/* Classic terminal green */</span>
+  <span class="py">--mr-text-secondary</span><span class="p">:</span> <span class="m">#66ff66</span><span class="p">;</span>  <span class="c">/* Brighter green for emphasis */</span>
+  <span class="py">--mr-accent</span><span class="p">:</span> <span class="m">#ff0066</span><span class="p">;</span>          <span class="c">/* Danger/alert red-pink */</span>
+  <span class="py">--mr-warning</span><span class="p">:</span> <span class="m">#ffaa00</span><span class="p">;</span>         <span class="c">/* Warning amber */</span>
+  <span class="py">--mr-gray</span><span class="p">:</span> <span class="m">#666666</span><span class="p">;</span>            <span class="c">/* Muted gray for secondary text */</span>
+  <span class="py">--mr-terminal-font</span><span class="p">:</span> <span class="s2">'Fira Code'</span><span class="p">,</span> <span class="s2">'Courier New'</span><span class="p">,</span> <span class="nb">monospace</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="list-of-tasks-to-be-completed-in-order">List of tasks to be completed in order</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Task 1</span><span class="pi">:</span>
+<span class="na">CREATE assets/css/mr-robot.css</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">MIRROR structure from</span><span class="pi">:</span> <span class="s">assets/css/style.css</span>
+  <span class="pi">-</span> <span class="s">MODIFY all color variables to dark theme</span>
+  <span class="pi">-</span> <span class="s">REPLACE font stacks with monospace options</span>
+  <span class="pi">-</span> <span class="s">ADD terminal-specific utility classes</span>
+
+<span class="na">Task 2</span><span class="pi">:</span>
+<span class="na">CREATE assets/css/terminal-effects.css</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ADD CRT monitor effects (scan lines, glow)</span>
+  <span class="pi">-</span> <span class="s">ADD text animations (typewriter, flicker)</span>
+  <span class="pi">-</span> <span class="s">ADD glitch effects for hover states</span>
+  <span class="pi">-</span> <span class="s">ENSURE performance with will-change</span>
+
+<span class="na">Task 3</span><span class="pi">:</span>
+<span class="na">CREATE _layouts/mr-robot-default.html</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">COPY from</span><span class="pi">:</span> <span class="s">_layouts/default.html</span>
+  <span class="pi">-</span> <span class="s">MODIFY CSS imports to use mr-robot.css</span>
+  <span class="pi">-</span> <span class="s">ADD terminal-effects.css import</span>
+  <span class="pi">-</span> <span class="s">UPDATE navigation to terminal style</span>
+  <span class="pi">-</span> <span class="s">ADD ASCII art header element</span>
+
+<span class="na">Task 4</span><span class="pi">:</span>
+<span class="na">CREATE assets/js/terminal.js</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ADD typewriter effect for headings</span>
+  <span class="pi">-</span> <span class="s">ADD cursor blink animation</span>
+  <span class="pi">-</span> <span class="s">ADD command prompt interactions</span>
+  <span class="pi">-</span> <span class="s">ADD subtle CRT flicker effect</span>
+
+<span class="na">Task 5</span><span class="pi">:</span>
+<span class="na">CREATE assets/js/mr-robot.js</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ADD theme initialization</span>
+  <span class="pi">-</span> <span class="s">ADD glitch effects on interaction</span>
+  <span class="pi">-</span> <span class="s">ADD terminal command navigation</span>
+  <span class="pi">-</span> <span class="s">ADD Easter eggs (konami code, etc)</span>
+
+<span class="na">Task 6</span><span class="pi">:</span>
+<span class="na">CREATE _includes/terminal-header.html</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ADD ASCII art logo/banner</span>
+  <span class="pi">-</span> <span class="s">ADD terminal prompt navigation</span>
+  <span class="pi">-</span> <span class="s">ADD system status indicators</span>
+  <span class="pi">-</span> <span class="s">STYLE like actual terminal header</span>
+
+<span class="na">Task 7</span><span class="pi">:</span>
+<span class="na">CREATE _layouts/mr-robot-home.html</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">COPY from</span><span class="pi">:</span> <span class="s">_layouts/home.html</span>
+  <span class="pi">-</span> <span class="s">MODIFY hero section to terminal boot sequence</span>
+  <span class="pi">-</span> <span class="s">ADD typewriter effect to intro text</span>
+  <span class="pi">-</span> <span class="s">STYLE sections as terminal windows</span>
+
+<span class="na">Task 8</span><span class="pi">:</span>
+<span class="na">CREATE _layouts/mr-robot-post.html</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">COPY from</span><span class="pi">:</span> <span class="s">_layouts/post.html</span>
+  <span class="pi">-</span> <span class="s">STYLE content as terminal output</span>
+  <span class="pi">-</span> <span class="s">ADD line numbers to code blocks</span>
+  <span class="pi">-</span> <span class="s">FORMAT metadata as terminal comments</span>
+
+<span class="na">Task 9</span><span class="pi">:</span>
+<span class="na">MODIFY assets/css/resume.css</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">UPDATE colors to match Mr. Robot theme</span>
+  <span class="pi">-</span> <span class="s">MAINTAIN professional readability</span>
+  <span class="pi">-</span> <span class="s">ADD subtle terminal styling</span>
+
+<span class="na">Task 10</span><span class="pi">:</span>
+<span class="na">UPDATE _config.yml</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ADD theme configuration variables</span>
+  <span class="pi">-</span> <span class="s">UPDATE site description for new aesthetic</span>
+</code></pre></div></div>
+
+<h3 id="per-task-pseudocode">Per task pseudocode</h3>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">#</span> <span class="nt">Task</span> <span class="err">1</span> <span class="nt">-</span> <span class="nt">Main</span> <span class="nt">theme</span> <span class="nt">CSS</span> <span class="nt">structure</span>
+<span class="c">/* mr-robot.css pseudocode */</span>
+<span class="nd">:root</span> <span class="p">{</span>
+  <span class="c">/* Color variables as defined above */</span>
+  <span class="c">/* Add glow/shadow variables */</span>
+  <span class="py">--mr-glow</span><span class="p">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">10px</span> <span class="n">rgba</span><span class="p">(</span><span class="m">51</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">51</span><span class="p">,</span> <span class="m">0.8</span><span class="p">);</span>
+  <span class="py">--mr-scanline</span><span class="p">:</span> <span class="n">repeating-linear-gradient</span><span class="p">(</span>
+    <span class="m">0deg</span><span class="p">,</span>
+    <span class="n">rgba</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0.15</span><span class="p">),</span>
+    <span class="n">rgba</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0.15</span><span class="p">)</span> <span class="m">1px</span><span class="p">,</span>
+    <span class="nb">transparent</span> <span class="m">1px</span><span class="p">,</span>
+    <span class="nb">transparent</span> <span class="m">2px</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c">/* Global reset with terminal styling */</span>
+<span class="o">*</span> <span class="p">{</span> <span class="nl">cursor</span><span class="p">:</span> <span class="nb">default</span><span class="p">;</span> <span class="p">}</span> <span class="c">/* Terminal cursor */</span>
+<span class="o">*</span><span class="nd">::selection</span> <span class="p">{</span> 
+  <span class="nl">background</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--mr-text-primary</span><span class="p">);</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--mr-bg-primary</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--mr-bg-primary</span><span class="p">);</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--mr-text-primary</span><span class="p">);</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--mr-terminal-font</span><span class="p">);</span>
+  <span class="c">/* Add scan line overlay */</span>
+<span class="p">}</span>
+
+<span class="c">/* Terminal window styling */</span>
+<span class="nc">.terminal-window</span> <span class="p">{</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="n">var</span><span class="p">(</span><span class="n">--mr-text-primary</span><span class="p">);</span>
+  <span class="nl">box-shadow</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--mr-glow</span><span class="p">);</span>
+  <span class="c">/* Terminal chrome styling */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">#</span> <span class="nx">Task</span> <span class="mi">4</span> <span class="o">-</span> <span class="nx">Terminal</span> <span class="nx">effects</span> <span class="nx">JavaScript</span>
+<span class="c1">// terminal.js pseudocode</span>
+<span class="kd">class</span> <span class="nx">TerminalEffect</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">=</span> <span class="nx">element</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">// ms per character</span>
+  <span class="p">}</span>
+  
+  <span class="nx">typewriter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Clear element</span>
+    <span class="c1">// Add characters one by one with delay</span>
+    <span class="c1">// Add blinking cursor at end</span>
+  <span class="p">}</span>
+  
+  <span class="nx">addCursor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Create span with cursor character</span>
+    <span class="c1">// Add blink animation</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// CRT flicker effect</span>
+<span class="kd">function</span> <span class="nx">addCRTFlicker</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Random subtle opacity changes</span>
+  <span class="c1">// Use requestAnimationFrame for performance</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="integration-points">Integration Points</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">LAYOUTS</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">update to</span><span class="pi">:</span> <span class="s">index.md</span>
+  <span class="pi">-</span> <span class="na">frontmatter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">layout:</span><span class="nv"> </span><span class="s">mr-robot-home"</span>
+  
+  <span class="pi">-</span> <span class="na">update to</span><span class="pi">:</span> <span class="s">blog.md</span>  
+  <span class="pi">-</span> <span class="na">frontmatter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">layout:</span><span class="nv"> </span><span class="s">mr-robot-default"</span>
+  
+  <span class="pi">-</span> <span class="na">update to</span><span class="pi">:</span> <span class="s">cv.md</span>
+  <span class="pi">-</span> <span class="na">frontmatter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">layout:</span><span class="nv"> </span><span class="s">mr-robot-default"</span>
+  
+<span class="na">CSS LOADING</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s">_layouts/mr-robot-default.html</span>
+  <span class="pi">-</span> <span class="na">replace</span><span class="pi">:</span> <span class="s">&lt;link rel="stylesheet" href="/assets/css/style.css"&gt;</span>
+  <span class="pi">-</span> <span class="na">with</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">&lt;link rel="stylesheet" href="/assets/css/mr-robot.css"&gt;</span>
+      <span class="s">&lt;link rel="stylesheet" href="/assets/css/terminal-effects.css"&gt;</span>
+  
+<span class="na">JAVASCRIPT</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">in</span><span class="pi">:</span> <span class="s">_layouts/mr-robot-default.html</span>
+  <span class="pi">-</span> <span class="na">before</span><span class="pi">:</span> <span class="s">&lt;/body&gt;</span>
+  <span class="pi">-</span> <span class="na">add</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">&lt;script src="/assets/js/terminal.js"&gt;&lt;/script&gt;</span>
+      <span class="s">&lt;script src="/assets/js/mr-robot.js"&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h2 id="validation-loop">Validation Loop</h2>
+
+<h3 id="level-1-syntax--style">Level 1: Syntax &amp; Style</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check CSS syntax</span>
+npx stylelint <span class="s2">"assets/css/*.css"</span> <span class="nt">--fix</span>
+
+<span class="c"># Validate HTML</span>
+npx htmlhint <span class="s2">"_layouts/*.html"</span>
+
+<span class="c"># Expected: No errors. If errors, READ and fix.</span>
+</code></pre></div></div>
+
+<h3 id="level-2-visual-testing">Level 2: Visual Testing</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start Jekyll server</span>
+bundle <span class="nb">exec </span>jekyll serve
+
+<span class="c"># Visual checks:</span>
+<span class="c"># 1. Dark theme applied to all pages</span>
+<span class="c"># 2. Green text visible and glowing</span>
+<span class="c"># 3. Terminal effects working</span>
+<span class="c"># 4. Navigation functional</span>
+<span class="c"># 5. Mobile responsive</span>
+
+<span class="c"># Browser testing</span>
+<span class="c"># - Chrome/Firefox/Safari</span>
+<span class="c"># - Mobile viewports</span>
+<span class="c"># - Check contrast ratios</span>
+</code></pre></div></div>
+
+<h3 id="level-3-performance-testing">Level 3: Performance Testing</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check page load performance</span>
+<span class="c"># Terminal effects shouldn't impact core web vitals</span>
+
+<span class="c"># Test animations</span>
+<span class="c"># - Smooth 60fps</span>
+<span class="c"># - No layout shifts</span>
+<span class="c"># - GPU acceleration working</span>
+</code></pre></div></div>
+
+<h2 id="final-validation-checklist">Final Validation Checklist</h2>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All pages use Mr. Robot theme</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Terminal effects working (scan lines, glow)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Typography is monospace throughout</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Dark color scheme properly implemented</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Navigation redesigned with terminal aesthetic</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Mobile responsive design maintained</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No accessibility issues (contrast ratios OK)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Performance acceptable (no jank)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />ASCII art renders correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Glitch effects subtle and intentional</li>
+</ul>
+
+<hr />
+
+<h2 id="anti-patterns-to-avoid">Anti-Patterns to Avoid</h2>
+<ul>
+  <li>❌ Don’t make effects too heavy (performance)</li>
+  <li>❌ Don’t sacrifice readability for aesthetics</li>
+  <li>❌ Don’t use pure black (#000000) - too harsh</li>
+  <li>❌ Don’t overdo glitch effects - less is more</li>
+  <li>❌ Don’t break existing functionality</li>
+  <li>❌ Don’t forget mobile experience</li>
+  <li>❌ Don’t use copyrighted Mr. Robot assets</li>
+</ul>
+
+<h2 id="additional-notes">Additional Notes</h2>
+
+<h3 id="accessibility-considerations">Accessibility Considerations</h3>
+<ul>
+  <li>Maintain WCAG AA contrast ratios (4.5:1 minimum)</li>
+  <li>Provide option to disable animations</li>
+  <li>Ensure keyboard navigation works</li>
+  <li>Screen reader compatibility</li>
+</ul>
+
+<h3 id="performance-optimizations">Performance Optimizations</h3>
+<ul>
+  <li>Use CSS transforms for animations</li>
+  <li>Implement will-change for animated elements</li>
+  <li>Lazy load heavy effects on mobile</li>
+  <li>Use CSS containment for terminal windows</li>
+</ul>
+
+<h3 id="progressive-enhancement">Progressive Enhancement</h3>
+<ul>
+  <li>Start with basic dark theme</li>
+  <li>Layer on CRT effects</li>
+  <li>Add animations last</li>
+  <li>Ensure graceful degradation</li>
+</ul>
+
+<h3 id="easter-eggs-ideas">Easter Eggs Ideas</h3>
+<ul>
+  <li>Konami code triggers special effect</li>
+  <li>Hidden terminal commands in navigation</li>
+  <li>ASCII art variations on refresh</li>
+  <li>fsociety references (subtle)</li>
+</ul>
+
+<h2 id="prp-quality-score-910">PRP Quality Score: 9/10</h2>
+
+<p>High confidence for one-pass implementation due to:</p>
+<ul>
+  <li>Comprehensive color and design specifications</li>
+  <li>Clear file structure and naming</li>
+  <li>Specific implementation steps in order</li>
+  <li>Existing codebase patterns to follow</li>
+  <li>Validation steps at each level</li>
+  <li>Performance and accessibility considerations included</li>
+</ul>
+
+<p>The only uncertainty is around specific ASCII art creation, but core theme implementation should succeed in one pass.</p>
+
+</div>
+  </main>
+  
+  <!-- Apple-style footer -->
+  <footer class="apple-footer">
+    <div class="apple-footer-container">
+      <div class="apple-footer-links">
+        <a href="mailto:lloyd@lloydmoore.com" class="apple-footer-link">Email</a>
+        <a href="https://linkedin.com/in/moorelloyd" class="apple-footer-link">LinkedIn</a>
+        <a href="https://github.com/iolloyd" class="apple-footer-link">GitHub</a>
+      </div>
+      <p class="apple-footer-copyright">
+        © 2025 Lloyd Moore. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  
+  <!-- Optimized script loading -->
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/mobile-nav.js" defer></script>
+  <script src="/assets/js/font-loader.js" defer></script>
+  <script src="/assets/js/lazy-load.js" defer></script>
+  <script src="/sw.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Single-Deploy Architecture: Serving Frontend and Backend Together with SQLite - Lloyd Moore</title>
+  <meta name="description" content="Engineering executive who scales teams, platforms and revenue. Expert in cloud architecture, team leadership, and digital transformation.">
+  
+  <!-- Resource hints for performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  
+  <!-- Preload custom font if available -->
+  <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Apple-inspired web app meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0071e3">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Critical CSS inline for faster first paint -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    :root {
+      --apple-black: #1d1d1f;
+      --apple-gray-dark: #424245;
+      --apple-gray: #86868b;
+      --apple-gray-light: #d2d2d7;
+      --apple-gray-lighter: #f5f5f7;
+      --apple-white: #ffffff;
+      --apple-blue: #0071e3;
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-system);
+      font-size: 1.0625rem;
+      line-height: 1.625;
+      color: var(--apple-black);
+      background-color: var(--apple-white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Navigation critical styles */
+    .apple-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(251, 251, 253, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .apple-nav-container {
+      max-width: 980px;
+      margin: 0;
+      padding: 0 var(--space-lg);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    /* Mobile nav toggle critical styles */
+    .mobile-nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--apple-black);
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+      }
+      
+      .apple-nav-menu {
+        display: none !important;
+      }
+      
+      .apple-nav-container {
+        height: 56px;
+        padding: 0 1rem;
+      }
+    }
+  </style>
+  
+  <!-- Apple-style CSS (deferred) -->
+  <link rel="preload" href="/assets/css/style.css" as="style">
+  <link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>
+  
+  <!-- Mobile-specific CSS -->
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  
+  <!-- Enhanced Typography System -->
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  
+  <!-- Additional CSS for animations -->
+  <style>
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Page load animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    /* Stagger animation delays */
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    
+    /* Apple-style container */
+    .apple-container {
+      max-width: var(--container-lg);
+      margin: 0;
+      padding: 0 var(--space-lg);
+    }
+    
+    /* Section spacing */
+    .apple-metrics,
+    .apple-philosophy,
+    .apple-recent-posts,
+    .apple-connect {
+      padding: var(--space-5xl) 0;
+    }
+    
+    /* Section titles */
+    .apple-section-title {
+      font-size: var(--text-5xl);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-md);
+      letter-spacing: var(--tracking-tight);
+    }
+    
+    .apple-section-lead {
+      font-size: var(--text-xl);
+      color: var(--apple-gray-dark);
+      text-align: center;
+      max-width: var(--container-md);
+      margin: 0 0 var(--space-3xl);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Philosophy grid */
+    .apple-philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-xl);
+    }
+    
+    .apple-philosophy-item h3 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-philosophy-item p {
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Blog preview */
+    .apple-blog-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+    }
+    
+    .apple-blog-preview-item {
+      padding: var(--space-lg);
+      background: var(--apple-gray-lighter);
+      border-radius: 18px;
+      transition: transform var(--transition-base);
+    }
+    
+    .apple-blog-preview-item:hover {
+      transform: translateY(-4px);
+    }
+    
+    .apple-blog-preview-date {
+      font-size: var(--text-sm);
+      color: var(--apple-gray);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .apple-blog-preview-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-blog-preview-title a {
+      color: var(--apple-black);
+      transition: color var(--transition-fast);
+    }
+    
+    .apple-blog-preview-title a:hover {
+      color: var(--apple-blue);
+    }
+    
+    .apple-blog-preview-excerpt {
+      color: var(--apple-gray-dark);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-md);
+    }
+    
+    /* Connect section */
+    .apple-connect {
+      background: var(--apple-gray-lighter);
+      text-align: center;
+    }
+    
+    .apple-connect-options {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Section CTA */
+    .apple-section-cta {
+      text-align: center;
+      margin-top: var(--space-xl);
+    }
+    
+    /* Hero CTA */
+    .apple-hero-cta {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+  </style>
+  
+  
+</head>
+<body>
+  <!-- Apple-style navigation -->
+  <nav class="apple-nav">
+    <div class="apple-nav-container">
+      <a href="/" class="apple-nav-brand">Lloyd Moore</a>
+      <div class="apple-nav-menu">
+        <a href="/about" class="apple-nav-link">About</a>
+        <a href="/blog" class="apple-nav-link">Blog</a>
+        <a href="/cv" class="apple-nav-link">Experience</a>
+      </div>
+      <!-- Typography accessibility controls -->
+      <!-- Typography Accessibility Controls -->
+<div class="typography-controls" aria-label="Typography settings">
+  <button 
+    class="typography-toggle-btn"
+    type="button"
+    aria-label="Typography settings"
+    aria-expanded="false"
+    aria-controls="typography-menu"
+  >
+    <svg class="typography-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+    </svg>
+  </button>
+  
+  <div id="typography-menu" class="typography-menu" aria-hidden="true">
+    <div class="typography-menu-header">
+      <h3 class="typography-menu-title">Reading Preferences</h3>
+      <button 
+        class="typography-close-btn"
+        type="button"
+        aria-label="Close typography settings"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="typography-menu-content">
+      <!-- Font Size Controls -->
+      <div class="typography-control-group">
+        <label class="typography-label">Text Size</label>
+        <div class="typography-size-controls">
+          <button 
+            class="size-btn" 
+            data-size="small"
+            aria-label="Small text size"
+            title="Small (90%)"
+          >
+            <span class="size-preview size-small">A</span>
+          </button>
+          <button 
+            class="size-btn active" 
+            data-size="normal"
+            aria-label="Normal text size"
+            title="Normal (100%)"
+          >
+            <span class="size-preview size-normal">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="large"
+            aria-label="Large text size"
+            title="Large (110%)"
+          >
+            <span class="size-preview size-large">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="xlarge"
+            aria-label="Extra large text size"
+            title="Extra Large (125%)"
+          >
+            <span class="size-preview size-xlarge">A</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Dyslexia Mode Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="dyslexia-toggle">
+          Dyslexia-Friendly Font
+          <span class="typography-hint">Improves letter distinction</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="dyslexia-toggle"
+            aria-describedby="dyslexia-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="dyslexia-desc" class="sr-only">
+          Activates a font designed to improve readability for people with dyslexia
+        </p>
+      </div>
+      
+      <!-- System Fonts Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="system-fonts-toggle">
+          Use System Fonts
+          <span class="typography-hint">Faster loading, native feel</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="system-fonts-toggle"
+            aria-describedby="system-fonts-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="system-fonts-desc" class="sr-only">
+          Uses your device's default fonts for faster loading
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Typography Controls Styles */
+.typography-controls {
+  position: relative;
+  display: inline-block;
+}
+
+.typography-toggle-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray-dark);
+  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.typography-toggle-btn:hover {
+  color: var(--apple-black);
+}
+
+.typography-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: var(--apple-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-base);
+  z-index: 100;
+}
+
+.typography-menu[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.typography-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--apple-gray-light);
+}
+
+.typography-menu-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0;
+}
+
+.typography-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.typography-close-btn:hover {
+  background: var(--apple-gray-lighter);
+}
+
+.typography-menu-content {
+  padding: var(--space-md);
+}
+
+.typography-control-group {
+  margin-bottom: var(--space-lg);
+}
+
+.typography-control-group:last-child {
+  margin-bottom: 0;
+}
+
+.typography-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: var(--space-sm);
+}
+
+.typography-hint {
+  font-size: var(--text-xs);
+  font-weight: normal;
+  color: var(--apple-gray);
+}
+
+/* Size Controls */
+.typography-size-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs);
+}
+
+.size-btn {
+  padding: var(--space-sm);
+  background: var(--apple-gray-lighter);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+}
+
+.size-btn:hover {
+  background: var(--apple-gray-light);
+}
+
+.size-btn.active {
+  background: var(--apple-blue);
+  color: white;
+  border-color: var(--apple-blue);
+}
+
+.size-preview {
+  display: block;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.size-small { font-size: 14px; }
+.size-normal { font-size: 18px; }
+.size-large { font-size: 22px; }
+.size-xlarge { font-size: 26px; }
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--apple-gray-light);
+  transition: all var(--transition-fast);
+  border-radius: 28px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: all var(--transition-fast);
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--apple-green);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .typography-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    transform: translateY(100%);
+  }
+  
+  .typography-menu[aria-hidden="false"] {
+    transform: translateY(0);
+  }
+  
+  .typography-control-group {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--apple-gray-lighter);
+  }
+  
+  .typography-control-group:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .typography-menu {
+    background: #1c1c1e;
+    color: #f2f2f7;
+  }
+  
+  .typography-menu-header {
+    border-bottom-color: #38383a;
+  }
+  
+  .typography-label {
+    color: #f2f2f7;
+  }
+  
+  .size-btn {
+    background: #2c2c2e;
+    color: #f2f2f7;
+  }
+  
+  .size-btn:hover {
+    background: #38383a;
+  }
+  
+  .typography-close-btn:hover {
+    background: #2c2c2e;
+  }
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  const toggle = document.querySelector('.typography-toggle-btn');
+  const menu = document.querySelector('.typography-menu');
+  const closeBtn = document.querySelector('.typography-close-btn');
+  const sizeButtons = document.querySelectorAll('.size-btn');
+  const dyslexiaToggle = document.getElementById('dyslexia-toggle');
+  const systemFontsToggle = document.getElementById('system-fonts-toggle');
+  
+  // Toggle menu
+  function toggleMenu() {
+    const isOpen = menu.getAttribute('aria-hidden') === 'false';
+    toggle.setAttribute('aria-expanded', !isOpen);
+    menu.setAttribute('aria-hidden', isOpen);
+  }
+  
+  toggle.addEventListener('click', toggleMenu);
+  closeBtn.addEventListener('click', toggleMenu);
+  
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.typography-controls')) {
+      toggle.setAttribute('aria-expanded', false);
+      menu.setAttribute('aria-hidden', true);
+    }
+  });
+  
+  // Font size controls
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const size = this.dataset.size;
+      
+      // Remove all size classes
+      document.body.classList.remove('font-size-small', 'font-size-normal', 'font-size-large', 'font-size-xlarge');
+      
+      // Add new size class
+      if (size !== 'normal') {
+        document.body.classList.add(`font-size-${size}`);
+      }
+      
+      // Update active button
+      sizeButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Save preference
+      localStorage.setItem('preferredFontSize', size);
+    });
+  });
+  
+  // Dyslexia mode
+  dyslexiaToggle.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dyslexia-mode');
+      localStorage.setItem('dyslexiaMode', 'true');
+    } else {
+      document.body.classList.remove('dyslexia-mode');
+      localStorage.removeItem('dyslexiaMode');
+    }
+  });
+  
+  // System fonts toggle
+  systemFontsToggle.addEventListener('change', function() {
+    if (typeof window.toggleSystemFonts === 'function') {
+      window.toggleSystemFonts(this.checked);
+    }
+    localStorage.setItem('prefersSystemFonts', this.checked);
+  });
+  
+  // Restore preferences on load
+  const savedSize = localStorage.getItem('preferredFontSize');
+  if (savedSize && savedSize !== 'normal') {
+    document.body.classList.add(`font-size-${savedSize}`);
+    document.querySelector(`[data-size="${savedSize}"]`).classList.add('active');
+    document.querySelector('[data-size="normal"]').classList.remove('active');
+  }
+  
+  if (localStorage.getItem('dyslexiaMode') === 'true') {
+    dyslexiaToggle.checked = true;
+    document.body.classList.add('dyslexia-mode');
+  }
+  
+  if (localStorage.getItem('prefersSystemFonts') === 'true') {
+    systemFontsToggle.checked = true;
+  }
+})();
+</script>
+      <!-- Mobile nav toggle button -->
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-menu">
+        <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path class="hamburger-line hamburger-line-top" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-middle" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-bottom" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation -->
+  <!-- Mobile Navigation Component -->
+<div class="mobile-nav-overlay" aria-hidden="true">
+  <nav id="mobile-nav-menu" class="mobile-nav-menu" role="navigation">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">Menu</span>
+      <button class="mobile-nav-close" aria-label="Close navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="/" class="mobile-nav-link">Home</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+      <a href="/blog" class="mobile-nav-link">Blog</a>
+      <a href="/cv" class="mobile-nav-link">Experience</a>
+    </div>
+  </nav>
+</div>
+  
+  <main>
+    <div class="page-content">
+  <h1>Single-Deploy Architecture: Serving Frontend and Backend Together with SQLite</h1>
+  <h1 id="single-deploy-architecture-serving-frontend-and-backend-together-with-sqlite">Single-Deploy Architecture: Serving Frontend and Backend Together with SQLite</h1>
+
+<p>In the world of modern web development, we often find ourselves managing separate deployments for our frontend and backend applications. While this separation has its merits for large-scale applications, many projects would benefit from a simpler, unified deployment approach. In this post, I’ll show you how to bundle your frontend build with your backend server and deploy them as a single unit, with SQLite as the perfect database companion.</p>
+
+<h2 id="why-unified-deployment">Why Unified Deployment?</h2>
+
+<p>The traditional approach of deploying frontend to a CDN and backend to a separate server adds complexity that isn’t always necessary. For many applications, especially those in the small to medium range, a unified deployment offers several compelling advantages:</p>
+
+<ul>
+  <li><strong>Simplified Infrastructure</strong>: One server, one deployment pipeline, one monitoring setup</li>
+  <li><strong>No CORS Configuration</strong>: Frontend and backend share the same origin</li>
+  <li><strong>Cost-Effective</strong>: Single server/container instead of multiple services</li>
+  <li><strong>Reduced Latency</strong>: No cross-origin requests means faster API calls</li>
+  <li><strong>Easier Local Development</strong>: Mirrors production architecture</li>
+</ul>
+
+<h2 id="architecture-overview">Architecture Overview</h2>
+
+<p>The concept is straightforward: your backend server handles both API routes and serves static frontend assets. Here’s how requests are typically routed:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/api/*</code> → Backend API handlers</li>
+  <li><code class="language-plaintext highlighter-rouge">/assets/*</code> → Static asset files (JS, CSS, images)</li>
+  <li><code class="language-plaintext highlighter-rouge">/*</code> → Serve the main index.html (for client-side routing)</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────┐     ┌──────────────────────────┐
+│   Browser   │────▶│      Web Server          │
+└─────────────┘     │                          │
+                    │  /api/* → API Handlers   │
+                    │  /assets/* → Static Files│
+                    │  /* → index.html         │
+                    │                          │
+                    │  ┌────────────────────┐  │
+                    │  │   SQLite Database  │  │
+                    │  └────────────────────┘  │
+                    └──────────────────────────┘
+</code></pre></div></div>
+
+<h2 id="implementation-examples">Implementation Examples</h2>
+
+<h3 id="nodejs-with-express">Node.js with Express</h3>
+
+<p>Here’s a complete Express server setup that serves both API and frontend:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">sqlite3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">sqlite3</span><span class="dl">'</span><span class="p">).</span><span class="nx">verbose</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">3000</span><span class="p">;</span>
+
+<span class="c1">// Initialize SQLite database</span>
+<span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sqlite3</span><span class="p">.</span><span class="nx">Database</span><span class="p">(</span><span class="dl">'</span><span class="s1">./database.sqlite</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// API routes</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api</span><span class="dl">'</span><span class="p">,</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./routes/api</span><span class="dl">'</span><span class="p">));</span>
+
+<span class="c1">// Serve static assets</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kd">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">public</span><span class="dl">'</span><span class="p">)));</span>
+
+<span class="c1">// Serve index.html for all other routes (client-side routing)</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">public</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">index.html</span><span class="dl">'</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Server running on port </span><span class="p">${</span><span class="nx">PORT</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="go-with-standard-library">Go with Standard Library</h3>
+
+<p>For Go enthusiasts, here’s an equivalent setup:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"database/sql"</span>
+    <span class="s">"log"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"path/filepath"</span>
+    
+    <span class="n">_</span> <span class="s">"github.com/mattn/go-sqlite3"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// Initialize SQLite database</span>
+    <span class="n">db</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">sql</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">"sqlite3"</span><span class="p">,</span> <span class="s">"./database.sqlite"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">defer</span> <span class="n">db</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    
+    <span class="c">// API routes</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">HandleFunc</span><span class="p">(</span><span class="s">"/api/"</span><span class="p">,</span> <span class="n">handleAPI</span><span class="p">)</span>
+    
+    <span class="c">// Serve static files</span>
+    <span class="n">fs</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">FileServer</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">Dir</span><span class="p">(</span><span class="s">"./public"</span><span class="p">))</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">Handle</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+    
+    <span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Server starting on :8080"</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">ListenAndServe</span><span class="p">(</span><span class="s">":8080"</span><span class="p">,</span> <span class="no">nil</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">handleAPI</span><span class="p">(</span><span class="n">w</span> <span class="n">http</span><span class="o">.</span><span class="n">ResponseWriter</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span><span class="n">http</span><span class="o">.</span><span class="n">Request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c">// API logic here</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="build-process-integration">Build Process Integration</h2>
+
+<p>The key to making this work smoothly is integrating your frontend build process with your backend structure. Here’s a typical setup:</p>
+
+<h3 id="project-structure">Project Structure</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my-app/
+├── backend/
+│   ├── server.js
+│   ├── routes/
+│   ├── models/
+│   └── public/          # Frontend builds here (gitignored)
+├── frontend/
+│   ├── src/
+│   ├── package.json
+│   └── vite.config.js   # Or webpack.config.js
+├── database.sqlite
+├── package.json         # Root package.json
+└── Dockerfile
+</code></pre></div></div>
+
+<h3 id="root-packagejson-scripts">Root package.json Scripts</h3>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"build:frontend"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd frontend &amp;&amp; npm run build"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"build:backend"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd backend &amp;&amp; npm run build"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run build:frontend &amp;&amp; npm run build:backend"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd backend &amp;&amp; node server.js"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"concurrently </span><span class="se">\"</span><span class="s2">npm run dev:frontend</span><span class="se">\"</span><span class="s2"> </span><span class="se">\"</span><span class="s2">npm run dev:backend</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dev:frontend"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd frontend &amp;&amp; npm run dev"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dev:backend"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd backend &amp;&amp; nodemon server.js"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="vite-configuration-frontendviteconfigjs">Vite Configuration (frontend/vite.config.js)</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">build</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">outDir</span><span class="p">:</span> <span class="dl">'</span><span class="s1">../backend/public</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">emptyOutDir</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="na">server</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">proxy</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">/api</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://localhost:3000</span><span class="dl">'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="sqlite-the-perfect-database-companion">SQLite: The Perfect Database Companion</h2>
+
+<p>SQLite is an ideal choice for this architecture because:</p>
+
+<ol>
+  <li><strong>Zero Configuration</strong>: No separate database server to manage</li>
+  <li><strong>Embedded</strong>: Runs in-process with your application</li>
+  <li><strong>File-Based</strong>: Easy backups (just copy the file)</li>
+  <li><strong>Surprisingly Capable</strong>: Handles millions of records efficiently</li>
+  <li><strong>Deployment Simplicity</strong>: Database travels with your application</li>
+</ol>
+
+<h3 id="database-initialization">Database Initialization</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Initialize database with tables</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s2">`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      email TEXT UNIQUE NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `</span><span class="p">);</span>
+  
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s2">`
+    CREATE TABLE IF NOT EXISTS posts (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER,
+      title TEXT NOT NULL,
+      content TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+  `</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="deployment-strategies">Deployment Strategies</h2>
+
+<h3 id="docker-deployment">Docker Deployment</h3>
+
+<p>Create a multi-stage Dockerfile that builds both frontend and backend:</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build frontend</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:18</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">frontend-build</span>
+<span class="k">WORKDIR</span><span class="s"> /app/frontend</span>
+<span class="k">COPY</span><span class="s"> frontend/package*.json ./</span>
+<span class="k">RUN </span>npm ci
+<span class="k">COPY</span><span class="s"> frontend/ ./</span>
+<span class="k">RUN </span>npm run build
+
+<span class="c"># Build backend</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:18</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">backend-build</span>
+<span class="k">WORKDIR</span><span class="s"> /app/backend</span>
+<span class="k">COPY</span><span class="s"> backend/package*.json ./</span>
+<span class="k">RUN </span>npm ci <span class="nt">--only</span><span class="o">=</span>production
+
+<span class="c"># Final stage</span>
+<span class="k">FROM</span><span class="s"> node:18-slim</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> --from=backend-build /app/backend/node_modules ./node_modules</span>
+<span class="k">COPY</span><span class="s"> backend/ ./</span>
+<span class="k">COPY</span><span class="s"> --from=frontend-build /app/backend/public ./public</span>
+<span class="k">EXPOSE</span><span class="s"> 3000</span>
+<span class="k">CMD</span><span class="s"> ["node", "server.js"]</span>
+</code></pre></div></div>
+
+<h3 id="platform-deployments">Platform Deployments</h3>
+
+<p>Many platforms support this architecture out of the box:</p>
+
+<p><strong>Fly.io</strong></p>
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># fly.toml</span>
+<span class="py">app</span> <span class="p">=</span> <span class="s">"my-app"</span>
+
+<span class="nn">[build]</span>
+  <span class="py">dockerfile</span> <span class="p">=</span> <span class="s">"Dockerfile"</span>
+
+<span class="nn">[[services]]</span>
+  <span class="py">internal_port</span> <span class="p">=</span> <span class="mi">3000</span>
+  <span class="py">protocol</span> <span class="p">=</span> <span class="s">"tcp"</span>
+
+<span class="nn">[mounts]</span>
+  <span class="py">destination</span> <span class="p">=</span> <span class="s">"/app/data"</span>
+  <span class="py">source</span> <span class="p">=</span> <span class="s">"sqlite_data"</span>
+</code></pre></div></div>
+
+<p><strong>Railway/Render</strong>
+These platforms automatically detect and build Node.js applications. Just ensure your build commands are in package.json.</p>
+
+<h2 id="production-considerations">Production Considerations</h2>
+
+<h3 id="1-static-asset-caching">1. Static Asset Caching</h3>
+
+<p>Configure proper cache headers for your static assets:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/assets</span><span class="dl">'</span><span class="p">,</span> <span class="nx">express</span><span class="p">.</span><span class="kd">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">public/assets</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span>
+  <span class="na">maxAge</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1y</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">etag</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}));</span>
+</code></pre></div></div>
+
+<h3 id="2-compression">2. Compression</h3>
+
+<p>Enable gzip compression for better performance:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">compression</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">compression</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">compression</span><span class="p">());</span>
+</code></pre></div></div>
+
+<h3 id="3-database-backups">3. Database Backups</h3>
+
+<p>Implement automated SQLite backups:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">backupDatabase</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">:.</span><span class="se">]</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">'</span><span class="s1">-</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">backupPath</span> <span class="o">=</span> <span class="s2">`./backups/database-</span><span class="p">${</span><span class="nx">timestamp</span><span class="p">}</span><span class="s2">.sqlite`</span><span class="p">;</span>
+  
+  <span class="nx">fs</span><span class="p">.</span><span class="nx">copyFileSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">./database.sqlite</span><span class="dl">'</span><span class="p">,</span> <span class="nx">backupPath</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Database backed up to </span><span class="p">${</span><span class="nx">backupPath</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Run daily backups</span>
+<span class="nx">setInterval</span><span class="p">(</span><span class="nx">backupDatabase</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="4-environment-based-configuration">4. Environment-Based Configuration</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">development</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">database</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./dev.sqlite</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span>
+  <span class="p">},</span>
+  <span class="na">production</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">database</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/data/production.sqlite</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">80</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">development</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">currentConfig</span> <span class="o">=</span> <span class="nx">config</span><span class="p">[</span><span class="nx">env</span><span class="p">];</span>
+</code></pre></div></div>
+
+<h2 id="when-to-use-this-approach">When to Use This Approach</h2>
+
+<p>This unified deployment architecture works best for:</p>
+
+<ul>
+  <li><strong>Internal Tools</strong>: Admin panels, dashboards, team tools</li>
+  <li><strong>MVPs and Prototypes</strong>: Quick deployment and iteration</li>
+  <li><strong>Small to Medium Apps</strong>: Up to thousands of daily active users</li>
+  <li><strong>Read-Heavy Applications</strong>: Blogs, portfolios, documentation sites</li>
+  <li><strong>Single-Tenant SaaS</strong>: Where each customer gets their own instance</li>
+</ul>
+
+<h2 id="when-to-consider-separation">When to Consider Separation</h2>
+
+<p>You might want to separate frontend and backend when:</p>
+
+<ul>
+  <li>You need global CDN distribution for assets</li>
+  <li>Multiple frontends consume the same API</li>
+  <li>You require horizontal scaling of the backend</li>
+  <li>Your team has separate frontend and backend developers</li>
+  <li>You need different deployment schedules for frontend and backend</li>
+</ul>
+
+<h2 id="complete-example-a-simple-blog-platform">Complete Example: A Simple Blog Platform</h2>
+
+<p>Here’s a minimal but complete example of a blog platform using this architecture:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// server.js</span>
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">sqlite3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">sqlite3</span><span class="dl">'</span><span class="p">).</span><span class="nx">verbose</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+
+<span class="c1">// Initialize database</span>
+<span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sqlite3</span><span class="p">.</span><span class="nx">Database</span><span class="p">(</span><span class="dl">'</span><span class="s1">./blog.sqlite</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s2">`
+  CREATE TABLE IF NOT EXISTS posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  )
+`</span><span class="p">);</span>
+
+<span class="c1">// API Routes</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/posts</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="dl">'</span><span class="s1">SELECT * FROM posts ORDER BY created_at DESC</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">posts</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">posts</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/posts</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">content</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span>
+    <span class="dl">'</span><span class="s1">INSERT INTO posts (title, content) VALUES (?, ?)</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">[</span><span class="nx">title</span><span class="p">,</span> <span class="nx">content</span><span class="p">],</span>
+    <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastID</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Serve frontend</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kd">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">public</span><span class="dl">'</span><span class="p">)));</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">public</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">index.html</span><span class="dl">'</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Blog platform running on http://localhost:3000</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The unified deployment approach with SQLite offers a refreshing simplicity for many web applications. By bundling your frontend with your backend and using an embedded database, you can dramatically simplify your deployment pipeline, reduce infrastructure costs, and maintain a clean, manageable codebase.</p>
+
+<p>This architecture isn’t a silver bullet—large-scale applications with complex requirements will still benefit from separation. But for the many applications that fall into the small to medium category, this approach provides an excellent balance of simplicity, performance, and maintainability.</p>
+
+<p>Start small, deploy simply, and scale when you need to. Your future self (and your ops team) will thank you.</p>
+
+<h2 id="resources-and-further-reading">Resources and Further Reading</h2>
+
+<ul>
+  <li><a href="https://www.sqlite.org/docs.html">SQLite Documentation</a></li>
+  <li><a href="https://expressjs.com/en/starter/static-files.html">Express.js Static Files Guide</a></li>
+  <li><a href="https://docs.docker.com/develop/develop-images/multistage-build/">Docker Multi-Stage Builds</a></li>
+  <li><a href="https://github.com/yourusername/unified-deploy-example">Example Repository</a> (placeholder)</li>
+</ul>
+
+<hr />
+
+<p><em>Have you tried this deployment approach? What has your experience been? Share your thoughts in the comments below!</em></p>
+
+</div>
+  </main>
+  
+  <!-- Apple-style footer -->
+  <footer class="apple-footer">
+    <div class="apple-footer-container">
+      <div class="apple-footer-links">
+        <a href="mailto:lloyd@lloydmoore.com" class="apple-footer-link">Email</a>
+        <a href="https://linkedin.com/in/moorelloyd" class="apple-footer-link">LinkedIn</a>
+        <a href="https://github.com/iolloyd" class="apple-footer-link">GitHub</a>
+      </div>
+      <p class="apple-footer-copyright">
+        © 2025 Lloyd Moore. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  
+  <!-- Optimized script loading -->
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/mobile-nav.js" defer></script>
+  <script src="/assets/js/font-loader.js" defer></script>
+  <script src="/assets/js/lazy-load.js" defer></script>
+  <script src="/sw.js" defer></script>
+</body>
+</html>

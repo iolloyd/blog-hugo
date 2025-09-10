@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DuckDB: The Surprising Swiss Army Knife of Data Processing | Lloyd Moore - CTO & VP Engineering</title>
+    <meta name="description" content="DuckDB isn't just 'SQLite for analytics.' It's a tool that makes impossible data tasks trivial, from analyzing S3 files without downloading to replacing entire ETL pipelines with a single SQL query.">
+    
+    <!-- Tactical CSS Framework -->
+    <link rel="stylesheet" href="/assets/css/tactical.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO and Social -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>DuckDB: The Surprising Swiss Army Knife of Data Processing | Lloyd Moore - CTO &amp; VP Engineering</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="DuckDB: The Surprising Swiss Army Knife of Data Processing" />
+<meta name="author" content="Lloyd Moore" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="DuckDB isn’t just ‘SQLite for analytics.’ It’s a tool that makes impossible data tasks trivial, from analyzing S3 files without downloading to replacing entire ETL pipelines with a single SQL query." />
+<meta property="og:description" content="DuckDB isn’t just ‘SQLite for analytics.’ It’s a tool that makes impossible data tasks trivial, from analyzing S3 files without downloading to replacing entire ETL pipelines with a single SQL query." />
+<link rel="canonical" href="http://localhost:4000/architecture/databases/data-engineering/2025/07/14/duckdb-the-surprising-swiss-army-knife-of-data.html" />
+<meta property="og:url" content="http://localhost:4000/architecture/databases/data-engineering/2025/07/14/duckdb-the-surprising-swiss-army-knife-of-data.html" />
+<meta property="og:site_name" content="Lloyd Moore - CTO &amp; VP Engineering" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-07-14T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="DuckDB: The Surprising Swiss Army Knife of Data Processing" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lloyd Moore"},"dateModified":"2025-07-14T00:00:00+01:00","datePublished":"2025-07-14T00:00:00+01:00","description":"DuckDB isn’t just ‘SQLite for analytics.’ It’s a tool that makes impossible data tasks trivial, from analyzing S3 files without downloading to replacing entire ETL pipelines with a single SQL query.","headline":"DuckDB: The Surprising Swiss Army Knife of Data Processing","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/architecture/databases/data-engineering/2025/07/14/duckdb-the-surprising-swiss-army-knife-of-data.html"},"url":"http://localhost:4000/architecture/databases/data-engineering/2025/07/14/duckdb-the-surprising-swiss-army-knife-of-data.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-tactical">
+        <div class="nav-tactical-container">
+            <a href="/" class="nav-tactical-brand">LLOYD.MOORE</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-tactical-menu">
+                <a href="/" class="nav-tactical-link">HOME</a>
+                <a href="/blog" class="nav-tactical-link">INTEL</a>
+                <a href="/about" class="nav-tactical-link">PERSONNEL</a>
+                <a href="/cv" class="nav-tactical-link">SERVICE.REC</a>
+            </div>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="tactical-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="tactical-hamburger-line"></span>
+                <span class="tactical-hamburger-line"></span>
+                <span class="tactical-hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="tactical-mobile-overlay" aria-hidden="true">
+        <div class="tactical-mobile-menu">
+            <div class="tactical-mobile-header">
+                <div class="tactical-mobile-brand">LLOYD.MOORE</div>
+                <button class="tactical-mobile-close" aria-label="Close navigation menu">
+                    <span class="tactical-close-line"></span>
+                    <span class="tactical-close-line"></span>
+                </button>
+            </div>
+            <nav class="tactical-mobile-nav">
+                <a href="/" class="tactical-mobile-link">HOME</a>
+                <a href="/blog" class="tactical-mobile-link">INTEL</a>
+                <a href="/about" class="tactical-mobile-link">PERSONNEL</a>
+                <a href="/cv" class="tactical-mobile-link">SERVICE.REC</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="tactical-main">
+        <article class="briefing-document document-content">
+  <!-- Intelligence Briefing Header -->
+  <header class="briefing-header">
+    <span class="classification">CLASSIFICATION: TECHNICAL</span>
+    <span class="briefing-date">DATE: 2025-07-14</span>
+  </header>
+  
+  <!-- Briefing Title -->
+  <h1 class="briefing-title">DuckDB: The Surprising Swiss Army Knife of Data Processing</h1>
+  
+  
+  <!-- Key Metrics Section -->
+  <section class="key-metrics">
+    <h2>Key Metrics</h2>
+    <ul class="metrics-list">
+      
+      <li class="metric-item">50GB+ S3 data analyzed without cluster setup</li>
+      
+      <li class="metric-item">10-100x faster than Pandas for analytics</li>
+      
+      <li class="metric-item">Single SQL query replaces ETL pipelines</li>
+      
+      <li class="metric-item">Zero infrastructure management required</li>
+      
+    </ul>
+  </section>
+  
+  
+  <!-- Tactical Analysis -->
+  <section class="tactical-analysis">
+    <h2>Tactical Analysis</h2>
+    <h1 id="duckdb-making-the-impossible-simple">DuckDB: Making the Impossible Simple</h1>
+
+<p>Last week, someone asked to analyze 50GB of CSV files scattered across S3. Five years ago, this would’ve meant spinning up a Spark cluster. Today? One line of DuckDB SQL.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">total_spent</span>
+<span class="k">FROM</span> <span class="n">read_csv_auto</span><span class="p">(</span><span class="s1">'s3://mybucket/transactions/*.csv'</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">transaction_date</span> <span class="o">&gt;</span> <span class="s1">'2025-01-01'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">customer_id</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">total_spent</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">100</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>No cluster. No downloads. No loading. Just query the files where they sit.</p>
+
+<p>This is DuckDB’s superpower: it makes difficult data tasks surprisingly simple.</p>
+
+<h2 id="what-is-duckdb">What Is DuckDB?</h2>
+
+<p>Think of DuckDB like an analytically-gifted SQLite. It’s an in-process SQL database designed for analytics, but that description massively undersells it. DuckDB is more like a Swiss Army knife for data – a single tool that replaces dozens of specialised ones.</p>
+
+<p>Key characteristics:</p>
+<ul>
+  <li><strong>Embedded</strong>: No server, just import and use</li>
+  <li><strong>Columnar storage</strong>: Optimized for analytical queries</li>
+  <li><strong>Zero dependencies</strong>: Single binary, works everywhere</li>
+  <li><strong>Vectorized execution</strong>: Processes data in chunks for speed</li>
+  <li><strong>SQL-first</strong>: If you know SQL, you know DuckDB</li>
+</ul>
+
+<p>But here’s what the documentation doesn’t explain: DuckDB is great at jobs you wouldn’t expect a database to handle at all.</p>
+
+<h2 id="surprising-use-case-1-the-universal-file-reader">Surprising Use Case #1: The Universal File Reader</h2>
+
+<p>Forget writing parsers. DuckDB reads everything:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Query CSV files</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="s1">'data.csv'</span><span class="p">;</span>
+
+<span class="c1">-- Query JSON files</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="s1">'api_response.json'</span><span class="p">;</span>
+
+<span class="c1">-- Query Parquet files</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="s1">'analytics/*.parquet'</span><span class="p">;</span>
+
+<span class="c1">-- Query Excel files (with spatial extension)</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="s1">'report.xlsx'</span><span class="p">;</span>
+
+<span class="c1">-- Mix and match!</span>
+<span class="k">SELECT</span> 
+    <span class="n">csv</span><span class="p">.</span><span class="n">user_id</span><span class="p">,</span>
+    <span class="n">json</span><span class="p">.</span><span class="n">preferences</span><span class="p">,</span>
+    <span class="n">parquet</span><span class="p">.</span><span class="n">transaction_history</span>
+<span class="k">FROM</span> <span class="s1">'users.csv'</span> <span class="n">csv</span>
+<span class="k">JOIN</span> <span class="s1">'preferences.json'</span> <span class="n">json</span> <span class="k">ON</span> <span class="n">csv</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">user_id</span>
+<span class="k">JOIN</span> <span class="s1">'transactions/*.parquet'</span> <span class="n">parquet</span> <span class="k">ON</span> <span class="n">csv</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">parquet</span><span class="p">.</span><span class="n">user_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>No schema definition. No CREATE TABLE. DuckDB infers everything and just works.</p>
+
+<h2 id="surprising-use-case-2-git-repository-analyst">Surprising Use Case #2: Git Repository Analyst</h2>
+
+<p>Want to analyze your Git history? DuckDB can query it directly:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Install git extension</span>
+<span class="n">INSTALL</span> <span class="n">git</span><span class="p">;</span>
+<span class="k">LOAD</span> <span class="n">git</span><span class="p">;</span>
+
+<span class="c1">-- Find most modified files</span>
+<span class="k">SELECT</span> 
+    <span class="n">file_path</span><span class="p">,</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">modifications</span><span class="p">,</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">author_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">unique_authors</span>
+<span class="k">FROM</span> <span class="n">git_log</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">file_path</span> <span class="k">LIKE</span> <span class="s1">'%.py'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">file_path</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">modifications</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">20</span><span class="p">;</span>
+
+<span class="c1">-- Analyze commit patterns</span>
+<span class="k">SELECT</span> 
+    <span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">'hour'</span><span class="p">,</span> <span class="n">commit_date</span><span class="p">)</span> <span class="k">as</span> <span class="n">hour</span><span class="p">,</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">commits</span>
+<span class="k">FROM</span> <span class="n">git_log</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">commit_date</span> <span class="o">&gt;</span> <span class="n">NOW</span><span class="p">()</span> <span class="o">-</span> <span class="n">INTERVAL</span> <span class="s1">'30 days'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">hour</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">hour</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This replaced a 200-line Python script with 10 lines of SQL.</p>
+
+<h2 id="surprising-use-case-3-the-pandas-replacement">Surprising Use Case #3: The Pandas Replacement</h2>
+
+<p>Data scientists, take note. DuckDB often outperforms pandas while using standard SQL:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Old way with pandas
+</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'sales_2023.csv'</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'sales_2024.csv'</span><span class="p">)</span>
+<span class="n">combined</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">combined</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'product_id'</span><span class="p">).</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s">'quantity'</span><span class="p">:</span> <span class="s">'sum'</span><span class="p">,</span>
+    <span class="s">'revenue'</span><span class="p">:</span> <span class="s">'sum'</span>
+<span class="p">}).</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">result</span><span class="p">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s">'summary.parquet'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># New way with DuckDB
+</span><span class="kn">import</span> <span class="nn">duckdb</span>
+
+<span class="n">duckdb</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="s">"""
+    COPY (
+        SELECT 
+            product_id,
+            SUM(quantity) as total_quantity,
+            SUM(revenue) as total_revenue
+        FROM read_csv_auto(['sales_2023.csv', 'sales_2024.csv'])
+        GROUP BY product_id
+    ) TO 'summary.parquet'
+"""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Same result. 10x faster. Uses 5x less memory.</p>
+
+<h2 id="surprising-use-case-4-log-file-detective">Surprising Use Case #4: Log File Detective</h2>
+
+<p>System logs giving you trouble? DuckDB handles unstructured data brilliantly:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Parse nginx logs</span>
+<span class="k">WITH</span> <span class="n">parsed_logs</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> 
+        <span class="n">regexp_extract</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s1">'(</span><span class="se">\d</span><span class="s1">+</span><span class="se">\.\d</span><span class="s1">+</span><span class="se">\.\d</span><span class="s1">+</span><span class="se">\.\d</span><span class="s1">+)'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">ip</span><span class="p">,</span>
+        <span class="n">regexp_extract</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s1">'</span><span class="se">\[</span><span class="s1">([^</span><span class="se">\]</span><span class="s1">]+)</span><span class="se">\]</span><span class="s1">'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="nb">timestamp</span><span class="p">,</span>
+        <span class="n">regexp_extract</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s1">'"(</span><span class="se">\w</span><span class="s1">+) ([^"]+)"'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="k">method</span><span class="p">,</span>
+        <span class="n">regexp_extract</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s1">'"(</span><span class="se">\w</span><span class="s1">+) ([^"]+)"'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">path</span><span class="p">,</span>
+        <span class="n">regexp_extract</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s1">'" (</span><span class="se">\d</span><span class="s1">+) '</span><span class="p">,</span> <span class="mi">1</span><span class="p">)::</span><span class="nb">INT</span> <span class="k">as</span> <span class="n">status_code</span><span class="p">,</span>
+        <span class="n">regexp_extract</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s1">'" </span><span class="se">\d</span><span class="s1">+ (</span><span class="se">\d</span><span class="s1">+)'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)::</span><span class="nb">INT</span> <span class="k">as</span> <span class="n">response_size</span>
+    <span class="k">FROM</span> <span class="n">read_csv_auto</span><span class="p">(</span><span class="s1">'access.log'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'line'</span><span class="p">:</span> <span class="s1">'VARCHAR'</span><span class="p">})</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> 
+    <span class="n">status_code</span><span class="p">,</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">requests</span><span class="p">,</span>
+    <span class="k">AVG</span><span class="p">(</span><span class="n">response_size</span><span class="p">)</span> <span class="k">as</span> <span class="n">avg_size</span><span class="p">,</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">ip</span><span class="p">)</span> <span class="k">as</span> <span class="n">unique_ips</span>
+<span class="k">FROM</span> <span class="n">parsed_logs</span>
+<span class="k">WHERE</span> <span class="k">method</span> <span class="o">=</span> <span class="s1">'GET'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">status_code</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">requests</span> <span class="k">DESC</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="surprising-use-case-5-api-response-wrangler">Surprising Use Case #5: API Response Wrangler</h2>
+
+<p>Got nested JSON from an API? DuckDB flattens it effortlessly:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Analyzing GitHub API responses</span>
+<span class="k">WITH</span> <span class="n">api_data</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">read_json_auto</span><span class="p">(</span><span class="s1">'github_repos.json'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> 
+    <span class="n">repo</span><span class="o">-&gt;&gt;</span><span class="s1">'name'</span> <span class="k">as</span> <span class="n">repo_name</span><span class="p">,</span>
+    <span class="n">repo</span><span class="o">-&gt;&gt;</span><span class="s1">'stargazers_count'</span> <span class="k">as</span> <span class="n">stars</span><span class="p">,</span>
+    <span class="k">owner</span><span class="o">-&gt;&gt;</span><span class="s1">'login'</span> <span class="k">as</span> <span class="k">owner</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">repo</span><span class="o">-&gt;&gt;</span><span class="s1">'created_at'</span><span class="p">)::</span><span class="nb">TIMESTAMP</span> <span class="k">as</span> <span class="n">created_date</span><span class="p">,</span>
+    <span class="k">unnest</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span> <span class="k">as</span> <span class="n">topic</span>
+<span class="k">FROM</span> <span class="n">api_data</span>
+<span class="k">WHERE</span> <span class="p">(</span><span class="n">repo</span><span class="o">-&gt;&gt;</span><span class="s1">'stargazers_count'</span><span class="p">)::</span><span class="nb">INT</span> <span class="o">&gt;</span> <span class="mi">1000</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">stars</span> <span class="k">DESC</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="surprising-use-case-6-the-local-data-lake">Surprising Use Case #6: The Local Data Lake</h2>
+
+<p>Transform your laptop into a mini data lake:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Create views over various data sources</span>
+<span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">sales</span> <span class="k">AS</span> 
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">read_parquet</span><span class="p">(</span><span class="s1">'s3://bucket/sales/*.parquet'</span><span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">customers</span> <span class="k">AS</span> 
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">postgres_scan</span><span class="p">(</span><span class="s1">'postgresql://prod/customers'</span><span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">products</span> <span class="k">AS</span> 
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="s1">'local_products.csv'</span><span class="p">;</span>
+
+<span class="c1">-- Query across all sources</span>
+<span class="k">SELECT</span> 
+    <span class="k">c</span><span class="p">.</span><span class="n">customer_name</span><span class="p">,</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">product_name</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">total_spent</span>
+<span class="k">FROM</span> <span class="n">sales</span> <span class="n">s</span>
+<span class="k">JOIN</span> <span class="n">customers</span> <span class="k">c</span> <span class="k">ON</span> <span class="n">s</span><span class="p">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+<span class="k">JOIN</span> <span class="n">products</span> <span class="n">p</span> <span class="k">ON</span> <span class="n">s</span><span class="p">.</span><span class="n">product_id</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="n">s</span><span class="p">.</span><span class="n">sale_date</span> <span class="o">&gt;</span> <span class="s1">'2024-01-01'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">c</span><span class="p">.</span><span class="n">customer_name</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">product_name</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">total_spent</span> <span class="k">DESC</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>No ETL. No data movement. Just federated queries across formats and locations.</p>
+
+<h2 id="performance-that-surprises">Performance That Surprises</h2>
+
+<p>Let’s talk numbers. Processing a 10GB CSV file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># PostgreSQL with COPY (after creating table)</span>
+Time: 4 minutes 32 seconds
+
+<span class="c"># Pandas read_csv</span>
+Time: 2 minutes 18 seconds
+Memory: 15GB
+
+<span class="c"># DuckDB</span>
+Time: 31 seconds
+Memory: 2.1GB
+</code></pre></div></div>
+
+<p>But here’s the kicker – with DuckDB, you can query the file without loading it:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- This runs in 1.2 seconds and uses 200MB RAM</span>
+<span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> 
+<span class="k">FROM</span> <span class="n">read_csv_auto</span><span class="p">(</span><span class="s1">'huge_file.csv'</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">category</span> <span class="o">=</span> <span class="s1">'Electronics'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="when-duckdb-isnt-the-answer">When DuckDB Isn’t the Answer</h2>
+
+<p>DuckDB excels at analytical workloads, but it’s not for everything:</p>
+
+<p><strong>Don’t use DuckDB for:</strong></p>
+<ul>
+  <li>High-concurrency transactional systems (use PostgreSQL)</li>
+  <li>Real-time streaming with millisecond latency (use Kafka + Flink)</li>
+  <li>Persistent production databases (use PostgreSQL)</li>
+  <li>Distributed processing of petabytes (use Spark/Presto)</li>
+</ul>
+
+<p><strong>Definitely try DuckDB for:</strong></p>
+<ul>
+  <li>Data exploration and analysis</li>
+  <li>ETL/ELT pipelines</li>
+  <li>Processing files without loading</li>
+  <li>Local analytical applications</li>
+  <li>Prototyping data pipelines</li>
+  <li>One-off data transformations</li>
+  <li>Embedded analytics in applications</li>
+</ul>
+
+<h2 id="real-world-pipeline-transformation">Real-World Pipeline Transformation</h2>
+
+<p>Here’s a before/after from a real project:</p>
+
+<p><strong>Before (Apache Airflow + Spark):</strong></p>
+<ul>
+  <li>Download files from S3 (7 minutes)</li>
+  <li>Load into Spark DataFrame (3 minutes)</li>
+  <li>Transform and aggregate (2 minutes)</li>
+  <li>Write to PostgreSQL (4 minutes)</li>
+  <li>Total: 16 minutes, $15 in compute costs</li>
+</ul>
+
+<p><strong>After (DuckDB):</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Entire pipeline in one query</span>
+<span class="k">COPY</span> <span class="p">(</span>
+    <span class="k">WITH</span> <span class="n">cleaned_data</span> <span class="k">AS</span> <span class="p">(</span>
+        <span class="k">SELECT</span> 
+            <span class="n">customer_id</span><span class="p">,</span>
+            <span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">'day'</span><span class="p">,</span> <span class="nb">timestamp</span><span class="p">)</span> <span class="k">as</span> <span class="nb">date</span><span class="p">,</span>
+            <span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">daily_total</span><span class="p">,</span>
+            <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">transaction_count</span>
+        <span class="k">FROM</span> <span class="n">read_parquet</span><span class="p">(</span><span class="s1">'s3://bucket/transactions/*.parquet'</span><span class="p">)</span>
+        <span class="k">WHERE</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span> 
+        <span class="k">AND</span> <span class="nb">timestamp</span> <span class="o">&gt;</span> <span class="k">CURRENT_DATE</span> <span class="o">-</span> <span class="n">INTERVAL</span> <span class="s1">'90 days'</span>
+        <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">customer_id</span><span class="p">,</span> <span class="nb">date</span>
+    <span class="p">)</span>
+    <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">cleaned_data</span>
+    <span class="k">WHERE</span> <span class="n">daily_total</span> <span class="o">&gt;</span> <span class="mi">100</span>
+<span class="p">)</span> <span class="k">TO</span> <span class="n">postgres_scan</span><span class="p">(</span><span class="s1">'postgresql://analytics/customer_metrics'</span><span class="p">);</span>
+</code></pre></div></div>
+<ul>
+  <li>Total: 1 minute, $0(ish) in compute costs</li>
+</ul>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Installation is refreshingly simple:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Python</span>
+pip <span class="nb">install </span>duckdb
+
+<span class="c"># CLI</span>
+brew <span class="nb">install </span>duckdb  <span class="c"># macOS</span>
+</code></pre></div></div>
+
+<p>Your first query:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">duckdb</span>
+
+<span class="c1"># Query any file
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">duckdb</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="s">"SELECT * FROM 'data.csv' LIMIT 5"</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+
+<span class="c1"># Or use it like a real database
+</span><span class="n">con</span> <span class="o">=</span> <span class="n">duckdb</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">'my_analysis.db'</span><span class="p">)</span>
+<span class="n">con</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"CREATE TABLE results AS SELECT * FROM 'huge_dataset.parquet'"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="the-hidden-magic">The Hidden Magic</h2>
+
+<p>What makes DuckDB special isn’t just speed – it’s removing friction:</p>
+<ul>
+  <li>No more writing custom parsers for each file format</li>
+  <li>No more moving data between systems</li>
+  <li>No more managing clusters for simple aggregations</li>
+  <li>No more choosing between SQL and DataFrame APIs</li>
+  <li>No more explaining why you need a Spark cluster for a 5GB file</li>
+</ul>
+
+<p>Instead, you just write SQL and it works.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>DuckDB represents a shift in how we think about data processing. It’s not trying to replace your production database or your streaming platform. It’s filling a gap we didn’t know existed – the space between “too big for Excel” and “too small for Spark.”</p>
+
+<p>The next time you’re faced with messy CSVs, nested JSON, or files scattered across S3, don’t spin up a cluster. Don’t write a complex Python script. Just point DuckDB at your data and write some SQL.</p>
+
+<p>Because sometimes the best solution isn’t the most sophisticated one – it’s the one that just works.</p>
+
+<hr />
+
+<p><em>Have you tried DuckDB for unconventional use cases? What surprised you?</em></p>
+
+<p><em>Originally shared on <a href="https://linkedin.com/in/moorelloyd">LinkedIn</a></em></p>
+
+  </section>
+  
+  <!-- Mission Navigation -->
+  <footer class="briefing-footer">
+    
+    <div class="briefing-nav">
+      
+      <a href="/architecture/databases/engineering/2025/07/06/sqlite-postgresql-right-database-for-most-use-cases.html" class="briefing-nav-link briefing-nav-prev">
+        <span class="briefing-nav-label">Previous Intel</span>
+        <span class="briefing-nav-title">SQLite and PostgreSQL: The Right Database for 99% of Use Cases</span>
+      </a>
+      
+      
+      
+      <a href="/formal-methods/verification/architecture/2025/08/28/tlaplus-not-just-concurrency.html" class="briefing-nav-link briefing-nav-next">
+        <span class="briefing-nav-label">Next Intel</span>
+        <span class="briefing-nav-title">How TLA+ Formal Verification Caught a Production Bug Before It Shipped</span>
+      </a>
+      
+    </div>
+    
+    
+    <!-- Mission Contact -->
+    <div class="briefing-contact">
+      <p class="briefing-contact-text">Request additional intelligence or operational consultation?</p>
+    </div>
+  </footer>
+</article>
+
+<style>
+/* Additional briefing styles */
+.briefing-footer {
+  margin-top: var(--space-4xl);
+  padding-top: var(--space-2xl);
+  border-top: 2px solid var(--tactical-grid);
+}
+
+.briefing-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xl);
+}
+
+.briefing-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  background: var(--tactical-surface);
+  border: 1px solid var(--tactical-grid);
+  text-decoration: none;
+  transition: all var(--transition-tactical);
+}
+
+.briefing-nav-link:hover {
+  border-color: var(--tactical-primary);
+  box-shadow: var(--shadow-tactical);
+}
+
+.briefing-nav-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.briefing-nav-label {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+}
+
+.briefing-nav-title {
+  font-size: var(--text-intel);
+  color: var(--tactical-text);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.briefing-contact {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: var(--tactical-surface);
+  border: 2px solid var(--tactical-grid);
+}
+
+.briefing-contact-text {
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .briefing-nav {
+    grid-template-columns: 1fr;
+  }
+  
+  .briefing-nav-next {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+</style>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tactical-footer">
+        <div class="tactical-footer-container">
+            <div class="tactical-footer-links">
+                <a href="mailto:lloyd@lloydmoore.com" class="tactical-footer-link">COMM.LINK</a>
+                <a href="https://www.linkedin.com/in/moorelloyd" class="tactical-footer-link">NET.PROF</a>
+            </div>
+            <div class="tactical-footer-copyright">
+                CLASSIFIED MATERIAL - 2025 - LLOYD MOORE
+            </div>
+        </div>
+    </footer>
+
+    <!-- Analytics and Scripts -->
+    
+    
+    <!-- Tactical Mobile Navigation Script -->
+    <script src="/assets/js/tactical-mobile-nav.js"></script>
+</body>
+</html>

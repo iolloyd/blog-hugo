@@ -3,6 +3,9 @@ source "https://rubygems.org"
 # GitHub Pages gem
 gem "github-pages", group: :jekyll_plugins
 
+# Required for Ruby 3.4+
+gem "csv"
+
 # Jekyll plugins
 group :jekyll_plugins do
   gem "jekyll-relative-links"

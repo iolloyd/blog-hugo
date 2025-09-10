@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple-Inspired Technical Blog Design Guide - Lloyd Moore</title>
+  <meta name="description" content="Engineering executive who scales teams, platforms and revenue. Expert in cloud architecture, team leadership, and digital transformation.">
+  
+  <!-- Resource hints for performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  
+  <!-- Preload custom font if available -->
+  <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Apple-inspired web app meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0071e3">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Critical CSS inline for faster first paint -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    :root {
+      --apple-black: #1d1d1f;
+      --apple-gray-dark: #424245;
+      --apple-gray: #86868b;
+      --apple-gray-light: #d2d2d7;
+      --apple-gray-lighter: #f5f5f7;
+      --apple-white: #ffffff;
+      --apple-blue: #0071e3;
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-system);
+      font-size: 1.0625rem;
+      line-height: 1.625;
+      color: var(--apple-black);
+      background-color: var(--apple-white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Navigation critical styles */
+    .apple-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(251, 251, 253, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .apple-nav-container {
+      max-width: 980px;
+      margin: 0;
+      padding: 0 var(--space-lg);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    /* Mobile nav toggle critical styles */
+    .mobile-nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--apple-black);
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+      }
+      
+      .apple-nav-menu {
+        display: none !important;
+      }
+      
+      .apple-nav-container {
+        height: 56px;
+        padding: 0 1rem;
+      }
+    }
+  </style>
+  
+  <!-- Apple-style CSS (deferred) -->
+  <link rel="preload" href="/assets/css/style.css" as="style">
+  <link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>
+  
+  <!-- Mobile-specific CSS -->
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  
+  <!-- Enhanced Typography System -->
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  
+  <!-- Additional CSS for animations -->
+  <style>
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Page load animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    /* Stagger animation delays */
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    
+    /* Apple-style container */
+    .apple-container {
+      max-width: var(--container-lg);
+      margin: 0;
+      padding: 0 var(--space-lg);
+    }
+    
+    /* Section spacing */
+    .apple-metrics,
+    .apple-philosophy,
+    .apple-recent-posts,
+    .apple-connect {
+      padding: var(--space-5xl) 0;
+    }
+    
+    /* Section titles */
+    .apple-section-title {
+      font-size: var(--text-5xl);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-md);
+      letter-spacing: var(--tracking-tight);
+    }
+    
+    .apple-section-lead {
+      font-size: var(--text-xl);
+      color: var(--apple-gray-dark);
+      text-align: center;
+      max-width: var(--container-md);
+      margin: 0 0 var(--space-3xl);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Philosophy grid */
+    .apple-philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-xl);
+    }
+    
+    .apple-philosophy-item h3 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-philosophy-item p {
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Blog preview */
+    .apple-blog-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+    }
+    
+    .apple-blog-preview-item {
+      padding: var(--space-lg);
+      background: var(--apple-gray-lighter);
+      border-radius: 18px;
+      transition: transform var(--transition-base);
+    }
+    
+    .apple-blog-preview-item:hover {
+      transform: translateY(-4px);
+    }
+    
+    .apple-blog-preview-date {
+      font-size: var(--text-sm);
+      color: var(--apple-gray);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .apple-blog-preview-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-blog-preview-title a {
+      color: var(--apple-black);
+      transition: color var(--transition-fast);
+    }
+    
+    .apple-blog-preview-title a:hover {
+      color: var(--apple-blue);
+    }
+    
+    .apple-blog-preview-excerpt {
+      color: var(--apple-gray-dark);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-md);
+    }
+    
+    /* Connect section */
+    .apple-connect {
+      background: var(--apple-gray-lighter);
+      text-align: center;
+    }
+    
+    .apple-connect-options {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Section CTA */
+    .apple-section-cta {
+      text-align: center;
+      margin-top: var(--space-xl);
+    }
+    
+    /* Hero CTA */
+    .apple-hero-cta {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+  </style>
+  
+  
+</head>
+<body>
+  <!-- Apple-style navigation -->
+  <nav class="apple-nav">
+    <div class="apple-nav-container">
+      <a href="/" class="apple-nav-brand">Lloyd Moore</a>
+      <div class="apple-nav-menu">
+        <a href="/about" class="apple-nav-link">About</a>
+        <a href="/blog" class="apple-nav-link">Blog</a>
+        <a href="/cv" class="apple-nav-link">Experience</a>
+      </div>
+      <!-- Typography accessibility controls -->
+      <!-- Typography Accessibility Controls -->
+<div class="typography-controls" aria-label="Typography settings">
+  <button 
+    class="typography-toggle-btn"
+    type="button"
+    aria-label="Typography settings"
+    aria-expanded="false"
+    aria-controls="typography-menu"
+  >
+    <svg class="typography-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+    </svg>
+  </button>
+  
+  <div id="typography-menu" class="typography-menu" aria-hidden="true">
+    <div class="typography-menu-header">
+      <h3 class="typography-menu-title">Reading Preferences</h3>
+      <button 
+        class="typography-close-btn"
+        type="button"
+        aria-label="Close typography settings"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="typography-menu-content">
+      <!-- Font Size Controls -->
+      <div class="typography-control-group">
+        <label class="typography-label">Text Size</label>
+        <div class="typography-size-controls">
+          <button 
+            class="size-btn" 
+            data-size="small"
+            aria-label="Small text size"
+            title="Small (90%)"
+          >
+            <span class="size-preview size-small">A</span>
+          </button>
+          <button 
+            class="size-btn active" 
+            data-size="normal"
+            aria-label="Normal text size"
+            title="Normal (100%)"
+          >
+            <span class="size-preview size-normal">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="large"
+            aria-label="Large text size"
+            title="Large (110%)"
+          >
+            <span class="size-preview size-large">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="xlarge"
+            aria-label="Extra large text size"
+            title="Extra Large (125%)"
+          >
+            <span class="size-preview size-xlarge">A</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Dyslexia Mode Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="dyslexia-toggle">
+          Dyslexia-Friendly Font
+          <span class="typography-hint">Improves letter distinction</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="dyslexia-toggle"
+            aria-describedby="dyslexia-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="dyslexia-desc" class="sr-only">
+          Activates a font designed to improve readability for people with dyslexia
+        </p>
+      </div>
+      
+      <!-- System Fonts Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="system-fonts-toggle">
+          Use System Fonts
+          <span class="typography-hint">Faster loading, native feel</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="system-fonts-toggle"
+            aria-describedby="system-fonts-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="system-fonts-desc" class="sr-only">
+          Uses your device's default fonts for faster loading
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Typography Controls Styles */
+.typography-controls {
+  position: relative;
+  display: inline-block;
+}
+
+.typography-toggle-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray-dark);
+  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.typography-toggle-btn:hover {
+  color: var(--apple-black);
+}
+
+.typography-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: var(--apple-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-base);
+  z-index: 100;
+}
+
+.typography-menu[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.typography-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--apple-gray-light);
+}
+
+.typography-menu-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0;
+}
+
+.typography-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.typography-close-btn:hover {
+  background: var(--apple-gray-lighter);
+}
+
+.typography-menu-content {
+  padding: var(--space-md);
+}
+
+.typography-control-group {
+  margin-bottom: var(--space-lg);
+}
+
+.typography-control-group:last-child {
+  margin-bottom: 0;
+}
+
+.typography-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: var(--space-sm);
+}
+
+.typography-hint {
+  font-size: var(--text-xs);
+  font-weight: normal;
+  color: var(--apple-gray);
+}
+
+/* Size Controls */
+.typography-size-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs);
+}
+
+.size-btn {
+  padding: var(--space-sm);
+  background: var(--apple-gray-lighter);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+}
+
+.size-btn:hover {
+  background: var(--apple-gray-light);
+}
+
+.size-btn.active {
+  background: var(--apple-blue);
+  color: white;
+  border-color: var(--apple-blue);
+}
+
+.size-preview {
+  display: block;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.size-small { font-size: 14px; }
+.size-normal { font-size: 18px; }
+.size-large { font-size: 22px; }
+.size-xlarge { font-size: 26px; }
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--apple-gray-light);
+  transition: all var(--transition-fast);
+  border-radius: 28px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: all var(--transition-fast);
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--apple-green);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .typography-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    transform: translateY(100%);
+  }
+  
+  .typography-menu[aria-hidden="false"] {
+    transform: translateY(0);
+  }
+  
+  .typography-control-group {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--apple-gray-lighter);
+  }
+  
+  .typography-control-group:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .typography-menu {
+    background: #1c1c1e;
+    color: #f2f2f7;
+  }
+  
+  .typography-menu-header {
+    border-bottom-color: #38383a;
+  }
+  
+  .typography-label {
+    color: #f2f2f7;
+  }
+  
+  .size-btn {
+    background: #2c2c2e;
+    color: #f2f2f7;
+  }
+  
+  .size-btn:hover {
+    background: #38383a;
+  }
+  
+  .typography-close-btn:hover {
+    background: #2c2c2e;
+  }
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  const toggle = document.querySelector('.typography-toggle-btn');
+  const menu = document.querySelector('.typography-menu');
+  const closeBtn = document.querySelector('.typography-close-btn');
+  const sizeButtons = document.querySelectorAll('.size-btn');
+  const dyslexiaToggle = document.getElementById('dyslexia-toggle');
+  const systemFontsToggle = document.getElementById('system-fonts-toggle');
+  
+  // Toggle menu
+  function toggleMenu() {
+    const isOpen = menu.getAttribute('aria-hidden') === 'false';
+    toggle.setAttribute('aria-expanded', !isOpen);
+    menu.setAttribute('aria-hidden', isOpen);
+  }
+  
+  toggle.addEventListener('click', toggleMenu);
+  closeBtn.addEventListener('click', toggleMenu);
+  
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.typography-controls')) {
+      toggle.setAttribute('aria-expanded', false);
+      menu.setAttribute('aria-hidden', true);
+    }
+  });
+  
+  // Font size controls
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const size = this.dataset.size;
+      
+      // Remove all size classes
+      document.body.classList.remove('font-size-small', 'font-size-normal', 'font-size-large', 'font-size-xlarge');
+      
+      // Add new size class
+      if (size !== 'normal') {
+        document.body.classList.add(`font-size-${size}`);
+      }
+      
+      // Update active button
+      sizeButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Save preference
+      localStorage.setItem('preferredFontSize', size);
+    });
+  });
+  
+  // Dyslexia mode
+  dyslexiaToggle.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dyslexia-mode');
+      localStorage.setItem('dyslexiaMode', 'true');
+    } else {
+      document.body.classList.remove('dyslexia-mode');
+      localStorage.removeItem('dyslexiaMode');
+    }
+  });
+  
+  // System fonts toggle
+  systemFontsToggle.addEventListener('change', function() {
+    if (typeof window.toggleSystemFonts === 'function') {
+      window.toggleSystemFonts(this.checked);
+    }
+    localStorage.setItem('prefersSystemFonts', this.checked);
+  });
+  
+  // Restore preferences on load
+  const savedSize = localStorage.getItem('preferredFontSize');
+  if (savedSize && savedSize !== 'normal') {
+    document.body.classList.add(`font-size-${savedSize}`);
+    document.querySelector(`[data-size="${savedSize}"]`).classList.add('active');
+    document.querySelector('[data-size="normal"]').classList.remove('active');
+  }
+  
+  if (localStorage.getItem('dyslexiaMode') === 'true') {
+    dyslexiaToggle.checked = true;
+    document.body.classList.add('dyslexia-mode');
+  }
+  
+  if (localStorage.getItem('prefersSystemFonts') === 'true') {
+    systemFontsToggle.checked = true;
+  }
+})();
+</script>
+      <!-- Mobile nav toggle button -->
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-menu">
+        <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path class="hamburger-line hamburger-line-top" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-middle" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-bottom" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation -->
+  <!-- Mobile Navigation Component -->
+<div class="mobile-nav-overlay" aria-hidden="true">
+  <nav id="mobile-nav-menu" class="mobile-nav-menu" role="navigation">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">Menu</span>
+      <button class="mobile-nav-close" aria-label="Close navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="/" class="mobile-nav-link">Home</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+      <a href="/blog" class="mobile-nav-link">Blog</a>
+      <a href="/cv" class="mobile-nav-link">Experience</a>
+    </div>
+  </nav>
+</div>
+  
+  <main>
+    <div class="page-content">
+  <h1>Apple-Inspired Technical Blog Design Guide</h1>
+  <h1 id="apple-inspired-technical-blog-design-guide">Apple-Inspired Technical Blog Design Guide</h1>
+
+<h2 id="overview">Overview</h2>
+<p>This design system reimagines your technical blog with Apple’s design philosophy, focusing on clarity, elegance, and exceptional user experience.</p>
+
+<h2 id="design-principles-applied">Design Principles Applied</h2>
+
+<h3 id="1-typography-excellence">1. <strong>Typography Excellence</strong></h3>
+<ul>
+  <li>System fonts for native feel (-apple-system, SF Pro)</li>
+  <li>Generous line heights (1.5-1.75) for readability</li>
+  <li>Clear hierarchy with dramatic size differences</li>
+  <li>Tight letter-spacing on headlines (-0.02em to -0.03em)</li>
+</ul>
+
+<h3 id="2-spatial-harmony">2. <strong>Spatial Harmony</strong></h3>
+<ul>
+  <li>Generous white space throughout</li>
+  <li>Consistent spacing scale (8px base)</li>
+  <li>Large touch targets (minimum 44px)</li>
+  <li>Breathing room between sections (80-128px)</li>
+</ul>
+
+<h3 id="3-color-restraint">3. <strong>Color Restraint</strong></h3>
+<ul>
+  <li>Minimal color palette</li>
+  <li>Subtle grays (#86868b, #d2d2d7)</li>
+  <li>Single accent color (Apple Blue #0071e3)</li>
+  <li>High contrast for readability</li>
+</ul>
+
+<h3 id="4-motion--interaction">4. <strong>Motion &amp; Interaction</strong></h3>
+<ul>
+  <li>Smooth cubic-bezier transitions</li>
+  <li>Parallax scrolling on hero</li>
+  <li>Fade-in animations on scroll</li>
+  <li>Responsive hover states</li>
+</ul>
+
+<h3 id="5-content-focus">5. <strong>Content Focus</strong></h3>
+<ul>
+  <li>Large, readable body text (17px base)</li>
+  <li>Maximum content widths for optimal reading</li>
+  <li>Clear visual hierarchy</li>
+  <li>Distraction-free layouts</li>
+</ul>
+
+<h2 id="file-structure">File Structure</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/assets/
+  /css/
+    apple-style.css         # Core design system
+  /js/
+    apple-animations.js     # Smooth animations
+
+/_layouts/
+  apple-default.html       # Base layout with navigation
+  apple-home.html          # Homepage layout
+  apple-post.html          # Blog post layout
+
+/
+  index-apple.md           # Apple-style homepage
+  blog-apple.md            # Apple-style blog listing
+</code></pre></div></div>
+
+<h2 id="usage-instructions">Usage Instructions</h2>
+
+<h3 id="1-homepage">1. <strong>Homepage</strong></h3>
+<p>To use the Apple-inspired homepage:</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">apple-home</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Your</span><span class="nv"> </span><span class="s">Name"</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Your</span><span class="nv"> </span><span class="s">tagline"</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h3 id="2-blog-posts">2. <strong>Blog Posts</strong></h3>
+<p>For Apple-style blog posts:</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">apple-post</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Post</span><span class="nv"> </span><span class="s">Title"</span>
+<span class="na">date</span><span class="pi">:</span> <span class="s">2025-01-30</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">category1</span><span class="pi">,</span> <span class="nv">category2</span><span class="pi">]</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Brief</span><span class="nv"> </span><span class="s">description"</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h3 id="3-blog-listing">3. <strong>Blog Listing</strong></h3>
+<p>The blog listing page automatically uses the Apple design:</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">apple-default</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blog"</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h2 id="key-features">Key Features</h2>
+
+<h3 id="navigation">Navigation</h3>
+<ul>
+  <li>Fixed navigation with backdrop blur</li>
+  <li>Smooth background transition on scroll</li>
+  <li>Mobile-responsive with animated menu</li>
+  <li>Minimal link styles</li>
+</ul>
+
+<h3 id="hero-sections">Hero Sections</h3>
+<ul>
+  <li>Large, bold headlines (96px on desktop)</li>
+  <li>Gradient text effects</li>
+  <li>Centered content with max-widths</li>
+  <li>Subtle parallax scrolling</li>
+</ul>
+
+<h3 id="content-cards">Content Cards</h3>
+<ul>
+  <li>18px border radius (Apple’s standard)</li>
+  <li>Subtle shadows and hover effects</li>
+  <li>Consistent padding (32-40px)</li>
+  <li>Light gray backgrounds (#f5f5f7)</li>
+</ul>
+
+<h3 id="buttons">Buttons</h3>
+<ul>
+  <li>Pill-shaped (border-radius: 980px)</li>
+  <li>Primary: Blue background</li>
+  <li>Secondary: Blue outline</li>
+  <li>Text: Minimal link style</li>
+  <li>Smooth scale animations on hover</li>
+</ul>
+
+<h3 id="typography-scale">Typography Scale</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>96px - Hero headlines
+72px - Page titles  
+48px - Section titles
+36px - Subsection titles
+24px - Card titles
+17px - Body text (Apple's default)
+14px - Small text
+12px - Caption text
+</code></pre></div></div>
+
+<h3 id="animations">Animations</h3>
+<ul>
+  <li>Fade up: 30px translate with opacity</li>
+  <li>Fade left: -30px translate with opacity</li>
+  <li>Staggered delays (0.1s increments)</li>
+  <li>Smooth cubic-bezier easing</li>
+  <li>Intersection Observer for performance</li>
+</ul>
+
+<h3 id="mobile-optimizations">Mobile Optimizations</h3>
+<ul>
+  <li>Responsive typography scaling</li>
+  <li>Touch-friendly tap targets</li>
+  <li>Slide-out navigation menu</li>
+  <li>Optimized spacing for small screens</li>
+  <li>Single column layouts on mobile</li>
+</ul>
+
+<h2 id="design-decisions">Design Decisions</h2>
+
+<h3 id="why-these-choices">Why These Choices?</h3>
+
+<ol>
+  <li><strong>System Fonts</strong>: Native performance and familiarity</li>
+  <li><strong>17px Base Size</strong>: Apple’s optimal reading size</li>
+  <li><strong>Minimal Colors</strong>: Focus on content, not decoration</li>
+  <li><strong>Large Spacing</strong>: Premium feel and clarity</li>
+  <li><strong>Subtle Animations</strong>: Delight without distraction</li>
+</ol>
+
+<h3 id="performance-considerations">Performance Considerations</h3>
+<ul>
+  <li>CSS custom properties for theming</li>
+  <li>Will-change for smooth animations</li>
+  <li>Intersection Observer for lazy animations</li>
+  <li>Minimal JavaScript footprint</li>
+  <li>Optimized font loading</li>
+</ul>
+
+<h2 id="customization">Customization</h2>
+
+<h3 id="colors">Colors</h3>
+<p>Edit CSS variables in <code class="language-plaintext highlighter-rouge">apple-style.css</code>:</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--apple-blue</span><span class="o">:</span> <span class="err">#0071</span><span class="nt">e3</span><span class="o">;</span>
+<span class="nt">--apple-black</span><span class="o">:</span> <span class="err">#1</span><span class="nt">d1d1f</span><span class="o">;</span>
+<span class="nt">--apple-gray</span><span class="o">:</span> <span class="err">#86868</span><span class="nt">b</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h3 id="spacing">Spacing</h3>
+<p>Adjust the spacing scale:</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--space-lg</span><span class="o">:</span> <span class="err">2</span><span class="nt">rem</span><span class="o">;</span>
+<span class="nt">--space-xl</span><span class="o">:</span> <span class="err">2</span><span class="o">.</span><span class="err">5</span><span class="nt">rem</span><span class="o">;</span>
+<span class="nt">--space-xxl</span><span class="o">:</span> <span class="err">3</span><span class="nt">rem</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h3 id="typography">Typography</h3>
+<p>Change font sizes:</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--text-base</span><span class="o">:</span> <span class="err">1</span><span class="o">.</span><span class="err">0625</span><span class="nt">rem</span><span class="o">;</span>
+<span class="nt">--text-lg</span><span class="o">:</span> <span class="err">1</span><span class="o">.</span><span class="err">25</span><span class="nt">rem</span><span class="o">;</span>
+<span class="nt">--text-xl</span><span class="o">:</span> <span class="err">1</span><span class="o">.</span><span class="err">5</span><span class="nt">rem</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<ol>
+  <li><strong>Content First</strong>: Let your content breathe with ample spacing</li>
+  <li><strong>Minimal Colors</strong>: Use color sparingly for emphasis</li>
+  <li><strong>Clear Hierarchy</strong>: Use size and weight, not just color</li>
+  <li><strong>Smooth Interactions</strong>: Every transition should feel natural</li>
+  <li><strong>Performance</strong>: Optimize images and lazy-load content</li>
+</ol>
+
+<h2 id="migration-guide">Migration Guide</h2>
+
+<p>To switch your existing blog:</p>
+
+<ol>
+  <li>Copy the new CSS and JS files</li>
+  <li>Update your layouts to use <code class="language-plaintext highlighter-rouge">apple-default</code></li>
+  <li>Change post layouts to <code class="language-plaintext highlighter-rouge">apple-post</code></li>
+  <li>Update homepage to use <code class="language-plaintext highlighter-rouge">apple-home</code></li>
+  <li>Adjust content for new spacing</li>
+</ol>
+
+<h2 id="inspiration-sources">Inspiration Sources</h2>
+
+<p>This design system draws from:</p>
+<ul>
+  <li>Apple.com’s current design language</li>
+  <li>iOS Human Interface Guidelines</li>
+  <li>Apple’s marketing sites</li>
+  <li>Safari’s Reader Mode</li>
+  <li>Apple News typography</li>
+</ul>
+
+<hr />
+
+<p>Remember: Great design is invisible. When done right, users focus on your content, not the interface.</p>
+
+</div>
+  </main>
+  
+  <!-- Apple-style footer -->
+  <footer class="apple-footer">
+    <div class="apple-footer-container">
+      <div class="apple-footer-links">
+        <a href="mailto:lloyd@lloydmoore.com" class="apple-footer-link">Email</a>
+        <a href="https://linkedin.com/in/moorelloyd" class="apple-footer-link">LinkedIn</a>
+        <a href="https://github.com/iolloyd" class="apple-footer-link">GitHub</a>
+      </div>
+      <p class="apple-footer-copyright">
+        © 2025 Lloyd Moore. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  
+  <!-- Optimized script loading -->
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/mobile-nav.js" defer></script>
+  <script src="/assets/js/font-loader.js" defer></script>
+  <script src="/assets/js/lazy-load.js" defer></script>
+  <script src="/sw.js" defer></script>
+</body>
+</html>

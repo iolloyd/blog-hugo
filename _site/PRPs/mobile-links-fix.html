@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRP: Fix Mobile Links Functionality - Lloyd Moore</title>
+  <meta name="description" content="Engineering executive who scales teams, platforms and revenue. Expert in cloud architecture, team leadership, and digital transformation.">
+  
+  <!-- Resource hints for performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  
+  <!-- Preload custom font if available -->
+  <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Apple-inspired web app meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0071e3">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Critical CSS inline for faster first paint -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    :root {
+      --apple-black: #1d1d1f;
+      --apple-gray-dark: #424245;
+      --apple-gray: #86868b;
+      --apple-gray-light: #d2d2d7;
+      --apple-gray-lighter: #f5f5f7;
+      --apple-white: #ffffff;
+      --apple-blue: #0071e3;
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-system);
+      font-size: 1.0625rem;
+      line-height: 1.625;
+      color: var(--apple-black);
+      background-color: var(--apple-white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Navigation critical styles */
+    .apple-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(251, 251, 253, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .apple-nav-container {
+      max-width: 980px;
+      margin: 0;
+      padding: 0 var(--space-lg);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    /* Mobile nav toggle critical styles */
+    .mobile-nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--apple-black);
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+      }
+      
+      .apple-nav-menu {
+        display: none !important;
+      }
+      
+      .apple-nav-container {
+        height: 56px;
+        padding: 0 1rem;
+      }
+    }
+  </style>
+  
+  <!-- Apple-style CSS (deferred) -->
+  <link rel="preload" href="/assets/css/style.css" as="style">
+  <link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>
+  
+  <!-- Mobile-specific CSS -->
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  
+  <!-- Enhanced Typography System -->
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  
+  <!-- Additional CSS for animations -->
+  <style>
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Page load animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    /* Stagger animation delays */
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    
+    /* Apple-style container */
+    .apple-container {
+      max-width: var(--container-lg);
+      margin: 0;
+      padding: 0 var(--space-lg);
+    }
+    
+    /* Section spacing */
+    .apple-metrics,
+    .apple-philosophy,
+    .apple-recent-posts,
+    .apple-connect {
+      padding: var(--space-5xl) 0;
+    }
+    
+    /* Section titles */
+    .apple-section-title {
+      font-size: var(--text-5xl);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-md);
+      letter-spacing: var(--tracking-tight);
+    }
+    
+    .apple-section-lead {
+      font-size: var(--text-xl);
+      color: var(--apple-gray-dark);
+      text-align: center;
+      max-width: var(--container-md);
+      margin: 0 0 var(--space-3xl);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Philosophy grid */
+    .apple-philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-xl);
+    }
+    
+    .apple-philosophy-item h3 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-philosophy-item p {
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Blog preview */
+    .apple-blog-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+    }
+    
+    .apple-blog-preview-item {
+      padding: var(--space-lg);
+      background: var(--apple-gray-lighter);
+      border-radius: 18px;
+      transition: transform var(--transition-base);
+    }
+    
+    .apple-blog-preview-item:hover {
+      transform: translateY(-4px);
+    }
+    
+    .apple-blog-preview-date {
+      font-size: var(--text-sm);
+      color: var(--apple-gray);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .apple-blog-preview-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-blog-preview-title a {
+      color: var(--apple-black);
+      transition: color var(--transition-fast);
+    }
+    
+    .apple-blog-preview-title a:hover {
+      color: var(--apple-blue);
+    }
+    
+    .apple-blog-preview-excerpt {
+      color: var(--apple-gray-dark);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-md);
+    }
+    
+    /* Connect section */
+    .apple-connect {
+      background: var(--apple-gray-lighter);
+      text-align: center;
+    }
+    
+    .apple-connect-options {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Section CTA */
+    .apple-section-cta {
+      text-align: center;
+      margin-top: var(--space-xl);
+    }
+    
+    /* Hero CTA */
+    .apple-hero-cta {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+  </style>
+  
+  
+</head>
+<body>
+  <!-- Apple-style navigation -->
+  <nav class="apple-nav">
+    <div class="apple-nav-container">
+      <a href="/" class="apple-nav-brand">Lloyd Moore</a>
+      <div class="apple-nav-menu">
+        <a href="/about" class="apple-nav-link">About</a>
+        <a href="/blog" class="apple-nav-link">Blog</a>
+        <a href="/cv" class="apple-nav-link">Experience</a>
+      </div>
+      <!-- Typography accessibility controls -->
+      <!-- Typography Accessibility Controls -->
+<div class="typography-controls" aria-label="Typography settings">
+  <button 
+    class="typography-toggle-btn"
+    type="button"
+    aria-label="Typography settings"
+    aria-expanded="false"
+    aria-controls="typography-menu"
+  >
+    <svg class="typography-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+    </svg>
+  </button>
+  
+  <div id="typography-menu" class="typography-menu" aria-hidden="true">
+    <div class="typography-menu-header">
+      <h3 class="typography-menu-title">Reading Preferences</h3>
+      <button 
+        class="typography-close-btn"
+        type="button"
+        aria-label="Close typography settings"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="typography-menu-content">
+      <!-- Font Size Controls -->
+      <div class="typography-control-group">
+        <label class="typography-label">Text Size</label>
+        <div class="typography-size-controls">
+          <button 
+            class="size-btn" 
+            data-size="small"
+            aria-label="Small text size"
+            title="Small (90%)"
+          >
+            <span class="size-preview size-small">A</span>
+          </button>
+          <button 
+            class="size-btn active" 
+            data-size="normal"
+            aria-label="Normal text size"
+            title="Normal (100%)"
+          >
+            <span class="size-preview size-normal">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="large"
+            aria-label="Large text size"
+            title="Large (110%)"
+          >
+            <span class="size-preview size-large">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="xlarge"
+            aria-label="Extra large text size"
+            title="Extra Large (125%)"
+          >
+            <span class="size-preview size-xlarge">A</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Dyslexia Mode Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="dyslexia-toggle">
+          Dyslexia-Friendly Font
+          <span class="typography-hint">Improves letter distinction</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="dyslexia-toggle"
+            aria-describedby="dyslexia-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="dyslexia-desc" class="sr-only">
+          Activates a font designed to improve readability for people with dyslexia
+        </p>
+      </div>
+      
+      <!-- System Fonts Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="system-fonts-toggle">
+          Use System Fonts
+          <span class="typography-hint">Faster loading, native feel</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="system-fonts-toggle"
+            aria-describedby="system-fonts-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="system-fonts-desc" class="sr-only">
+          Uses your device's default fonts for faster loading
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Typography Controls Styles */
+.typography-controls {
+  position: relative;
+  display: inline-block;
+}
+
+.typography-toggle-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray-dark);
+  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.typography-toggle-btn:hover {
+  color: var(--apple-black);
+}
+
+.typography-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: var(--apple-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-base);
+  z-index: 100;
+}
+
+.typography-menu[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.typography-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--apple-gray-light);
+}
+
+.typography-menu-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0;
+}
+
+.typography-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.typography-close-btn:hover {
+  background: var(--apple-gray-lighter);
+}
+
+.typography-menu-content {
+  padding: var(--space-md);
+}
+
+.typography-control-group {
+  margin-bottom: var(--space-lg);
+}
+
+.typography-control-group:last-child {
+  margin-bottom: 0;
+}
+
+.typography-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: var(--space-sm);
+}
+
+.typography-hint {
+  font-size: var(--text-xs);
+  font-weight: normal;
+  color: var(--apple-gray);
+}
+
+/* Size Controls */
+.typography-size-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs);
+}
+
+.size-btn {
+  padding: var(--space-sm);
+  background: var(--apple-gray-lighter);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+}
+
+.size-btn:hover {
+  background: var(--apple-gray-light);
+}
+
+.size-btn.active {
+  background: var(--apple-blue);
+  color: white;
+  border-color: var(--apple-blue);
+}
+
+.size-preview {
+  display: block;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.size-small { font-size: 14px; }
+.size-normal { font-size: 18px; }
+.size-large { font-size: 22px; }
+.size-xlarge { font-size: 26px; }
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--apple-gray-light);
+  transition: all var(--transition-fast);
+  border-radius: 28px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: all var(--transition-fast);
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--apple-green);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .typography-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    transform: translateY(100%);
+  }
+  
+  .typography-menu[aria-hidden="false"] {
+    transform: translateY(0);
+  }
+  
+  .typography-control-group {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--apple-gray-lighter);
+  }
+  
+  .typography-control-group:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .typography-menu {
+    background: #1c1c1e;
+    color: #f2f2f7;
+  }
+  
+  .typography-menu-header {
+    border-bottom-color: #38383a;
+  }
+  
+  .typography-label {
+    color: #f2f2f7;
+  }
+  
+  .size-btn {
+    background: #2c2c2e;
+    color: #f2f2f7;
+  }
+  
+  .size-btn:hover {
+    background: #38383a;
+  }
+  
+  .typography-close-btn:hover {
+    background: #2c2c2e;
+  }
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  const toggle = document.querySelector('.typography-toggle-btn');
+  const menu = document.querySelector('.typography-menu');
+  const closeBtn = document.querySelector('.typography-close-btn');
+  const sizeButtons = document.querySelectorAll('.size-btn');
+  const dyslexiaToggle = document.getElementById('dyslexia-toggle');
+  const systemFontsToggle = document.getElementById('system-fonts-toggle');
+  
+  // Toggle menu
+  function toggleMenu() {
+    const isOpen = menu.getAttribute('aria-hidden') === 'false';
+    toggle.setAttribute('aria-expanded', !isOpen);
+    menu.setAttribute('aria-hidden', isOpen);
+  }
+  
+  toggle.addEventListener('click', toggleMenu);
+  closeBtn.addEventListener('click', toggleMenu);
+  
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.typography-controls')) {
+      toggle.setAttribute('aria-expanded', false);
+      menu.setAttribute('aria-hidden', true);
+    }
+  });
+  
+  // Font size controls
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const size = this.dataset.size;
+      
+      // Remove all size classes
+      document.body.classList.remove('font-size-small', 'font-size-normal', 'font-size-large', 'font-size-xlarge');
+      
+      // Add new size class
+      if (size !== 'normal') {
+        document.body.classList.add(`font-size-${size}`);
+      }
+      
+      // Update active button
+      sizeButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Save preference
+      localStorage.setItem('preferredFontSize', size);
+    });
+  });
+  
+  // Dyslexia mode
+  dyslexiaToggle.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dyslexia-mode');
+      localStorage.setItem('dyslexiaMode', 'true');
+    } else {
+      document.body.classList.remove('dyslexia-mode');
+      localStorage.removeItem('dyslexiaMode');
+    }
+  });
+  
+  // System fonts toggle
+  systemFontsToggle.addEventListener('change', function() {
+    if (typeof window.toggleSystemFonts === 'function') {
+      window.toggleSystemFonts(this.checked);
+    }
+    localStorage.setItem('prefersSystemFonts', this.checked);
+  });
+  
+  // Restore preferences on load
+  const savedSize = localStorage.getItem('preferredFontSize');
+  if (savedSize && savedSize !== 'normal') {
+    document.body.classList.add(`font-size-${savedSize}`);
+    document.querySelector(`[data-size="${savedSize}"]`).classList.add('active');
+    document.querySelector('[data-size="normal"]').classList.remove('active');
+  }
+  
+  if (localStorage.getItem('dyslexiaMode') === 'true') {
+    dyslexiaToggle.checked = true;
+    document.body.classList.add('dyslexia-mode');
+  }
+  
+  if (localStorage.getItem('prefersSystemFonts') === 'true') {
+    systemFontsToggle.checked = true;
+  }
+})();
+</script>
+      <!-- Mobile nav toggle button -->
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-menu">
+        <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path class="hamburger-line hamburger-line-top" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-middle" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-bottom" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation -->
+  <!-- Mobile Navigation Component -->
+<div class="mobile-nav-overlay" aria-hidden="true">
+  <nav id="mobile-nav-menu" class="mobile-nav-menu" role="navigation">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">Menu</span>
+      <button class="mobile-nav-close" aria-label="Close navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="/" class="mobile-nav-link">Home</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+      <a href="/blog" class="mobile-nav-link">Blog</a>
+      <a href="/cv" class="mobile-nav-link">Experience</a>
+    </div>
+  </nav>
+</div>
+  
+  <main>
+    <div class="page-content">
+  <h1>PRP: Fix Mobile Links Functionality</h1>
+  <h1 id="prp-fix-mobile-links-functionality">PRP: Fix Mobile Links Functionality</h1>
+
+<p><strong>Date</strong>: 2025-07-15<br />
+<strong>Status</strong>: Ready for Implementation<br />
+<strong>Confidence Score</strong>: 9/10</p>
+
+<h2 id="problem-statement">Problem Statement</h2>
+
+<p>Links styled as buttons (with classes <code class="language-plaintext highlighter-rouge">.btn</code> or <code class="language-plaintext highlighter-rouge">.apple-btn</code>) are not working on mobile devices. The issue is caused by <code class="language-plaintext highlighter-rouge">e.preventDefault()</code> in the touchstart event handler in <code class="language-plaintext highlighter-rouge">assets/js/animations.js</code> (line 105), which prevents the default link navigation behavior.</p>
+
+<h2 id="context-and-research">Context and Research</h2>
+
+<h3 id="root-cause-analysis">Root Cause Analysis</h3>
+<ul>
+  <li><strong>File</strong>: <code class="language-plaintext highlighter-rouge">/Users/iolloyd/code/blog/assets/js/animations.js</code></li>
+  <li><strong>Function</strong>: <code class="language-plaintext highlighter-rouge">enhanceButtons()</code> (lines 87-128)</li>
+  <li><strong>Issue</strong>: The touchstart event handler calls <code class="language-plaintext highlighter-rouge">preventDefault()</code> on ALL elements matching <code class="language-plaintext highlighter-rouge">.apple-btn, .btn, button</code></li>
+  <li><strong>Impact</strong>: Anchor tags (<code class="language-plaintext highlighter-rouge">&lt;a&gt;</code>) with button classes cannot navigate to their href destinations on mobile</li>
+</ul>
+
+<h3 id="affected-elements">Affected Elements</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Examples of broken links --&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/experience"</span> <span class="na">class=</span><span class="s">"apple-btn apple-btn-secondary"</span><span class="nt">&gt;</span>View experience<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"mailto:lloyd@lloydmoore.com"</span> <span class="na">class=</span><span class="s">"apple-btn apple-btn-primary"</span><span class="nt">&gt;</span>Email me<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/blog/"</span> <span class="na">class=</span><span class="s">"btn btn-sm"</span><span class="nt">&gt;</span>Read more<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<h3 id="current-implementation-context">Current Implementation Context</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Current problematic code (animations.js:105)</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">touchstart</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Prevent double-tap zoom</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// THIS BREAKS LINK NAVIGATION</span>
+  
+  <span class="c1">// Visual feedback</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">scale(0.95)</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">touch-active</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="c1">// Haptic feedback (if supported)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nb">navigator</span> <span class="o">&amp;&amp;</span> <span class="nb">window</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">vibrate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">vibrate</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="p">{</span> <span class="na">passive</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="implementation-blueprint">Implementation Blueprint</h2>
+
+<h3 id="approach-1-css-based-solution-recommended">Approach 1: CSS-Based Solution (Recommended)</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Pseudocode for fix</span>
+<span class="kd">function</span> <span class="nx">enhanceButtons</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">.apple-btn, .btn, button</span><span class="dl">'</span><span class="p">)</span>
+  
+  <span class="k">for</span> <span class="nx">each</span> <span class="nx">button</span><span class="p">:</span>
+    <span class="c1">// Add CSS touch-action to prevent double-tap zoom</span>
+    <span class="nx">button</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">touchAction</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">manipulation</span><span class="dl">'</span>
+    
+    <span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">touchstart</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Remove preventDefault() - let links work naturally</span>
+      <span class="c1">// Keep visual feedback</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">scale(0.95)</span><span class="dl">'</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">touch-active</span><span class="dl">'</span><span class="p">)</span>
+      
+      <span class="c1">// Keep haptic feedback</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nb">navigator</span><span class="p">?.</span><span class="nx">vibrate</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">vibrate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="p">{</span> <span class="na">passive</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span> <span class="c1">// Change to passive since no preventDefault</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="approach-2-conditional-preventdefault-alternative">Approach 2: Conditional preventDefault (Alternative)</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Only prevent default for actual buttons, not links</span>
+<span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">touchstart</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Only prevent default for button elements, not anchors</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tagName</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">A</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Rest of the code remains the same</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h2 id="tasks-to-complete">Tasks to Complete</h2>
+
+<ol>
+  <li><strong>Update animations.js</strong>
+    <ul>
+      <li>Remove <code class="language-plaintext highlighter-rouge">e.preventDefault()</code> from touchstart handler</li>
+      <li>Add <code class="language-plaintext highlighter-rouge">touch-action: manipulation</code> CSS property to buttons</li>
+      <li>Change event listener to passive</li>
+      <li>Test visual feedback still works</li>
+    </ul>
+  </li>
+  <li><strong>Add CSS touch-action property</strong>
+    <ul>
+      <li>Update <code class="language-plaintext highlighter-rouge">assets/css/style.css</code> to include:
+        <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.apple-btn</span><span class="o">,</span>
+<span class="nc">.btn</span><span class="o">,</span>
+<span class="nt">button</span> <span class="p">{</span>
+<span class="py">touch-action</span><span class="p">:</span> <span class="n">manipulation</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Verify other touch handlers</strong>
+    <ul>
+      <li>Ensure no other event handlers interfere with links</li>
+      <li>Check mobile-nav.js for conflicts</li>
+    </ul>
+  </li>
+  <li><strong>Test comprehensively</strong>
+    <ul>
+      <li>Test all button-styled links work on mobile</li>
+      <li>Verify double-tap zoom is still prevented</li>
+      <li>Ensure visual feedback (scale animation) works</li>
+      <li>Confirm haptic feedback functions</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="reference-documentation">Reference Documentation</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action">MDN touch-action CSS property</a></li>
+  <li><a href="https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away">Preventing double-tap zoom best practices</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent">Touch events and preventDefault</a></li>
+</ul>
+
+<h2 id="patterns-to-follow">Patterns to Follow</h2>
+
+<ul>
+  <li>Match existing code style in animations.js</li>
+  <li>Use the same visual feedback patterns (scale transform, touch-active class)</li>
+  <li>Maintain consistency with other touch handlers (enhanceLinks, enhanceCards)</li>
+  <li>Follow the passive event listener pattern used elsewhere</li>
+</ul>
+
+<h2 id="error-handling-strategy">Error Handling Strategy</h2>
+
+<ol>
+  <li>Feature detection for vibrate API is already implemented</li>
+  <li>Graceful fallback if CSS touch-action not supported (older browsers)</li>
+  <li>Ensure no JavaScript errors break the entire page</li>
+</ol>
+
+<h2 id="validation-gates">Validation Gates</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Check JavaScript syntax</span>
+npx eslint assets/js/animations.js
+
+<span class="c"># 2. Validate HTML/CSS changes</span>
+npx html-validate _site/<span class="k">**</span>/<span class="k">*</span>.html
+
+<span class="c"># 3. Test on actual mobile devices</span>
+<span class="c"># Manual testing required - use mobile-test-guide.md checklist</span>
+
+<span class="c"># 4. Verify no console errors</span>
+<span class="c"># Open browser DevTools in mobile mode and check console</span>
+
+<span class="c"># 5. Performance check</span>
+<span class="c"># Ensure touch responsiveness is maintained</span>
+</code></pre></div></div>
+
+<h2 id="testing-checklist">Testing Checklist</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All navigation button links work on mobile</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Email/contact links function properly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Blog “Read more” links navigate correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Download CV link works</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Double-tap zoom is still prevented</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Visual feedback (scale animation) works</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Haptic feedback triggers on supported devices</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No JavaScript errors in console</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Touch responsiveness feels natural</li>
+</ul>
+
+<h2 id="known-gotchas">Known Gotchas</h2>
+
+<ol>
+  <li><strong>Passive vs Active Listeners</strong>: When removing preventDefault(), the listener can be passive for better performance</li>
+  <li><strong>Browser Compatibility</strong>: <code class="language-plaintext highlighter-rouge">touch-action: manipulation</code> is well-supported but check older iOS versions</li>
+  <li><strong>Testing</strong>: Must test on actual devices, not just browser DevTools</li>
+  <li><strong>Related Files</strong>: Changes might affect mobile-nav.js behavior - test mobile menu thoroughly</li>
+</ol>
+
+<h2 id="success-criteria">Success Criteria</h2>
+
+<ul>
+  <li>All links with button classes navigate properly on mobile devices</li>
+  <li>Double-tap zoom prevention still works</li>
+  <li>No regression in visual/haptic feedback</li>
+  <li>No new JavaScript errors</li>
+  <li>Performance remains smooth</li>
+</ul>
+
+<p><strong>Confidence Score: 9/10</strong> - The solution is straightforward with clear implementation path. Only deduction is for the need to test on actual mobile devices.</p>
+
+</div>
+  </main>
+  
+  <!-- Apple-style footer -->
+  <footer class="apple-footer">
+    <div class="apple-footer-container">
+      <div class="apple-footer-links">
+        <a href="mailto:lloyd@lloydmoore.com" class="apple-footer-link">Email</a>
+        <a href="https://linkedin.com/in/moorelloyd" class="apple-footer-link">LinkedIn</a>
+        <a href="https://github.com/iolloyd" class="apple-footer-link">GitHub</a>
+      </div>
+      <p class="apple-footer-copyright">
+        © 2025 Lloyd Moore. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  
+  <!-- Optimized script loading -->
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/mobile-nav.js" defer></script>
+  <script src="/assets/js/font-loader.js" defer></script>
+  <script src="/assets/js/lazy-load.js" defer></script>
+  <script src="/sw.js" defer></script>
+</body>
+</html>

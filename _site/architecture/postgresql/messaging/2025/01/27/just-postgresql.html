@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostgreSQL Will Do, or, You Don't Need Kafka | Lloyd Moore - CTO & VP Engineering</title>
+    <meta name="description" content="Before you spin up a three-node Kafka cluster, consider this: PostgreSQL can handle most pub-sub use cases perfectly well. And you've probably already got it running.">
+    
+    <!-- Tactical CSS Framework -->
+    <link rel="stylesheet" href="/assets/css/tactical.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO and Social -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>PostgreSQL Will Do, or, You Don’t Need Kafka | Lloyd Moore - CTO &amp; VP Engineering</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="PostgreSQL Will Do, or, You Don’t Need Kafka" />
+<meta name="author" content="Lloyd Moore" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Before you spin up a three-node Kafka cluster, consider this: PostgreSQL can handle most pub-sub use cases perfectly well. And you’ve probably already got it running." />
+<meta property="og:description" content="Before you spin up a three-node Kafka cluster, consider this: PostgreSQL can handle most pub-sub use cases perfectly well. And you’ve probably already got it running." />
+<link rel="canonical" href="http://localhost:4000/architecture/postgresql/messaging/2025/01/27/just-postgresql.html" />
+<meta property="og:url" content="http://localhost:4000/architecture/postgresql/messaging/2025/01/27/just-postgresql.html" />
+<meta property="og:site_name" content="Lloyd Moore - CTO &amp; VP Engineering" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-27T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PostgreSQL Will Do, or, You Don’t Need Kafka" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lloyd Moore"},"dateModified":"2025-01-27T00:00:00+00:00","datePublished":"2025-01-27T00:00:00+00:00","description":"Before you spin up a three-node Kafka cluster, consider this: PostgreSQL can handle most pub-sub use cases perfectly well. And you’ve probably already got it running.","headline":"PostgreSQL Will Do, or, You Don’t Need Kafka","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/architecture/postgresql/messaging/2025/01/27/just-postgresql.html"},"url":"http://localhost:4000/architecture/postgresql/messaging/2025/01/27/just-postgresql.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-tactical">
+        <div class="nav-tactical-container">
+            <a href="/" class="nav-tactical-brand">LLOYD.MOORE</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-tactical-menu">
+                <a href="/" class="nav-tactical-link">HOME</a>
+                <a href="/blog" class="nav-tactical-link">INTEL</a>
+                <a href="/about" class="nav-tactical-link">PERSONNEL</a>
+                <a href="/cv" class="nav-tactical-link">SERVICE.REC</a>
+            </div>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="tactical-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="tactical-hamburger-line"></span>
+                <span class="tactical-hamburger-line"></span>
+                <span class="tactical-hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="tactical-mobile-overlay" aria-hidden="true">
+        <div class="tactical-mobile-menu">
+            <div class="tactical-mobile-header">
+                <div class="tactical-mobile-brand">LLOYD.MOORE</div>
+                <button class="tactical-mobile-close" aria-label="Close navigation menu">
+                    <span class="tactical-close-line"></span>
+                    <span class="tactical-close-line"></span>
+                </button>
+            </div>
+            <nav class="tactical-mobile-nav">
+                <a href="/" class="tactical-mobile-link">HOME</a>
+                <a href="/blog" class="tactical-mobile-link">INTEL</a>
+                <a href="/about" class="tactical-mobile-link">PERSONNEL</a>
+                <a href="/cv" class="tactical-mobile-link">SERVICE.REC</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="tactical-main">
+        <article class="briefing-document document-content">
+  <!-- Intelligence Briefing Header -->
+  <header class="briefing-header">
+    <span class="classification">CLASSIFICATION: TECHNICAL</span>
+    <span class="briefing-date">DATE: 2025-01-27</span>
+  </header>
+  
+  <!-- Briefing Title -->
+  <h1 class="briefing-title">PostgreSQL Will Do, or, You Don't Need Kafka</h1>
+  
+  
+  <!-- Key Metrics Section -->
+  <section class="key-metrics">
+    <h2>Key Metrics</h2>
+    <ul class="metrics-list">
+      
+      <li class="metric-item">90% of use cases covered by PostgreSQL pub/sub</li>
+      
+      <li class="metric-item">Zero additional infrastructure overhead</li>
+      
+      <li class="metric-item">ACID transactions with event streaming</li>
+      
+      <li class="metric-item">50k+ messages/second throughput capability</li>
+      
+    </ul>
+  </section>
+  
+  
+  <!-- Tactical Analysis -->
+  <section class="tactical-analysis">
+    <h2>Tactical Analysis</h2>
+    <h1 id="you-dont-need-kafka-postgresql-will-do-just-fine">You Don’t Need Kafka (PostgreSQL Will Do Just Fine)</h1>
+
+<p>Every few months, someone on your team suggests adding Kafka. “We need real-time event streaming,” they say. “We need to decouple our services.”</p>
+
+<p>Stop. Before you spin up a three-node Kafka cluster, consider PostgreSQL. It can handle most pub-sub use cases perfectly well. You’ve probably already got it running.</p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>Your application grows. Different parts need to know when things happen. The order service needs to tell the inventory service about new orders. The user service needs to notify the email service about registrations.</p>
+
+<p>The textbook answer is simple: message queue, event streaming, Kafka.</p>
+
+<p>But Kafka brings complexity. You need Zookeeper or KRaft. You need partitions, consumer groups, offset management. Suddenly you’re debugging stuck messages. You’re waiting for rebalancing to finish. Your disk fills up with log segments.</p>
+
+<p>Meanwhile, PostgreSQL sits quietly handling your data. It provides ACID guarantees, battle-tested replication, and tooling your team already knows.</p>
+
+<h2 id="why-postgresql-works-for-messaging">Why PostgreSQL Works for Messaging</h2>
+
+<p>PostgreSQL has everything you need for messaging:</p>
+
+<ul>
+  <li><strong>Durability</strong>: Write-ahead logging ensures messages survive crashes</li>
+  <li><strong>Ordering</strong>: SERIAL columns give you strict ordering</li>
+  <li><strong>Transactions</strong>: Publish events atomically with other database changes</li>
+  <li><strong>Queries</strong>: Find any message by time, type, or content</li>
+  <li><strong>Concurrency</strong>: SKIP LOCKED enables parallel consumers without coordination</li>
+</ul>
+
+<p>Most applications don’t need millions of messages per second. They need hundreds or thousands. PostgreSQL handles that easily.</p>
+
+<h2 id="the-basic-pattern">The Basic Pattern</h2>
+
+<p>Create a simple events table:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">events</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="n">BIGSERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">created_at</span> <span class="n">TIMESTAMPTZ</span> <span class="k">DEFAULT</span> <span class="n">NOW</span><span class="p">(),</span>
+    <span class="n">event_type</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">payload</span> <span class="n">JSONB</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">processed_at</span> <span class="n">TIMESTAMPTZ</span><span class="p">,</span>
+    <span class="n">consumer_id</span> <span class="nb">TEXT</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">idx_unprocessed</span> <span class="k">ON</span> <span class="n">events</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> 
+<span class="k">WHERE</span> <span class="n">processed_at</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Publishing events is trivial:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">events</span> <span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span> 
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">'order.created'</span><span class="p">,</span> <span class="s1">'{"order_id": 123, "total": 45.99}'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Consuming uses PostgreSQL’s row-level locking:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">events</span> 
+<span class="k">SET</span> <span class="n">processed_at</span> <span class="o">=</span> <span class="n">NOW</span><span class="p">(),</span> <span class="n">consumer_id</span> <span class="o">=</span> <span class="s1">'inventory-service'</span>
+<span class="k">WHERE</span> <span class="n">id</span> <span class="k">IN</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="n">events</span> 
+    <span class="k">WHERE</span> <span class="n">processed_at</span> <span class="k">IS</span> <span class="k">NULL</span> 
+    <span class="k">AND</span> <span class="n">event_type</span> <span class="o">=</span> <span class="s1">'order.created'</span>
+    <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span> 
+    <span class="k">LIMIT</span> <span class="mi">10</span>
+    <span class="k">FOR</span> <span class="k">UPDATE</span> <span class="n">SKIP</span> <span class="n">LOCKED</span>
+<span class="p">)</span>
+<span class="n">RETURNING</span> <span class="o">*</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The FOR UPDATE SKIP LOCKED clause is magic. Multiple consumers can pull events concurrently without coordination. No consumer groups, no rebalancing. It just works.</p>
+
+<h2 id="advanced-patterns">Advanced Patterns</h2>
+
+<p>Need real-time notifications? Use LISTEN/NOTIFY:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Publisher</span>
+<span class="k">NOTIFY</span> <span class="n">new_event</span><span class="p">,</span> <span class="s1">'order.created'</span><span class="p">;</span>
+
+<span class="c1">-- Consumer</span>
+<span class="k">LISTEN</span> <span class="n">new_event</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Need multiple consumer groups? Add a consumer_group column:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">event_consumers</span> <span class="p">(</span>
+    <span class="n">event_id</span> <span class="nb">BIGINT</span><span class="p">,</span>
+    <span class="n">consumer_group</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">processed_at</span> <span class="n">TIMESTAMPTZ</span><span class="p">,</span>
+    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">event_id</span><span class="p">,</span> <span class="n">consumer_group</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Need event replay? Use a simple SELECT:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">events</span> 
+<span class="k">WHERE</span> <span class="n">created_at</span> <span class="o">&gt;</span> <span class="s1">'2024-01-01'</span> 
+<span class="k">AND</span> <span class="n">event_type</span> <span class="o">=</span> <span class="s1">'order.created'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Need retention policies? Partition by month:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">events_2024_03</span> <span class="k">PARTITION</span> <span class="k">OF</span> <span class="n">events</span>
+<span class="k">FOR</span> <span class="k">VALUES</span> <span class="k">FROM</span> <span class="p">(</span><span class="s1">'2024-03-01'</span><span class="p">)</span> <span class="k">TO</span> <span class="p">(</span><span class="s1">'2024-04-01'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="when-you-actually-need-kafka">When You Actually Need Kafka</h2>
+
+<p>You do need Kafka in these cases:</p>
+
+<ul>
+  <li><strong>Throughput</strong>: Millions of events per second</li>
+  <li><strong>Multiple datacentres</strong>: Built-in geo-replication</li>
+  <li><strong>Stream processing</strong>: Complex windowing and joins</li>
+  <li><strong>Long retention</strong>: Keeping months of high-volume data</li>
+  <li><strong>Existing ecosystem</strong>: Your team already runs Kafka</li>
+</ul>
+
+<p>These are exceptional cases. Most applications process thousands of events per second at peak. They need reliability more than raw throughput.</p>
+
+<h2 id="the-implementation-path">The Implementation Path</h2>
+
+<p>Start simple:</p>
+
+<ol>
+  <li>Create the events table</li>
+  <li>Publish events alongside your transactions</li>
+  <li>Write a consumer loop with SKIP LOCKED</li>
+  <li>Monitor with normal PostgreSQL tools</li>
+</ol>
+
+<p>When you need more:</p>
+
+<ol>
+  <li>Add LISTEN/NOTIFY for lower latency</li>
+  <li>Partition old events to archive tables</li>
+  <li>Create materialized views for analytics</li>
+  <li>Add read replicas for consumer scaling</li>
+</ol>
+
+<h2 id="the-real-win">The Real Win</h2>
+
+<p>The biggest advantage isn’t technical. It’s operational. Your team knows PostgreSQL. It’s easier to learn, deploy and maintain than Kafka. Your monitoring covers PostgreSQL. Your backups include PostgreSQL.</p>
+
+<p>When something goes wrong at 3am, you debug familiar SQL. You don’t decipher consumer group rebalancing.</p>
+
+<p>You write:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">events</span> <span class="k">WHERE</span> <span class="n">processed_at</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">.</span> 
+</code></pre></div></div>
+
+<p>Not:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-consumer-groups <span class="nt">--describe</span> <span class="nt">--group</span> my-consumer <span class="nt">--bootstrap-server</span> localhost:9092.
+</code></pre></div></div>
+
+<h2 id="making-the-choice">Making the Choice</h2>
+
+<p>Next time someone suggests Kafka, ask these questions:</p>
+
+<ul>
+  <li>How many events per second? (Really?)</li>
+  <li>Do we need multi-datacentre replication?</li>
+  <li>Are we doing complex stream processing?</li>
+  <li>Can we tolerate 100ms latency?</li>
+</ul>
+
+<p>If you answer “thousands”, “no”, “no”, and “yes” - you don’t need Kafka. You need PostgreSQL.</p>
+
+<p>This isn’t anti-Kafka. Kafka’s brilliant for the problems it solves. But those problems are rarer than we think. Most of us build CRUD apps with some events on the side. PostgreSQL handles that beautifully.</p>
+
+
+  </section>
+  
+  <!-- Mission Navigation -->
+  <footer class="briefing-footer">
+    
+    <div class="briefing-nav">
+      
+      <a href="/devops/productivity/tooling/2025/01/03/makefile-as-development-environment.html" class="briefing-nav-link briefing-nav-prev">
+        <span class="briefing-nav-label">Previous Intel</span>
+        <span class="briefing-nav-title">Makefiles: Your Secret Weapon for Self-Documenting Development Environments</span>
+      </a>
+      
+      
+      
+      <a href="/architecture/leadership/devops/2025/01/30/when-boring-tech-is-best.html" class="briefing-nav-link briefing-nav-next">
+        <span class="briefing-nav-label">Next Intel</span>
+        <span class="briefing-nav-title">When 'Boring' Technology is the Best Choice</span>
+      </a>
+      
+    </div>
+    
+    
+    <!-- Mission Contact -->
+    <div class="briefing-contact">
+      <p class="briefing-contact-text">Request additional intelligence or operational consultation?</p>
+    </div>
+  </footer>
+</article>
+
+<style>
+/* Additional briefing styles */
+.briefing-footer {
+  margin-top: var(--space-4xl);
+  padding-top: var(--space-2xl);
+  border-top: 2px solid var(--tactical-grid);
+}
+
+.briefing-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xl);
+}
+
+.briefing-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  background: var(--tactical-surface);
+  border: 1px solid var(--tactical-grid);
+  text-decoration: none;
+  transition: all var(--transition-tactical);
+}
+
+.briefing-nav-link:hover {
+  border-color: var(--tactical-primary);
+  box-shadow: var(--shadow-tactical);
+}
+
+.briefing-nav-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.briefing-nav-label {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+}
+
+.briefing-nav-title {
+  font-size: var(--text-intel);
+  color: var(--tactical-text);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.briefing-contact {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: var(--tactical-surface);
+  border: 2px solid var(--tactical-grid);
+}
+
+.briefing-contact-text {
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .briefing-nav {
+    grid-template-columns: 1fr;
+  }
+  
+  .briefing-nav-next {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+</style>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tactical-footer">
+        <div class="tactical-footer-container">
+            <div class="tactical-footer-links">
+                <a href="mailto:lloyd@lloydmoore.com" class="tactical-footer-link">COMM.LINK</a>
+                <a href="https://www.linkedin.com/in/moorelloyd" class="tactical-footer-link">NET.PROF</a>
+            </div>
+            <div class="tactical-footer-copyright">
+                CLASSIFIED MATERIAL - 2025 - LLOYD MOORE
+            </div>
+        </div>
+    </footer>
+
+    <!-- Analytics and Scripts -->
+    
+    
+    <!-- Tactical Mobile Navigation Script -->
+    <script src="/assets/js/tactical-mobile-nav.js"></script>
+</body>
+</html>

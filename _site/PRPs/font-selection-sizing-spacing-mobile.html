@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lloyd Moore</title>
+  <meta name="description" content="Engineering executive who scales teams, platforms and revenue. Expert in cloud architecture, team leadership, and digital transformation.">
+  
+  <!-- Resource hints for performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  
+  <!-- Preload custom font if available -->
+  <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Apple-inspired web app meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0071e3">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Critical CSS inline for faster first paint -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    :root {
+      --apple-black: #1d1d1f;
+      --apple-gray-dark: #424245;
+      --apple-gray: #86868b;
+      --apple-gray-light: #d2d2d7;
+      --apple-gray-lighter: #f5f5f7;
+      --apple-white: #ffffff;
+      --apple-blue: #0071e3;
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-system);
+      font-size: 1.0625rem;
+      line-height: 1.625;
+      color: var(--apple-black);
+      background-color: var(--apple-white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Navigation critical styles */
+    .apple-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(251, 251, 253, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .apple-nav-container {
+      max-width: 980px;
+      margin: 0;
+      padding: 0 var(--space-lg);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    /* Mobile nav toggle critical styles */
+    .mobile-nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--apple-black);
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+      }
+      
+      .apple-nav-menu {
+        display: none !important;
+      }
+      
+      .apple-nav-container {
+        height: 56px;
+        padding: 0 1rem;
+      }
+    }
+  </style>
+  
+  <!-- Apple-style CSS (deferred) -->
+  <link rel="preload" href="/assets/css/style.css" as="style">
+  <link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>
+  
+  <!-- Mobile-specific CSS -->
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  
+  <!-- Enhanced Typography System -->
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  
+  <!-- Additional CSS for animations -->
+  <style>
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Page load animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    /* Stagger animation delays */
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    
+    /* Apple-style container */
+    .apple-container {
+      max-width: var(--container-lg);
+      margin: 0;
+      padding: 0 var(--space-lg);
+    }
+    
+    /* Section spacing */
+    .apple-metrics,
+    .apple-philosophy,
+    .apple-recent-posts,
+    .apple-connect {
+      padding: var(--space-5xl) 0;
+    }
+    
+    /* Section titles */
+    .apple-section-title {
+      font-size: var(--text-5xl);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: var(--space-md);
+      letter-spacing: var(--tracking-tight);
+    }
+    
+    .apple-section-lead {
+      font-size: var(--text-xl);
+      color: var(--apple-gray-dark);
+      text-align: center;
+      max-width: var(--container-md);
+      margin: 0 0 var(--space-3xl);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Philosophy grid */
+    .apple-philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-xl);
+    }
+    
+    .apple-philosophy-item h3 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-philosophy-item p {
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Blog preview */
+    .apple-blog-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+    }
+    
+    .apple-blog-preview-item {
+      padding: var(--space-lg);
+      background: var(--apple-gray-lighter);
+      border-radius: 18px;
+      transition: transform var(--transition-base);
+    }
+    
+    .apple-blog-preview-item:hover {
+      transform: translateY(-4px);
+    }
+    
+    .apple-blog-preview-date {
+      font-size: var(--text-sm);
+      color: var(--apple-gray);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .apple-blog-preview-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .apple-blog-preview-title a {
+      color: var(--apple-black);
+      transition: color var(--transition-fast);
+    }
+    
+    .apple-blog-preview-title a:hover {
+      color: var(--apple-blue);
+    }
+    
+    .apple-blog-preview-excerpt {
+      color: var(--apple-gray-dark);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-md);
+    }
+    
+    /* Connect section */
+    .apple-connect {
+      background: var(--apple-gray-lighter);
+      text-align: center;
+    }
+    
+    .apple-connect-options {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Section CTA */
+    .apple-section-cta {
+      text-align: center;
+      margin-top: var(--space-xl);
+    }
+    
+    /* Hero CTA */
+    .apple-hero-cta {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+  </style>
+  
+  
+</head>
+<body>
+  <!-- Apple-style navigation -->
+  <nav class="apple-nav">
+    <div class="apple-nav-container">
+      <a href="/" class="apple-nav-brand">Lloyd Moore</a>
+      <div class="apple-nav-menu">
+        <a href="/about" class="apple-nav-link">About</a>
+        <a href="/blog" class="apple-nav-link">Blog</a>
+        <a href="/cv" class="apple-nav-link">Experience</a>
+      </div>
+      <!-- Typography accessibility controls -->
+      <!-- Typography Accessibility Controls -->
+<div class="typography-controls" aria-label="Typography settings">
+  <button 
+    class="typography-toggle-btn"
+    type="button"
+    aria-label="Typography settings"
+    aria-expanded="false"
+    aria-controls="typography-menu"
+  >
+    <svg class="typography-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+    </svg>
+  </button>
+  
+  <div id="typography-menu" class="typography-menu" aria-hidden="true">
+    <div class="typography-menu-header">
+      <h3 class="typography-menu-title">Reading Preferences</h3>
+      <button 
+        class="typography-close-btn"
+        type="button"
+        aria-label="Close typography settings"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="typography-menu-content">
+      <!-- Font Size Controls -->
+      <div class="typography-control-group">
+        <label class="typography-label">Text Size</label>
+        <div class="typography-size-controls">
+          <button 
+            class="size-btn" 
+            data-size="small"
+            aria-label="Small text size"
+            title="Small (90%)"
+          >
+            <span class="size-preview size-small">A</span>
+          </button>
+          <button 
+            class="size-btn active" 
+            data-size="normal"
+            aria-label="Normal text size"
+            title="Normal (100%)"
+          >
+            <span class="size-preview size-normal">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="large"
+            aria-label="Large text size"
+            title="Large (110%)"
+          >
+            <span class="size-preview size-large">A</span>
+          </button>
+          <button 
+            class="size-btn" 
+            data-size="xlarge"
+            aria-label="Extra large text size"
+            title="Extra Large (125%)"
+          >
+            <span class="size-preview size-xlarge">A</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Dyslexia Mode Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="dyslexia-toggle">
+          Dyslexia-Friendly Font
+          <span class="typography-hint">Improves letter distinction</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="dyslexia-toggle"
+            aria-describedby="dyslexia-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="dyslexia-desc" class="sr-only">
+          Activates a font designed to improve readability for people with dyslexia
+        </p>
+      </div>
+      
+      <!-- System Fonts Toggle -->
+      <div class="typography-control-group">
+        <label class="typography-label" for="system-fonts-toggle">
+          Use System Fonts
+          <span class="typography-hint">Faster loading, native feel</span>
+        </label>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            id="system-fonts-toggle"
+            aria-describedby="system-fonts-desc"
+          >
+          <span class="toggle-slider"></span>
+        </label>
+        <p id="system-fonts-desc" class="sr-only">
+          Uses your device's default fonts for faster loading
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Typography Controls Styles */
+.typography-controls {
+  position: relative;
+  display: inline-block;
+}
+
+.typography-toggle-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray-dark);
+  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.typography-toggle-btn:hover {
+  color: var(--apple-black);
+}
+
+.typography-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: var(--apple-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-base);
+  z-index: 100;
+}
+
+.typography-menu[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.typography-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--apple-gray-light);
+}
+
+.typography-menu-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0;
+}
+
+.typography-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--apple-gray);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.typography-close-btn:hover {
+  background: var(--apple-gray-lighter);
+}
+
+.typography-menu-content {
+  padding: var(--space-md);
+}
+
+.typography-control-group {
+  margin-bottom: var(--space-lg);
+}
+
+.typography-control-group:last-child {
+  margin-bottom: 0;
+}
+
+.typography-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: var(--space-sm);
+}
+
+.typography-hint {
+  font-size: var(--text-xs);
+  font-weight: normal;
+  color: var(--apple-gray);
+}
+
+/* Size Controls */
+.typography-size-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs);
+}
+
+.size-btn {
+  padding: var(--space-sm);
+  background: var(--apple-gray-lighter);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+}
+
+.size-btn:hover {
+  background: var(--apple-gray-light);
+}
+
+.size-btn.active {
+  background: var(--apple-blue);
+  color: white;
+  border-color: var(--apple-blue);
+}
+
+.size-preview {
+  display: block;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.size-small { font-size: 14px; }
+.size-normal { font-size: 18px; }
+.size-large { font-size: 22px; }
+.size-xlarge { font-size: 26px; }
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--apple-gray-light);
+  transition: all var(--transition-fast);
+  border-radius: 28px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: all var(--transition-fast);
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--apple-green);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .typography-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    transform: translateY(100%);
+  }
+  
+  .typography-menu[aria-hidden="false"] {
+    transform: translateY(0);
+  }
+  
+  .typography-control-group {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--apple-gray-lighter);
+  }
+  
+  .typography-control-group:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .typography-menu {
+    background: #1c1c1e;
+    color: #f2f2f7;
+  }
+  
+  .typography-menu-header {
+    border-bottom-color: #38383a;
+  }
+  
+  .typography-label {
+    color: #f2f2f7;
+  }
+  
+  .size-btn {
+    background: #2c2c2e;
+    color: #f2f2f7;
+  }
+  
+  .size-btn:hover {
+    background: #38383a;
+  }
+  
+  .typography-close-btn:hover {
+    background: #2c2c2e;
+  }
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  const toggle = document.querySelector('.typography-toggle-btn');
+  const menu = document.querySelector('.typography-menu');
+  const closeBtn = document.querySelector('.typography-close-btn');
+  const sizeButtons = document.querySelectorAll('.size-btn');
+  const dyslexiaToggle = document.getElementById('dyslexia-toggle');
+  const systemFontsToggle = document.getElementById('system-fonts-toggle');
+  
+  // Toggle menu
+  function toggleMenu() {
+    const isOpen = menu.getAttribute('aria-hidden') === 'false';
+    toggle.setAttribute('aria-expanded', !isOpen);
+    menu.setAttribute('aria-hidden', isOpen);
+  }
+  
+  toggle.addEventListener('click', toggleMenu);
+  closeBtn.addEventListener('click', toggleMenu);
+  
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.typography-controls')) {
+      toggle.setAttribute('aria-expanded', false);
+      menu.setAttribute('aria-hidden', true);
+    }
+  });
+  
+  // Font size controls
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const size = this.dataset.size;
+      
+      // Remove all size classes
+      document.body.classList.remove('font-size-small', 'font-size-normal', 'font-size-large', 'font-size-xlarge');
+      
+      // Add new size class
+      if (size !== 'normal') {
+        document.body.classList.add(`font-size-${size}`);
+      }
+      
+      // Update active button
+      sizeButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Save preference
+      localStorage.setItem('preferredFontSize', size);
+    });
+  });
+  
+  // Dyslexia mode
+  dyslexiaToggle.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dyslexia-mode');
+      localStorage.setItem('dyslexiaMode', 'true');
+    } else {
+      document.body.classList.remove('dyslexia-mode');
+      localStorage.removeItem('dyslexiaMode');
+    }
+  });
+  
+  // System fonts toggle
+  systemFontsToggle.addEventListener('change', function() {
+    if (typeof window.toggleSystemFonts === 'function') {
+      window.toggleSystemFonts(this.checked);
+    }
+    localStorage.setItem('prefersSystemFonts', this.checked);
+  });
+  
+  // Restore preferences on load
+  const savedSize = localStorage.getItem('preferredFontSize');
+  if (savedSize && savedSize !== 'normal') {
+    document.body.classList.add(`font-size-${savedSize}`);
+    document.querySelector(`[data-size="${savedSize}"]`).classList.add('active');
+    document.querySelector('[data-size="normal"]').classList.remove('active');
+  }
+  
+  if (localStorage.getItem('dyslexiaMode') === 'true') {
+    dyslexiaToggle.checked = true;
+    document.body.classList.add('dyslexia-mode');
+  }
+  
+  if (localStorage.getItem('prefersSystemFonts') === 'true') {
+    systemFontsToggle.checked = true;
+  }
+})();
+</script>
+      <!-- Mobile nav toggle button -->
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-menu">
+        <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path class="hamburger-line hamburger-line-top" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-middle" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path class="hamburger-line hamburger-line-bottom" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation -->
+  <!-- Mobile Navigation Component -->
+<div class="mobile-nav-overlay" aria-hidden="true">
+  <nav id="mobile-nav-menu" class="mobile-nav-menu" role="navigation">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">Menu</span>
+      <button class="mobile-nav-close" aria-label="Close navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="/" class="mobile-nav-link">Home</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+      <a href="/blog" class="mobile-nav-link">Blog</a>
+      <a href="/cv" class="mobile-nav-link">Experience</a>
+    </div>
+  </nav>
+</div>
+  
+  <main>
+    <div class="page-content">
+  <h1></h1>
+  <p>name: “Mobile Font Selection, Sizing &amp; Spacing Enhancement v1”
+description: |</p>
+
+<h2 id="purpose">Purpose</h2>
+<p>Enhance the existing mobile typography system with improved font selection, sizing, and spacing for optimal readability, accessibility, and user experience on mobile devices.</p>
+
+<h2 id="core-principles">Core Principles</h2>
+<ol>
+  <li><strong>Context is King</strong>: Include ALL necessary documentation, examples, and caveats</li>
+  <li><strong>Validation Loops</strong>: Provide executable tests/lints the AI can run and fix</li>
+  <li><strong>Information Dense</strong>: Use keywords and patterns from the codebase</li>
+  <li><strong>Progressive Success</strong>: Start simple, validate, then enhance</li>
+  <li><strong>Global rules</strong>: Be sure to follow all rules in CLAUDE.md</li>
+</ol>
+
+<hr />
+
+<h2 id="goal">Goal</h2>
+<p>Enhance the blog’s mobile typography system to provide better readability, improved content hierarchy, and accessibility features while maintaining the existing Apple-inspired design aesthetic. The implementation should support variable fonts for performance, implement proper spacing systems, and add accessibility options like dyslexia-friendly font alternatives.</p>
+
+<h2 id="why">Why</h2>
+<ul>
+  <li><strong>Better Readability</strong>: Current font sizes work but could be optimized for different content types</li>
+  <li><strong>Accessibility</strong>: No current support for users with dyslexia or vision impairments beyond basic sizing</li>
+  <li><strong>Performance</strong>: System fonts are fast but variable fonts could provide better weight control</li>
+  <li><strong>Consistency</strong>: Need more granular control over spacing and typography hierarchy</li>
+</ul>
+
+<h2 id="what">What</h2>
+<p>Implement an enhanced mobile typography system that:</p>
+<ul>
+  <li>Maintains system font stack as primary with optional custom font loading</li>
+  <li>Creates content-specific typography scales (articles vs navigation vs UI)</li>
+  <li>Implements proper vertical rhythm and spacing system</li>
+  <li>Adds accessibility features including dyslexia-friendly alternatives</li>
+  <li>Ensures 16px minimum for inputs to prevent iOS zoom</li>
+</ul>
+
+<h3 id="success-criteria">Success Criteria</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All text meets WCAG 2.1 AA standards for contrast and sizing</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No iOS zoom on input focus (16px minimum maintained)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Lighthouse mobile score remains 90+ for performance</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Typography scales properly across device sizes (375px to 428px)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Vertical rhythm maintained throughout all content</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Accessibility options work without breaking layout</li>
+</ul>
+
+<h2 id="all-needed-context">All Needed Context</h2>
+
+<h3 id="documentation--references">Documentation &amp; References</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># MUST READ - Include these in your context window</span>
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://www.learnui.design/blog/mobile-desktop-website-font-size-guidelines.html</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Mobile-specific font size recommendations (16-20px body, 17px recommended start)</span>
+  
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://developer.apple.com/design/human-interface-guidelines/typography</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">iOS typography standards and SF font implementation details</span>
+  
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://m3.material.io/styles/typography/type-scale-tokens</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Android Material Design 3 typography scale for cross-platform consistency</span>
+  
+<span class="pi">-</span> <span class="na">file</span><span class="pi">:</span> <span class="s">/Users/iolloyd/code/blog/assets/css/mobile.css</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Current mobile typography implementation to build upon</span>
+  
+<span class="pi">-</span> <span class="na">file</span><span class="pi">:</span> <span class="s">/Users/iolloyd/code/blog/assets/css/style.css</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Base typography system and CSS custom properties</span>
+  
+<span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span> <span class="s">https://web.dev/font-best-practices/</span>
+  <span class="na">section</span><span class="pi">:</span> <span class="s">Font loading strategies</span>
+  <span class="na">critical</span><span class="pi">:</span> <span class="na">Use font-display</span><span class="pi">:</span> <span class="s">swap for custom fonts to prevent FOIT</span>
+
+<span class="pi">-</span> <span class="na">file</span><span class="pi">:</span> <span class="s">/Users/iolloyd/code/blog/PRPs/phone-ux-improvements.md</span>
+  <span class="na">why</span><span class="pi">:</span> <span class="s">Existing mobile UX patterns to maintain consistency</span>
+</code></pre></div></div>
+
+<h3 id="current-codebase-tree">Current Codebase tree</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span>
+├── assets/
+│   ├── css/
+│   │   ├── style.css          <span class="c"># Base styles with typography scale</span>
+│   │   ├── mobile.css         <span class="c"># Mobile-specific overrides</span>
+│   │   └── fonts/            <span class="c"># Currently empty (using system fonts)</span>
+│   └── js/
+│       └── mobile-nav.js      <span class="c"># Mobile navigation logic</span>
+├── _layouts/
+│   ├── default.html          <span class="c"># Main layout with font loading</span>
+│   └── post.html            <span class="c"># Article layout needing typography</span>
+├── _includes/
+│   └── head.html            <span class="c"># Where font loading occurs</span>
+└── validate-mobile.sh        <span class="c"># Mobile validation script</span>
+</code></pre></div></div>
+
+<h3 id="desired-codebase-tree-with-files-to-be-added">Desired Codebase tree with files to be added</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span>
+├── assets/
+│   ├── css/
+│   │   ├── style.css          <span class="c"># Base styles (updated)</span>
+│   │   ├── mobile.css         <span class="c"># Mobile overrides (enhanced)</span>
+│   │   ├── typography.css     <span class="c"># NEW: Modular typography system</span>
+│   │   └── fonts/
+│   │       └── inter-var.woff2  <span class="c"># NEW: Variable font for performance</span>
+│   └── js/
+│       ├── mobile-nav.js      
+│       └── font-loader.js     <span class="c"># NEW: Progressive font loading</span>
+├── _includes/
+│   ├── head.html             <span class="c"># Updated with font loading strategy</span>
+│   └── typography-toggle.html <span class="c"># NEW: Accessibility font toggle</span>
+└── validate-typography.sh     <span class="c"># NEW: Typography validation</span>
+</code></pre></div></div>
+
+<h3 id="known-gotchas--library-quirks">Known Gotchas &amp; Library Quirks</h3>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* CRITICAL: iOS Safari specific issues */</span>
+<span class="c">/* 1. Input fields &lt; 16px cause zoom on focus */</span>
+<span class="nt">input</span><span class="o">,</span> <span class="nt">select</span><span class="o">,</span> <span class="nt">textarea</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span> <span class="c">/* Never go below this on mobile */</span>
+<span class="p">}</span>
+
+<span class="c">/* 2. -webkit-text-stroke can cause performance issues if &gt; 0.5px */</span>
+<span class="c">/* Current implementation uses 0.35px which is safe */</span>
+
+<span class="c">/* 3. System font stack must include -apple-system FIRST for iOS */</span>
+<span class="c">/* font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display"... */</span>
+
+<span class="c">/* 4. Variable fonts require @supports check for older devices */</span>
+<span class="k">@supports</span> <span class="p">(</span><span class="n">font-variation-settings</span><span class="p">:</span> <span class="nb">normal</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c">/* Variable font implementation */</span>
+<span class="p">}</span>
+
+<span class="c">/* 5. Jekyll doesn't support CSS imports, must use HTML link tags */</span>
+</code></pre></div></div>
+
+<h2 id="implementation-blueprint">Implementation Blueprint</h2>
+
+<h3 id="data-models-and-structure">Data models and structure</h3>
+
+<p>Create CSS custom properties for enhanced typography control:</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* Content-specific type scales */</span>
+<span class="nd">:root</span> <span class="p">{</span>
+  <span class="c">/* Article typography */</span>
+  <span class="py">--article-font-size</span><span class="p">:</span> <span class="n">clamp</span><span class="p">(</span><span class="m">1.125rem</span><span class="p">,</span> <span class="m">2vw</span> <span class="err">+</span> <span class="m">1rem</span><span class="p">,</span> <span class="m">1.25rem</span><span class="p">);</span>
+  <span class="py">--article-line-height</span><span class="p">:</span> <span class="m">1.7</span><span class="p">;</span>
+  <span class="py">--article-paragraph-spacing</span><span class="p">:</span> <span class="m">1.5em</span><span class="p">;</span>
+  
+  <span class="c">/* UI typography */</span>
+  <span class="py">--ui-font-size</span><span class="p">:</span> <span class="m">1rem</span><span class="p">;</span>
+  <span class="py">--ui-line-height</span><span class="p">:</span> <span class="m">1.4</span><span class="p">;</span>
+  
+  <span class="c">/* Vertical rhythm unit */</span>
+  <span class="py">--baseline</span><span class="p">:</span> <span class="m">0.5rem</span><span class="p">;</span>
+  
+  <span class="c">/* Font loading states */</span>
+  <span class="py">--font-loaded</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> <span class="c">/* JavaScript will set to 1 */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="list-of-tasks-to-be-completed-in-order">List of tasks to be completed in order</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Task 1</span><span class="pi">:</span> <span class="s">Analyze and Document Current Typography System</span>
+<span class="na">READ assets/css/mobile.css</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">Document all current font sizes and line heights</span>
+  <span class="pi">-</span> <span class="s">Note iOS-specific fixes already implemented</span>
+  <span class="pi">-</span> <span class="s">Identify gaps in current implementation</span>
+
+<span class="na">READ assets/css/style.css</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">Map existing CSS custom properties</span>
+  <span class="pi">-</span> <span class="s">Document font stack implementation</span>
+  <span class="pi">-</span> <span class="s">Note any typography utility classes</span>
+
+<span class="na">CREATE PRPs/typography-audit.md</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">Document findings</span>
+  <span class="pi">-</span> <span class="s">Create baseline measurements</span>
+  <span class="pi">-</span> <span class="s">List specific improvements needed</span>
+
+<span class="na">Task 2</span><span class="pi">:</span> <span class="s">Create Enhanced Typography System</span>
+<span class="na">CREATE assets/css/typography.css</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">PATTERN</span><span class="pi">:</span> <span class="s">Use existing CSS custom property structure</span>
+  <span class="pi">-</span> <span class="s">Implement content-specific scales (article, UI, navigation)</span>
+  <span class="pi">-</span> <span class="s">Add vertical rhythm system using baseline unit</span>
+  <span class="pi">-</span> <span class="s">Include @supports checks for variable fonts</span>
+  <span class="pi">-</span> <span class="s">PRESERVE existing mobile breakpoint structure</span>
+
+<span class="na">MODIFY assets/css/mobile.css</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">FIND pattern</span><span class="pi">:</span> <span class="s2">"</span><span class="s">:root</span><span class="nv"> </span><span class="s">{"</span> <span class="na">inside @media (max-width</span><span class="pi">:</span> <span class="s">768px)</span>
+  <span class="pi">-</span> <span class="s">UPDATE font size scale based on new recommendations</span>
+  <span class="pi">-</span> <span class="s">ADD line-height adjustments for better readability</span>
+  <span class="pi">-</span> <span class="s">PRESERVE iOS-specific fixes</span>
+
+<span class="na">Task 3</span><span class="pi">:</span> <span class="s">Implement Font Loading Strategy</span>
+<span class="na">CREATE assets/js/font-loader.js</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">PATTERN</span><span class="pi">:</span> <span class="s">Progressive enhancement approach</span>
+  <span class="pi">-</span> <span class="na">Implement font-display</span><span class="pi">:</span> <span class="s">swap strategy</span>
+  <span class="pi">-</span> <span class="s">Use Font Loading API with fallback</span>
+  <span class="pi">-</span> <span class="s">Set --font-loaded custom property when complete</span>
+
+<span class="na">MODIFY _includes/head.html</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ADD preload for critical fonts</span>
+  <span class="pi">-</span> <span class="s">ADD font loading script</span>
+  <span class="pi">-</span> <span class="s">PRESERVE existing meta tags and structure</span>
+
+<span class="na">Task 4</span><span class="pi">:</span> <span class="s">Add Accessibility Features</span>
+<span class="na">CREATE _includes/typography-toggle.html</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">PATTERN</span><span class="pi">:</span> <span class="s">Use existing mobile nav toggle as reference</span>
+  <span class="pi">-</span> <span class="s">Implement dyslexia-friendly font toggle</span>
+  <span class="pi">-</span> <span class="s">Add font size adjustment controls</span>
+  <span class="pi">-</span> <span class="s">Ensure ARIA labels for screen readers</span>
+
+<span class="na">MODIFY assets/css/typography.css</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ADD .dyslexia-mode class styles</span>
+  <span class="pi">-</span> <span class="s">Implement OpenDyslexic or similar as fallback</span>
+  <span class="pi">-</span> <span class="s">Ensure proper contrast ratios maintained</span>
+
+<span class="na">Task 5</span><span class="pi">:</span> <span class="s">Create Validation Script</span>
+<span class="na">CREATE validate-typography.sh</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">PATTERN</span><span class="pi">:</span> <span class="s">Mirror validate-mobile.sh structure</span>
+  <span class="pi">-</span> <span class="s">Check font file sizes (&lt; 50KB for mobile)</span>
+  <span class="pi">-</span> <span class="s">Verify CSS imports are correct</span>
+  <span class="pi">-</span> <span class="s">Test font loading fallbacks</span>
+  <span class="pi">-</span> <span class="s">Validate WCAG compliance</span>
+
+<span class="na">Task 6</span><span class="pi">:</span> <span class="s">Update Layouts and Test</span>
+<span class="na">MODIFY _layouts/default.html</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ADD typography toggle component</span>
+  <span class="pi">-</span> <span class="s">ENSURE proper class application</span>
+  <span class="pi">-</span> <span class="s">PRESERVE existing structure</span>
+
+<span class="na">MODIFY _layouts/post.html</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">APPLY article-specific typography classes</span>
+  <span class="pi">-</span> <span class="s">TEST readability improvements</span>
+  <span class="pi">-</span> <span class="s">ENSURE proper spacing</span>
+
+<span class="na">Task 7</span><span class="pi">:</span> <span class="s">Performance Optimization</span>
+<span class="na">OPTIMIZE font loading</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">Subset fonts to only needed characters</span>
+  <span class="pi">-</span> <span class="s">Implement proper caching headers</span>
+  <span class="pi">-</span> <span class="s">Test on slow 3G connections</span>
+  <span class="pi">-</span> <span class="s">Ensure no layout shift (CLS)</span>
+</code></pre></div></div>
+
+<h3 id="per-task-pseudocode">Per task pseudocode</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Task 2 - Typography System Structure
+</span><span class="o">/*</span> <span class="n">typography</span><span class="p">.</span><span class="n">css</span> <span class="n">structure</span> <span class="o">*/</span>
+<span class="o">/*</span> <span class="mf">1.</span> <span class="n">Base</span> <span class="n">setup</span> <span class="k">with</span> <span class="o">@</span><span class="n">supports</span> <span class="o">*/</span>
+<span class="o">@</span><span class="n">supports</span> <span class="p">(</span><span class="n">font</span><span class="o">-</span><span class="n">variation</span><span class="o">-</span><span class="n">settings</span><span class="p">:</span> <span class="n">normal</span><span class="p">)</span> <span class="p">{</span>
+  <span class="o">@</span><span class="n">font</span><span class="o">-</span><span class="n">face</span> <span class="p">{</span>
+    <span class="n">font</span><span class="o">-</span><span class="n">family</span><span class="p">:</span> <span class="s">'Inter var'</span><span class="p">;</span>
+    <span class="n">src</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="s">'../fonts/inter-var.woff2'</span><span class="p">)</span> <span class="nb">format</span><span class="p">(</span><span class="s">'woff2-variations'</span><span class="p">);</span>
+    <span class="n">font</span><span class="o">-</span><span class="n">weight</span><span class="p">:</span> <span class="mi">100</span> <span class="mi">900</span><span class="p">;</span>
+    <span class="n">font</span><span class="o">-</span><span class="n">display</span><span class="p">:</span> <span class="n">swap</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="o">/*</span> <span class="mf">2.</span> <span class="n">Content</span><span class="o">-</span><span class="n">specific</span> <span class="n">scales</span> <span class="o">*/</span>
+<span class="p">.</span><span class="n">article</span><span class="o">-</span><span class="n">content</span> <span class="p">{</span>
+  <span class="o">/*</span> <span class="n">PATTERN</span><span class="p">:</span> <span class="n">Use</span> <span class="n">clamp</span><span class="p">()</span> <span class="k">for</span> <span class="n">fluid</span> <span class="n">typography</span> <span class="o">*/</span>
+  <span class="n">font</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="n">clamp</span><span class="p">(</span><span class="mf">1.125</span><span class="n">rem</span><span class="p">,</span> <span class="mi">2</span><span class="n">vw</span> <span class="o">+</span> <span class="mi">1</span><span class="n">rem</span><span class="p">,</span> <span class="mf">1.25</span><span class="n">rem</span><span class="p">);</span>
+  <span class="n">line</span><span class="o">-</span><span class="n">height</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="o">--</span><span class="n">article</span><span class="o">-</span><span class="n">line</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+  
+  <span class="o">/*</span> <span class="n">GOTCHA</span><span class="p">:</span> <span class="n">Must</span> <span class="n">test</span> <span class="n">on</span> <span class="n">actual</span> <span class="n">devices</span> <span class="o">-</span> <span class="n">appears</span> <span class="n">different</span> <span class="n">than</span> <span class="n">desktop</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="o">/*</span> <span class="mf">3.</span> <span class="n">Vertical</span> <span class="n">rhythm</span> <span class="n">implementation</span> <span class="o">*/</span>
+<span class="o">*</span> <span class="p">{</span>
+  <span class="o">/*</span> <span class="n">PATTERN</span><span class="p">:</span> <span class="n">All</span> <span class="n">spacing</span> <span class="n">based</span> <span class="n">on</span> <span class="n">baseline</span> <span class="n">unit</span> <span class="o">*/</span>
+  <span class="n">margin</span><span class="o">-</span><span class="n">bottom</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="o">--</span><span class="n">baseline</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1"># Task 3 - Font Loading Implementation
+</span><span class="o">//</span> <span class="n">font</span><span class="o">-</span><span class="n">loader</span><span class="p">.</span><span class="n">js</span> <span class="n">structure</span>
+<span class="o">//</span> <span class="n">CRITICAL</span><span class="p">:</span> <span class="n">Must</span> <span class="ow">not</span> <span class="n">block</span> <span class="n">render</span>
+<span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">PATTERN</span><span class="p">:</span> <span class="n">Check</span> <span class="k">if</span> <span class="n">fonts</span> <span class="n">already</span> <span class="n">cached</span>
+  <span class="k">if</span> <span class="p">(</span><span class="s">'fonts'</span> <span class="ow">in</span> <span class="n">document</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Modern</span> <span class="n">approach</span>
+    <span class="n">document</span><span class="p">.</span><span class="n">fonts</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">'1em Inter var'</span><span class="p">).</span><span class="n">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="n">document</span><span class="p">.</span><span class="n">documentElement</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s">'--font-loaded'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">);</span>
+      <span class="n">document</span><span class="p">.</span><span class="n">documentElement</span><span class="p">.</span><span class="n">classList</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">'fonts-loaded'</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Fallback</span> <span class="k">for</span> <span class="n">older</span> <span class="n">browsers</span>
+    <span class="o">//</span> <span class="n">GOTCHA</span><span class="p">:</span> <span class="n">Don</span><span class="s">'t use for system fonts - unnecessary
+  }
+})();
+</span></code></pre></div></div>
+
+<h3 id="integration-points">Integration Points</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">HEAD.HTML</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">add</span><span class="pi">:</span> <span class="s">&lt;link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin&gt;</span>
+  <span class="pi">-</span> <span class="na">add</span><span class="pi">:</span> <span class="s">&lt;link rel="stylesheet" href="/assets/css/typography.css"&gt;</span>
+  <span class="pi">-</span> <span class="na">pattern</span><span class="pi">:</span> <span class="s">Place after style.css but before mobile.css</span>
+  
+<span class="na">MOBILE.CSS</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">update</span><span class="pi">:</span> <span class="s">Font size scale in :root</span>
+  <span class="pi">-</span> <span class="na">preserve</span><span class="pi">:</span> <span class="s">All iOS-specific fixes</span>
+  <span class="pi">-</span> <span class="na">add</span><span class="pi">:</span> <span class="s">Import typography utilities</span>
+  
+<span class="na">LAYOUTS</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">default.html</span><span class="pi">:</span> <span class="s">Add typography-toggle include</span>
+  <span class="pi">-</span> <span class="na">post.html</span><span class="pi">:</span> <span class="s">Add article-content class to main content</span>
+  
+<span class="na">JAVASCRIPT</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">add to</span><span class="pi">:</span> <span class="s">mobile-nav.js (extend for font controls)</span>
+  <span class="pi">-</span> <span class="na">pattern</span><span class="pi">:</span> <span class="s">Use same event handling structure</span>
+</code></pre></div></div>
+
+<h2 id="validation-loop">Validation Loop</h2>
+
+<h3 id="level-1-syntax--style">Level 1: Syntax &amp; Style</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Validate CSS syntax</span>
+npx stylelint assets/css/typography.css <span class="nt">--fix</span>
+npx stylelint assets/css/mobile.css <span class="nt">--fix</span>
+
+<span class="c"># Check for CSS custom property usage</span>
+<span class="nb">grep</span> <span class="nt">-r</span> <span class="s2">"var(--"</span> assets/css/ | <span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"(font|text|baseline)"</span>
+
+<span class="c"># Expected: All typography uses CSS custom properties</span>
+</code></pre></div></div>
+
+<h3 id="level-2-mobile-testing">Level 2: Mobile Testing</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Run typography validation</span>
+<span class="nb">chmod</span> +x validate-typography.sh
+./validate-typography.sh
+
+<span class="c"># Expected output:</span>
+<span class="c"># ✓ Font files under 50KB</span>
+<span class="c"># ✓ All inputs &gt;= 16px</span>
+<span class="c"># ✓ Proper font loading implemented</span>
+<span class="c"># ✓ Accessibility features working</span>
+</code></pre></div></div>
+
+<h3 id="level-3-device-testing">Level 3: Device Testing</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start Jekyll server</span>
+bundle <span class="nb">exec </span>jekyll serve <span class="nt">--host</span> 0.0.0.0
+
+<span class="c"># Test on real devices (critical for typography)</span>
+<span class="c"># 1. iPhone SE (375px) - smallest common viewport</span>
+<span class="c"># 2. iPhone 14 Pro (393px) - standard iOS</span>
+<span class="c"># 3. Pixel 7 (412px) - standard Android</span>
+
+<span class="c"># Lighthouse test</span>
+npx lighthouse http://localhost:4000 <span class="se">\</span>
+  <span class="nt">--view</span> <span class="se">\</span>
+  <span class="nt">--only-categories</span><span class="o">=</span>performance,accessibility <span class="se">\</span>
+  <span class="nt">--emulated-form-factor</span><span class="o">=</span>mobile
+
+<span class="c"># Expected scores:</span>
+<span class="c"># Performance: 90+</span>
+<span class="c"># Accessibility: 95+</span>
+</code></pre></div></div>
+
+<h3 id="level-4-accessibility-testing">Level 4: Accessibility Testing</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Test with screen reader (iOS VoiceOver, Android TalkBack)</span>
+<span class="c"># Manual test checklist:</span>
+<span class="c"># - [ ] Font toggle works with keyboard</span>
+<span class="c"># - [ ] ARIA labels announced correctly</span>
+<span class="c"># - [ ] Text remains readable at 200% zoom</span>
+<span class="c"># - [ ] No horizontal scroll at any zoom level</span>
+
+<span class="c"># Automated accessibility test</span>
+npx axe http://localhost:4000 <span class="nt">--rules</span> wcag2aa
+</code></pre></div></div>
+
+<h2 id="final-validation-checklist">Final Validation Checklist</h2>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All CSS validates: <code class="language-plaintext highlighter-rouge">npx stylelint assets/css/*.css</code></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Typography scales properly: Test on devices 375px-428px</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No iOS zoom on inputs: All inputs &gt;= 16px</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Font loading doesn’t block: Lighthouse FCP &lt; 1.8s</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Accessibility features work: Toggle functions, proper contrast</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Vertical rhythm maintained: Consistent spacing throughout</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No layout shift: CLS score &lt; 0.1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Documentation updated: README includes typography info</li>
+</ul>
+
+<hr />
+
+<h2 id="anti-patterns-to-avoid">Anti-Patterns to Avoid</h2>
+<ul>
+  <li>❌ Don’t use px for font sizes - use rem for accessibility</li>
+  <li>❌ Don’t load fonts synchronously - always use font-display: swap</li>
+  <li>❌ Don’t ignore actual device testing - desktop preview lies</li>
+  <li>❌ Don’t set line-height with units - use unitless values</li>
+  <li>❌ Don’t forget iOS input zoom - keep inputs at 16px+</li>
+  <li>❌ Don’t break existing iOS fixes - preserve -webkit prefixes</li>
+</ul>
+
+<h2 id="confidence-score-810">Confidence Score: 8/10</h2>
+
+<p>This PRP provides comprehensive context for implementing mobile typography enhancements. The score reflects:</p>
+<ul>
+  <li>Strong foundation exists in current codebase (mobile.css)</li>
+  <li>Clear documentation and references provided</li>
+  <li>Specific implementation patterns from existing code</li>
+  <li>Detailed validation steps</li>
+  <li>Some complexity in font loading and accessibility features may require iteration</li>
+</ul>
+
+<p>The implementation should succeed in one pass with possible minor adjustments needed for cross-device compatibility testing.</p>
+
+</div>
+  </main>
+  
+  <!-- Apple-style footer -->
+  <footer class="apple-footer">
+    <div class="apple-footer-container">
+      <div class="apple-footer-links">
+        <a href="mailto:lloyd@lloydmoore.com" class="apple-footer-link">Email</a>
+        <a href="https://linkedin.com/in/moorelloyd" class="apple-footer-link">LinkedIn</a>
+        <a href="https://github.com/iolloyd" class="apple-footer-link">GitHub</a>
+      </div>
+      <p class="apple-footer-copyright">
+        © 2025 Lloyd Moore. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  
+  <!-- Optimized script loading -->
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/mobile-nav.js" defer></script>
+  <script src="/assets/js/font-loader.js" defer></script>
+  <script src="/assets/js/lazy-load.js" defer></script>
+  <script src="/sw.js" defer></script>
+</body>
+</html>
