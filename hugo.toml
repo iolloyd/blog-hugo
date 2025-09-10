@@ -1,0 +1,24 @@
+baseURL = 'https://lloydmoore.com/'
+languageCode = 'en-us'
+title = 'Lloyd Moore'
+theme = 'ananke'
+
+# Enable Git info for last modified dates
+enableGitInfo = true
+
+# Enable RSS feed
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+
+# SEO and performance optimizations
+[params]
+  description = "Professional engineering leadership blog covering databases, DevOps, formal methods, and software architecture."
+  author = "Lloyd Moore"
+
+# Markup settings for better content rendering
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Allow raw HTML in markdown

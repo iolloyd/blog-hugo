@@ -1,6 +1,0 @@
-# robots.txt for https://iolloyd.github.io
-
-User-agent: *
-Allow: /
-
-Sitemap: https://iolloyd.github.io/sitemap.xml
