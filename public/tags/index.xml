@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Lloyd Moore</title>
+    <link>https://lloydmoore.com/tags/</link>
+    <description>Recent content in Tags on Lloyd Moore</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lloydmoore.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Concurrency</title>
+      <link>https://lloydmoore.com/tags/concurrency/</link>
+      <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/concurrency/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Formal-Verification</title>
+      <link>https://lloydmoore.com/tags/formal-verification/</link>
+      <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/formal-verification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Software-Engineering</title>
+      <link>https://lloydmoore.com/tags/software-engineering/</link>
+      <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/software-engineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Testing</title>
+      <link>https://lloydmoore.com/tags/testing/</link>
+      <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/testing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tlaplus</title>
+      <link>https://lloydmoore.com/tags/tlaplus/</link>
+      <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/tlaplus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Analytics</title>
+      <link>https://lloydmoore.com/tags/analytics/</link>
+      <pubDate>Mon, 14 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/analytics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data-Processing</title>
+      <link>https://lloydmoore.com/tags/data-processing/</link>
+      <pubDate>Mon, 14 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/data-processing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Duckdb</title>
+      <link>https://lloydmoore.com/tags/duckdb/</link>
+      <pubDate>Mon, 14 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/duckdb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Performance</title>
+      <link>https://lloydmoore.com/tags/performance/</link>
+      <pubDate>Mon, 14 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/performance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sql</title>
+      <link>https://lloydmoore.com/tags/sql/</link>
+      <pubDate>Mon, 14 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/sql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Architecture</title>
+      <link>https://lloydmoore.com/tags/architecture/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/architecture/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Event-Streaming</title>
+      <link>https://lloydmoore.com/tags/event-streaming/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/event-streaming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Kafka</title>
+      <link>https://lloydmoore.com/tags/kafka/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/kafka/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Message-Queue</title>
+      <link>https://lloydmoore.com/tags/message-queue/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/message-queue/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Postgresql</title>
+      <link>https://lloydmoore.com/tags/postgresql/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/tags/postgresql/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

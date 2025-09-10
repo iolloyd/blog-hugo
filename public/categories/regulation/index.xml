@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Regulation on Lloyd Moore</title>
+    <link>https://lloydmoore.com/categories/regulation/</link>
+    <description>Recent content in Regulation on Lloyd Moore</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Jan 2025 10:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lloydmoore.com/categories/regulation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How Smart Tokenization Platforms Turn Regulation Into a Competitive Moat</title>
+      <link>https://lloydmoore.com/posts/2025-01-30-tokenization-platforms-regulation-as-competitive-advantage/</link>
+      <pubDate>Thu, 30 Jan 2025 10:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/posts/2025-01-30-tokenization-platforms-regulation-as-competitive-advantage/</guid>
+      <description>&lt;p&gt;I just finished a four-week review of twelve tokenization platforms. We conducted architecture reviews, compliance audits, and technical evaluations. One lesson stands out:&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;The frontrunners treat SEC and FINRA rules as design specifications, not handcuffs.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-real-moat-in-tokenization&#34;&gt;The Real Moat in Tokenization&lt;/h2&gt;&#xA;&lt;p&gt;Winners don&amp;rsquo;t compete on blockchain novelty or clever token mechanisms. They build something far more defensible:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Licensed broker-dealers integrated into the platform&lt;/li&gt;&#xA;&lt;li&gt;Registered transfer agents working seamlessly with smart contracts&lt;/li&gt;&#xA;&lt;li&gt;Legal teams that understand both code and compliance&lt;/li&gt;&#xA;&lt;li&gt;Technical architecture that treats regulatory requirements as first-class features&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This separates platforms that will survive from those that won&amp;rsquo;t.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

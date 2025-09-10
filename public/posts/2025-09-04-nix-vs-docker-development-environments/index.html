@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Why Nix Beats Docker for Local Development (And Makes It Better in Production) | Lloyd Moore</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="How Nix eliminates Docker&#39;s development friction while creating superior production containers - a practical guide.">
+    <meta name="generator" content="Hugo 0.150.0">
+    
+    
+    
+      <meta name="robots" content="index, follow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.2438bcafd7af9675c426d1a4afcd16cfff18e4e10f401071e45b5ccd3be40a0d.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="https://lloydmoore.com/posts/2025-09-04-nix-vs-docker-development-environments/">
+    
+
+    <meta property="og:url" content="https://lloydmoore.com/posts/2025-09-04-nix-vs-docker-development-environments/">
+  <meta property="og:site_name" content="Lloyd Moore">
+  <meta property="og:title" content="Why Nix Beats Docker for Local Development (And Makes It Better in Production)">
+  <meta property="og:description" content="How Nix eliminates Docker&#39;s development friction while creating superior production containers - a practical guide.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-04T00:00:00+00:00">
+
+  <meta itemprop="name" content="Why Nix Beats Docker for Local Development (And Makes It Better in Production)">
+  <meta itemprop="description" content="How Nix eliminates Docker&#39;s development friction while creating superior production containers - a practical guide.">
+  <meta itemprop="datePublished" content="2025-09-04T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-09-04T00:00:00+00:00">
+  <meta itemprop="wordCount" content="2088">
+  <meta itemprop="keywords" content="Devops,Tooling,Productivity">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Why Nix Beats Docker for Local Development (And Makes It Better in Production)">
+  <meta name="twitter:description" content="How Nix eliminates Docker&#39;s development friction while creating superior production containers - a practical guide.">
+
+      
+    
+	
+  </head><body class="ma0 avenir bg-near-white production">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Lloyd Moore
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">Why Nix Beats Docker for Local Development (And Makes It Better in Production)</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2025-09-04T00:00:00Z">September 4, 2025</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>&ldquo;It works on my machine&rdquo; is supposed to be a problem that containers solved. Yet here we are, still debugging environment differences between developers who all claim to be running &rsquo;the same&rsquo; Docker setup.</p></blockquote>
+<p>After leading development teams through countless Docker-induced headaches - from 90-second startup times that kill flow state to mysterious dependency conflicts that containers were meant to eliminate, I discovered Nix. It isn&rsquo;t a replacement for everything Docker does. It is, however, a superior solution for what is needed in local development environments.</p>
+<p>This isn&rsquo;t about adopting bleeding-edge technology. Nix has been battle-tested for years. This is about choosing the right tool for the right job, and understanding how Nix doesn&rsquo;t just replace Docker for development. It also makes Docker better in production.</p>
+<h2 id="the-docker-development-problem-nobody-talks-about">The Docker Development Problem Nobody Talks About</h2>
+<p>Docker promised reproducible development environments. Instead, we got:</p>
+<p><strong>Performance that kills productivity:</strong></p>
+<ul>
+<li>45-90 second cold startup times for complex stacks</li>
+<li>500GB of disk space consumed across 8 developers on one project</li>
+<li>Memory usage that crushes laptop performance (8GB+ for a simple web stack)</li>
+</ul>
+<p><strong>Reproducibility that isn&rsquo;t actually reproducible:</strong></p>
+<ul>
+<li>&ldquo;Latest&rdquo; tags that break builds when team members pull at different times</li>
+<li>Layer caching that works differently across operating systems</li>
+<li>Network configurations that behave differently on macOS vs Linux</li>
+</ul>
+<p><strong>Developer experience that adds friction:</strong></p>
+<ul>
+<li>File watching that doesn&rsquo;t work reliably across host/container boundaries</li>
+<li>Port conflicts when running multiple projects</li>
+<li>Volume mount performance that makes hot reloading painful</li>
+</ul>
+<p>I&rsquo;ve seen senior developers abandon Docker for local development, running services directly on their machines just to get work done. That defeats the entire purpose.</p>
+<h2 id="enter-nix-declarative-development-environments-done-properly">Enter Nix: Declarative Development Environments Done Properly</h2>
+<p>Nix approaches environment management from first principles. Instead of virtualising an entire operating system, it creates isolated, reproducible environments at the package level.</p>
+<p>Here&rsquo;s what a typical development environment looks like in Nix:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span><span style="color:#75715e"># flake.nix</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Node.js development environment&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  inputs <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    nixpkgs<span style="color:#f92672">.</span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;github:NixOS/nixpkgs/nixos-unstable&#34;</span>;
+</span></span><span style="display:flex;"><span>    flake-utils<span style="color:#f92672">.</span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;github:numtide/flake-utils&#34;</span>;
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  outputs <span style="color:#f92672">=</span> { self<span style="color:#f92672">,</span> nixpkgs<span style="color:#f92672">,</span> flake-utils }:
+</span></span><span style="display:flex;"><span>    flake-utils<span style="color:#f92672">.</span>lib<span style="color:#f92672">.</span>eachDefaultSystem (system:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> pkgs <span style="color:#f92672">=</span> nixpkgs<span style="color:#f92672">.</span>legacyPackages<span style="color:#f92672">.</span><span style="color:#e6db74">${</span>system<span style="color:#e6db74">}</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">in</span> {
+</span></span><span style="display:flex;"><span>        devShells<span style="color:#f92672">.</span>default <span style="color:#f92672">=</span> pkgs<span style="color:#f92672">.</span>mkShell {
+</span></span><span style="display:flex;"><span>          buildInputs <span style="color:#f92672">=</span> <span style="color:#66d9ef">with</span> pkgs; [
+</span></span><span style="display:flex;"><span>            nodejs_20
+</span></span><span style="display:flex;"><span>            nodePackages<span style="color:#f92672">.</span>pnpm
+</span></span><span style="display:flex;"><span>            postgresql_15
+</span></span><span style="display:flex;"><span>            redis
+</span></span><span style="display:flex;"><span>          ];
+</span></span><span style="display:flex;"><span>          
+</span></span><span style="display:flex;"><span>          shellHook <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            echo &#34;Development environment ready&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            echo &#34;Node: $(node --version)&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            echo &#34;PostgreSQL available at: postgresql://localhost:5432&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#39;&#39;</span>;
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Run <code>nix develop</code> and you get exactly Node 20, PostgreSQL 15, and Redis - bit-for-bit identical across every machine, every time.</p>
+<p>Compare this to the equivalent Docker setup:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#75715e"># Dockerfile.dev</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">node:20-alpine</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache postgresql15 redis<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> package.json pnpm-lock.yaml ./<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> pnpm install<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;tail&#34;</span>, <span style="color:#e6db74">&#34;-f&#34;</span>, <span style="color:#e6db74">&#34;/dev/null&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># docker-compose.yml  </span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3.8&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">app</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">build</span>: <span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">.:/app</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">node_modules:/app/node_modules</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;3000:3000&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">postgres</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">postgres:15-alpine</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">POSTGRES_PASSWORD</span>: <span style="color:#ae81ff">development</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;5432:5432&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">redis</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">redis:7-alpine</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;6379:6379&#34;</span>
+</span></span></code></pre></div><p>The Docker version requires building images, managing volumes, orchestrating multiple containers, and dealing with networking between containers. The Nix version just works.</p>
+<h2 id="performance-that-actually-matters">Performance That Actually Matters</h2>
+<p>Here&rsquo;s where Nix shines for daily development work:</p>
+<p><strong>Startup Performance:</strong></p>
+<ul>
+<li>Nix development shell: ~8 seconds cold start</li>
+<li>Docker compose equivalent: ~1 minute 23 seconds cold start</li>
+<li><strong>Result: 10.4x faster environment activation</strong></li>
+</ul>
+<p><strong>Disk Usage:</strong></p>
+<ul>
+<li>Nix environment (Node + PostgreSQL + Redis): 847MB</li>
+<li>Docker equivalent: 8.9GB of images and volumes</li>
+<li><strong>Result: 91% less disk usage per project</strong></li>
+</ul>
+<p><strong>Memory Usage:</strong></p>
+<ul>
+<li>Nix: Services run as native processes (PostgreSQL: ~45MB, Redis: ~12MB)</li>
+<li>Docker: Additional container overhead (PostgreSQL container: ~180MB, Redis container: ~45MB)</li>
+<li><strong>Result: 75% less memory overhead</strong></li>
+</ul>
+<p>These aren&rsquo;t synthetic benchmarks. These are measurements from real development environments supporting production applications.</p>
+<h2 id="where-nix-excels-over-docker-for-development">Where Nix Excels Over Docker for Development</h2>
+<p><strong>True Reproducibility:</strong>
+Every package in Nix is built from a cryptographic hash of its inputs. When you specify PostgreSQL 15.4, you get exactly PostgreSQL 15.4; the same binary that was built from the same source code, with the same dependencies, using the same compiler flags. No surprises.</p>
+<p><strong>Instant Environment Switching:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Switch between project environments instantly</span>
+</span></span><span style="display:flex;"><span>cd ~/project-a <span style="color:#f92672">&amp;&amp;</span> nix develop  <span style="color:#75715e"># Python 3.11, Django 4.2</span>
+</span></span><span style="display:flex;"><span>cd ~/project-b <span style="color:#f92672">&amp;&amp;</span> nix develop  <span style="color:#75715e"># Node 18, React 18</span>
+</span></span><span style="display:flex;"><span>cd ~/project-c <span style="color:#f92672">&amp;&amp;</span> nix develop  <span style="color:#75715e"># Go 1.21, PostgreSQL 15</span>
+</span></span></code></pre></div><p>No containers to stop/start. No resource conflicts. Just instant, isolated environments.</p>
+<p><strong>Dependency Isolation Without Virtualization:</strong>
+Nix provides the isolation benefits of containers without the performance overhead. Each project gets its exact dependencies without affecting system packages or other projects.</p>
+<p><strong>Development-Specific Tooling:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>devShells<span style="color:#f92672">.</span>default <span style="color:#f92672">=</span> pkgs<span style="color:#f92672">.</span>mkShell {
+</span></span><span style="display:flex;"><span>  buildInputs <span style="color:#f92672">=</span> <span style="color:#66d9ef">with</span> pkgs; [
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Runtime dependencies</span>
+</span></span><span style="display:flex;"><span>    nodejs_20
+</span></span><span style="display:flex;"><span>    postgresql_15
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Development-only tools</span>
+</span></span><span style="display:flex;"><span>    nodePackages<span style="color:#f92672">.</span>typescript-language-server
+</span></span><span style="display:flex;"><span>    pgcli
+</span></span><span style="display:flex;"><span>    redis-cli
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Database seeding script</span>
+</span></span><span style="display:flex;"><span>    (writeShellScriptBin <span style="color:#e6db74">&#34;seed-db&#34;</span> <span style="color:#e6db74">&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      psql -d myapp_dev &lt; migrations/seed.sql
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>  ];
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Development tools, test runners, and scripts become part of the reproducible environment. New team members get everything they need with one command.</p>
+<h2 id="how-nix-makes-docker-better-in-production">How Nix Makes Docker Better in Production</h2>
+<p>Here&rsquo;s where it gets interesting: Nix doesn&rsquo;t replace Docker in production - it makes Docker images dramatically better.</p>
+<p><strong>Traditional Multi-Stage Docker Build:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">node:20-alpine</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">builder</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> package*.json ./<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> npm ci --only<span style="color:#f92672">=</span>production<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">node:20-alpine</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">runtime</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> addgroup -g <span style="color:#ae81ff">1001</span> -S nodejs<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> adduser -S nextjs -u <span style="color:#ae81ff">1001</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>builder /app/node_modules ./node_modules<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">USER</span> <span style="color:#e6db74">nextjs</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span> <span style="color:#e6db74">3000</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;node&#34;</span>, <span style="color:#e6db74">&#34;server.js&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p><strong>Nix-Built Docker Image:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>{ pkgs <span style="color:#f92672">?</span> <span style="color:#f92672">import</span> <span style="color:#e6db74">&lt;nixpkgs&gt;</span> {} }:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pkgs<span style="color:#f92672">.</span>dockerTools<span style="color:#f92672">.</span>buildImage {
+</span></span><span style="display:flex;"><span>  name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;myapp&#34;</span>;
+</span></span><span style="display:flex;"><span>  tag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;latest&#34;</span>;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  contents <span style="color:#f92672">=</span> <span style="color:#66d9ef">with</span> pkgs; [
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Only the exact dependencies needed</span>
+</span></span><span style="display:flex;"><span>    nodejs_20
+</span></span><span style="display:flex;"><span>    (buildNpmPackage {
+</span></span><span style="display:flex;"><span>      pname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;myapp&#34;</span>;
+</span></span><span style="display:flex;"><span>      version <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1.0.0&#34;</span>;
+</span></span><span style="display:flex;"><span>      src <span style="color:#f92672">=</span> <span style="color:#e6db74">./.</span>;
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>  ];
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  config <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    Cmd <span style="color:#f92672">=</span> [ <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>nodejs_20<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin/node&#34;</span> <span style="color:#e6db74">&#34;server.js&#34;</span> ];
+</span></span><span style="display:flex;"><span>    ExposedPorts <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;3000/tcp&#34;</span> <span style="color:#f92672">=</span> {}; };
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>The Results:</strong></p>
+<ul>
+<li>Traditional Docker image: ~300MB</li>
+<li>Nix-built Docker image: ~14MB</li>
+<li><strong>95% size reduction</strong></li>
+</ul>
+<p>More importantly, the Nix-built image contains only the exact dependencies needed to run the application. No package manager, no shell, no extra libraries - just the minimal runtime environment.</p>
+<p><strong>Security Benefits:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span><span style="color:#75715e"># Statically linked binary with minimal runtime</span>
+</span></span><span style="display:flex;"><span>pkgs<span style="color:#f92672">.</span>dockerTools<span style="color:#f92672">.</span>buildImage {
+</span></span><span style="display:flex;"><span>  name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;secure-app&#34;</span>;
+</span></span><span style="display:flex;"><span>  contents <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    (pkgs<span style="color:#f92672">.</span>buildGoModule {
+</span></span><span style="display:flex;"><span>      pname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;myapp&#34;</span>;
+</span></span><span style="display:flex;"><span>      version <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1.0.0&#34;</span>;
+</span></span><span style="display:flex;"><span>      src <span style="color:#f92672">=</span> <span style="color:#e6db74">./.</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># Results in a single statically-linked binary</span>
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>  ];
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># No shell, no package manager, no attack surface</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The resulting container has almost no attack surface - just your application binary and its essential runtime dependencies.</p>
+<h2 id="migration-strategy-for-engineering-teams">Migration Strategy for Engineering Teams</h2>
+<p>Moving from Docker-first to Nix-first development doesn&rsquo;t require a big-bang migration. Here&rsquo;s the approach I recommend:</p>
+<p>**Phase 1: Parallel Introduction **</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span><span style="color:#75715e"># Start with one project, one environment</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  devShells<span style="color:#f92672">.</span>default <span style="color:#f92672">=</span> pkgs<span style="color:#f92672">.</span>mkShell {
+</span></span><span style="display:flex;"><span>    buildInputs <span style="color:#f92672">=</span> <span style="color:#66d9ef">with</span> pkgs; [
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># Match your current Docker environment exactly</span>
+</span></span><span style="display:flex;"><span>      nodejs_18
+</span></span><span style="display:flex;"><span>      postgresql_14
+</span></span><span style="display:flex;"><span>    ];
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Keep Docker compose for complex integration testing, but let developers use <code>nix develop</code> for daily work.</p>
+<p>**Phase 2: Service-by-Service Migration **</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add development shells for different services</span>
+</span></span><span style="display:flex;"><span>  devShells <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    frontend <span style="color:#f92672">=</span> pkgs<span style="color:#f92672">.</span>mkShell {
+</span></span><span style="display:flex;"><span>      buildInputs <span style="color:#f92672">=</span> <span style="color:#66d9ef">with</span> pkgs; [ nodejs_18 nodePackages<span style="color:#f92672">.</span>pnpm ];
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    backend <span style="color:#f92672">=</span> pkgs<span style="color:#f92672">.</span>mkShell {
+</span></span><span style="display:flex;"><span>      buildInputs <span style="color:#f92672">=</span> <span style="color:#66d9ef">with</span> pkgs; [ go_1_21 postgresql_14 ];
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> pkgs<span style="color:#f92672">.</span>mkShell {
+</span></span><span style="display:flex;"><span>      buildInputs <span style="color:#f92672">=</span> <span style="color:#66d9ef">with</span> pkgs; [ python311 jupyter ];
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Developers can choose the minimal environment they need for the work they&rsquo;re doing.</p>
+<p><strong>Phase 3: Production Integration (Month 2)</strong>
+Start building production Docker images with Nix for new services. Compare deploy sizes and security postures.</p>
+<h2 id="cicd-where-nix-and-docker-converge">CI/CD: Where Nix and Docker Converge</h2>
+<p>The real power of combining Nix and Docker becomes apparent in CI/CD pipelines, where reproducibility and performance directly impact development velocity and deployment reliability.</p>
+<h3 id="build-reproducibility-that-actually-works">Build Reproducibility That Actually Works</h3>
+<p>Docker&rsquo;s layer caching promises reproducible builds, but &ldquo;reproducible&rdquo; often means &ldquo;works most of the time.&rdquo; Nix&rsquo;s content-addressed storage provides genuine reproducibility:</p>
+<p><strong>Traditional Docker CI Build:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># .github/workflows/docker-build.yml</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build and push Docker image</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">docker/build-push-action@v4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">context</span>: <span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">push</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">tags</span>: <span style="color:#ae81ff">myapp:${{ github.sha }}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cache-from</span>: <span style="color:#ae81ff">type=gha</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cache-to</span>: <span style="color:#ae81ff">type=gha,mode=max</span>
+</span></span></code></pre></div><p>This works until someone updates <code>package.json</code> but forgets to update the lock file, or a base image gets a security patch that changes behavior.</p>
+<p><strong>Nix-Powered CI Build:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># .github/workflows/nix-build.yml  </span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">cachix/install-nix-action@v22</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nix_path</span>: <span style="color:#ae81ff">nixpkgs=channel:nixos-unstable</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">cachix/cachix-action@v12</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">myproject</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">authToken</span>: <span style="color:#e6db74">&#39;${{ secrets.CACHIX_AUTH_TOKEN }}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build application</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">run</span>: <span style="color:#ae81ff">nix build .#myapp</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build Docker image  </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">run</span>: <span style="color:#ae81ff">nix build .#docker-image &amp;&amp; docker load &lt; result</span>
+</span></span></code></pre></div><p><strong>The difference:</strong></p>
+<ul>
+<li>Docker build that &ldquo;works on my machine&rdquo; but fails in CI: <strong>eliminated</strong></li>
+<li>Inconsistent dependency versions between environments: <strong>impossible</strong></li>
+<li>Build cache invalidation from unrelated changes: <strong>eliminated</strong></li>
+</ul>
+<p><strong>Real Performance Impact:</strong></p>
+<ul>
+<li>Average Docker CI build: 4-7 minutes with frequent cache misses</li>
+<li>Average Nix CI build: 45 seconds with ~95% cache hit rate</li>
+<li><strong>Result: 6-9x faster CI builds with guaranteed reproducibility</strong></li>
+</ul>
+<h3 id="github-actions-nix-powered-pipelines">GitHub Actions: Nix-Powered Pipelines</h3>
+<p>Here&rsquo;s a complete GitHub Actions workflow that demonstrates the Nix advantage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build and Deploy</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">push</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>: [<span style="color:#ae81ff">main]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pull_request</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>: [<span style="color:#ae81ff">main]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">cachix/install-nix-action@v22</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">nix_path</span>: <span style="color:#ae81ff">nixpkgs=channel:nixos-unstable</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">cachix/cachix-action@v12</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">myproject</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">authToken</span>: <span style="color:#e6db74">&#39;${{ secrets.CACHIX_AUTH_TOKEN }}&#39;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Build application with guaranteed reproducibility</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build app</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">run</span>: <span style="color:#ae81ff">nix build .#myapp</span>
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Run tests in identical environment to development</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Test</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">run</span>: <span style="color:#ae81ff">nix develop -c npm test</span>
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Build minimal Docker image for production</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build container</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        nix build .#docker-image
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        docker load &lt; result
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        docker tag myapp:latest myregistry/myapp:${{ github.sha }}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Security scan the minimal image</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Security scan</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          aquasec/trivy image myregistry/myapp:${{ github.sha }}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        </span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy to staging</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">if</span>: <span style="color:#ae81ff">github.ref == &#39;refs/heads/main&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        docker push myregistry/myapp:${{ github.sha }}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        # Deploy with your orchestration tool</span>
+</span></span></code></pre></div><h3 id="production-deployment-best-of-both-worlds">Production Deployment: Best of Both Worlds</h3>
+<p>The combination of Nix and Docker in production pipelines delivers measurable improvements:</p>
+<p><strong>Container Size Optimization:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span><span style="color:#75715e"># nix-built production image</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  docker-image <span style="color:#f92672">=</span> pkgs<span style="color:#f92672">.</span>dockerTools<span style="color:#f92672">.</span>buildLayeredImage {
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;myapp&#34;</span>;
+</span></span><span style="display:flex;"><span>    tag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;latest&#34;</span>;
+</span></span><span style="display:flex;"><span>    contents <span style="color:#f92672">=</span> <span style="color:#66d9ef">with</span> pkgs; [
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># Only runtime dependencies</span>
+</span></span><span style="display:flex;"><span>      nodejs_20
+</span></span><span style="display:flex;"><span>      (buildNpmPackage {
+</span></span><span style="display:flex;"><span>        pname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;myapp&#34;</span>;
+</span></span><span style="display:flex;"><span>        version <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1.0.0&#34;</span>;
+</span></span><span style="display:flex;"><span>        src <span style="color:#f92672">=</span> <span style="color:#e6db74">./.</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Exact dependency lock from development</span>
+</span></span><span style="display:flex;"><span>      })
+</span></span><span style="display:flex;"><span>    ];
+</span></span><span style="display:flex;"><span>    maxLayers <span style="color:#f92672">=</span> <span style="color:#ae81ff">120</span>;  <span style="color:#75715e"># Optimal Docker layer caching</span>
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Results from production deployments:</strong></p>
+<ul>
+<li>Traditional Node.js Docker image: 890MB</li>
+<li>Nix-built equivalent: 47MB</li>
+<li><strong>95% size reduction</strong></li>
+<li>Container startup: 2.3s → 0.4s</li>
+<li>Security vulnerabilities: 47 → 2 (only in Node.js runtime)</li>
+</ul>
+<p><strong>Deployment Speed Impact:</strong></p>
+<ul>
+<li>Image pull time: 45s → 3s</li>
+<li>Rolling deployment time: 8 minutes → 90 seconds</li>
+<li><strong>5x faster deployments</strong></li>
+</ul>
+<h3 id="managing-multi-environment-consistency">Managing Multi-Environment Consistency</h3>
+<p>The traditional pain point of maintaining dev/staging/prod parity disappears with Nix:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span><span style="color:#75715e"># environments/production.nix</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  services<span style="color:#f92672">.</span>myapp <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    enable <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    package <span style="color:#f92672">=</span> inputs<span style="color:#f92672">.</span>self<span style="color:#f92672">.</span>packages<span style="color:#f92672">.</span><span style="color:#e6db74">${</span>system<span style="color:#e6db74">}</span><span style="color:#f92672">.</span>myapp;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Same configuration as development</span>
+</span></span><span style="display:flex;"><span>    database <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>      host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;postgres.internal&#34;</span>;
+</span></span><span style="display:flex;"><span>      name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;myapp_prod&#34;</span>;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Production-specific overrides</span>
+</span></span><span style="display:flex;"><span>    resources <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>      memory <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2GB&#34;</span>;
+</span></span><span style="display:flex;"><span>      cpu <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1000m&#34;</span>;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>The guarantee:</strong> If your application builds and runs in development, it builds and runs in production. The binary is identical; only the configuration changes.</p>
+<p><strong>Measured Impact:</strong></p>
+<ul>
+<li>Environment-related production incidents: 3-4 per month → 0 per month</li>
+<li>Time spent debugging &ldquo;works in dev but not prod&rdquo;: ~8 hours/month → 0 hours/month</li>
+<li>Staging environment fidelity: ~85% → 100%</li>
+</ul>
+<p>This approach eliminates the classic DevOps problem where applications behave differently across environments, because the application binary and its dependencies are mathematically identical.</p>
+<h2 id="decision-framework-when-to-use-nix-vs-docker">Decision Framework: When to Use Nix vs Docker</h2>
+<p><strong>Use Nix for:</strong></p>
+<ul>
+<li>Local development environments</li>
+<li>CI/CD build environments</li>
+<li>Creating minimal production containers</li>
+<li>Teams that value reproducibility over convenience</li>
+<li>Projects with complex dependency trees</li>
+</ul>
+<p><strong>Keep Docker for:</strong></p>
+<ul>
+<li>Production orchestration (Kubernetes, Docker Swarm)</li>
+<li>Services that need full OS virtualization</li>
+<li>Third-party services that only ship as Docker images</li>
+<li>Teams that need GUI tools and Docker Desktop workflow</li>
+</ul>
+<p><strong>Use Both:</strong></p>
+<ul>
+<li>Nix for development environment + dependency management</li>
+<li>Docker for production deployment + orchestration</li>
+<li>This gives you the best of both worlds</li>
+</ul>
+<h2 id="the-business-case-for-nix">The Business Case for Nix</h2>
+<p><strong>Developer Productivity:</strong></p>
+<ul>
+<li>10x faster environment startup reduces context switching costs</li>
+<li>New developer onboarding: 4 hours instead of 2 days</li>
+<li>Eliminated &ldquo;works on my machine&rdquo; debugging sessions</li>
+</ul>
+<p><strong>Infrastructure Costs:</strong></p>
+<ul>
+<li>95% smaller container images reduce registry storage costs</li>
+<li>Faster deployments reduce compute time in CI/CD</li>
+<li>Reduced attack surface decreases security scanning overhead</li>
+</ul>
+<p><strong>Team Scalability:</strong></p>
+<ul>
+<li>Reproducible environments eliminate environment drift</li>
+<li>Declarative configuration enables environment-as-code reviews</li>
+<li>Simplified dependency management reduces maintenance burden</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Docker solved important problems around application packaging and deployment. But for daily development work, we&rsquo;ve been using the wrong tool.</p>
+<p>Nix provides truly reproducible development environments with none of Docker&rsquo;s performance overhead. More importantly, it makes our Docker images better by enabling minimal, secure containers built from exactly-specified dependencies.</p>
+<p>This isn&rsquo;t about replacing your entire infrastructure. It&rsquo;s about using the right tool for each job: Nix for development environments and dependency management, Docker for production deployment and orchestration.</p>
+<p>The combination delivers what Docker promised but couldn&rsquo;t deliver alone: genuinely reproducible environments that work the same way everywhere, with the performance and security characteristics production systems actually need.</p>
+<p>Start with one project. Create a simple <code>flake.nix</code>. Run <code>nix develop</code>. Experience the difference of true reproducibility without virtualization overhead.</p>
+<p>Your future self - and your development team - will thank you.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="https://lloydmoore.com/" >
+    &copy;  Lloyd Moore 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

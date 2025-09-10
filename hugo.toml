@@ -1,0 +1,4 @@
+baseURL = 'https://lloydmoore.com/'
+languageCode = 'en-us'
+title = 'Lloyd Moore'
+theme = 'ananke'

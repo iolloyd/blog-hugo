@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on Lloyd Moore</title>
+    <link>https://lloydmoore.com/categories/security/</link>
+    <description>Recent content in Security on Lloyd Moore</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lloydmoore.com/categories/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Security Revolution: Why Tailscale and Teleport Are Changing Everything</title>
+      <link>https://lloydmoore.com/posts/2025-09-08-tailscale-teleport-security-article/</link>
+      <pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/posts/2025-09-08-tailscale-teleport-security-article/</guid>
+      <description>&lt;h1 id=&#34;the-security-revolution-why-tailscale-and-teleport-are-changing-everything&#34;&gt;The Security Revolution: Why Tailscale and Teleport Are Changing Everything&lt;/h1&gt;&#xA;&lt;p&gt;Your security setup is broken. Not a little bit broken – completely broken.&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re still using traditional VPNs, static passwords, and shared SSH keys, you&amp;rsquo;re fighting yesterday&amp;rsquo;s battles with stone-age tools. Meanwhile, attackers are using modern techniques to walk through your defenses like they&amp;rsquo;re not even there.&lt;/p&gt;&#xA;&lt;p&gt;The good news? There&amp;rsquo;s a better way. Two tools – Tailscale and Teleport – are quietly revolutionizing how smart organizations approach security. Here&amp;rsquo;s why they matter and how they&amp;rsquo;ll transform your infrastructure.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

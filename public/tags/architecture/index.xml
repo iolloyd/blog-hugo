@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Architecture on Lloyd Moore</title>
+    <link>https://lloydmoore.com/tags/architecture/</link>
+    <description>Recent content in Architecture on Lloyd Moore</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lloydmoore.com/tags/architecture/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgreSQL Will Do, or, You Don&#39;t Need Kafka</title>
+      <link>https://lloydmoore.com/posts/2025-07-07-just-postgresql/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/posts/2025-07-07-just-postgresql/</guid>
+      <description>&lt;h1 id=&#34;you-dont-need-kafka-postgresql-will-do-just-fine&#34;&gt;You Don&amp;rsquo;t Need Kafka (PostgreSQL Will Do Just Fine)&lt;/h1&gt;&#xA;&lt;p&gt;Every few months, someone on your team suggests adding Kafka. &amp;ldquo;We need real-time event streaming,&amp;rdquo; they say. &amp;ldquo;We need to decouple our services.&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;Stop. Before you spin up a three-node Kafka cluster, consider PostgreSQL. It can handle most pub-sub use cases perfectly well. You&amp;rsquo;ve probably already got it running.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;&#xA;&lt;p&gt;Your application grows. Different parts need to know when things happen. The order service needs to tell the inventory service about new orders. The user service needs to notify the email service about registrations.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

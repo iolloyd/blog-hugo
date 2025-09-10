@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Leadership on Lloyd Moore</title>
+    <link>https://lloydmoore.com/categories/leadership/</link>
+    <description>Recent content in Leadership on Lloyd Moore</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lloydmoore.com/categories/leadership/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>When &#39;Boring&#39; Technology is the Best Choice</title>
+      <link>https://lloydmoore.com/posts/2025-01-30-when-boring-tech-is-best/</link>
+      <pubDate>Thu, 30 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/posts/2025-01-30-when-boring-tech-is-best/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;Nobody ever got fired for buying IBM.&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;Replace IBM with Kubernetes in 2025. The saying still rings true. I&amp;rsquo;ve scaled engineering teams from 10 to 187 people. Here&amp;rsquo;s what I learned: &lt;strong&gt;the best technology solves your problem with minimal friction. It&amp;rsquo;s not the most popular or hyped.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-messy-reality-of-multi-cloud-architecture&#34;&gt;The Messy Reality of Multi-Cloud Architecture&lt;/h2&gt;&#xA;&lt;p&gt;We faced a classic challenge recently. We needed to deploy one application across Google Cloud Platform, AWS, and bare-metal racks. The overlay network had to stretch across all three environments.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

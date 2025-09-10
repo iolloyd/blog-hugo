@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Engineering on Lloyd Moore</title>
+    <link>https://lloydmoore.com/categories/engineering/</link>
+    <description>Recent content in Engineering on Lloyd Moore</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lloydmoore.com/categories/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQLite and PostgreSQL: The Right Database for 99% of Use Cases</title>
+      <link>https://lloydmoore.com/posts/2025-07-06-sqlite-postgresql-right-database-for-most-use-cases/</link>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://lloydmoore.com/posts/2025-07-06-sqlite-postgresql-right-database-for-most-use-cases/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;The best tool for the job is the one you already know how to use properly.&amp;rdquo; - Ancient Engineering Wisdom&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;You face endless database choices today. NoSQL, NewSQL, graph databases, time-series databases – they all promise to solve your problems. But here&amp;rsquo;s the truth: &lt;strong&gt;you only need SQLite or PostgreSQL for 99% of applications&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-power-duo-sqlite-and-postgresql&#34;&gt;The Power Duo: SQLite and PostgreSQL&lt;/h2&gt;&#xA;&lt;h3 id=&#34;sqlite-the-embedded-powerhouse&#34;&gt;SQLite: The Embedded Powerhouse&lt;/h3&gt;&#xA;&lt;p&gt;Don&amp;rsquo;t dismiss SQLite as a &amp;ldquo;toy database.&amp;rdquo; It&amp;rsquo;s the world&amp;rsquo;s most deployed database engine. Billions of devices run SQLite right now. Here&amp;rsquo;s when you should choose it:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

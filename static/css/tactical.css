@@ -1,0 +1,954 @@
+/* Tactical Intelligence Briefing Design System
+   Military command center aesthetic meets Silicon Valley data visualization
+   High-contrast, precision-focused, brutally effective design
+*/
+
+:root {
+  /* Tactical Color Palette - High contrast for readability */
+  --tactical-background: #FAFAFA;
+  --tactical-surface: #FFFFFF;
+  --tactical-text: #0A0A0B;
+  --tactical-text-secondary: #404145;
+  --tactical-text-muted: #8E8E93;
+  
+  /* Command Center Alert Colors */
+  --tactical-primary: #FF3B30;      /* Critical alert red */
+  --tactical-secondary: #007AFF;    /* Intelligence blue */
+  --tactical-success: #34C759;      /* Mission success green */
+  --tactical-warning: #FF9500;      /* Caution orange */
+  --tactical-grid: #E5E5E7;         /* Grid lines */
+  
+  /* Typography - Command precision */
+  --font-tactical: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-tactical-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+  --font-tactical-display: 'Inter', system-ui, sans-serif;
+  
+  /* Tactical Typography Scale - Fixed */
+  --text-briefing: clamp(2.5rem, 6vw, 4rem);    /* Hero titles */
+  --text-classification: 0.875rem; /* Labels */
+  --text-intel: 1.125rem;   /* Body text */
+  --text-tactical: 1.5rem; /* Section headers */
+  --text-command: clamp(1.75rem, 4vw, 2.5rem);     /* Major headers */
+  --text-status: 1rem; /* Status indicators */
+  
+  /* Spacing - Grid-based precision */
+  --space-grid: 8px;
+  --space-xs: calc(var(--space-grid) * 1);   /* 8px */
+  --space-sm: calc(var(--space-grid) * 2);   /* 16px */
+  --space-md: calc(var(--space-grid) * 3);   /* 24px */
+  --space-lg: calc(var(--space-grid) * 4);   /* 32px */
+  --space-xl: calc(var(--space-grid) * 6);   /* 48px */
+  --space-2xl: calc(var(--space-grid) * 8);  /* 64px */
+  --space-3xl: calc(var(--space-grid) * 10); /* 80px */
+  --space-4xl: calc(var(--space-grid) * 12); /* 96px */
+  --space-5xl: calc(var(--space-grid) * 16); /* 128px */
+  
+  /* Document-style container widths */
+  --container-briefing: 75ch;  /* Optimal reading width */
+  --container-intel: 65ch;
+  --container-command: 70ch;
+  --document-margin: clamp(1rem, 5vw, 2rem);
+  
+  /* Transitions - Snappy like military equipment */
+  --transition-tactical: 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-command: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Shadows - Minimal, functional */
+  --shadow-tactical: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-command: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Reset with tactical precision */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base tactical typography */
+body {
+  font-family: var(--font-tactical);
+  font-size: var(--text-intel);
+  line-height: 1.6;
+  color: var(--tactical-text);
+  background-color: var(--tactical-background);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Document Layout System - Left-aligned */
+.tactical-grid {
+  /* Remove min-height for natural document flow */
+}
+
+/* Document container - left-aligned */
+.tactical-container {
+  max-width: var(--container-briefing);
+  margin: 0; /* Left-aligned, not centered */
+  padding: 0 var(--document-margin);
+}
+
+/* Main content area - document flow */
+.tactical-main {
+  padding-top: 56px; /* Nav height */
+  padding-bottom: var(--space-2xl);
+  max-width: 100%;
+}
+
+/* Document content wrapper */
+.document-content {
+  max-width: var(--container-intel);
+  line-height: 1.7;
+  text-align: left;
+}
+
+/* Document-specific typography improvements */
+.document-content h1,
+.document-content h2,
+.document-content h3 {
+  text-align: left;
+  margin-bottom: var(--space-lg);
+  max-width: 100%;
+}
+
+.document-content p,
+.document-content ul,
+.document-content ol {
+  margin-bottom: var(--space-md);
+  max-width: var(--container-intel);
+}
+
+.document-content ul,
+.document-content ol {
+  padding-left: var(--space-lg);
+}
+
+/* Better document flow for content sections */
+.service-record,
+.briefing-document,
+.personnel-file {
+  margin-bottom: var(--space-2xl);
+}
+
+/* Ensure all text content is left-aligned */
+.service-record *,
+.briefing-document *,
+.personnel-file * {
+  text-align: left !important;
+}
+
+/* Navigation - Command Interface */
+.nav-tactical {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--tactical-grid);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 56px;
+}
+
+.nav-tactical-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  padding: 0 var(--document-margin);
+  max-width: var(--container-briefing);
+  margin: 0;
+}
+
+.nav-tactical-brand {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text);
+}
+
+.nav-tactical-menu {
+  display: flex;
+  gap: var(--space-xl);
+}
+
+.nav-tactical-link {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text-secondary);
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-sm);
+  transition: color var(--transition-tactical);
+  border: 1px solid transparent;
+}
+
+.nav-tactical-link:hover {
+  color: var(--tactical-primary);
+  border-color: var(--tactical-primary);
+}
+
+/* Intelligence Briefing Header */
+.briefing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--tactical-grid);
+  padding: calc(56px + var(--space-lg)) 0 var(--space-lg);
+  margin-bottom: var(--space-xl);
+  max-width: var(--container-briefing);
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: var(--document-margin);
+  padding-right: var(--document-margin);
+}
+
+.classification {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--tactical-grid);
+  background: var(--tactical-surface);
+}
+
+.briefing-date {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 500;
+  color: var(--tactical-text-muted);
+  justify-self: end;
+}
+
+/* Briefing Title - Command Authority */
+.briefing-title {
+  font-size: var(--text-briefing);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-xl);
+  text-transform: uppercase;
+  max-width: var(--container-briefing);
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: var(--document-margin);
+  padding-right: var(--document-margin);
+  text-align: left;
+}
+
+/* Mission Dashboard - Homepage */
+.mission-dashboard {
+  padding: calc(56px + var(--space-2xl)) var(--document-margin) var(--space-4xl);
+  max-width: var(--container-briefing);
+  margin: 0;
+}
+
+.mission-briefing-header {
+  text-align: left;
+  margin-bottom: var(--space-4xl);
+  padding: var(--space-2xl);
+  border: 2px solid var(--tactical-grid);
+  background: var(--tactical-surface);
+}
+
+.mission-classification {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.mission-title {
+  font-size: var(--text-briefing);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--tactical-text);
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+}
+
+.mission-objective {
+  font-size: var(--text-tactical);
+  color: var(--tactical-text-secondary);
+  line-height: 1.4;
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* Key Metrics Display */
+.metrics-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+  margin: var(--space-4xl) 0;
+}
+
+.metric-card {
+  padding: var(--space-lg);
+  border: 2px solid var(--tactical-grid);
+  background: var(--tactical-surface);
+  transition: border-color var(--transition-tactical);
+}
+
+.metric-card:hover {
+  border-color: var(--tactical-primary);
+}
+
+.metric-label {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.metric-value {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-command);
+  font-weight: 800;
+  color: var(--tactical-primary);
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+
+.metric-description {
+  font-size: var(--text-status);
+  color: var(--tactical-text-secondary);
+  line-height: 1.4;
+}
+
+/* Intelligence Reports - Blog Listing */
+.intel-reports {
+  margin: var(--space-4xl) 0;
+}
+
+.intel-section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 2px solid var(--tactical-grid);
+}
+
+.intel-section-title {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-tactical);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text);
+}
+
+.intel-report-item {
+  padding: var(--space-lg);
+  border: 1px solid var(--tactical-grid);
+  background: var(--tactical-surface);
+  margin-bottom: var(--space-md);
+  transition: all var(--transition-tactical);
+}
+
+.intel-report-item:hover {
+  border-color: var(--tactical-primary);
+  box-shadow: var(--shadow-tactical);
+}
+
+.intel-report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.intel-report-classification {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  padding: 2px var(--space-xs);
+  border: 1px solid var(--tactical-grid);
+}
+
+.intel-report-date {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  color: var(--tactical-text-muted);
+}
+
+.intel-report-title {
+  font-size: var(--text-tactical);
+  font-weight: 700;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-sm);
+  line-height: 1.2;
+}
+
+.intel-report-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-tactical);
+}
+
+.intel-report-title a:hover {
+  color: var(--tactical-primary);
+}
+
+.intel-report-summary {
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  line-height: 1.5;
+}
+
+/* Article Layout - Intelligence Briefing */
+.briefing-document {
+  max-width: var(--container-intel);
+  margin: 0;
+  padding: 0 var(--space-lg) var(--space-4xl);
+}
+
+.tactical-analysis {
+  margin-top: var(--space-xl);
+}
+
+.tactical-analysis h2 {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-tactical);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text);
+  margin: var(--space-2xl) 0 var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--tactical-grid);
+}
+
+.tactical-analysis h3 {
+  font-size: var(--text-intel);
+  font-weight: 600;
+  color: var(--tactical-text);
+  margin: var(--space-xl) 0 var(--space-md);
+}
+
+.tactical-analysis p {
+  margin-bottom: var(--space-lg);
+  line-height: 1.7;
+}
+
+.tactical-analysis ul,
+.tactical-analysis ol {
+  margin: var(--space-lg) 0;
+  padding-left: var(--space-xl);
+}
+
+.tactical-analysis li {
+  margin-bottom: var(--space-sm);
+  line-height: 1.6;
+}
+
+.tactical-analysis blockquote {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg);
+  background: var(--tactical-surface);
+  border-left: 4px solid var(--tactical-primary);
+  font-style: italic;
+  color: var(--tactical-text-secondary);
+}
+
+.tactical-analysis code {
+  font-family: var(--font-tactical-mono);
+  font-size: 0.9em;
+  padding: 2px 6px;
+  background: var(--tactical-surface);
+  border: 1px solid var(--tactical-grid);
+  color: var(--tactical-text);
+}
+
+.tactical-analysis pre {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg);
+  background: var(--tactical-surface);
+  border: 2px solid var(--tactical-grid);
+  overflow-x: auto;
+}
+
+.tactical-analysis pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Key Metrics in Articles */
+.key-metrics {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg);
+  background: var(--tactical-surface);
+  border: 2px solid var(--tactical-grid);
+}
+
+.key-metrics h2 {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-status);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  margin-bottom: var(--space-md);
+  border-bottom: none;
+}
+
+.metrics-list {
+  list-style: none;
+  padding: 0;
+}
+
+.metric-item {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-intel);
+  color: var(--tactical-text);
+  margin-bottom: var(--space-sm);
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.metric-item::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--tactical-primary);
+  font-weight: 700;
+}
+
+/* Tactical Buttons */
+.btn-tactical {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--tactical-primary);
+  color: var(--tactical-surface);
+  border: 2px solid var(--tactical-primary);
+  text-decoration: none;
+  transition: all var(--transition-tactical);
+  cursor: pointer;
+}
+
+.btn-tactical:hover {
+  background: transparent;
+  color: var(--tactical-primary);
+  box-shadow: var(--shadow-tactical);
+}
+
+.btn-tactical-secondary {
+  background: transparent;
+  color: var(--tactical-secondary);
+  border-color: var(--tactical-secondary);
+}
+
+.btn-tactical-secondary:hover {
+  background: var(--tactical-secondary);
+  color: var(--tactical-surface);
+}
+
+/* Personnel File - About Page */
+.personnel-file {
+  padding: calc(56px + var(--space-2xl)) var(--space-lg) var(--space-4xl);
+  max-width: var(--container-briefing);
+  margin: 0;
+}
+
+.personnel-header {
+  text-align: center;
+  margin-bottom: var(--space-4xl);
+  padding: var(--space-xl);
+  border: 2px solid var(--tactical-grid);
+  background: var(--tactical-surface);
+}
+
+.personnel-classification {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tactical-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.personnel-name {
+  font-size: var(--text-command);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--tactical-text);
+  margin-bottom: var(--space-md);
+}
+
+.personnel-rank {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-intel);
+  color: var(--tactical-text-secondary);
+  line-height: 1.4;
+}
+
+/* Footer - Command Terminal */
+.tactical-footer {
+  background: var(--tactical-surface);
+  border-top: 2px solid var(--tactical-grid);
+  padding: var(--space-xl) 0;
+  margin-top: var(--space-4xl);
+}
+
+.tactical-footer-container {
+  max-width: var(--container-briefing);
+  margin: 0;
+  padding: 0 var(--space-lg);
+  text-align: center;
+}
+
+.tactical-footer-links {
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: center;
+  margin-bottom: var(--space-md);
+}
+
+.tactical-footer-link {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  color: var(--tactical-text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color var(--transition-tactical);
+}
+
+.tactical-footer-link:hover {
+  color: var(--tactical-primary);
+}
+
+.tactical-footer-copyright {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-classification);
+  color: var(--tactical-text-muted);
+}
+
+/* Tactical Mobile Navigation */
+.tactical-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: var(--space-xs);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.tactical-hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: var(--tactical-text);
+  transition: all var(--transition-tactical);
+  transform-origin: center;
+}
+
+.tactical-mobile-toggle[aria-expanded="true"] .tactical-hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.tactical-mobile-toggle[aria-expanded="true"] .tactical-hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.tactical-mobile-toggle[aria-expanded="true"] .tactical-hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Navigation Overlay */
+.tactical-mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-command), visibility var(--transition-command);
+}
+
+.tactical-mobile-overlay[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tactical-mobile-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(100vw, 400px);
+  height: 100vh;
+  background-color: var(--tactical-surface);
+  border-left: 2px solid var(--tactical-primary);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--transition-command);
+}
+
+.tactical-mobile-overlay[aria-hidden="false"] .tactical-mobile-menu {
+  transform: translateX(0);
+}
+
+.tactical-mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  border-bottom: 2px solid var(--tactical-grid);
+  background: var(--tactical-background);
+}
+
+.tactical-mobile-brand {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-status);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text);
+}
+
+.tactical-mobile-close {
+  display: flex;
+  background: none;
+  border: 1px solid var(--tactical-grid);
+  padding: var(--space-xs);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  transition: border-color var(--transition-tactical);
+}
+
+.tactical-mobile-close:hover,
+.tactical-mobile-close:focus {
+  border-color: var(--tactical-primary);
+}
+
+.tactical-close-line {
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: var(--tactical-text);
+}
+
+.tactical-close-line:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.tactical-close-line:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+.tactical-mobile-nav {
+  padding: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tactical-mobile-link {
+  font-family: var(--font-tactical-mono);
+  font-size: var(--text-intel);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tactical-text-secondary);
+  text-decoration: none;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--tactical-grid);
+  transition: all var(--transition-tactical);
+  display: flex;
+  align-items: center;
+  min-height: 44px; /* Accessibility touch target */
+}
+
+.tactical-mobile-link:hover,
+.tactical-mobile-link:focus {
+  color: var(--tactical-primary);
+  background-color: var(--tactical-background);
+  border-left: 4px solid var(--tactical-primary);
+}
+
+.tactical-mobile-link:last-child {
+  border-bottom: none;
+}
+
+/* Mobile Tactical Optimization */
+@media (max-width: 768px) {
+  .tactical-container,
+  .nav-tactical-container,
+  .tactical-footer-container {
+    padding: 0 var(--space-md);
+  }
+  
+  /* Hide desktop navigation on mobile */
+  .nav-tactical-menu {
+    display: none;
+  }
+  
+  /* Show mobile toggle on mobile */
+  .tactical-mobile-toggle {
+    display: flex;
+  }
+  
+  .briefing-header {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  .briefing-title {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  .mission-dashboard,
+  .personnel-file {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  .briefing-document {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  .metrics-display {
+    grid-template-columns: 1fr;
+  }
+  
+  .intel-report-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+  
+  .tactical-footer-links {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .tactical-container,
+  .nav-tactical-container,
+  .tactical-footer-container {
+    padding: 0 var(--space-sm);
+  }
+  
+  .mission-briefing-header,
+  .personnel-header {
+    padding: var(--space-md);
+  }
+  
+  .briefing-header,
+  .briefing-title,
+  .mission-dashboard,
+  .personnel-file,
+  .briefing-document {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+  
+  .metric-card,
+  .intel-report-item {
+    padding: var(--space-md);
+  }
+  
+  /* Document layout mobile enhancements */
+  .document-content {
+    font-size: 1.125rem; /* Larger text on mobile */
+    line-height: 1.8;
+  }
+  
+  .tactical-container {
+    padding: 0 var(--space-md); /* Increased mobile padding */
+  }
+  
+  .briefing-title {
+    font-size: clamp(1.75rem, 8vw, 3rem);
+    line-height: 1.2;
+  }
+}
+
+/* Enhanced mobile typography and spacing */
+@media (max-width: 480px) {
+  :root {
+    --document-margin: var(--space-md);
+  }
+  
+  .tactical-container,
+  .mission-dashboard,
+  .briefing-document {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  /* Single column layout for all grids */
+  .metrics-display,
+  .intel-reports,
+  .service-record-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-md);
+  }
+  
+  /* Better touch targets */
+  .btn-tactical {
+    padding: var(--space-md) var(--space-lg);
+    font-size: 1rem;
+    min-height: 44px; /* iOS recommended touch target */
+  }
+  
+  /* Improved readability */
+  .document-content,
+  .briefing-content,
+  .personnel-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    max-width: 100%;
+  }
+}
