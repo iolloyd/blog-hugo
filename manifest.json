@@ -1,0 +1,31 @@
+{
+  "name": "Lloyd Moore - CTO & VP Engineering",
+  "short_name": "Lloyd Moore",
+  "description": "Engineering executive who scales teams, platforms and revenue. Expert in cloud architecture, team leadership, and digital transformation.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0071e3",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["business", "technology", "blog"],
+  "lang": "en-US",
+  "prefer_related_applications": false
+}
