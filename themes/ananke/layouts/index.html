@@ -1,6 +1,9 @@
 {{ define "main" }}
   <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }}">
     {{ .Content }}
+    <div class="tc pv3">
+      <a href="/cv" class="f4 link dim black ba b--black-20 ph3 pv2 mb2 dib">View CV</a>
+    </div>
   </article>
 
   {{/* Define a section to pull recent posts from. For Hugo 0.20 this will default to the section with the most number of pages. */}}
