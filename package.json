@@ -1,0 +1,25 @@
+{
+  "name": "lloydmoore-blog",
+  "version": "1.0.0",
+  "description": "Lloyd Moore's technical blog - Hugo static site deployed on Cloudflare Workers",
+  "scripts": {
+    "build": "hugo --minify",
+    "dev": "hugo server --buildDrafts --buildFuture",
+    "workers:dev": "wrangler dev",
+    "workers:deploy": "wrangler deploy",
+    "workers:preview": "wrangler deploy --env preview",
+    "clean": "rm -rf public"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iolloyd/blog.git"
+  },
+  "author": "Lloyd Moore",
+  "license": "MIT"
+}

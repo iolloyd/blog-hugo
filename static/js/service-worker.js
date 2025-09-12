@@ -5,14 +5,18 @@ const CACHE_NAME = 'lloyd-blog-v1';
 const RUNTIME_CACHE = 'lloyd-blog-runtime';
 
 // Essential files to cache on install
+// Updated paths for Cloudflare Workers static asset serving
 const STATIC_CACHE_URLS = [
   '/',
   '/offline.html',
-  '/assets/css/style.css',
-  '/assets/css/mobile.css',
-  '/assets/js/animations.js',
-  '/assets/js/mobile-nav.js',
-  '/assets/js/lazy-load.js',
+  '/css/style.css',
+  '/css/mobile.css', 
+  '/css/minimal.css',
+  '/css/tactical.css',
+  '/css/terminal-effects.css',
+  '/js/animations.js',
+  '/js/mobile-nav.js',
+  '/js/lazy-load.js',
   '/manifest.json'
 ];
 
