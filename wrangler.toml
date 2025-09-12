@@ -1,0 +1,15 @@
+name = "lloydmoore-blog"
+compatibility_date = "2025-07-31"
+
+[build]
+command = "hugo --gc --minify"
+
+[assets]
+directory = "./public"
+not_found_handling = "404-page"
+
+[vars]
+ENVIRONMENT = "production"
+
+[env.preview.vars]
+ENVIRONMENT = "preview"

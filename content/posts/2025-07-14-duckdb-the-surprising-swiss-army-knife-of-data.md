@@ -14,7 +14,7 @@ metrics:
 
 # DuckDB: Making the Impossible Simple
 
-Last week, someone asked to analyze 50GB of CSV files scattered across S3. Five years ago, this would've meant spinning up a Spark cluster. Today? One line of DuckDB SQL.
+Your data analyst just asked you to analyze 50GB of CSV files scattered across S3. Five years ago, this would've meant spinning up a Spark cluster. Today? One line of DuckDB SQL.
 
 ```sql
 SELECT customer_id, SUM(amount) as total_spent
@@ -25,28 +25,28 @@ ORDER BY total_spent DESC
 LIMIT 100;
 ```
 
-No cluster. No downloads. No loading. Just query the files where they sit.
+No cluster. No downloads. No loading. You just query the files where they sit.
 
-This is DuckDB's superpower: it makes difficult data tasks surprisingly simple.
+This is DuckDB's superpower: it makes your difficult data tasks surprisingly simple.
 
 ## What Is DuckDB?
 
 Think of DuckDB like SQLite's analytical cousin. It's a database that runs inside your application without needing a separate server.
 
-But calling it 'just a database' misses the point. DuckDB is more like a Swiss Army knife for data. One tool that replaces dozens of specialized ones.
+But calling it 'just a database' misses the point. DuckDB is more like a Swiss Army knife for your data. One tool that replaces dozens of specialized ones.
 
-What makes it special:
+What makes it special for your business:
 - **No server needed**: Just import and use
-- **Built for analysis**: Stores data in columns, not rows (faster for analytics)
+- **Built for analysis**: Stores data in columns, not rows (faster for your analytics)
 - **Zero setup**: Single file, works anywhere
-- **Processes in chunks**: Handles data in batches for speed
+- **Processes in chunks**: Handles your data in batches for speed
 - **Pure SQL**: If you know SQL, you're ready to go
 
 Here's what the docs don't tell you: DuckDB excels at jobs you wouldn't expect any database to handle.
 
 ## Surprising Use Case #1: The Universal File Reader
 
-Forget writing parsers. DuckDB reads everything:
+Stop writing parsers. DuckDB reads everything:
 
 ```sql
 -- Query CSV files
@@ -71,11 +71,11 @@ JOIN 'preferences.json' json ON csv.user_id = json.user_id
 JOIN 'transactions/*.parquet' parquet ON csv.user_id = parquet.user_id;
 ```
 
-No schema needed. No CREATE TABLE required. DuckDB figures out the structure and just works.
+No schema needed. No CREATE TABLE required. DuckDB figures out your data structure and just works.
 
 ## Surprising Use Case #2: Git Repository Analyst
 
-Want to analyze your Git history? DuckDB can query it directly:
+Want to analyze your team's Git history? DuckDB can query it directly:
 
 ```sql
 -- Install git extension
@@ -103,11 +103,11 @@ GROUP BY hour
 ORDER BY hour;
 ```
 
-Ten lines of SQL replaced a 200-line Python script.
+Ten lines of SQL replace your 200-line Python script.
 
 ## Surprising Use Case #3: The Pandas Replacement
 
-Data scientists, pay attention. DuckDB beats pandas performance while using familiar SQL:
+If you're a data scientist tired of waiting for pandas to process large files, pay attention. DuckDB beats pandas performance while using familiar SQL:
 
 ```python
 # Old way with pandas

@@ -13,13 +13,13 @@ metrics:
 
 > "The best code is no code. The second-best code is code so simple that deletion becomes obvious."
 
-After years wrestling with Apache Kafka, Redis Streams, and message queues, I learned an uncomfortable truth: **most event processing problems are simpler than we make them.**
+Your event processing system probably costs more and does less than you need. After years of wrestling with Apache Kafka, Redis Streams, and complex message queues, here's an uncomfortable truth: **most event processing problems are simpler than you make them.**
 
 True story: this solution is running in production, and has been for years ... 
 
 ## The Problem: Multi-Database Event Replication
 
-Imagine you are building a financial system where every transaction needs to be recorded across multiple database replicas for compliance. The events must be:
+Picture this: you're building a financial system where every transaction needs to be recorded across multiple database replicas for compliance. The events must be:
 
 - **Durable**: Never lose an event, even when systems crash
 - **Ordered**: Process events in the exact sequence they happened
@@ -27,17 +27,17 @@ Imagine you are building a financial system where every transaction needs to be 
 - **Eventually Consistent**: All copies end up with the same data
 - **Auditable**: Complete history of everything that happened
 
-Most people reach for Apache Kafka, Amazon Kinesis, or Redis Streams. But what if SQLite could handle this job?
+Most people reach for Apache Kafka, Amazon Kinesis, or Redis Streams. But what if SQLite could handle your job better?
 
 ## The SQLite Event Log: Architecture Overview
 
-Here's the key insight: **SQLite guarantees your data stays safe (ACID compliance) and handles multiple writers efficiently (WAL mode)**. This makes it perfect for event logs.
+Here's the key insight: **SQLite guarantees your data stays safe (ACID compliance) and handles multiple writers efficiently (WAL mode)**. This makes it perfect for your event logs.
 
 Think of it like a journal that never loses pages. Every entry gets written safely. Multiple people can write at the same time. You can read the whole history anytime.
 
 ### Core Components
 
-1. **Event Log Table**: Where we store every event (append-only, never delete)
+1. **Event Log Table**: Where you store every event (append-only, never delete)
 2. **Replication Tracker**: Keeps track of which events got copied where
 3. **Worker Processes**: Background tasks that copy events and process them
 4. **Recovery Mechanism**: Makes sure we never lose events when things break

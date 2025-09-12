@@ -16,30 +16,30 @@ metrics:
 
 ---
 
-I tried TLA+ formal verification on our recruitment system. It started as an experiment. It ended up saving us from a nasty production bug.
+Why should you care about formal verification? Because it catches bugs that will cost your business money, reputation, and sleep. Here's how TLA+ formal verification saved us from a nasty production bug.
 
-The verification caught a race condition that would have corrupted our data. Our code reviews missed it. Our unit tests missed it. Our integration tests missed it too.
+The verification caught a race condition that would have corrupted your data. Your code reviews would miss this. Your unit tests would miss this. Your integration tests would miss this too.
 
-Here's how mathematical proof succeeded where traditional testing failed.
+Here's how mathematical proof succeeds where traditional testing fails.
 
 ## The System: CV Job Matching at Scale
 
-We built a recruitment platform that processes PDF CVs and matches candidates to jobs. Think mini-LinkedIn for recruiters. It has four main parts:
+Picture a recruitment platform that processes PDF CVs and matches candidates to jobs. Think mini-LinkedIn for recruiters. It has four main parts:
 
 - **PDF Processing Pipeline**: Extracts data from uploaded CVs
 - **Multi-Stage Matching Engine**: Scores candidates against jobs
 - **Job Lifecycle Management**: Handles job states (draft → active → inactive)
 - **REST API**: Manages uploads, matching requests, and results
 
-The architecture looked solid. We had unit tests. We had integration tests. I'd reviewed all the code myself. What could go wrong?
+The architecture looked solid. You have unit tests. You have integration tests. You've reviewed all the code. What could go wrong?
 
 ## Enter TLA+: Mathematical Bug Hunting
 
-[TLA+](https://lamport.azurewebsites.net/tla/tla.html) is a tool for finding bugs in concurrent systems. Think of it as a mathematical detective.
+[TLA+](https://lamport.azurewebsites.net/tla/tla.html) is a tool for finding bugs in concurrent systems. Think of it as a mathematical detective that never gets tired and never misses anything.
 
-Testing checks specific scenarios. TLA+ works differently. It explores every possible execution of your system. Every thread interleaving. Every timing variation. Every edge case you didn't think to test.
+Your testing checks specific scenarios. TLA+ works differently. It explores every possible execution of your system. Every thread interleaving. Every timing variation. Every edge case you didn't think to test.
 
-I spent a day writing TLA+ specifications for our matching system. Here's what they looked like:
+Here's what a day of writing TLA+ specifications for the matching system looks like. Here's what they looked like:
 
 ```tla
 \* CV Processing State Machine
@@ -75,13 +75,13 @@ MatchingPreconditions ==
         candidateStatus[pair[1]] = "completed" /\ jobStatus[pair[2]] = "active"
 ```
 
-This rule seemed bulletproof. How could we match a candidate with an inactive job? Surely impossible.
+This rule seems bulletproof. How could you match a candidate with an inactive job? Surely impossible.
 
-TLA+ would prove me wrong.
+TLA+ proves this assumption wrong.
 
 ## The Smoking Gun: TLC Model Checker Finds the Bug
 
-I ran the TLC model checker. It found a violation immediately:
+The TLC model checker finds a violation immediately:
 
 ```
 Error: Invariant MatchingPreconditions is violated.

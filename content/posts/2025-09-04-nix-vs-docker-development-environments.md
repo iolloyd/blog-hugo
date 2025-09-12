@@ -13,11 +13,11 @@ metrics:
 
 “It works on my machine.”
 
-Every developer has said it. Docker was supposed to kill that excuse. But after leading teams through years of Docker-induced headaches , 90-second startup times, 500GB of disk bloat, CI pipelines that randomly broke, I can tell you: containers didn’t solve the problem. They just moved it around.
+Your developers say this every time something breaks in production. Docker was supposed to kill that excuse. But after leading teams through years of Docker-induced headaches , 90-second startup times, 500GB of disk bloat, CI pipelines that randomly broke. containers didn’t solve the problem. They just moved it around.
 
 Enter Nix.
 
-Nix isn’t a shiny toy. It’s been battle-tested for years. And for local development, it delivers what Docker promised but never achieved: truly reproducible environments, instant switching, and minimal overhead. Even better, it makes Docker more powerful in production.
+Nix isn’t a shiny toy. It’s been battle-tested for years. For your local development, it delivers what Docker promised but never achieved: truly reproducible environments, instant switching, and minimal overhead. Even better, it makes Docker more powerful in production.
 
 ## The Docker Development Problem Nobody Talks About
 
