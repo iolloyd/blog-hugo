@@ -13,7 +13,9 @@ metrics:
 
 > "Nobody ever got fired for buying IBM."
 
-Replace IBM with Kubernetes in 2025. The saying still rings true. I've scaled engineering teams from 10 to 187 people. Here's what I learned: **the best technology solves your problem with minimal friction. It's not the most popular or hyped.**
+Replace IBM with Kubernetes in 2025. The saying still holds true.
+
+I've scaled engineering teams from 10 to 187 people. Here's what I learned: **the best technology solves your problem with the least fuss. Popular doesn't mean right.**
 
 ## The Messy Reality of Multi-Cloud Architecture
 
@@ -27,13 +29,13 @@ Our first instinct was Kubernetes. It's the default choice. Everyone hires for i
 
 Kubernetes would cost us dearly:
 
-**Cluster Federation**: We'd drown in YAML configurations. Stitching clouds and on-premises infrastructure together meant endless complexity.
+**Too much configuration**: We'd drown in YAML files. Connecting different cloud providers would create endless complexity.
 
-**Networking Complexity**: CNIs and ingress controllers are hard. Juggling them across environments felt impossible.
+**Network headaches**: Container networking (CNIs) and load balancing (ingress controllers) are difficult. Managing them across multiple environments seemed impossible.
 
-**Operational Overhead**: Our lean SRE team would spend all their time on maintenance. Cluster upgrades and CRDs would consume everything.
+**Maintenance burden**: Our small reliability team would spend all their time keeping Kubernetes running. Upgrades and custom resources would eat everything.
 
-We'd maintain the orchestrator instead of shipping features. That's backwards.
+We'd spend time maintaining the tool instead of building products. That's backwards.
 
 ## The "Boring" Alternative: HashiCorp Nomad
 
@@ -43,14 +45,14 @@ Nomad doesn't headline conference keynotes. It lacks Kubernetes' buzz and market
 
 We had three main reasons:
 
-**Multi-Cloud Federation Made Simple**
-We needed seamless cluster federation across clouds. Nomad delivered with one command. Clusters join and work. No complex federation controllers. No cross-cluster authentication nightmares.
+**Multi-Cloud Made Simple**
+We needed to connect clusters across different cloud providers. Nomad solved this with one command. Clusters join and work. No complex controllers needed. No authentication headaches.
 
-**Lightweight Footprint**
-Nomad uses a single binary deployment. The installation path is identical everywhere - cloud or bare metal. Resource overhead stays minimal compared to the k8s control plane.
+**Lightweight Setup**
+Nomad is just one file you download and run. Installation works the same everywhere - cloud servers or physical hardware. It uses far less resources than Kubernetes.
 
-**Integrated Stack**
-Consul comes built-in for service mesh. Vault integration handles secrets natively. You don't bolt on additional complexity.
+**Everything Works Together**
+Service networking (Consul) comes built-in. Secret management (Vault) integrates natively. You don't add layers of complexity.
 
 ### The Results That Matter
 
@@ -73,21 +75,21 @@ Start with your business need, not the technology. List your actual requirements
 
 ### 2. How Big and Experienced Is Your Team Today?
 
-A team of 5 can't operate infrastructure designed for 50 people. Consider your team's existing expertise. Factor in their learning capacity.
+Five people can't run infrastructure built for fifty. Look at your team's current skills. Consider how much new technology they can learn.
 
 ### 3. What Will Hiring Look Like in 18 Months?
 
-Plan to 10x your team? Optimize for common skills. Staying lean? Optimize for operational simplicity.
+Planning to grow your team ten times larger? Choose technology with common skills. Staying small? Choose simple operations.
 
 ## The Innovation in "Boring"
 
-The "boring" choice can be your most innovative move. Innovation isn't about using cool technology. It's about delivering business value quickly and sustainably.
+The 'boring' choice can be your smartest move. Innovation isn't about using trendy technology. It's about delivering business value quickly and reliably.
 
 Choosing Nomad over Kubernetes gave us:
-- Faster time to market
-- Lower operational overhead
-- Happier engineers focused on product features
-- A system that worked without drama
+- Shipped faster to customers
+- Less time spent on maintenance
+- Engineers focused on building products
+- A system that worked without constant firefighting
 
 Real innovation solves the right problems with minimal complexity.
 

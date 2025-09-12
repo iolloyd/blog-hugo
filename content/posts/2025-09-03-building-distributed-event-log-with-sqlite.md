@@ -13,7 +13,7 @@ metrics:
 
 > "The best code is no code. The second-best code is code so simple that deletion becomes obvious."
 
-After years of wrestling with Apache Kafka, Redis Streams, and various message queue solutions, I've come to appreciate an uncomfortable truth: **most event processing problems don't need the complexity we throw at them.**
+After years wrestling with Apache Kafka, Redis Streams, and message queues, I learned an uncomfortable truth: **most event processing problems are simpler than we make them.**
 
 True story: this solution is running in production, and has been for years ... 
 
@@ -21,24 +21,26 @@ True story: this solution is running in production, and has been for years ...
 
 Imagine you are building a financial system where every transaction needs to be recorded across multiple database replicas for compliance. The events must be:
 
-- **Durable**: Never lose an event, even during system failures
-- **Ordered**: Process events in the sequence they occurred
-- **Distributed**: Replicate to multiple database instances
-- **Eventually Consistent**: All replicas converge to the same state
-- **Auditable**: Full history of what happened and when
+- **Durable**: Never lose an event, even when systems crash
+- **Ordered**: Process events in the exact sequence they happened
+- **Distributed**: Copy events to multiple database copies
+- **Eventually Consistent**: All copies end up with the same data
+- **Auditable**: Complete history of everything that happened
 
-The conventional wisdom suggests Apache Kafka, Amazon Kinesis, or maybe Redis Streams. But what if we could accomplish this with just SQLite?
+Most people reach for Apache Kafka, Amazon Kinesis, or Redis Streams. But what if SQLite could handle this job?
 
 ## The SQLite Event Log: Architecture Overview
 
-Here's the core insight: **SQLite's ACID properties and Write-Ahead Logging (WAL) mode make it an excellent foundation for building event logs**. Combined with its simplicity and reliability, we can create a distributed system that's both robust and maintainable.
+Here's the key insight: **SQLite guarantees your data stays safe (ACID compliance) and handles multiple writers efficiently (WAL mode)**. This makes it perfect for event logs.
+
+Think of it like a journal that never loses pages. Every entry gets written safely. Multiple people can write at the same time. You can read the whole history anytime.
 
 ### Core Components
 
-1. **Event Log Table**: Our append-only event store
-2. **Replication Tracker**: Monitors which events have been replicated where
-3. **Worker Processes**: Handle replication and event processing
-4. **Recovery Mechanism**: Ensures no events are lost during failures
+1. **Event Log Table**: Where we store every event (append-only, never delete)
+2. **Replication Tracker**: Keeps track of which events got copied where
+3. **Worker Processes**: Background tasks that copy events and process them
+4. **Recovery Mechanism**: Makes sure we never lose events when things break
 
 Let's build it step by step.
 
