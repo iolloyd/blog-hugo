@@ -11,11 +11,13 @@ metrics:
   - "Zero dependency conflicts across team environments"
 ---
 
-> "It works on my machine" is supposed to be a problem that containers solved. Yet here we are, still debugging environment differences between developers who all claim to be running 'the same' Docker setup.
+“It works on my machine.”
 
-After leading development teams through countless Docker-induced headaches - from 90-second startup times that kill flow state to mysterious dependency conflicts that containers were meant to eliminate, I discovered Nix. It isn't a replacement for everything Docker does. It is, however, a superior solution for what is needed in local development environments.
+Every developer has said it. Docker was supposed to kill that excuse. But after leading teams through years of Docker-induced headaches , 90-second startup times, 500GB of disk bloat, CI pipelines that randomly broke, I can tell you: containers didn’t solve the problem. They just moved it around.
 
-This isn't about adopting bleeding-edge technology. Nix has been battle-tested for years. This is about choosing the right tool for the right job, and understanding how Nix doesn't just replace Docker for development. It also makes Docker better in production.
+Enter Nix.
+
+Nix isn’t a shiny toy. It’s been battle-tested for years. And for local development, it delivers what Docker promised but never achieved: truly reproducible environments, instant switching, and minimal overhead. Even better, it makes Docker more powerful in production.
 
 ## The Docker Development Problem Nobody Talks About
 
@@ -516,14 +518,18 @@ This approach eliminates the classic DevOps problem where applications behave di
 
 ## Conclusion
 
-Docker solved important problems around application packaging and deployment. But for daily development work, we've been using the wrong tool.
+Here’s the bottom line.
+	•	Developers get 10x faster startup and zero “works on my machine” bugs.
+	•	CI pipelines run 6–9x faster with real reproducibility.
+	•	Production containers shrink by 95% with dramatically fewer vulnerabilities.
 
-Nix provides truly reproducible development environments with none of Docker's performance overhead. More importantly, it makes our Docker images better by enabling minimal, secure containers built from exactly-specified dependencies.
+I’ve seen teams go from two-day onboarding slogs to one-hour ramp-ups by moving to Nix. The productivity gains alone are worth it. The security improvements are no joke.
 
-This isn't about replacing your entire infrastructure. It's about using the right tool for each job: Nix for development environments and dependency management, Docker for production deployment and orchestration.
+This isn’t about throwing Docker away. It’s about using the right tool for the right job:
+	•	Nix for development and dependency management.
+	•	Docker for orchestration and deployment.
 
-The combination delivers what Docker promised but couldn't deliver alone: genuinely reproducible environments that work the same way everywhere, with the performance and security characteristics production systems actually need.
+Together, they deliver on the original promise: environments that work the same everywhere.
 
-Start with one project. Create a simple `flake.nix`. Run `nix develop`. Experience the difference of true reproducibility without virtualization overhead.
-
-Your future self - and your development team - will thank you.
+—
+Want more posts like this? I’m writing a series on the tools and practices that actually scale engineering teams. Subscribe or follow me on LinkedIn to catch the next one.
