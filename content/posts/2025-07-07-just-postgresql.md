@@ -12,7 +12,6 @@ metrics:
   - "50k+ messages/second throughput capability"
 ---
 
-# You Don't Need Kafka (PostgreSQL Will Do Just Fine)
 
 Every few months, someone on your team suggests adding Kafka. "We need real-time event streaming," they say. "We need to decouple our services."
 

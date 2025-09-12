@@ -1,12 +1,11 @@
 ---
-layout: post
+layout: tactical-briefing
 title: "The Security Revolution: Why Tailscale and Teleport Are Changing Everything"
 date: 2025-09-08
 categories: [security, networking, devops]
 description: "Traditional security approaches are fundamentally broken. Here's how Tailscale and Teleport are revolutionizing infrastructure security."
 ---
 
-# The Security Revolution: Why Tailscale and Teleport Are Changing Everything
 
 At Blockdaemon, I once watched a single stolen SSH key give an attacker unlimited access to critical infrastructure, until someone noticed, hours later, and manually revoked it.
 

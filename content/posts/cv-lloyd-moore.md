@@ -1,12 +1,14 @@
-+++
-date = '2025-09-10T19:28:20+01:00'
-draft = false
-title = 'CV: Lloyd Moore - Engineering Executive'
-description = 'Complete professional CV for Lloyd Moore: CTO/VP Engineering with operational experience scaling teams from 10 to 187, achieving $3.25B valuation, and reducing cloud costs by 70%'
-categories = ['leadership', 'career']
-tags = ['cv', 'resume', 'cto', 'vp-engineering', 'leadership', 'scaling', 'military', 'technology']
-build = { list = false }
-+++
+---
+layout: tactical-briefing
+date: 2025-09-10
+draft: false
+title: 'CV: Lloyd Moore - Engineering Executive'
+description: 'Complete professional CV for Lloyd Moore: CTO/VP Engineering with operational experience scaling teams from 10 to 187, achieving $3.25B valuation, and reducing cloud costs by 70%'
+categories: ['leadership', 'career']
+tags: ['cv', 'resume', 'cto', 'vp-engineering', 'leadership', 'scaling', 'military', 'technology']
+build: 
+  list: false
+---
 
 # Lloyd Moore
 ## CTO | VP Engineering | Engineering Executive

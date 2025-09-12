@@ -1,7 +1,7 @@
 ---
 layout: tactical-briefing
 title: "How Smart Tokenization Platforms Turn Regulation Into a Competitive Moat"
-date: 2025-01-30 10:00:00
+date: 2025-01-30
 categories: [fintech, blockchain, regulation, architecture]
 description: "After reviewing a dozen tokenization platforms, the winners aren't building around regulations—they're building with them. Here's why compliance is becoming the ultimate competitive advantage."
 metrics:
