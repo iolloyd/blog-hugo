@@ -18,20 +18,20 @@ metrics:
 
 Why should you care about formal verification? Because it catches bugs that will cost your business money, reputation, and sleep. Here's how TLA+ formal verification saved us from a nasty production bug.
 
-The verification caught a race condition that would have corrupted your data. Your code reviews would miss this. Your unit tests would miss this. Your integration tests would miss this too.
+The verification caught a race condition that would have corrupted data. Most code reviews would miss this. Your unit tests would miss this. Your integration tests would miss this too.
 
 Here's how mathematical proof succeeds where traditional testing fails.
 
 ## The System: CV Job Matching at Scale
 
-Picture a recruitment platform that processes PDF CVs and matches candidates to jobs. Think mini-LinkedIn for recruiters. It has four main parts:
+This is an early stage recruitment platform that processes PDF CVs and matches candidates to jobs. Think mini-LinkedIn for recruiters. It has four main parts:
 
 - **PDF Processing Pipeline**: Extracts data from uploaded CVs
 - **Multi-Stage Matching Engine**: Scores candidates against jobs
 - **Job Lifecycle Management**: Handles job states (draft → active → inactive)
 - **REST API**: Manages uploads, matching requests, and results
 
-The architecture looked solid. You have unit tests. You have integration tests. You've reviewed all the code. What could go wrong?
+The architecture looked solid, although I am biased. There are some unit tests. There are more integration tests. What could go wrong?
 
 ## Enter TLA+: Mathematical Bug Hunting
 
@@ -39,7 +39,7 @@ The architecture looked solid. You have unit tests. You have integration tests. 
 
 Your testing checks specific scenarios. TLA+ works differently. It explores every possible execution of your system. Every thread interleaving. Every timing variation. Every edge case you didn't think to test.
 
-Here's what a day of writing TLA+ specifications for the matching system looks like. Here's what they looked like:
+Here's what a day of writing TLA+ specifications for the matching system looked like.
 
 ```tla
 \* CV Processing State Machine
@@ -77,11 +77,7 @@ MatchingPreconditions ==
 
 This rule seems bulletproof. How could you match a candidate with an inactive job? Surely impossible.
 
-TLA+ proves this assumption wrong.
-
-## The Smoking Gun: TLC Model Checker Finds the Bug
-
-The TLC model checker finds a violation immediately:
+TLA+ proves this assumption wrong. The TLC model checker finds a violation immediately:
 
 ```
 Error: Invariant MatchingPreconditions is violated.
@@ -92,14 +88,12 @@ State 3: Job j1 deactivated while matching still in progress
 Result: matchingInProgress = {<<c1, j1>>} but jobStatus[j1] = "inactive"
 ```
 
-**Wait, what?**
-
 The model checker found this execution sequence:
-1. A candidate completes CV processing ✅
-2. A job is activated ✅  
-3. Matching starts between the candidate and job ✅
-4. **The job gets deactivated while matching is still running** ❌
-5. Now we have active matching for an inactive job ❌
+1. A candidate completes CV processing
+2. A job is activated
+3. Matching starts between the candidate and job
+4. **The job gets deactivated while matching is still running**
+5. Now we have active matching for an inactive job
 
 ## The Race Condition Explained
 
@@ -126,11 +120,11 @@ Thread 1 (Matching):     Thread 2 (Job Management):
 │                       ├─ Admin deactivates job J1
 │                       │  (status = "inactive") 
 │                       │
-├─ Calculate scores     │  ❌ Job is now inactive but
-│  (expensive operation)│     matching continues!
+├─ Calculate scores     │  Job is now inactive but
+│  (expensive operation)│  matching continues!
 │                       │
-├─ Store match results  │  ❌ Results saved for 
-   for inactive job J1  │     inactive job!
+├─ Store match results  │  Results saved for 
+   for inactive job J1  │  inactive job!
 ```
 
 This breaks everything:
@@ -197,8 +191,8 @@ SafeDeactivateJob ==
 
 I implemented the fix and re-ran TLA+ verification:
 
-**Before Fix**: ❌ `MatchingPreconditions` invariant violated  
-**After Fix**: ✅ All invariants maintained across all reachable states
+**Before Fix**: `MatchingPreconditions` invariant violated  
+**After Fix**: All invariants maintained across all reachable states
 
 ```
 Model checking completed. No error has been found.
@@ -217,53 +211,28 @@ This bug shows why race conditions are so nasty:
 4. **Complex setup**: Requires specific event sequencing across multiple components
 
 Our test suite included:
-- ✅ Unit tests for job deactivation (passed)
-- ✅ Unit tests for matching algorithm (passed)  
-- ✅ Integration tests for the complete flow (passed)
-- ❌ **No tests for concurrent job state changes during matching**
+- Unit tests for job deactivation (passed)
+- Unit tests for matching algorithm (passed)  
+- Integration tests for the complete flow (passed)
+- **No tests for concurrent job state changes during matching**
 
 TLA+ found it immediately. Formal verification explores *all possible interleavings* of concurrent operations. Not just the ones we thought to test.
 
-## The Broader Lesson: Formal Methods in Practice
-
 This experience taught me when formal verification pays off:
 
-### When TLA+ Shines
+When TLA+ Shines
 - Systems with multiple threads or processes
 - Complex state machines with many moving parts
 - Rules that must always hold (no exceptions)
 - Catching design flaws before you build them
 
-### When TLA+ Is Overkill  
+When TLA+ Is Overkill  
 - Single-threaded algorithms (use property-based testing instead)
 - Simple database apps with minimal concurrency
 - User interface logic (use integration testing)
 - Performance problems (TLA+ finds correctness bugs, not speed issues)
 
-### Where to Start
-Don't verify everything. Pick your battles:
-1. Core business logic that can't break
-2. Areas where multiple threads share data
-3. Components that have caused problems before
-
-## The ROI of Mathematical Rigor
-
-**Time Investment**: ~1 day to write TLA+ specs  
-**Bug Found**: Critical race condition  
-**Production Impact Avoided**: Data inconsistencies, user confusion, debugging nightmares  
-**Team Learning**: New appreciation for formal methods
-
-TLA+ paid for itself the moment TLC printed that first invariant violation. Finding this bug in production would have meant:
-- Emergency hotfix deployment
-- Data cleanup scripts  
-- Customer support issues
-- Loss of confidence in the system
-
-Instead, we caught it before shipping any problematic code.
-
-## Getting Started with TLA+
-
-Want to try TLA+? Here's how to start:
+I'm stilling on my learning journey with TLAplus. If you want to try TLA+, here's how I recommend you start:
 
 1. **Install TLA+ Tools**: Download from [TLA+ home page](https://lamport.azurewebsites.net/tla/tools.html)
 2. **Start Small**: Model a simple state machine from your system
@@ -273,7 +242,7 @@ Want to try TLA+? Here's how to start:
 
 Don't model your entire system at once. Pick one tricky concurrent component and start there.
 
-## Conclusion: Bugs vs. Mathematical Proof
+## The Bottom Line
 
 Software bugs are inevitable. But some bugs are more inevitable than others. Race conditions in concurrent systems aren't just likely. They're mathematically guaranteed if you have shared state and poor synchronization.
 
@@ -283,4 +252,4 @@ Formal verification is different. It proves the moles can't exist.
 
 TLA+ won't replace your tests. But it's perfect for the nastiest bugs. The ones that hide between components. The ones that wait for perfect timing to destroy your data.
 
-Next time you build a concurrent system, spend a day on formal modeling. Your production systems will thank you. So will your sleep schedule.
+Next time you build a concurrent system, maybe think about spending some time on formal modeling. Your production systems might be thankful.
