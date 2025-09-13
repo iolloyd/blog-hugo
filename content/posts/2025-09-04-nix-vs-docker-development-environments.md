@@ -13,34 +13,25 @@ metrics:
 
 “It works on my machine.”
 
-Your developers say this every time something breaks in production. Docker was supposed to kill that excuse. But after leading teams through years of Docker-induced headaches , 90-second startup times, 500GB of disk bloat, CI pipelines that randomly broke. containers didn’t solve the problem. They just moved it around.
+Your developers say this every time something breaks in production. Docker was supposed to kill that excuse, but it didn't. What's worse, is that developers trust it too much and lay blame elsewhere.
 
-Enter Nix.
-
-Nix isn’t a shiny toy. It’s been battle-tested for years. For your local development, it delivers what Docker promised but never achieved: truly reproducible environments, instant switching, and minimal overhead. Even better, it makes Docker more powerful in production.
-
-## The Docker Development Problem Nobody Talks About
+Enter Nix. Nix isn’t a new shiny toy. It’s been battle-tested for years. For your local development, it delivers what Docker promised but never achieved: truly reproducible environments, instant switching, and minimal overhead. Even better, it makes Docker more powerful in production.
 
 Docker promised reproducible development environments. Instead, we got:
 
-**Performance that kills productivity:**
 - 45-90 second cold startup times for complex stacks
 - 500GB of disk space consumed across 8 developers on one project
 - Memory usage that crushes laptop performance (8GB+ for a simple web stack)
 
-**Reproducibility that isn't actually reproducible:**
 - "Latest" tags that break builds when team members pull at different times  
 - Layer caching that works differently across operating systems
 - Network configurations that behave differently on macOS vs Linux
 
-**Developer experience that adds friction:**
 - File watching that doesn't work reliably across host/container boundaries
 - Port conflicts when running multiple projects
 - Volume mount performance that makes hot reloading painful
 
-I've seen senior developers abandon Docker for local development, running services directly on their machines just to get work done. That defeats the entire purpose.
-
-## Enter Nix: Declarative Development Environments Done Properly
+I've seen senior developers abandon Docker for local development, running services directly on their machines just to get work done. I've done it myself, and yet it just defeats the entire purpose.
 
 Nix approaches environment management from first principles. Instead of virtualising an entire operating system, it creates isolated, reproducible environments at the package level.
 
@@ -120,28 +111,12 @@ services:
 
 The Docker version requires building images, managing volumes, orchestrating multiple containers, and dealing with networking between containers. The Nix version just works.
 
-## Performance That Actually Matters
+Nix is excellent for daily development work: Nix development shell with low time startup. The Docker compose equivalent can be close to a minute or more. Disk usage with Nix environment (Node + PostgreSQL + Redis): 847MB vs Docker equivalent: 8.9GB of images and volumes
 
-Here's where Nix shines for daily development work:
+- Nix services run as native processes (PostgreSQL: ~45MB, Redis: ~12MB) vs Docker: Additional container overhead (PostgreSQL container: ~180MB, Redis container: ~45MB)
 
-**Startup Performance:**
-- Nix development shell: ~8 seconds cold start
-- Docker compose equivalent: ~1 minute 23 seconds cold start  
-- **Result: 10.4x faster environment activation**
+These aren't synthetic benchmarks. These are my measurements from real development environments supporting production applications.
 
-**Disk Usage:**
-- Nix environment (Node + PostgreSQL + Redis): 847MB
-- Docker equivalent: 8.9GB of images and volumes
-- **Result: 91% less disk usage per project**
-
-**Memory Usage:**
-- Nix: Services run as native processes (PostgreSQL: ~45MB, Redis: ~12MB)
-- Docker: Additional container overhead (PostgreSQL container: ~180MB, Redis container: ~45MB)
-- **Result: 75% less memory overhead**
-
-These aren't synthetic benchmarks. These are measurements from real development environments supporting production applications.
-
-## Where Nix Excels Over Docker for Development
 
 **True Reproducibility:**
 Every package in Nix is built from a cryptographic hash of its inputs. When you specify PostgreSQL 15.4, you get exactly PostgreSQL 15.4; the same binary that was built from the same source code, with the same dependencies, using the same compiler flags. No surprises.
@@ -182,11 +157,10 @@ devShells.default = pkgs.mkShell {
 
 Development tools, test runners, and scripts become part of the reproducible environment. New team members get everything they need with one command.
 
-## How Nix Makes Docker Better in Production
+## Nix Makes Docker Better in Production
 
-Here's where it gets interesting: Nix doesn't replace Docker in production - it makes Docker images dramatically better.
+Nix doesn't replace Docker in production - it makes Docker images dramatically better. Take a look at this traditional multi-stage docker build:
 
-**Traditional Multi-Stage Docker Build:**
 ```dockerfile
 FROM node:20-alpine AS builder
 WORKDIR /app
@@ -203,7 +177,8 @@ EXPOSE 3000
 CMD ["node", "server.js"]
 ```
 
-**Nix-Built Docker Image:**
+Here is the same thing, but using nix to build the docker image:
+
 ```nix
 { pkgs ? import <nixpkgs> {} }:
 
@@ -228,12 +203,11 @@ pkgs.dockerTools.buildImage {
 }
 ```
 
-**The Results:**
+They both do the same thing, but with different costs:
 - Traditional Docker image: ~300MB
-- Nix-built Docker image: ~14MB
-- **95% size reduction**
+- Nix-built Docker image: ~14MB !!
 
-More importantly, the Nix-built image contains only the exact dependencies needed to run the application. No package manager, no shell, no extra libraries - just the minimal runtime environment.
+The Nix-built image contains only the exact dependencies needed to run the application. No package manager, no shell, no extra libraries.
 
 **Security Benefits:**
 ```nix
@@ -254,11 +228,9 @@ pkgs.dockerTools.buildImage {
 
 The resulting container has almost no attack surface - just your application binary and its essential runtime dependencies.
 
-## Migration Strategy for Engineering Teams
+If you are interested in moving from Docker-first to Nix-first development, it doesn't require a big-bang migration. Here's the approach I recommend:
 
-Moving from Docker-first to Nix-first development doesn't require a big-bang migration. Here's the approach I recommend:
-
-**Phase 1: Parallel Introduction **
+#### Phase 1: Parallel Introduction 
 ```nix
 # Start with one project, one environment
 {
@@ -274,7 +246,7 @@ Moving from Docker-first to Nix-first development doesn't require a big-bang mig
 
 Keep Docker compose for complex integration testing, but let developers use `nix develop` for daily work.
 
-**Phase 2: Service-by-Service Migration **
+#### Phase 2: Service-by-Service Migration
 ```nix
 {
   # Add development shells for different services
@@ -298,153 +270,6 @@ Developers can choose the minimal environment they need for the work they're doi
 
 **Phase 3: Production Integration (Month 2)**
 Start building production Docker images with Nix for new services. Compare deploy sizes and security postures.
-
-## CI/CD: Where Nix and Docker Converge
-
-The real power of combining Nix and Docker becomes apparent in CI/CD pipelines, where reproducibility and performance directly impact development velocity and deployment reliability.
-
-### Build Reproducibility That Actually Works
-
-Docker's layer caching promises reproducible builds, but "reproducible" often means "works most of the time." Nix's content-addressed storage provides genuine reproducibility:
-
-**Traditional Docker CI Build:**
-```yaml
-# .github/workflows/docker-build.yml
-- name: Build and push Docker image
-  uses: docker/build-push-action@v4
-  with:
-    context: .
-    push: true
-    tags: myapp:${{ github.sha }}
-    cache-from: type=gha
-    cache-to: type=gha,mode=max
-```
-
-This works until someone updates `package.json` but forgets to update the lock file, or a base image gets a security patch that changes behavior.
-
-**Nix-Powered CI Build:**
-```yaml
-# .github/workflows/nix-build.yml  
-- uses: cachix/install-nix-action@v22
-  with:
-    nix_path: nixpkgs=channel:nixos-unstable
-
-- uses: cachix/cachix-action@v12
-  with:
-    name: myproject
-    authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-- name: Build application
-  run: nix build .#myapp
-
-- name: Build Docker image  
-  run: nix build .#docker-image && docker load < result
-```
-
-**The difference:**
-- Docker build that "works on my machine" but fails in CI: **eliminated**
-- Inconsistent dependency versions between environments: **impossible**
-- Build cache invalidation from unrelated changes: **eliminated**
-
-**Real Performance Impact:**
-- Average Docker CI build: 4-7 minutes with frequent cache misses
-- Average Nix CI build: 45 seconds with ~95% cache hit rate
-- **Result: 6-9x faster CI builds with guaranteed reproducibility**
-
-### GitHub Actions: Nix-Powered Pipelines
-
-Here's a complete GitHub Actions workflow that demonstrates the Nix advantage:
-
-```yaml
-name: Build and Deploy
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    
-    - uses: cachix/install-nix-action@v22
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
-        
-    - uses: cachix/cachix-action@v12
-      with:
-        name: myproject
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    
-    # Build application with guaranteed reproducibility
-    - name: Build app
-      run: nix build .#myapp
-      
-    # Run tests in identical environment to development
-    - name: Test
-      run: nix develop -c npm test
-      
-    # Build minimal Docker image for production
-    - name: Build container
-      run: |
-        nix build .#docker-image
-        docker load < result
-        docker tag myapp:latest myregistry/myapp:${{ github.sha }}
-        
-    # Security scan the minimal image
-    - name: Security scan
-      run: |
-        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-          aquasec/trivy image myregistry/myapp:${{ github.sha }}
-        
-    - name: Deploy to staging
-      if: github.ref == 'refs/heads/main'
-      run: |
-        docker push myregistry/myapp:${{ github.sha }}
-        # Deploy with your orchestration tool
-```
-
-### Production Deployment: Best of Both Worlds
-
-The combination of Nix and Docker in production pipelines delivers measurable improvements:
-
-**Container Size Optimization:**
-```nix
-# nix-built production image
-{
-  docker-image = pkgs.dockerTools.buildLayeredImage {
-    name = "myapp";
-    tag = "latest";
-    contents = with pkgs; [
-      # Only runtime dependencies
-      nodejs_20
-      (buildNpmPackage {
-        pname = "myapp";
-        version = "1.0.0";
-        src = ./.;
-        # Exact dependency lock from development
-      })
-    ];
-    maxLayers = 120;  # Optimal Docker layer caching
-  };
-}
-```
-
-**Results from production deployments:**
-- Traditional Node.js Docker image: 890MB
-- Nix-built equivalent: 47MB  
-- **95% size reduction**
-- Container startup: 2.3s → 0.4s
-- Security vulnerabilities: 47 → 2 (only in Node.js runtime)
-
-**Deployment Speed Impact:**
-- Image pull time: 45s → 3s
-- Rolling deployment time: 8 minutes → 90 seconds
-- **5x faster deployments**
-
-### Managing Multi-Environment Consistency
 
 The traditional pain point of maintaining dev/staging/prod parity disappears with Nix:
 
@@ -479,57 +304,22 @@ The traditional pain point of maintaining dev/staging/prod parity disappears wit
 
 This approach eliminates the classic DevOps problem where applications behave differently across environments, because the application binary and its dependencies are mathematically identical.
 
-## Decision Framework: When to Use Nix vs Docker
 
-**Use Nix for:**
-- Local development environments
-- CI/CD build environments
-- Creating minimal production containers
-- Teams that value reproducibility over convenience
-- Projects with complex dependency trees
+# The bottom line.
+Developers get 10x faster startup and zero “works on my machine” bugs.
 
-**Keep Docker for:**
-- Production orchestration (Kubernetes, Docker Swarm)
-- Services that need full OS virtualization
-- Third-party services that only ship as Docker images
-- Teams that need GUI tools and Docker Desktop workflow
+CI pipelines run 6–9x faster with real reproducibility.
 
-**Use Both:**
-- Nix for development environment + dependency management
-- Docker for production deployment + orchestration
-- This gives you the best of both worlds
-
-## The Business Case for Nix
-
-**Developer Productivity:**
-- 10x faster environment startup reduces context switching costs
-- New developer onboarding: 4 hours instead of 2 days
-- Eliminated "works on my machine" debugging sessions
-
-**Infrastructure Costs:**
-- 95% smaller container images reduce registry storage costs
-- Faster deployments reduce compute time in CI/CD
-- Reduced attack surface decreases security scanning overhead
-
-**Team Scalability:**
-- Reproducible environments eliminate environment drift
-- Declarative configuration enables environment-as-code reviews
-- Simplified dependency management reduces maintenance burden
-
-## Conclusion
-
-Here’s the bottom line.
-	•	Developers get 10x faster startup and zero “works on my machine” bugs.
-	•	CI pipelines run 6–9x faster with real reproducibility.
-	•	Production containers shrink by 95% with dramatically fewer vulnerabilities.
+Production containers shrink by 95% with dramatically fewer vulnerabilities.
 
 I’ve seen teams go from two-day onboarding slogs to one-hour ramp-ups by moving to Nix. The productivity gains alone are worth it. The security improvements are no joke.
 
 This isn’t about throwing Docker away. It’s about using the right tool for the right job:
-	•	Nix for development and dependency management.
-	•	Docker for orchestration and deployment.
+- Nix for development and dependency management.
+- Docker for orchestration and deployment.
 
 Together, they deliver on the original promise: environments that work the same everywhere.
 
-—
+---
+
 Want more posts like this? I’m writing a series on the tools and practices that actually scale engineering teams. Subscribe or follow me on LinkedIn to catch the next one.
