@@ -2,11 +2,15 @@
 layout: minimal-home
 title: "Lloyd Moore"
 ---
+I scale engineering organizations that deliver measurable business impact.
 
-I'm an engineering executive who has scaled teams from 10 to 187 engineers, driving $3.25B in organizational value while achieving 70% cost reduction and maintaining 96% retention rates.
+Over the past decade, I’ve grown teams from 10 to 187 engineers, driving $3.25B in enterprise value, achieving 70% cost reductions, and sustaining 96% retention rates. My leadership combines the rigor of military principles with modern technology execution—clear mission focus, systematic optimization, and uncompromising standards.
 
-My approach combines operational discipline with strategic thinking, applying military leadership principles to technology organizations. I focus on building high-performing teams that deliver exceptional results through clear mission focus, systematic optimization, and unwavering standards.
+I specialize in helping technology companies:
+	•	Scale engineering organizations without losing speed or culture
+	•	Build systems and processes that support growth at scale
+	•	Develop resilient, high-performing teams that consistently deliver results
 
-I write about engineering leadership, scaling teams, and building technology organizations that can execute at scale.
+I work with executives, boards, and technology leaders as an advisor, operator, and coach.
 
 Contact: [lloyd@lloydmoore.com](mailto:lloyd@lloydmoore.com) | [LinkedIn](https://www.linkedin.com/in/moorelloyd)
