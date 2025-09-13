@@ -1,6 +1,6 @@
 ---
 layout: minimal-home
-title: "Lloyd Moore"
+title: ""
 ---
 I scale engineering organizations that deliver measurable business impact.
 
