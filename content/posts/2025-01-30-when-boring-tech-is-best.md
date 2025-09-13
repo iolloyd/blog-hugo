@@ -1,100 +1,75 @@
 ---
-layout: tactical-briefing
-title: "When 'Boring' Technology is the Best Choice"
+title: "Nobody Got Fired for Buying Kubernetes"
 date: 2025-01-30
-categories: [architecture, leadership, devops]
-description: "Why choosing 'boring' technology like HashiCorp Nomad over popular options like Kubernetes can be the most innovative decision for your business."
-metrics:
-  - "50% reduction in operational complexity"
-  - "3-month deployment timeline vs 9+ months for K8s"
-  - "Zero specialized hiring required"
-  - "Multi-cloud deployment across GCP, AWS, bare metal"
 ---
 
-> "Nobody ever got fired for buying IBM."
+Nobody ever got fired for buying IBM.
 
-Replace IBM with Kubernetes in 2025. The saying still holds true.
+Replace IBM with Kubernetes. The saying still holds.
 
-I've scaled engineering teams from 10 to 187 people. Here's what I learned: **the best technology solves your problem with the least fuss. Popular doesn't mean right.**
+Your team needs to deploy across multiple clouds. The answer is obvious: Kubernetes. It's what everyone uses. It's what everyone hires for. It's safe.
 
-## The Messy Reality of Multi-Cloud Architecture
+Except when it isn't.
 
-We faced a classic challenge recently. We needed to deploy one application across Google Cloud Platform, AWS, and bare-metal racks. The overlay network had to stretch across all three environments.
+⸻
 
-The whiteboard diagram looked clean. Reality was messier.
+## The Problem with Safe Choices
 
-Our first instinct was Kubernetes. It's the default choice. Everyone hires for it. Then we ran the numbers.
+We had a simple problem. Deploy one application across GCP, AWS, and some bare metal servers. Network everything together.
 
-### The Hidden Costs of the "Popular" Choice
+The team's first instinct? Kubernetes, obviously.
 
-Kubernetes would cost us dearly:
+I ran the numbers. Kubernetes would take us nine months to deploy properly. We'd need new hires. We'd drown in YAML files. Our three-person ops team would spend their lives keeping the thing running instead of building products.
 
-**Too much configuration**: We'd drown in YAML files. Connecting different cloud providers would create endless complexity.
+That's not innovation. That's cargo culting.
 
-**Network headaches**: Container networking (CNIs) and load balancing (ingress controllers) are difficult. Managing them across multiple environments seemed impossible.
+⸻
 
-**Maintenance burden**: Our small reliability team would spend all their time keeping Kubernetes running. Upgrades and custom resources would eat everything.
+## The Boring Choice
 
-We'd spend time maintaining the tool instead of building products. That's backwards.
+We picked HashiCorp Nomad instead.
 
-## The "Boring" Alternative: HashiCorp Nomad
+Nobody writes Medium articles about Nomad. It doesn't have Kubernetes' marketing budget. It won't impress your friends at conferences.
 
-Nomad doesn't headline conference keynotes. It lacks Kubernetes' buzz and marketing budget. But boring can be the smart choice.
+But it worked.
 
-### Why Nomad Won
+One binary. Download and run. Same everywhere - cloud or bare metal. Clusters connect with one command. No CNI headaches. No ingress controllers. No wondering why your pods won't schedule.
 
-We had three main reasons:
+We deployed in three weeks, not nine months.
 
-**Multi-Cloud Made Simple**
-We needed to connect clusters across different cloud providers. Nomad solved this with one command. Clusters join and work. No complex controllers needed. No authentication headaches.
+⸻
 
-**Lightweight Setup**
-Nomad is just one file you download and run. Installation works the same everywhere - cloud servers or physical hardware. It uses far less resources than Kubernetes.
+## When Boring Wins
 
-**Everything Works Together**
-Service networking (Consul) comes built-in. Secret management (Vault) integrates natively. You don't add layers of complexity.
+The best technology solves your problem with minimum fuss.
 
-### The Results That Matter
+Nomad gave us:
+- Multi-cloud networking that actually worked
+- Zero new hires needed
+- Engineers building features, not debugging infrastructure
+- Ops team that could take weekends off
 
-We shipped our unified network in weeks, not months. The resilient system spanned three distinct environments.
+That's real innovation. Not using the latest shiny thing, but shipping products faster.
 
-More importantly:
-- Operational toil dropped dramatically
-- Engineers built features instead of fighting infrastructure
-- Our small SRE team could take vacations
+⸻
 
-## A Decision Framework for Technical Leaders
+## The Right Framework
 
-Would I recommend Nomad for everyone? No. If you're scaling headcount rapidly, choose Kubernetes. You'll find k8s engineers more easily than Nomad experts.
+Would I recommend Nomad for everyone? No.
 
-Here's my framework for these decisions:
+If you're scaling to hundreds of engineers, use Kubernetes. You'll find the talent. If you need every feature under the sun, use Kubernetes.
 
-### 1. What Problem Are You Actually Solving?
+But ask yourself:
+- What problem are you actually solving?
+- How big is your team today?
+- What can they realistically operate?
 
-Start with your business need, not the technology. List your actual requirements. Ignore features you think you might need someday.
+Sometimes the boring choice is the smart choice.
 
-### 2. How Big and Experienced Is Your Team Today?
+The goal isn't to use cool technology. It's to build products that work.
 
-Five people can't run infrastructure built for fifty. Look at your team's current skills. Consider how much new technology they can learn.
+⸻
 
-### 3. What Will Hiring Look Like in 18 Months?
+Most engineering decisions aren't about technology. They're about people, time, and what you can actually execute.
 
-Planning to grow your team ten times larger? Choose technology with common skills. Staying small? Choose simple operations.
-
-## The Innovation in "Boring"
-
-The 'boring' choice can be your smartest move. Innovation isn't about using trendy technology. It's about delivering business value quickly and reliably.
-
-Choosing Nomad over Kubernetes gave us:
-- Shipped faster to customers
-- Less time spent on maintenance
-- Engineers focused on building products
-- A system that worked without constant firefighting
-
-Real innovation solves the right problems with minimal complexity.
-
----
-
-*What's your experience with choosing "boring" technology? Have you gone against popular choices and found success? I'd love to hear your stories.*
-
-*Originally shared on [LinkedIn](https://linkedin.com/in/moorelloyd)*
+Choose accordingly.

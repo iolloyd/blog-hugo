@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{{ .Site.Title }}</title>
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta name="generator" content="Hugo {{ hugo.Version }}">
+  {{ if eq hugo.Environment "development" }}<meta name="robots" content="noindex, nofollow">{{ end }}
+  
+  <link rel="stylesheet" href="/css/overrides.css">
+</head>
+<body>
+  <div class="minimal-container">
+    <header class="minimal-header">
+      <h1 class="minimal-title">Engineering Leadership</h1>
+    </header>
+    
+    <main class="minimal-content">
+      {{ .Content }}
+      
+      <section class="blog-posts">
+        <h2 class="posts-title">Recent Posts</h2>
+        <ul class="posts-list">
+          {{ range first 10 (where .Site.RegularPages "Type" "posts") }}
+          <li class="post-item">
+            <a href="{{ .Permalink }}" class="post-link">
+              <span class="post-title">{{ .Title }}</span>
+              <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </section>
+    </main>
+  </div>
+  
+  <footer style="background: #1a1a1a; color: #999; padding: 2rem 0; margin-top: 4rem; text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      &copy; {{ .Site.Title }} {{ now.Format "2006" }}
+    </div>
+  </footer>
+</body>
+</html>

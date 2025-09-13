@@ -1,7 +1,7 @@
 ---
 layout: tactical-briefing
 title: "DuckDB: The Surprising Swiss Army Knife of Data Processing"
-date: 2025-07-14
+date: 2025-05-30
 categories: [architecture, databases, data-engineering]
 tags: [duckdb, data-processing, analytics, sql, performance]
 description: "DuckDB isn't just 'SQLite for analytics.' It's a tool that makes impossible data tasks trivial, from analyzing S3 files without downloading to replacing entire ETL pipelines with a single SQL query."
@@ -343,6 +343,4 @@ Sometimes the best solution isn't the most sophisticated. It's the one that just
 
 ---
 
-*Have you tried DuckDB for unconventional use cases? What surprised you?*
-
-*Originally shared on [LinkedIn](https://linkedin.com/in/moorelloyd)*
+If you found this useful, subscribe — I write about the practical side of scaling engineering teams: security, infrastructure, and system design that actually works in production.

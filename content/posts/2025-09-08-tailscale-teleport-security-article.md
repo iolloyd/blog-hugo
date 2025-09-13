@@ -1,7 +1,7 @@
 ---
 layout: tactical-briefing
 title: "The Security Revolution: Why Tailscale and Teleport Are Changing Everything"
-date: 2025-09-08
+date: 2025-07-18
 categories: [security, networking, devops]
 description: "Traditional security approaches are fundamentally broken. Here's how Tailscale and Teleport are revolutionizing infrastructure security."
 ---
@@ -100,7 +100,6 @@ I’ve led engineering teams through the pain of credential leaks and VPN bottle
 
 Tailscale and Teleport eliminate these problems. They make secure access easy for your developers, auditable for your security team, and nearly impossible for attackers to exploit.
 
-If you’re leading a modern team, the real question isn’t whether to move beyond passwords and VPNs. It’s how soon you can afford to wait.
---
+---
 
 If you found this useful, subscribe — I write about the practical side of scaling engineering teams: security, infrastructure, and system design that actually works in production.

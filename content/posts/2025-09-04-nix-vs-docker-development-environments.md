@@ -1,7 +1,7 @@
 ---
 layout: tactical-briefing
 title: "Why Nix Beats Docker for Local Development (And Makes It Better in Production)"
-date: 2025-09-04
+date: 2025-04-25
 categories: [devops, tooling, productivity]
 description: "How Nix eliminates Docker's development friction while creating superior production containers - a practical guide."
 metrics:

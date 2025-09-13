@@ -1,7 +1,7 @@
 ---
 layout: tactical-briefing
 title: "PostgreSQL Will Do, or, You Don't Need Kafka"
-date: 2025-01-27
+date: 2025-01-12
 categories: [architecture, postgresql, messaging]
 tags: [postgresql, kafka, event-streaming, message-queue, architecture]
 description: "Before you spin up a three-node Kafka cluster, consider this: PostgreSQL can handle most pub-sub use cases perfectly well. And you've probably already got it running."

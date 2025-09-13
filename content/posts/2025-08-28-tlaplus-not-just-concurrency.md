@@ -1,7 +1,7 @@
 ---
 layout: tactical-briefing
 title: "How TLA+ Formal Verification Caught a Production Bug Before It Shipped"
-date: 2025-08-28
+date: 2025-06-22
 categories: [formal-methods, verification, architecture]
 tags: [tlaplus, formal-verification, concurrency, testing, software-engineering]
 description: "A real-world case study of using formal methods to find a subtle race condition in a CV matching system that traditional testing missed."

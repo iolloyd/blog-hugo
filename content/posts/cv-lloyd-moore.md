@@ -1,6 +1,6 @@
 ---
 layout: tactical-briefing
-date: 2025-09-10
+date: 2025-08-14
 draft: false
 title: 'CV: Lloyd Moore - Engineering Executive'
 description: 'Complete professional CV for Lloyd Moore: CTO/VP Engineering with operational experience scaling teams from 10 to 187, achieving $3.25B valuation, and reducing cloud costs by 70%'

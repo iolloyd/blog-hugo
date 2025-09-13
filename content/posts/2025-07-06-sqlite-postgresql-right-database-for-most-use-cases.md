@@ -1,7 +1,7 @@
 ---
 layout: tactical-briefing
 title: "SQLite and PostgreSQL: The Right Database for 99% of Use Cases"
-date: 2025-07-06
+date: 2025-02-20
 categories: [architecture, databases, engineering]
 description: "Why SQLite and PostgreSQL cover almost all database needs, and when you actually need something else."
 metrics:

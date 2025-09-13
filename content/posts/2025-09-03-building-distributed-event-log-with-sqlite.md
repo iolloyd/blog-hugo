@@ -1,7 +1,7 @@
 ---
 layout: tactical-briefing
 title: "Building a Distributed Event Log with SQLite: When Simple Beats Complex"
-date: 2025-09-03
+date: 2025-03-18
 categories: [architecture, databases, distributed-systems]
 description: "How to build a robust, eventually-consistent event queue and replication system using SQLite as the foundation—proving that sometimes the simplest solution is the most elegant."
 metrics:
