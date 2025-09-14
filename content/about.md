@@ -17,10 +17,10 @@ I write about engineering leadership, scaling teams, and applying military princ
 
 ## Background
 
-**Military Service**: Royal Marines Commandos, 10 years of service in demanding operational environments.
+**Military Service**: Royal Marines Commandos, 12 years of service in demanding operational environments.
 
 **Technology Leadership**: Engineering executive roles scaling high-growth organizations through critical expansion phases.
 
-**Core Expertise**: Team scaling, operational optimization, strategic technology leadership, organizational transformation.
+**Core Expertise**: Team scaling, operational optimisation, strategic technology leadership, organisational transformation.
 
 Contact: [lloyd@lloydmoore.com](mailto:lloyd@lloydmoore.com) | [LinkedIn](https://www.linkedin.com/in/moorelloyd)

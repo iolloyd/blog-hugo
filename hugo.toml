@@ -17,6 +17,21 @@ enableGitInfo = true
   description = "Professional engineering leadership blog covering databases, DevOps, formal methods, and software architecture."
   author = "Lloyd Moore"
 
+# Navigation menu configuration
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Posts" 
+    url = "/posts"
+    weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 3
+
 # Markup settings for better content rendering
 [markup]
   [markup.goldmark]
