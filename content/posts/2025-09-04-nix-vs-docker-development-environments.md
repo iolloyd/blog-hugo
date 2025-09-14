@@ -56,7 +56,7 @@ Here's what a typical development environment looks like in Nix:
             nodejs_20
             nodePackages.pnpm
             postgresql_15
-            redis
+            redis_7_2
           ];
           
           shellHook = ''
@@ -69,7 +69,7 @@ Here's what a typical development environment looks like in Nix:
 }
 ```
 
-Run `nix develop` and you get exactly Node 20, PostgreSQL 15, and Redis - bit-for-bit identical across every machine, every time.
+Run `nix develop` and you get exactly Node 20, PostgreSQL 15, and Redis 7.2 - bit-for-bit identical across every machine, every time. Notice that specific version: `redis_7_2`. No ambiguity, no "latest" tags that break when pulled at different times.
 
 Compare this to the equivalent Docker setup:
 
@@ -104,7 +104,7 @@ services:
     ports:
       - "5432:5432"
   redis:
-    image: redis:7-alpine
+    image: redis:alpine  # What version? 6? 7? 7.2? Changes over time
     ports:
       - "6379:6379"
 ```
@@ -112,6 +112,9 @@ services:
 The Docker version requires building images, managing volumes, orchestrating multiple containers, and dealing with networking between containers. The Nix version just works.
 
 Nix is excellent for daily development work: Nix development shell with low time startup. The Docker compose equivalent can be close to a minute or more. Disk usage with Nix environment (Node + PostgreSQL + Redis): 847MB vs Docker equivalent: 8.9GB of images and volumes
+
+**Version Precision That Actually Works:**
+When you specify `redis_7_2` in Nix, you get exactly Redis 7.2.4 (or whatever specific patch version that nixpkgs hash represents). When your colleague runs `nix develop` six months later, they get the identical binary. Docker's `redis:alpine` might pull 7.0, 7.2, or 8.0 depending on when you run it.
 
 - Nix services run as native processes (PostgreSQL: ~45MB, Redis: ~12MB) vs Docker: Additional container overhead (PostgreSQL container: ~180MB, Redis container: ~45MB)
 
@@ -124,9 +127,9 @@ Every package in Nix is built from a cryptographic hash of its inputs. When you 
 **Instant Environment Switching:**
 ```bash
 # Switch between project environments instantly
-cd ~/project-a && nix develop  # Python 3.11, Django 4.2
-cd ~/project-b && nix develop  # Node 18, React 18
-cd ~/project-c && nix develop  # Go 1.21, PostgreSQL 15
+cd ~/code/project-python && nix develop  # Python 3.11, Django 4.2
+cd ~/code/project-web && nix develop  # Node 18, React 18
+cd ~/code/project-api && nix develop  # Go 1.21, PostgreSQL 15
 ```
 
 No containers to stop/start. No resource conflicts. Just instant, isolated environments.
@@ -177,37 +180,75 @@ EXPOSE 3000
 CMD ["node", "server.js"]
 ```
 
-Here is the same thing, but using nix to build the docker image:
+Here is the same thing, but using nix to build docker images. In production, you'd want separate images per service:
 
 ```nix
+# images.nix - Production-ready service images
 { pkgs ? import <nixpkgs> {} }:
 
-pkgs.dockerTools.buildImage {
-  name = "myapp";
-  tag = "latest";
-  
-  contents = with pkgs; [
-    # Only the exact dependencies needed
-    nodejs_20
-    (buildNpmPackage {
-      pname = "myapp";
-      version = "1.0.0";
-      src = ./.;
-    })
-  ];
-  
-  config = {
-    Cmd = [ "${nodejs_20}/bin/node" "server.js" ];
-    ExposedPorts = { "3000/tcp" = {}; };
+{
+  # Application server image
+  app = pkgs.dockerTools.buildImage {
+    name = "myapp";
+    tag = "latest";
+    
+    contents = with pkgs; [
+      nodejs_20
+      (buildNpmPackage {
+        pname = "myapp";
+        version = "1.0.0";
+        src = ./.;
+      })
+    ];
+    
+    config = {
+      Cmd = [ "${pkgs.nodejs_20}/bin/node" "server.js" ];
+      ExposedPorts = { "3000/tcp" = {}; };
+    };
+  };
+
+  # PostgreSQL image with exact version
+  postgres = pkgs.dockerTools.buildImage {
+    name = "myapp-postgres";
+    tag = "latest";
+    
+    contents = with pkgs; [
+      postgresql_15
+      (writeShellScriptBin "init-db" ''
+        initdb -D /var/lib/postgresql/data
+        pg_ctl -D /var/lib/postgresql/data -l /var/lib/postgresql/logfile start
+      '')
+    ];
+    
+    config = {
+      Cmd = [ "${pkgs.postgresql_15}/bin/postgres" ];
+      ExposedPorts = { "5432/tcp" = {}; };
+    };
+  };
+
+  # Redis image with exact version  
+  redis = pkgs.dockerTools.buildImage {
+    name = "myapp-redis";
+    tag = "latest";
+    
+    contents = with pkgs; [ redis_7_2 ];
+    
+    config = {
+      Cmd = [ "${pkgs.redis_7_2}/bin/redis-server" ];
+      ExposedPorts = { "6379/tcp" = {}; };
+    };
   };
 }
 ```
 
-They both do the same thing, but with different costs:
-- Traditional Docker image: ~300MB
-- Nix-built Docker image: ~14MB !!
+The size difference is significant:
+- Traditional Docker stack: ~1.2GB (Node:300MB + Postgres:350MB + Redis:45MB + base layers)
+- Nix-built Docker stack: ~67MB (App:14MB + Postgres:45MB + Redis:8MB)
 
-The Nix-built image contains only the exact dependencies needed to run the application. No package manager, no shell, no extra libraries.
+Each Nix-built image contains only what that service needs to run. The PostgreSQL image has exactly PostgreSQL 15.4, no Alpine base layer, no package manager. The Redis image has exactly Redis 7.2, no shell, no extras. The app image has exactly Node 20 and your compiled application.
+
+**Version Consistency Across Services:**
+Notice how all three services specify exact versions: `nodejs_20`, `postgresql_15`, `redis_7_2`. In traditional Docker, you'd have `node:20-alpine`, `postgres:15-alpine`, `redis:alpine` - different base images, different patch versions pulled at different times, different security profiles.
 
 **Security Benefits:**
 ```nix
