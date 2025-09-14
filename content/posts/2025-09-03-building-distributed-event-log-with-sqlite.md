@@ -94,15 +94,21 @@ import hashlib
 import time
 import threading
 from typing import Dict, List, Optional, Any
-from dataclasses import dataclass
 from pathlib import Path
 
-@dataclass
-class Event:
-    event_type: str
-    payload: Dict[str, Any]
-    correlation_id: Optional[str] = None
+def create_event(
+    event_type: str,
+    payload: Dict[str, Any],
+    correlation_id: Optional[str] = None,
     source_node: str = "default"
+) -> Dict[str, Any]:
+    """Create an event dictionary with the specified fields"""
+    return {
+        "event_type": event_type,
+        "payload": payload,
+        "correlation_id": correlation_id,
+        "source_node": source_node
+    }
 
 class SQLiteEventLog:
     def __init__(self, db_path: str, node_id: str = "node-1"):
@@ -121,23 +127,23 @@ class SQLiteEventLog:
             with open("events.sql") as f:
                 conn.executescript(f.read())
     
-    def append_event(self, event: Event) -> int:
+    def append_event(self, event: Dict[str, Any]) -> int:
         """Append an event to the log and return the event ID"""
-        payload_json = json.dumps(event.payload, sort_keys=True)
+        payload_json = json.dumps(event["payload"], sort_keys=True)
         checksum = hashlib.sha256(
-            f"{event.event_type}{payload_json}{event.correlation_id}".encode()
+            f"{event['event_type']}{payload_json}{event['correlation_id']}".encode()
         ).hexdigest()
         
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute("""
                 INSERT INTO event_log (event_type, payload, correlation_id, source_node, checksum)
                 VALUES (?, ?, ?, ?, ?)
-            """, (event.event_type, payload_json, event.correlation_id, self.node_id, checksum))
+            """, (event["event_type"], payload_json, event["correlation_id"], self.node_id, checksum))
             
             event_id = cursor.lastrowid
             conn.commit()
             
-        print(f"✅ Event {event_id} appended: {event.event_type}")
+        print(f"✅ Event {event_id} appended: {event['event_type']}")
         return event_id
     
     def get_events_since(self, since_id: int = 0, limit: int = 100) -> List[Dict]:
@@ -300,9 +306,9 @@ async def main():
     
     # Simulate some events
     events = [
-        Event("user.created", {"user_id": 123, "email": "alba@right-here.com"}),
-        Event("order.placed", {"order_id": 456, "user_id": 123, "amount": 99.99}),
-        Event("payment.processed", {"order_id": 456, "amount": 99.99, "status": "success"}),
+        create_event("user.created", {"user_id": 123, "email": "alba@right-here.com"}),
+        create_event("order.placed", {"order_id": 456, "user_id": 123, "amount": 99.99}),
+        create_event("payment.processed", {"order_id": 456, "amount": 99.99, "status": "success"}),
     ]
     
     for event in events:
