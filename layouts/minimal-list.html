@@ -1,0 +1,34 @@
+{{ define "header" }}
+  <header>
+    <div class="bg-black">
+      {{ partial "site-navigation.html" . }}
+    </div>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  <div class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <h1 class="f2 f-subheadline-l fw2 black-80 mb0 lh-title">{{ .Title }}</h1>
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l">
+      {{ .Content }}
+      
+      <section class="mt5">
+        <ul class="list pl0">
+          {{ range .Pages }}
+          <li class="mb4">
+            <a href="{{ .Permalink }}" class="db pv1 link blue dim">
+              <span class="fw6">{{ .Title }}</span>
+              <span class="db f6 gray">{{ .Date.Format "January 2, 2006" }}</span>
+              {{ if .Summary }}
+              <span class="db f6 mid-gray mt2">{{ .Summary }}</span>
+              {{ end }}
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </section>
+    </div>
+  </div>
+{{ end }}

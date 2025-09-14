@@ -1,11 +1,9 @@
 ---
 layout: minimal-default
-title: "About"
+title: ""
 permalink: /about/
 description: "Lloyd Moore: Royal Marines Commando to Silicon Valley engineering executive."
 ---
-
-# About
 
 I started my career in the Royal Marines Commandos, where I learned that leadership isn't about rank or title—it's about earning trust, making critical decisions under pressure, and putting team success above personal advancement.
 
