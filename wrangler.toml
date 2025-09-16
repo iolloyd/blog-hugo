@@ -13,9 +13,12 @@ not_found_handling = "404-page"
 [vars]
 ENVIRONMENT = "production"
 
-[[send_email]]
-name = "SEND_EMAIL"
-destination_address = "lloyd@lloydmoore.com"
+send_email = [
+    {name = "SEND_EMAIL", destination_address = "lloyd@lloydmoore.com"}
+]
+
+[observability.logs]
+enabled = true
 
 [env.preview.vars]
 ENVIRONMENT = "preview"
