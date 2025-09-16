@@ -1,20 +1,229 @@
 {{ $.Scratch.Add "labelClasses" "f6 b db mb1 mt3 sans-serif mid-gray" }}
 {{ $.Scratch.Add "inputClasses" "w-100 f5 pv3 ph3 bg-light-gray bn" }}
 
-<form class="black-80 sans-serif" accept-charset="UTF-8" action="{{ .Get "action" }}" method="POST" role="form">
-
-    <label class="{{ $.Scratch.Get "labelClasses" }}"  for="name">{{ lang.Translate "yourName" }}</label>
-    <input type="text" id="name" name="name" class="{{ $.Scratch.Get "inputClasses" }}"  required placeholder=" "  aria-labelledby="name"/>
-
-    <label class="{{ $.Scratch.Get "labelClasses" }}" for="email">{{ lang.Translate "emailAddress" }}</label>
-    <input type="email" id="email" name="email" class="{{ $.Scratch.Get "inputClasses" }}"  required placeholder=" "  aria-labelledby="email"/>
-    <div class="requirements f6 gray glow i ph3 overflow-hidden">
-      {{ lang.Translate "emailRequiredNote" }}
+<div id="contact-form-container">
+  <form id="contact-form" class="black-80 sans-serif" accept-charset="UTF-8" action="{{ .Get "action" | default "/contact" }}" method="POST" role="form">
+    
+    <!-- Honeypot field for spam prevention (hidden from users) -->
+    <input type="text" name="honeypot" style="display:none !important;" tabindex="-1" autocomplete="off" />
+    
+    <div class="form-field">
+      <label class="{{ $.Scratch.Get "labelClasses" }}" for="name">{{ lang.Translate "yourName" }}</label>
+      <input type="text" id="name" name="name" class="{{ $.Scratch.Get "inputClasses" }}" required placeholder=" " aria-labelledby="name"/>
+      <div class="error-message f6 red" id="name-error" style="display: none;"></div>
     </div>
 
-    <label class="{{ $.Scratch.Get "labelClasses" }}" for="message">{{ lang.Translate "message" }}</label>
-    <textarea id="message" name="message" class="{{ $.Scratch.Get "inputClasses" }} h4" aria-labelledby="message"></textarea>
+    <div class="form-field">
+      <label class="{{ $.Scratch.Get "labelClasses" }}" for="email">{{ lang.Translate "emailAddress" }}</label>
+      <input type="email" id="email" name="email" class="{{ $.Scratch.Get "inputClasses" }}" required placeholder=" " aria-labelledby="email"/>
+      <div class="requirements f6 gray glow i ph3 overflow-hidden">
+        {{ lang.Translate "emailRequiredNote" }}
+      </div>
+      <div class="error-message f6 red" id="email-error" style="display: none;"></div>
+    </div>
 
-    <input class="db w-100 mv2 white pa3 bn hover-shadow hover-bg-black bg-animate bg-black" type="submit" value="{{ lang.Translate "send" }}" />
+    <div class="form-field">
+      <label class="{{ $.Scratch.Get "labelClasses" }}" for="message">{{ lang.Translate "message" }}</label>
+      <textarea id="message" name="message" class="{{ $.Scratch.Get "inputClasses" }} h4" required minlength="10" maxlength="2000" aria-labelledby="message"></textarea>
+      <div class="f6 gray">{{ lang.Translate "messageLength" }}</div>
+      <div class="error-message f6 red" id="message-error" style="display: none;"></div>
+    </div>
 
-</form>
+    <button id="submit-btn" class="apple-btn apple-btn-primary db w-100 mv2" type="submit">
+      <span id="submit-text">{{ lang.Translate "send" }}</span>
+      <span id="loading-text" style="display: none;">{{ lang.Translate "sending" }}</span>
+    </button>
+
+  </form>
+
+  <!-- Success message -->
+  <div id="success-message" class="simple-block bg-light-green pa3 br2 green" style="display: none;">
+    <div class="simple-block-content">
+      <h3 class="f5 b mb2">{{ lang.Translate "messageSuccess" }}</h3>
+      <p class="f6 mb0">{{ lang.Translate "messageSuccessDetails" }}</p>
+    </div>
+  </div>
+
+  <!-- Error message -->
+  <div id="error-message" class="simple-block bg-light-red pa3 br2 dark-red" style="display: none;">
+    <div class="simple-block-content">
+      <h3 class="f5 b mb2">{{ lang.Translate "messageFailed" }}</h3>
+      <p class="f6 mb0" id="error-text">{{ lang.Translate "messageFailedDetails" }}</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Pass i18n messages to JavaScript
+window.contactFormMessages = {
+  nameRequired: '{{ lang.Translate "nameRequired" }}',
+  emailInvalid: '{{ lang.Translate "emailInvalid" }}',
+  messageInvalid: '{{ lang.Translate "messageInvalid" }}'
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const submitText = document.getElementById('submit-text');
+  const loadingText = document.getElementById('loading-text');
+  const successMessage = document.getElementById('success-message');
+  const errorMessage = document.getElementById('error-message');
+  const errorText = document.getElementById('error-text');
+
+  // Field validation
+  const validateField = (field, validator, errorMsg) => {
+    const value = field.value.trim();
+    const errorElement = document.getElementById(field.id + '-error');
+    
+    if (!validator(value)) {
+      errorElement.textContent = errorMsg;
+      errorElement.style.display = 'block';
+      field.style.borderColor = 'var(--apple-red, #ff3b30)';
+      return false;
+    } else {
+      errorElement.style.display = 'none';
+      field.style.borderColor = '';
+      return true;
+    }
+  };
+
+  // Validators
+  const isValidName = (value) => value.length >= 2 && value.length <= 100;
+  const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  const isValidMessage = (value) => value.length >= 10 && value.length <= 2000;
+
+  // Real-time validation
+  document.getElementById('name').addEventListener('blur', function() {
+    validateField(this, isValidName, window.contactFormMessages.nameRequired);
+  });
+
+  document.getElementById('email').addEventListener('blur', function() {
+    validateField(this, isValidEmail, window.contactFormMessages.emailInvalid);
+  });
+
+  document.getElementById('message').addEventListener('blur', function() {
+    validateField(this, isValidMessage, window.contactFormMessages.messageInvalid);
+  });
+
+  // Form submission
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Clear previous messages
+    successMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
+
+    // Validate all fields
+    const nameValid = validateField(document.getElementById('name'), isValidName, window.contactFormMessages.nameRequired);
+    const emailValid = validateField(document.getElementById('email'), isValidEmail, window.contactFormMessages.emailInvalid);
+    const messageValid = validateField(document.getElementById('message'), isValidMessage, window.contactFormMessages.messageInvalid);
+
+    if (!nameValid || !emailValid || !messageValid) {
+      return;
+    }
+
+    // Show loading state
+    submitBtn.disabled = true;
+    submitText.style.display = 'none';
+    loadingText.style.display = 'inline';
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Success
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
+      } else {
+        // Error
+        throw new Error(result.error || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      errorText.textContent = error.message || 'An unexpected error occurred. Please try again.';
+      errorMessage.style.display = 'block';
+    } finally {
+      // Reset button state
+      submitBtn.disabled = false;
+      submitText.style.display = 'inline';
+      loadingText.style.display = 'none';
+    }
+  });
+});
+</script>
+
+<style>
+/* Contact form specific styles using Apple design system */
+#contact-form-container {
+  max-width: var(--container-md, 800px);
+  margin: 0 auto;
+}
+
+.form-field {
+  margin-bottom: var(--space-lg, 2rem);
+}
+
+.error-message {
+  margin-top: var(--space-xxs, 0.5rem);
+  padding-left: var(--space-sm, 1rem);
+}
+
+/* Enhanced button styles */
+.apple-btn-primary {
+  background: var(--apple-blue, #0071e3);
+  color: var(--apple-white, #ffffff);
+  border: none;
+  border-radius: 6px;
+  padding: var(--space-sm, 1rem) var(--space-lg, 2rem);
+  font-family: var(--font-system);
+  font-size: var(--text-base, 1.0625rem);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast, 150ms);
+}
+
+.apple-btn-primary:hover:not(:disabled) {
+  background: var(--apple-blue-hover, #0077ed);
+  transform: translateY(-1px);
+}
+
+.apple-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success/Error message styles */
+.bg-light-green {
+  background-color: #d4edda;
+}
+
+.bg-light-red {
+  background-color: #f8d7da;
+}
+
+.green {
+  color: #155724;
+}
+
+.dark-red {
+  color: #721c24;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  #contact-form-container {
+    padding: 0 var(--space-md, 1.5rem);
+  }
+  
+  .form-field {
+    margin-bottom: var(--space-md, 1.5rem);
+  }
+}
+</style>

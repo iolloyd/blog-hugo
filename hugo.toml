@@ -31,6 +31,10 @@ enableGitInfo = true
     name = "About"
     url = "/about"
     weight = 3
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact"
+    weight = 4
 
 # Markup settings for better content rendering
 [markup]

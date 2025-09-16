@@ -21,5 +21,8 @@
     "url": "https://github.com/iolloyd/blog.git"
   },
   "author": "Lloyd Moore",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mimetext": "^3.0.27"
+  }
 }

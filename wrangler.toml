@@ -1,5 +1,7 @@
 name = "lloydmoore-blog"
 compatibility_date = "2025-07-31"
+main = "src/index.js"
+compatibility_flags = ["nodejs_compat"]
 
 [build]
 command = "hugo --gc --minify"
@@ -10,6 +12,10 @@ not_found_handling = "404-page"
 
 [vars]
 ENVIRONMENT = "production"
+
+[[send_email]]
+name = "SEND_EMAIL"
+destination_address = "lloyd@lloydmoore.com"
 
 [env.preview.vars]
 ENVIRONMENT = "preview"
