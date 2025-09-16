@@ -1,5 +1,4 @@
-import { EmailMessage } from "cloudflare:email";
-import { createMimeMessage } from "mimetext";
+import { Resend } from "resend";
 
 // Rate limiting configuration
 const RATE_LIMIT = 5;
@@ -200,28 +199,18 @@ const handleContactForm = async (request, env) => {
       message: sanitizeInput(formData.message)
     };
     
-    // Send email using Cloudflare Email Routing
-    // Create MIME message
-    const msg = createMimeMessage();
-    msg.setSender({ name: "Contact Form", addr: "noreply@lloydmoore.com" });
-    msg.setRecipient("lloyd@lloydmoore.com");
-    msg.setSubject(`New Contact Form Submission from ${sanitizedData.name}`);
-    msg.addMessage({
-      contentType: "text/html",
-      data: generateEmailTemplate(sanitizedData),
-    });
-
-    // Create EmailMessage
-    const message = new EmailMessage(
-      "noreply@lloydmoore.com",
-      "lloyd@lloydmoore.com",
-      msg.asRaw()
-    );
-
+    // Send email using Resend
+    const resend = new Resend(env.RESEND_API_KEY);
+    
     try {
-      await env.SEND_EMAIL.send(message);
+      await resend.emails.send({
+        from: 'Contact Form <noreply@lloydmoore.com>',
+        to: ['lloyd@lloydmoore.com'],
+        subject: `New Contact Form Submission from ${sanitizedData.name}`,
+        html: generateEmailTemplate(sanitizedData),
+      });
     } catch (error) {
-      console.error('Cloudflare Email Routing error:', error);
+      console.error('Resend email error:', error);
       return new Response(JSON.stringify({ 
         error: 'Failed to send message. Please try again later.' 
       }), {
@@ -263,8 +252,12 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     
-    // Handle contact form submission
-    if (request.method === 'POST' && url.pathname === '/contact') {
+    // Log all requests for debugging
+    console.log(`${request.method} ${url.pathname}`);
+    
+    // Handle contact form submission (with or without trailing slash)
+    if (request.method === 'POST' && (url.pathname === '/contact' || url.pathname === '/contact/')) {
+      console.log('Handling contact form submission');
       return handleContactForm(request, env);
     }
     

@@ -1,5 +1,5 @@
 name = "lloydmoore-blog"
-compatibility_date = "2025-07-31"
+compatibility_date = "2024-09-23"
 main = "src/index.js"
 compatibility_flags = ["nodejs_compat"]
 
@@ -13,9 +13,9 @@ not_found_handling = "404-page"
 [vars]
 ENVIRONMENT = "production"
 
-send_email = [
-    {name = "SEND_EMAIL", destination_address = "lloyd@lloydmoore.com"}
-]
+# Remove email binding - using Resend API instead
+# Environment variables are set in Cloudflare dashboard:
+# RESEND_API_KEY = "re_..."
 
 [observability.logs]
 enabled = true

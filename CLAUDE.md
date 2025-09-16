@@ -30,3 +30,7 @@ Write in the style of Tom Albrighton, author of "How to Write Clearly", adapted 
 - If you need more than one comma in a sentence, consider breaking it into two
 
 
+## Contributor Reference
+
+- Review `AGENTS.md` for repository-specific workflows, coding expectations, and deploy steps before starting any change.
+- Keep those operational guidelines open alongside these writing rules when preparing updates or documentation.
