@@ -2,7 +2,7 @@
 {{ $.Scratch.Add "inputClasses" "w-100 f5 pv3 ph3 bg-light-gray bn" }}
 
 <div id="contact-form-container">
-  <form id="contact-form" class="black-80 sans-serif" accept-charset="UTF-8" action="{{ .Get "action" | default "/contact" }}" method="POST" role="form">
+  <form id="contact-form" class="black-80 sans-serif" accept-charset="UTF-8" action="{{ .Get "action" | default "/api/contact" }}" method="POST" role="form">
     
     <!-- Honeypot field for spam prevention (hidden from users) -->
     <input type="text" name="honeypot" style="display:none !important;" tabindex="-1" autocomplete="off" />

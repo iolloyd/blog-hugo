@@ -8,7 +8,7 @@ command = "hugo --gc --minify"
 
 [assets]
 directory = "./public"
-not_found_handling = "404-page"
+binding = "ASSETS"
 
 [vars]
 ENVIRONMENT = "production"

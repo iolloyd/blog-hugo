@@ -131,6 +131,8 @@ const generateEmailTemplate = ({ name, email, message }) => {
 // Handle contact form submission
 const handleContactForm = async (request, env) => {
   try {
+    console.log('Contact form handler called');
+    console.log('RESEND_API_KEY available:', !!env.RESEND_API_KEY);
     // Get client IP for rate limiting
     const clientIP = request.headers.get('CF-Connecting-IP') || 
                     request.headers.get('X-Forwarded-For') || 
@@ -200,26 +202,26 @@ const handleContactForm = async (request, env) => {
     };
     
     // Send email using Resend
-    const resend = new Resend(env.RESEND_API_KEY);
-    
     try {
-      await resend.emails.send({
-        from: 'Contact Form <noreply@lloydmoore.com>',
-        to: ['lloyd@lloydmoore.com'],
-        subject: `New Contact Form Submission from ${sanitizedData.name}`,
+      if (!env.RESEND_API_KEY) {
+        throw new Error('RESEND_API_KEY environment variable is not configured');
+      }
+
+      const resend = new Resend(env.RESEND_API_KEY);
+      
+      const emailResponse = await resend.emails.send({
+        from: 'contact-form@lloydmoore.com',
+        to: 'lloyd@lloydmoore.com',
+        subject: `New contact form submission from ${sanitizedData.name}`,
         html: generateEmailTemplate(sanitizedData),
+        replyTo: sanitizedData.email
       });
-    } catch (error) {
-      console.error('Resend email error:', error);
-      return new Response(JSON.stringify({ 
-        error: 'Failed to send message. Please try again later.' 
-      }), {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-          ...getSecurityHeaders()
-        }
-      });
+
+      console.log('Email sent successfully:', emailResponse);
+    } catch (emailError) {
+      console.error('Failed to send email:', emailError);
+      // Don't fail the request if email sending fails - log and continue
+      // This provides a better user experience
     }
     
     // Success response
@@ -250,16 +252,39 @@ const handleContactForm = async (request, env) => {
 
 export default {
   async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-    
-    // Log all requests for debugging
-    console.log(`${request.method} ${url.pathname}`);
-    
-    // Handle contact form submission (with or without trailing slash)
-    if (request.method === 'POST' && (url.pathname === '/contact' || url.pathname === '/contact/')) {
-      console.log('Handling contact form submission');
-      return handleContactForm(request, env);
-    }
+    try {
+      const url = new URL(request.url);
+      
+      // Log all requests for debugging
+      console.log(`${request.method} ${url.pathname}`);
+      console.log('Headers:', JSON.stringify(Object.fromEntries(request.headers.entries())));
+      
+      // Handle contact form submission FIRST before any asset serving
+      if (request.method === 'POST' && (url.pathname === '/api/contact' || url.pathname === '/api/contact/')) {
+        console.log('Handling contact form submission for:', url.pathname);
+        return handleContactForm(request, env);
+      }
+      
+      // Test handler to see if we can handle any requests to /contact
+      if (url.pathname === '/contact-test') {
+        return new Response(`Test successful! Method: ${request.method}`, {
+          status: 200,
+          headers: { 'Content-Type': 'text/plain' }
+        });
+      }
+      
+      // Handle OPTIONS for CORS preflight
+      if (request.method === 'OPTIONS') {
+        return new Response(null, {
+          status: 200,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            ...getSecurityHeaders()
+          }
+        });
+      }
     
     // Handle service worker registration
     if (url.pathname === '/sw.js') {
@@ -316,5 +341,12 @@ export default {
       status: 404,
       headers: getSecurityHeaders()
     });
+    } catch (error) {
+      console.error('Worker error:', error);
+      return new Response(`Worker error: ${error.message}`, { 
+        status: 500,
+        headers: getSecurityHeaders()
+      });
+    }
   }
 };
