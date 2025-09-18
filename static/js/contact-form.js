@@ -100,8 +100,14 @@ function bindContactForm() {
     loadingText.style.display = 'inline';
 
     try {
-      const formData = new FormData(form);
-      const response = await fetch(form.action, {
+      // Create FormData manually to avoid the HTMLFormElement error
+      const formData = new FormData();
+      formData.append('name', document.getElementById('name').value);
+      formData.append('email', document.getElementById('email').value); 
+      formData.append('message', document.getElementById('message').value);
+      formData.append('honeypot', document.querySelector('input[name="honeypot"]').value);
+      
+      const response = await fetch('/api/contact', {
         method: 'POST',
         body: formData
       });
