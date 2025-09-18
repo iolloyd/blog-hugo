@@ -59,17 +59,18 @@ function bindContactForm() {
     validateField(this, isValidMessage, window.contactFormMessages.messageInvalid);
   });
 
-  // Override form submission completely
-  console.log('Adding submit event listener to form');
+  // Override submit button click directly
+  console.log('Overriding submit button click');
   
-  // Override the form's submit method
-  const originalSubmit = form.submit;
-  form.submit = function() {
-    console.log('Form.submit() called - intercepting');
+  submitBtn.addEventListener('click', function(e) {
+    console.log('Submit button clicked - intercepting');
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
     handleFormSubmission();
-    return false;
-  };
+  }, true);
   
+  // Also override form submission as backup
   form.addEventListener('submit', async function(e) {
     console.log('Form submit event intercepted - preventing default');
     e.preventDefault();
