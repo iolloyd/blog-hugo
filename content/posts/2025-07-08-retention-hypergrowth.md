@@ -6,7 +6,7 @@ categories: ["leadership", "engineering"]
 tags: ["retention", "scaling", "cto", "team-building"]
 ---
 
-When I told our CEO I wanted our best blockchain engineers to work part-time for Ethereum Foundation and Solana, he didn't blink. Constantine trusted me. But I understood why it sounded mad.
+When I told our CEO I wanted our best blockchain engineers to work part-time for Ethereum Foundation and Solana, he didn't blink. Konstantin trusted me. But I understood why it sounded mad.
 
 We were scaling Blockdaemon from 10 to 187 engineers. We'd just closed a funding round. Everyone knows you're supposed to lock down your best people during hypergrowth, not let them moonlight with the competition.
 
