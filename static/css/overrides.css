@@ -161,17 +161,36 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Email signup section */
+.email-signup {
+    margin: 3rem 0 4rem 0;
+    padding: 3rem 0 4rem 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.email-signup-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .container, main {
         padding: 0 1rem;
     }
-    
+
     .header h1, header h1 {
         font-size: 2rem;
     }
-    
+
     p, li {
         font-size: 1rem;
+    }
+
+    .email-signup {
+        margin: 2rem 0 3rem 0;
+        padding: 2rem 1rem 3rem 1rem;
     }
 }
