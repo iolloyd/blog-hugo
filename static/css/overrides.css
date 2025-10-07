@@ -175,6 +175,21 @@ a:hover {
     text-align: center;
 }
 
+/* Email signup for download/lead magnet pages */
+.email-signup-download {
+    margin: 2.5rem 0 2rem 0;
+    padding: 2.5rem 2rem;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+.email-signup-download iframe,
+.email-signup-download form {
+    max-width: 100%;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .container, main {
