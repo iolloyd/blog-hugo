@@ -107,3 +107,5 @@ You're scaling fast. You're hiring aggressively. You're under pressure to hit ta
 But if you lose your best people in the middle of that, you're not moving forward. You're explaining the past to newcomers who don't have the context to understand it.
 
 That's the retention problem at Series A. And it's fixable if you're willing to build systems instead of relying on hope.
+
+Want this framework as a one-page reference? Download it here: https://lloydmoore.com/downloads/retention-framework.pdf  
